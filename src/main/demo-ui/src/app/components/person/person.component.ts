@@ -1,3 +1,4 @@
+// @ts-ignore
 import { Component, OnInit } from '@angular/core';
 import {PersonService} from '../../service/PersonService';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -23,6 +24,10 @@ export class PersonComponent implements OnInit {
         this.persons = data;
       })
     })
+  }
+
+  hidePerson() {
+    this.persons = [];
   }
 
 }

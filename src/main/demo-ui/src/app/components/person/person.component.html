@@ -1,7 +1,19 @@
-<p>person works!</p>
-<button type="button" (click)="showPerson()">Show persons</button>
-<ul>
-  <li *ngFor="let person of persons">{{person.name}}</li>
-</ul>
+<h1 class="center">Lifetech</h1>
+<table class="table">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">Prénom</th>
+    <th scope="col">Nom</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let person of persons">
+    <td>{{person.name}}</td>
+    <td>{{person.lastName}}</td>
+  </tr>
+  </tbody>
+</table>
+<button class="btn btn-primary" type="button" (click)="showPerson()">Show persons</button>
+<button class="btn btn-danger" type="button" (click)="hidePerson()">Hide persons</button>
 
 
