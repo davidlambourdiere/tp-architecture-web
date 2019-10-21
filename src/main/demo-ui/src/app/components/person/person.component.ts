@@ -14,6 +14,10 @@ export class PersonComponent implements OnInit {
   constructor(private personService: PersonService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+
+  }
+
+  showPerson() {
     this.route.params.subscribe(params=> {
       this.personService.findAllPerson().subscribe(data=>{
         this.persons = data;
