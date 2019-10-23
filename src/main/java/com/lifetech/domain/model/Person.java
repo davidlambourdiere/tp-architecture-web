@@ -1,4 +1,4 @@
-package com.demospringboot.domain.model;
+package com.lifetech.domain.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

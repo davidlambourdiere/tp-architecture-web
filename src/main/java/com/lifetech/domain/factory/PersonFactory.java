@@ -1,4 +1,4 @@
-package com.demospringboot.domain.factory;
+package com.lifetech.domain.factory;
 
 public interface PersonFactory {
     void createPerson();

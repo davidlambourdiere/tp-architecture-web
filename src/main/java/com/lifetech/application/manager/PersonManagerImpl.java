@@ -1,9 +1,8 @@
-package com.demospringboot.application.manager;
+package com.lifetech.application.manager;
 
-import com.demospringboot.application.dto.PersonDTO;
-import com.demospringboot.domain.OrikaBeanMapper;
-import com.demospringboot.domain.dao.PersonDAO;
-import com.demospringboot.domain.model.Person;
+import com.lifetech.application.dto.PersonDTO;
+import com.lifetech.domain.OrikaBeanMapper;
+import com.lifetech.domain.dao.PersonDAO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
