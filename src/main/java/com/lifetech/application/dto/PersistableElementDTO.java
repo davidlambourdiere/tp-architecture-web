@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.lang.Nullable;
 
 import java.sql.Timestamp;
-import java.util.Objects;
 
 public class PersistableElementDTO {
 
