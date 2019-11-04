@@ -1,0 +1,9 @@
+CREATE TABLE object (
+id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+name VARCHAR(255),
+status VARCHAR (255),
+date TIMESTAMP(3),
+minValue NUMBER,
+maxValue NUMBER,
+actualValue NUMBER
+);

@@ -1,5 +1,6 @@
 package com.demospringboot.domain;
 
+import com.demospringboot.application.dto.ObjectDTO;
 import com.demospringboot.application.dto.PersonDTO;
 import com.demospringboot.domain.model.Person;
 import ma.glasnost.orika.MapperFactory;
@@ -25,6 +26,7 @@ public class OrikaBeanMapper extends ConfigurableMapper {
     protected void configure(MapperFactory factory) {
         this.factory = factory;
         registerClassMap(Person.class, PersonDTO.class);
+        registerClassMap(Object.class, ObjectDTO.class);
     }
 
     private void registerClassMap(Class a, Class b) {
