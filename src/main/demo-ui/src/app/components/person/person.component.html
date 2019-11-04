@@ -15,9 +15,15 @@
 </table>
 <button class="btn btn-primary" type="button" (click)="showPerson()">Show persons</button>
 <button class="btn btn-danger" type="button" (click)="hidePerson()">Hide persons</button>
+<br/><br/><br/>
 <div>
-  {{personToShow.name}}
+  <header><h1>Selection d'une Personne</h1></header>
+  <form (ngSubmit)="onSubmit()">
+    <label>Id de la personne : </label>
+    <input type="number" id="id" name="id" required [(ngModel)]="id"/>
+  </form>
 </div>
-<button class="btn btn-danger" type="button" (click)="showOnePerson()">Show One persons</button>
+<div>{{personToShow.name}}</div>
+<button class="btn btn-danger" type="button" (click)="onSubmit()">Show One persons</button>
 
 
