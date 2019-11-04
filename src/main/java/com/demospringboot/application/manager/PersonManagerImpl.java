@@ -23,4 +23,9 @@ public class PersonManagerImpl implements PersonManager {
     public List<PersonDTO> findAll() {
         return orikaBeanMapper.mapAsList(personDAO.findAll(), PersonDTO.class);
     }
+
+    public PersonDTO findById(Long id) {
+        Person person = personDAO.findById(id).orElse(null);
+        return orikaBeanMapper.map(person, PersonDTO.class);
+    }
 }

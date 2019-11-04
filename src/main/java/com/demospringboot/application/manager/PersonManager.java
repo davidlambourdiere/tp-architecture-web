@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface PersonManager {
     List<PersonDTO> findAll();
+    PersonDTO findById(Long id);
 }

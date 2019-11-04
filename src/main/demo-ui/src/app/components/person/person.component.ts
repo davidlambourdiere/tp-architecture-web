@@ -12,6 +12,7 @@ import {PersonDTO} from '../../dto/PersonDTO';
 export class PersonComponent implements OnInit {
 
   persons: PersonDTO[] = [];
+  personToShow: PersonDTO;
   constructor(private personService: PersonService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -26,8 +27,17 @@ export class PersonComponent implements OnInit {
     })
   }
 
+
+
   hidePerson() {
     this.persons = [];
   }
 
+  showOnePerson() {
+    this.route.params.subscribe(params=> {
+      this.personService.find(1).subscribe(data=>{
+        this.personToShow = data;
+      })
+    })
+  }
 }
