@@ -1,4 +1,4 @@
-package com.demospringboot.domain.model;
+package com.lifetech.domain.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,11 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity(name = "person")
-public class Person {
-
-    @Id
-    @GeneratedValue
-    Long id;
+public class Person extends PersistableElement{
 
     @Column(name="name")
     private String name;
@@ -23,14 +19,6 @@ public class Person {
     public Person(String name, String lastName) {
         this.name = name;
         this.lastName = lastName;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {

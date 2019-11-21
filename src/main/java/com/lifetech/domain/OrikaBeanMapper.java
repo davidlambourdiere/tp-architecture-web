@@ -1,7 +1,9 @@
-package com.demospringboot.domain;
+package com.lifetech.domain;
 
-import com.demospringboot.application.dto.PersonDTO;
-import com.demospringboot.domain.model.Person;
+import com.lifetech.application.dto.PersonDTO;
+import com.lifetech.application.dto.SensorDTO;
+import com.lifetech.domain.model.Person;
+import com.lifetech.domain.model.Sensor;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
@@ -25,6 +27,7 @@ public class OrikaBeanMapper extends ConfigurableMapper {
     protected void configure(MapperFactory factory) {
         this.factory = factory;
         registerClassMap(Person.class, PersonDTO.class);
+        registerClassMap(Sensor.class, SensorDTO.class);
     }
 
     private void registerClassMap(Class a, Class b) {

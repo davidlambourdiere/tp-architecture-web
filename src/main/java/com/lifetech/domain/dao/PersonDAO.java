@@ -1,6 +1,6 @@
-package com.demospringboot.domain.dao;
+package com.lifetech.domain.dao;
 
-import com.demospringboot.domain.model.Person;
+import com.lifetech.domain.model.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
