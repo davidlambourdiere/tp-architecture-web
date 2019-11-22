@@ -4,6 +4,8 @@ package com.lifetech.application.dto;
 public class PersonDTO extends PersistableElementDTO {
     private String name;
     private String lastName;
+    private String login;
+    private String password;
 
     public PersonDTO() {
     }
@@ -22,5 +24,21 @@ public class PersonDTO extends PersistableElementDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
