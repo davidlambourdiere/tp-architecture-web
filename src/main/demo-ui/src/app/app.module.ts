@@ -9,13 +9,17 @@ import { PersonComponent } from './components/person/person.component';
 
 // @ts-ignore
 import {HttpClientModule} from '@angular/common/http';
-import { SensorComponent } from './components/sensor/sensor.component';
+import {HeadComponent} from './components/head/head.component';
+import {HomeComponent} from './components/home/home.component';
+import {ConnectionComponent} from './components/connection/connection.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HeadComponent,
     PersonComponent,
-    SensorComponent
+    HomeComponent,
+    ConnectionComponent
   ],
   imports: [
     BrowserModule,
