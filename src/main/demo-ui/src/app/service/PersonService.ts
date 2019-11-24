@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {PersonDTO} from "../dto/PersonDTO";
+import {PersonDTO} from '../dto/PersonDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +18,9 @@ export class PersonService {
 
   find(id: number) :Observable<PersonDTO>{
     return this.http.get<PersonDTO>(`api/person/findById/${id}`);
+  }
+
+  verifyConnection(person: PersonDTO): Observable<any> {
+    return this.http.post<PersonDTO>(`api/person/verifyConnection`, person);
   }
 }

@@ -6,16 +6,21 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PersonComponent } from './components/person/person.component';
-import { ChienComponent } from './chien/chien.component';
+
 // @ts-ignore
 import {HttpClientModule} from '@angular/common/http';
+import {HeadComponent} from './components/head/head.component';
+import {HomeComponent} from './components/home/home.component';
+import {ConnectionComponent} from './components/connection/connection.component';
 import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
+    HeadComponent,
     PersonComponent,
-    ChienComponent
+    HomeComponent,
+    ConnectionComponent
   ],
   imports: [
     BrowserModule,
