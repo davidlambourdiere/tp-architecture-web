@@ -12,7 +12,13 @@ import {HttpClientModule} from '@angular/common/http';
 import {HeadComponent} from './components/head/head.component';
 import {HomeComponent} from './components/home/home.component';
 import {ConnectionComponent} from './components/connection/connection.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule} from '@angular/forms';
+import {MonitoringComponent} from './components/monitoring/monitoring.component';
+import {PanneComponent} from './components/panne/panne.component';
+import {GestionObjectComponent} from './components/gestion.object/gestion.object.component';
+import {ActivityAnalysisComponent} from './components/activity.analysis/activity.analysis.component';
+import {LocationComponent} from './components/location/location.component';
+import {MedicalControlComponent} from './components/medical.control/medical.control.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +26,13 @@ import {FormsModule} from "@angular/forms";
     HeadComponent,
     PersonComponent,
     HomeComponent,
-    ConnectionComponent
+    ConnectionComponent,
+    MonitoringComponent,
+    PanneComponent,
+    GestionObjectComponent,
+    ActivityAnalysisComponent,
+    LocationComponent,
+    MedicalControlComponent
   ],
   imports: [
     BrowserModule,
