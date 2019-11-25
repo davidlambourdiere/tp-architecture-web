@@ -1,6 +1,6 @@
-package com.demospringboot.application.manager;
+package com.lifetech.application.manager;
 
-import com.demospringboot.application.dto.ObjectDTO;
+import com.lifetech.application.dto.ObjectDTO;
 
 import java.util.List;
 

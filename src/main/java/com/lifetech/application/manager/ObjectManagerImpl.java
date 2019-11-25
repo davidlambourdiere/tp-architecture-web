@@ -1,14 +1,14 @@
-package com.demospringboot.application.manager;
+package com.lifetech.application.manager;
 
-import com.demospringboot.application.dto.ObjectDTO;
-import com.demospringboot.domain.OrikaBeanMapper;
-import com.demospringboot.domain.dao.ObjectDAO;
+import com.lifetech.application.dto.ObjectDTO;
+import com.lifetech.domain.OrikaBeanMapper;
+import com.lifetech.domain.dao.ObjectDAO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ObjectManagerImpl implements com.demospringboot.application.manager.ObjectManager {
+public class ObjectManagerImpl implements ObjectManager {
 
     private final ObjectDAO objectDAO;
 

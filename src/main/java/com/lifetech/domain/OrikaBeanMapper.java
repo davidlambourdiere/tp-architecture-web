@@ -1,7 +1,8 @@
 package com.lifetech.domain;
 
-import com.demospringboot.application.dto.PersonDTO;
-import com.demospringboot.domain.model.Person;
+import com.lifetech.application.dto.ObjectDTO;
+import com.lifetech.application.dto.PersonDTO;
+import com.lifetech.domain.model.Person;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
 import ma.glasnost.orika.impl.DefaultMapperFactory;

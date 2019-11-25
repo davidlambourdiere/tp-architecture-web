@@ -1,4 +1,6 @@
-package com.demospringboot.domain.model;
+package com.lifetech.domain.model;
+
+import com.lifetech.domain.model.PersistableElement;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,12 +9,7 @@ import javax.persistence.Id;
 import java.util.Date;
 
 @Entity(name = "objectiot")
-public class ObjectIOT {
-
-    @Id
-    @GeneratedValue
-    Long id;
-
+public class ObjectIOT extends PersistableElement {
     @Column(name="name")
     private String name;
     @Column(name="status")
@@ -35,14 +32,6 @@ public class ObjectIOT {
         this.minValue = minValue;
         this.maxValue = maxValue;
         this.actualValue=actualValue;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {

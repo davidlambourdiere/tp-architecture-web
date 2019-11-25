@@ -1,4 +1,4 @@
-package com.demospringboot.application.dto;
+package com.lifetech.application.dto;
 
 import com.lifetech.application.dto.PersistableElementDTO;
 
