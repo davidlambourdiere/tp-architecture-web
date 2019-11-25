@@ -1,46 +1,18 @@
-package com.lifetech.domain.model;
+package com.lifetech.application.dto;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity(name="iot")
-public class IOT extends PersistableElement {
-
-    @Column(name="status")
+public class IOTDTO extends PersistableElementDTO{
     private String status;
-
-    @Column(name="state")
     private String state;
-
-    @Column(name="startdate")
     private Timestamp startdate;
-
-    @Column(name="minvalueref")
     private String minvalueref;
-
-    @Column(name="maxvalueref")
-    private String maxvalueref;
-
-    @Column(name="suspect")
     private String suspect;
-
-    @Column(name="activityduration")
+    private String maxvalueref;
     private Timestamp activityduration;
+    private PersonDTO person;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Person person;
-
-    public IOT(String status, String state, Timestamp startdate, String minvalueref, String maxvalueref, Timestamp activityduration, Person person) {
-        this.status = status;
-        this.state = state;
-        this.startdate = startdate;
-        this.minvalueref = minvalueref;
-        this.maxvalueref = maxvalueref;
-        this.activityduration = activityduration;
-        this.person = person;
-    }
-
-    public IOT() {
+    public IOTDTO() {
     }
 
     public String getStatus() {
@@ -91,11 +63,11 @@ public class IOT extends PersistableElement {
         this.activityduration = activityduration;
     }
 
-    public Person getPerson() {
+    public PersonDTO getPerson() {
         return person;
     }
 
-    public void setPerson(Person person) {
+    public void setPerson(PersonDTO person) {
         this.person = person;
     }
 

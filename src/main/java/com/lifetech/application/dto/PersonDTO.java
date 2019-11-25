@@ -6,6 +6,8 @@ public class PersonDTO extends PersistableElementDTO {
     private String lastName;
     private String login;
     private String password;
+    private String userevaluation;
+    private String userrole;
 
     public PersonDTO() {
     }
@@ -40,5 +42,21 @@ public class PersonDTO extends PersistableElementDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUserevaluation() {
+        return userevaluation;
+    }
+
+    public void setUserevaluation(String userevaluation) {
+        this.userevaluation = userevaluation;
+    }
+
+    public String getUserrole() {
+        return userrole;
+    }
+
+    public void setUserrole(String userrole) {
+        this.userrole = userrole;
     }
 }

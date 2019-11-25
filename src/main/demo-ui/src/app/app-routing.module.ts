@@ -15,10 +15,6 @@ import {ResidentComponent} from './components/resident/resident.component';
 
 const routes: Routes = [
   {
-    path:'',
-    component: ConnectionComponent
-  },
-  {
     path: 'connexionPage',
     component: ConnectionComponent
   },

@@ -4,7 +4,8 @@ optlock TIMESTAMP (3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 firstname VARCHAR (255),
 lastname VARCHAR (255),
 login VARCHAR (255),
+suspect VARCHAR(255),
 password VARCHAR (255),
-userrank INT,
+userevaluation INT,
 userrole VARCHAR (255)
 );

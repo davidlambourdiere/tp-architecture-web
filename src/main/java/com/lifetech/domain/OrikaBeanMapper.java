@@ -1,6 +1,8 @@
 package com.lifetech.domain;
 
+import com.lifetech.application.dto.IOTDTO;
 import com.lifetech.application.dto.PersonDTO;
+import com.lifetech.domain.model.IOT;
 import com.lifetech.domain.model.Person;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
@@ -25,6 +27,7 @@ public class OrikaBeanMapper extends ConfigurableMapper {
     protected void configure(MapperFactory factory) {
         this.factory = factory;
         registerClassMap(Person.class, PersonDTO.class);
+        registerClassMap(IOT.class, IOTDTO.class);
     }
 
     private void registerClassMap(Class a, Class b) {

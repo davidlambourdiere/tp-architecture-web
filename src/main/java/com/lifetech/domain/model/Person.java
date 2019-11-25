@@ -18,8 +18,8 @@ public class Person extends PersistableElement{
     @Column(name="password")
     private String password;
 
-    @Column(name="rank")
-    private Long userrank;
+    @Column(name="userevaluation")
+    private Long userevaluation;
 
     @Enumerated(EnumType.STRING)
     private PersonStatus userrole;
@@ -66,12 +66,12 @@ public class Person extends PersistableElement{
         this.password = password;
     }
 
-    public Long getUserrank() {
-        return userrank;
+    public Long getUserevaluation() {
+        return userevaluation;
     }
 
-    public void setUserrank(Long userrank) {
-        this.userrank = userrank;
+    public void setUserevaluation(Long userevaluation) {
+        this.userevaluation = userevaluation;
     }
 
     public PersonStatus getUserrole() {
