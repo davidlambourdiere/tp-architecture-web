@@ -9,6 +9,7 @@ import {GestionObjectComponent} from './components/gestion.object/gestion.object
 import {ActivityAnalysisComponent} from './components/activity.analysis/activity.analysis.component';
 import {LocationComponent} from './components/location/location.component';
 import {MedicalControlComponent} from './components/medical.control/medical.control.component';
+import {BillingComponent} from './components/billing/billing.component';
 
 
 const routes: Routes = [
@@ -43,6 +44,10 @@ const routes: Routes = [
   {
     path: 'medicalControl',
     component: MedicalControlComponent
+  },
+  {
+    path: 'billing',
+    component: BillingComponent
   }
 
 ];
