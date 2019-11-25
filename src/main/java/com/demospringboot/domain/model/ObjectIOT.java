@@ -6,8 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
 
-@Entity(name = "object")
-public class Object {
+@Entity(name = "objectiot")
+public class ObjectIOT {
 
     @Id
     @GeneratedValue
@@ -26,9 +26,9 @@ public class Object {
     @Column(name="actualValue")
     private int actualValue;
 
-    public Object(){}
+    public ObjectIOT(){}
 
-    public Object(String name, String status, Date date, int minValue, int maxValue, int actualValue) {
+    public ObjectIOT(String name, String status, Date date, int minValue, int maxValue, int actualValue) {
         this.name = name;
         this.status = status;
         this.date =date;
