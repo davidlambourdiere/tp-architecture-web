@@ -10,6 +10,7 @@ import {ActivityAnalysisComponent} from './components/activity.analysis/activity
 import {LocationComponent} from './components/location/location.component';
 import {MedicalControlComponent} from './components/medical.control/medical.control.component';
 import {BillingComponent} from './components/billing/billing.component';
+import {ResidentComponent} from './components/resident/resident.component';
 
 
 const routes: Routes = [
@@ -48,6 +49,10 @@ const routes: Routes = [
   {
     path: 'billing',
     component: BillingComponent
+  },
+  {
+    path: 'resident',
+    component: ResidentComponent
   }
 
 ];
