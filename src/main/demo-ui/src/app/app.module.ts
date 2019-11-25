@@ -12,6 +12,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {HeadComponent} from './components/head/head.component';
 import {HomeComponent} from './components/home/home.component';
 import {ConnectionComponent} from './components/connection/connection.component';
+// @ts-ignore
 import {FormsModule} from '@angular/forms';
 import {MonitoringComponent} from './components/monitoring/monitoring.component';
 import {PanneComponent} from './components/panne/panne.component';

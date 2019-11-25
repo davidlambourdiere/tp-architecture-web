@@ -1,6 +1,6 @@
 // @ts-ignore
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+
 import {ConnectionComponent} from './components/connection/connection.component';
 import {HomeComponent} from './components/home/home.component';
 import {MonitoringComponent} from './components/monitoring/monitoring.component';
@@ -9,6 +9,7 @@ import {GestionObjectComponent} from './components/gestion.object/gestion.object
 import {ActivityAnalysisComponent} from './components/activity.analysis/activity.analysis.component';
 import {LocationComponent} from './components/location/location.component';
 import {MedicalControlComponent} from './components/medical.control/medical.control.component';
+import {RouterModule, Routes} from '@angular/router';
 
 
 const routes: Routes = [
@@ -47,6 +48,7 @@ const routes: Routes = [
 
 ];
 
+// @ts-ignore
 @NgModule({
   declarations: [],
   imports: [RouterModule.forRoot(routes)],
