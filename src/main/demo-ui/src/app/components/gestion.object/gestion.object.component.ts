@@ -8,3 +8,7 @@ import {Component} from "@angular/core";
 export class  GestionObjectComponent {
 
 }
+
+var timeControl = document.querySelector('input[type="time"]');
+
+
