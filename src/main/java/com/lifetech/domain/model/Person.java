@@ -8,8 +8,8 @@ import javax.persistence.Id;
 @Entity(name = "person")
 public class Person extends PersistableElement{
 
-    @Column(name="name")
-    private String name;
+    @Column(name="firstname")
+    private String firstName;
 
     @Column(name="lastname")
     private String lastName;
@@ -22,17 +22,17 @@ public class Person extends PersistableElement{
 
     public Person(){}
 
-    public Person(String name, String lastName) {
-        this.name = name;
+    public Person(String firstName, String lastName) {
+        this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {

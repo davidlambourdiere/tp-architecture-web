@@ -1,5 +1,5 @@
 export class PersonDTO{
-  name: string;
+  firstName: string;
   lastName: string;
   login: string;
   password: string;
