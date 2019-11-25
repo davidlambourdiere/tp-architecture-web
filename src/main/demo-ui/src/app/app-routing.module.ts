@@ -9,10 +9,15 @@ import {GestionObjectComponent} from './components/gestion.object/gestion.object
 import {ActivityAnalysisComponent} from './components/activity.analysis/activity.analysis.component';
 import {LocationComponent} from './components/location/location.component';
 import {MedicalControlComponent} from './components/medical.control/medical.control.component';
-import {RouterModule, Routes} from '@angular/router';
+import {BillingComponent} from './components/billing/billing.component';
+import {ResidentComponent} from './components/resident/resident.component';
 
 
 const routes: Routes = [
+  {
+    path:'',
+    component: ConnectionComponent
+  },
   {
     path: 'connexionPage',
     component: ConnectionComponent
@@ -44,6 +49,14 @@ const routes: Routes = [
   {
     path: 'medicalControl',
     component: MedicalControlComponent
+  },
+  {
+    path: 'billing',
+    component: BillingComponent
+  },
+  {
+    path: 'resident',
+    component: ResidentComponent
   }
 
 ];

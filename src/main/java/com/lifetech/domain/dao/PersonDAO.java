@@ -7,5 +7,4 @@ import java.util.List;
 
 @Repository
 public interface PersonDAO extends JpaRepository<Person, Long> {
-    List<Person> findAllByName(String name);
 }
