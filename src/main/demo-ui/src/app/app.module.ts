@@ -21,6 +21,7 @@ import {LocationComponent} from './components/location/location.component';
 import {MedicalControlComponent} from './components/medical.control/medical.control.component';
 import {BillingComponent} from './components/billing/billing.component';
 import {ResidentComponent} from './components/resident/resident.component';
+import {AuthService} from "./service/AuthService";
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import {ResidentComponent} from './components/resident/resident.component';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

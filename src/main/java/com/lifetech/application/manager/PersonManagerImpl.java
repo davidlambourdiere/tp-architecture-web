@@ -30,9 +30,9 @@ public class PersonManagerImpl implements PersonManager {
     }
 
     @Override
-    public boolean verifyConnexion(PersonDTO connectedLogs) {
+    public PersonDTO verifyConnexion(PersonDTO connectedLogs) {
         List<Person> people = personDAO.findAll();
         Person person = orikaBeanMapper.map(connectedLogs, Person.class);
-        return personService.verifyConnection(people, person);
+        return orikaBeanMapper.map(personService.verifyConnection(people, person), PersonDTO.class);
     }
 }

@@ -1,13 +1,13 @@
 import {PersonDTO} from './PersonDTO';
 
-export class IOTDTO{
+export class LightDTO{
   status: string;
   state: string;
-  startdate: string;
-  suspect: string;
   minvalueref: string;
+  suspect: string;
   maxvalueref: string;
-  activityduration: string;
+  percentage: string;
+  color: string;
   person: PersonDTO;
 }
 

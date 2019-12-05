@@ -1,7 +1,24 @@
 <home></home>
-<div>
-  <ul *ngFor="let iot of iots">
-    <li>{{iot.status}}</li>
-  </ul>
+<br>
+<div class="container">
+  <form class="form-inline">
+    <div class="form-group mb-2">
+      <label>Username</label>
+      <input type="text" class="form-control" placeholder="Enter object type"
+             name="login" required>
+    </div>
+      <div class="form-group mb-2 mx-sm-5">
+      <label>Password</label>
+      <input type="password" class="form-control" placeholder="Enter object "
+             name="password" required>
+    </div>
+    <button type="button" class="btn btn-primary" (click)="findAllIOT()">Find IOTs</button>
+  </form>
+
+  <div>
+<!--    <ul *ngFor="let iot of iots">-->
+<!--      <li>{{iot.person.firstName}}</li>-->
+<!--    </ul>-->
+  </div>
 </div>
-Louis monitoring
+

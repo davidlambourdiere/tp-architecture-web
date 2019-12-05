@@ -2,7 +2,7 @@ package com.lifetech.application.dto;
 
 import java.sql.Timestamp;
 
-public class IOTDTO extends PersistableElementDTO{
+public class LightDTO extends PersistableElementDTO{
     private String status;
     private String state;
     private Timestamp startdate;
@@ -10,9 +10,11 @@ public class IOTDTO extends PersistableElementDTO{
     private String suspect;
     private String maxvalueref;
     private Timestamp activityduration;
+    private String color;
+    private String percentage;
     private PersonDTO person;
 
-    public IOTDTO() {
+    public LightDTO() {
     }
 
     public String getStatus() {
@@ -77,5 +79,21 @@ public class IOTDTO extends PersistableElementDTO{
 
     public void setSuspect(String suspect) {
         this.suspect = suspect;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(String percentage) {
+        this.percentage = percentage;
     }
 }

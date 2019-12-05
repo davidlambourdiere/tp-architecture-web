@@ -18,6 +18,12 @@ public class Person extends PersistableElement{
     @Column(name="password")
     private String password;
 
+    @Column(name="deseas")
+    private String deseas;
+
+    @Column(name="ismobile")
+    private String ismobile;
+
     @Column(name="userevaluation")
     private Long userevaluation;
 
@@ -25,13 +31,45 @@ public class Person extends PersistableElement{
     private PersonStatus userrole;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
-    private List<IOT> iots;
+    private List<Light> lights;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
+    private List<Shutter> shutters;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
+    private List<Heater> heaters;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
+    private List<Clock> clocks;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+    private Strap strap;
 
     public Person(){}
 
-    public Person(String firstName, String lastName) {
+    public Person(String firstName, String lastName, String deseas, String ismobile, Long userevaluation, PersonStatus userrole) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.deseas = deseas;
+        this.ismobile = ismobile;
+        this.userevaluation = userevaluation;
+        this.userrole = userrole;
+    }
+
+    public String getDeseas() {
+        return deseas;
+    }
+
+    public void setDeseas(String deseas) {
+        this.deseas = deseas;
+    }
+
+    public String getIsmobile() {
+        return ismobile;
+    }
+
+    public void setIsmobile(String ismobile) {
+        this.ismobile = ismobile;
     }
 
     public String getFirstName() {
@@ -82,11 +120,43 @@ public class Person extends PersistableElement{
         this.userrole = userrole;
     }
 
-    public List<IOT> getIots() {
-        return iots;
+    public List<Light> getLights() {
+        return lights;
     }
 
-    public void setIots(List<IOT> iots) {
-        this.iots = iots;
+    public void setLights(List<Light> lights) {
+        this.lights = lights;
+    }
+
+    public List<Shutter> getShutters() {
+        return shutters;
+    }
+
+    public void setShutters(List<Shutter> shutters) {
+        this.shutters = shutters;
+    }
+
+    public Strap getStrap() {
+        return strap;
+    }
+
+    public void setStrap(Strap strap) {
+        this.strap = strap;
+    }
+
+    public List<Heater> getHeaters() {
+        return heaters;
+    }
+
+    public void setHeaters(List<Heater> heaters) {
+        this.heaters = heaters;
+    }
+
+    public List<Clock> getClocks() {
+        return clocks;
+    }
+
+    public void setClocks(List<Clock> clocks) {
+        this.clocks = clocks;
     }
 }
