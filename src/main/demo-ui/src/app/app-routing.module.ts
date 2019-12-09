@@ -11,6 +11,7 @@ import {LocationComponent} from './components/location/location.component';
 import {MedicalControlComponent} from './components/medical.control/medical.control.component';
 import {BillingComponent} from './components/billing/billing.component';
 import {ResidentComponent} from './components/resident/resident.component';
+import {RouterModule, Routes} from "@angular/router";
 
 
 const routes: Routes = [

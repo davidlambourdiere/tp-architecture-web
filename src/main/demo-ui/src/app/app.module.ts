@@ -22,6 +22,8 @@ import {LocationComponent} from './components/location/location.component';
 import {MedicalControlComponent} from './components/medical.control/medical.control.component';
 import {BillingComponent} from './components/billing/billing.component';
 import {ResidentComponent} from './components/resident/resident.component';
+import { LogementComponent } from './components/panne/logement/logement.component';
+import { ObjectListComponent } from './components/panne/object-list/object-list.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import {ResidentComponent} from './components/resident/resident.component';
     LocationComponent,
     MedicalControlComponent,
     BillingComponent,
-    ResidentComponent
+    ResidentComponent,
+    LogementComponent,
+    ObjectListComponent
   ],
   imports: [
     BrowserModule,
