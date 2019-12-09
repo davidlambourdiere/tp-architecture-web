@@ -2,11 +2,12 @@ package com.lifetech.application.dto;
 
 import java.sql.Timestamp;
 
-public class HeaterDTO {
+public class HeaterDTO extends PersistableElementDTO{
     private String status;
     private String state;
     private Timestamp startdate;
     private String minvalueref;
+    private String ipadress;
     private String suspect;
     private String maxvalueref;
     private Timestamp activityduration;
@@ -79,5 +80,11 @@ public class HeaterDTO {
         this.suspect = suspect;
     }
 
+    public String getIpadress() {
+        return ipadress;
+    }
 
+    public void setIpadress(String ipadress) {
+        this.ipadress = ipadress;
+    }
 }

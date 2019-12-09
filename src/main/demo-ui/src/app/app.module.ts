@@ -22,6 +22,8 @@ import {MedicalControlComponent} from './components/medical.control/medical.cont
 import {BillingComponent} from './components/billing/billing.component';
 import {ResidentComponent} from './components/resident/resident.component';
 import {AuthService} from "./service/AuthService";
+import {NotificationComponent} from "./components/notification/notification.component";
+import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import {AuthService} from "./service/AuthService";
     ConnectionComponent,
     MonitoringComponent,
     PanneComponent,
+    NotificationComponent,
+    DetailIotComponent,
     GestionObjectComponent,
     ActivityAnalysisComponent,
     LocationComponent,

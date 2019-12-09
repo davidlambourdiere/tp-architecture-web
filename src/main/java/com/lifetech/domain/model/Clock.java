@@ -15,8 +15,8 @@ public class Clock extends IOT {
     @ManyToOne(cascade = CascadeType.ALL)
     private Person person;
 
-    public Clock(String status, String state, Timestamp startdate, String minvalueref, String maxvalueref, Timestamp activityduration, Timestamp time, Person person) {
-        super(status, state, startdate, minvalueref, maxvalueref, activityduration);
+    public Clock(String status, String state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration, Timestamp time, Person person) {
+        super(status, state, ipadress, startdate, minvalueref, maxvalueref, suspect, activityduration);
         this.time = time;
         this.person = person;
     }

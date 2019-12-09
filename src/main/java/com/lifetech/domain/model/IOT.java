@@ -22,6 +22,9 @@ public class IOT implements Serializable {
     @Column(name="state")
     private String state;
 
+    @Column(name="ipadress")
+    private String ipadress;
+
     @Column(name="startdate")
     private Timestamp startdate;
 
@@ -38,13 +41,14 @@ public class IOT implements Serializable {
     private Timestamp activityduration;
 
 
-
-    public IOT(String status, String state, Timestamp startdate, String minvalueref, String maxvalueref, Timestamp activityduration) {
+    public IOT(String status, String state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration) {
         this.status = status;
         this.state = state;
+        this.ipadress = ipadress;
         this.startdate = startdate;
         this.minvalueref = minvalueref;
         this.maxvalueref = maxvalueref;
+        this.suspect = suspect;
         this.activityduration = activityduration;
     }
 
@@ -105,5 +109,29 @@ public class IOT implements Serializable {
 
     public void setSuspect(String suspect) {
         this.suspect = suspect;
+    }
+
+    public String getIpadress() {
+        return ipadress;
+    }
+
+    public void setIpadress(String ipadress) {
+        this.ipadress = ipadress;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Timestamp getOptlock() {
+        return optlock;
+    }
+
+    public void setOptlock(Timestamp optlock) {
+        this.optlock = optlock;
     }
 }

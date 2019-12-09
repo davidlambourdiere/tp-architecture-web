@@ -12,16 +12,37 @@ export class MonitoringComponent implements OnInit {
 
   iots: IOTDTO = new IOTDTO;
   show: boolean = false;
+  type: string = 'all';
+  owner: string= '';
 
   constructor(private router: Router, private route: ActivatedRoute, private iotservice: IOTService) {
   }
 
   ngOnInit(): void {
+    this.findAllIOT();
   }
 
   findAllIOT() {
     this.route.params.subscribe(params => {
       this.iotservice.findAllIOT().subscribe(data => {
+        this.iots = data;
+        this.show = true;
+      })
+    })
+  }
+
+  findByType(){
+    this.route.params.subscribe(params => {
+      this.iotservice.findIOTByType(this.type).subscribe(data => {
+       this.iots = data;
+        this.show = true;
+      })
+    })
+  }
+
+  findIOTByPerson(){
+    this.route.params.subscribe(params => {
+      this.iotservice.findIOTByPerson('1').subscribe(data => {
         this.iots = data;
         this.show = true;
       })

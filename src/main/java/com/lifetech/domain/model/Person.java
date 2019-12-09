@@ -12,6 +12,21 @@ public class Person extends PersistableElement{
     @Column(name="lastname")
     private String lastName;
 
+    @Column(name="birthdate")
+    private String birthdate;
+
+    @Column(name="email")
+    private String email;
+
+    @Column(name="phone")
+    private String phone;
+
+    @Column(name="handicap")
+    private String handicap;
+
+    @Column(name="averageincome")
+    private String averageincome;
+
     @Column(name="login")
     private String login;
 
@@ -42,15 +57,25 @@ public class Person extends PersistableElement{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
     private List<Clock> clocks;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Residence residence;
+
     @PrimaryKeyJoinColumn
     @OneToOne
     private Strap strap;
 
     public Person(){}
 
-    public Person(String firstName, String lastName, String deseas, String ismobile, Long userevaluation, PersonStatus userrole) {
+    public Person(String firstName, String lastName, String birthdate, String email, String phone, String handicap, String averageincome, String login, String password, String deseas, String ismobile, Long userevaluation, PersonStatus userrole) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.birthdate = birthdate;
+        this.email = email;
+        this.phone = phone;
+        this.handicap = handicap;
+        this.averageincome = averageincome;
+        this.login = login;
+        this.password = password;
         this.deseas = deseas;
         this.ismobile = ismobile;
         this.userevaluation = userevaluation;
@@ -159,5 +184,53 @@ public class Person extends PersistableElement{
 
     public void setClocks(List<Clock> clocks) {
         this.clocks = clocks;
+    }
+
+    public Residence getResidence() {
+        return residence;
+    }
+
+    public void setResidence(Residence residence) {
+        this.residence = residence;
+    }
+
+    public String getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getHandicap() {
+        return handicap;
+    }
+
+    public void setHandicap(String handicap) {
+        this.handicap = handicap;
+    }
+
+    public String getAverageincome() {
+        return averageincome;
+    }
+
+    public void setAverageincome(String averageincome) {
+        this.averageincome = averageincome;
     }
 }

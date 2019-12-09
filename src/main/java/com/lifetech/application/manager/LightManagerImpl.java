@@ -29,4 +29,10 @@ public class LightManagerImpl implements LightManager {
         List<Light> lights = lightDAO.findAllByPersonId(Long. parseLong(id));
         return orikaBeanMapper.mapAsList(lights, LightDTO.class);
     }
+
+    @Override
+    public LightDTO findById(String id) {
+        Light light = lightDAO.findById(Long.parseLong(id)).orElse(null);
+        return orikaBeanMapper.map(light, LightDTO.class);
+    }
 }

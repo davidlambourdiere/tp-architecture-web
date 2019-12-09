@@ -18,8 +18,8 @@ public class Light extends IOT{
     @ManyToOne(cascade = CascadeType.ALL)
     private Person person;
 
-    public Light(String status, String state, Timestamp startdate, String minvalueref, String maxvalueref, Timestamp activityduration, Person person, String color, String percentage) {
-        super(status, state, startdate, minvalueref, maxvalueref, activityduration);
+    public Light(String status, String state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration, String color, String percentage, Person person) {
+        super(status, state, ipadress, startdate, minvalueref, maxvalueref, suspect, activityduration);
         this.color = color;
         this.percentage = percentage;
         this.person = person;

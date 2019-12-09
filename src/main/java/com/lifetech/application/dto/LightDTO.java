@@ -2,11 +2,12 @@ package com.lifetech.application.dto;
 
 import java.sql.Timestamp;
 
-public class LightDTO extends PersistableElementDTO{
+public class LightDTO extends PersistableElementDTO {
     private String status;
     private String state;
     private Timestamp startdate;
     private String minvalueref;
+    private String ipadress;
     private String suspect;
     private String maxvalueref;
     private Timestamp activityduration;
@@ -95,5 +96,13 @@ public class LightDTO extends PersistableElementDTO{
 
     public void setPercentage(String percentage) {
         this.percentage = percentage;
+    }
+
+    public String getIpadress() {
+        return ipadress;
+    }
+
+    public void setIpadress(String ipadress) {
+        this.ipadress = ipadress;
     }
 }
