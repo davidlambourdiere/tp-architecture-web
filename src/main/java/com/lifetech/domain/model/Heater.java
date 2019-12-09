@@ -16,6 +16,9 @@ public class Heater  extends IOT{
         this.person = person;
     }
 
+    public Heater() {
+    }
+
     public Person getPerson() {
         return person;
     }

@@ -25,6 +25,9 @@ public class Light extends IOT{
         this.person = person;
     }
 
+    public Light() {
+    }
+
     public String getColor() {
         return color;
     }

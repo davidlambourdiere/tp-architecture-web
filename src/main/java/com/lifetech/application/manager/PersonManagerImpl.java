@@ -25,8 +25,7 @@ public class PersonManagerImpl implements PersonManager {
         this.personService = personService;
     }
 
-    public List<PersonDTO> findAll() {
-        return orikaBeanMapper.mapAsList(personDAO.findAll(), PersonDTO.class);
+    public List<PersonDTO> findAll() {return orikaBeanMapper.mapAsList(personDAO.findAll(), PersonDTO.class);
     }
 
     @Override

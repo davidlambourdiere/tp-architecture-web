@@ -21,6 +21,9 @@ public class Shutter extends IOT{
         this.person = person;
     }
 
+    public Shutter() {
+    }
+
     public String getPercentage() {
         return percentage;
     }

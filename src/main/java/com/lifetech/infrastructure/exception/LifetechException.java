@@ -2,7 +2,7 @@ package com.lifetech.infrastructure.exception;
 
 import java.util.Map;
 
-public abstract class LifetechException extends RuntimeException{
+public abstract class LifetechException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 

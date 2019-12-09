@@ -11,6 +11,7 @@ import {LocationComponent} from './components/location/location.component';
 import {MedicalControlComponent} from './components/medical.control/medical.control.component';
 import {BillingComponent} from './components/billing/billing.component';
 import {ResidentComponent} from './components/resident/resident.component';
+import {AuthGuardService} from './guards/auth-guard.service';
 
 
 const routes: Routes = [
@@ -20,39 +21,48 @@ const routes: Routes = [
   },
   {
     path:'home',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'monitoring',
-    component: MonitoringComponent
+    component: MonitoringComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'panne',
-    component: PanneComponent
+    component: PanneComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'gestionObject',
-    component: GestionObjectComponent
+    component: GestionObjectComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'activityAnalysis',
-    component: ActivityAnalysisComponent
+    component: ActivityAnalysisComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'location',
-    component: LocationComponent
+    component: LocationComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'medicalControl',
-    component: MedicalControlComponent
+    component: MedicalControlComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'billing',
-    component: BillingComponent
+    component: BillingComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'resident',
-    component: ResidentComponent
+    component: ResidentComponent,
+    canActivate: [AuthGuardService]
   }
 
 ];

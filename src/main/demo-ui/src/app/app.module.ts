@@ -40,6 +40,7 @@ import {AuthService} from "./service/AuthService";
     ResidentComponent
   ],
   imports: [
+    // NgbModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

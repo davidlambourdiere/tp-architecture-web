@@ -21,6 +21,9 @@ public class Clock extends IOT {
         this.person = person;
     }
 
+    public Clock() {
+    }
+
     public Timestamp getTime() {
         return time;
     }

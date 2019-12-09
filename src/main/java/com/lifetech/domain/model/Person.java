@@ -42,7 +42,8 @@ public class Person extends PersistableElement{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
     private List<Clock> clocks;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+    @PrimaryKeyJoinColumn
+    @OneToOne
     private Strap strap;
 
     public Person(){}

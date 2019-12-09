@@ -1,8 +1,6 @@
 package com.lifetech.domain.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity(name="strap")
@@ -27,7 +25,7 @@ public class Strap extends IOT{
     @Column(name="minsteps")
     private String minsteps;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     private Person person;
 
     public Strap(String status, String state, Timestamp startdate, String minvalueref, String maxvalueref, Timestamp activityduration, String minsysto, String maxsysto, String maxdiasto, String minglyc, String maxglyc, String minsteps, Person person) {
@@ -39,6 +37,9 @@ public class Strap extends IOT{
         this.maxglyc = maxglyc;
         this.minsteps = minsteps;
         this.person = person;
+    }
+
+    public Strap() {
     }
 
     public String getMinsysto() {

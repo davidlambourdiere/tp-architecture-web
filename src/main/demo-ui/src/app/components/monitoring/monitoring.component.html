@@ -3,22 +3,121 @@
 <div class="container">
   <form class="form-inline">
     <div class="form-group mb-2">
-      <label>Username</label>
-      <input type="text" class="form-control" placeholder="Enter object type"
-             name="login" required>
+
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" ngbDropDownToggle>
+          dropdown example
+        </button>
+        <ul class="dropdown-menu">
+          <li>toto</li>
+          <li>titi</li>
+        </ul>
+      </div>
+
     </div>
-      <div class="form-group mb-2 mx-sm-5">
-      <label>Password</label>
-      <input type="password" class="form-control" placeholder="Enter object "
-             name="password" required>
+    <div class="form-group mb-2 mx-sm-5">
+      <label>Person</label>
+      <input type="text" class="form-control" placeholder="Enter object person"
+             name="person" required>
     </div>
     <button type="button" class="btn btn-primary" (click)="findAllIOT()">Find IOTs</button>
   </form>
-
-  <div>
-<!--    <ul *ngFor="let iot of iots">-->
-<!--      <li>{{iot.person.firstName}}</li>-->
-<!--    </ul>-->
+  <div *ngIf="show===true"><
+    <div *ngIf="iots!==null && iots.lights!==null">
+      <h2>Lights</h2>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Nom du propriètaire</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let iot of iots.lights">
+          <td>{{iot.person.lastName}}</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="iots!==null && iots.straps!==null">
+      <h2>Straps</h2>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Nom du propriètaire</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let iot of iots.straps">
+          <td>{{iot.person.lastName}}</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="iots!==null && iots.clocks!==null">
+      <h2>Clocks</h2>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Nom du propriètaire</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let iot of iots.clocks">
+          <td>{{iot.person.lastName}}</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="iots!==null && iots.heaters!==null">
+      <h2>Heaters</h2>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Nom du propriètaire</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let iot of iots.heaters">
+          <td>{{iot.person.lastName}}</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="iots!==null && iots.shutters!==null">
+      <h2>Shutters</h2>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Nom du propriètaire</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let iot of iots.shutters">
+          <td>{{iot.person.lastName}}</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 

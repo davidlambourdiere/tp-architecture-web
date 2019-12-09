@@ -133,7 +133,7 @@
 <!--                <configuration>-->
 <!--                    <jsonLibrary>jackson2</jsonLibrary>-->
 <!--                    <classPaterns>-->
-<!--                        <pattern>com.lifetech.application.**DTO</pattern>-->
+<!--                        <pattern>com.lifetech.application.dto.**DTO</pattern>-->
 <!--                    </classPaterns>-->
 <!--                    <customTypeMappings>-->
 <!--                        <mapping>java.sql.Timestamp:Date</mapping>-->
