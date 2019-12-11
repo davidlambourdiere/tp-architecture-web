@@ -46,4 +46,33 @@ public class IOTManagerImpl implements IOTManager{
         iotToReturn.setStraps(straps);
         return iotToReturn;
     }
+
+    public IOTDTO  findIOTByType(String type) {
+        IOTDTO iotToReturn = new IOTDTO();
+        switch(type){
+            case "heater":
+                List<HeaterDTO> heaters = orikaBeanMapper.convertListDTO(heaterDAO.findAll(), HeaterDTO.class);
+                iotToReturn.setHeaters(heaters);
+                break;
+            case "light":
+                List<LightDTO> lights = orikaBeanMapper.convertListDTO(lightDAO.findAll(), LightDTO.class);
+                iotToReturn.setLights(lights);
+                break;
+            case "strap":
+                List<StrapDTO> straps = orikaBeanMapper.convertListDTO(strapDAO.findAll(), StrapDTO.class);
+                iotToReturn.setStraps(straps);
+                break;
+            case "shutter":
+                List<ShutterDTO> shutters = orikaBeanMapper.convertListDTO(shutterDAO.findAll(), ShutterDTO.class);
+                iotToReturn.setShutters(shutters);
+                break;
+            case "clock":
+                List<ClockDTO> clocks = orikaBeanMapper.convertListDTO(clockDAO.findAll(), ClockDTO.class);
+                iotToReturn.setClocks(clocks);
+                break;
+            default :
+                return null;
+        }
+        return iotToReturn;
+    }
 }

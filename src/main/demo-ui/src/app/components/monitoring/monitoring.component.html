@@ -4,15 +4,12 @@
   <form class="form-inline">
     <div class="form-group mb-2">
 
-      <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" ngbDropDownToggle>
-          dropdown example
-        </button>
-        <ul class="dropdown-menu">
-          <li>toto</li>
-          <li>titi</li>
-        </ul>
-      </div>
+      <select class="custom-select mr-sm-2">
+        <option selected>Choose object type</option>
+        <option>Heater</option>
+        <option>Clock</option>
+        <option>Strap</option>
+      </select>
 
     </div>
     <div class="form-group mb-2 mx-sm-5">
@@ -22,22 +19,20 @@
     </div>
     <button type="button" class="btn btn-primary" (click)="findAllIOT()">Find IOTs</button>
   </form>
-  <div *ngIf="show===true"><
+  <div *ngIf="show===true">
     <div *ngIf="iots!==null && iots.lights!==null">
       <h2>Lights</h2>
       <table class="table table-striped">
         <thead>
         <tr>
           <th scope="col">Nom du propriètaire</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
+          <th scope="col">Etat</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let iot of iots.lights">
-          <td>{{iot.person.lastName}}</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+          <td>{{iot.person.firstName}}{{iot.person.lastName}}</td>
+          <td>{{iot.state}}</td>
         </tr>
         </tbody>
       </table>
@@ -48,15 +43,13 @@
         <thead>
         <tr>
           <th scope="col">Nom du propriètaire</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
+          <th scope="col">Etat</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let iot of iots.straps">
-          <td>{{iot.person.lastName}}</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+          <td>{{iot.person.firstName}}{{iot.person.lastName}}</td>
+          <td>{{iot.state}}</td>
         </tr>
         </tbody>
       </table>
@@ -67,15 +60,13 @@
         <thead>
         <tr>
           <th scope="col">Nom du propriètaire</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
+          <th scope="col">Etat</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let iot of iots.clocks">
-          <td>{{iot.person.lastName}}</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+          <td>{{iot.person.firstName}}{{iot.person.lastName}}</td>
+          <td>{{iot.state}}</td>
         </tr>
         </tbody>
       </table>
@@ -86,15 +77,13 @@
         <thead>
         <tr>
           <th scope="col">Nom du propriètaire</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
+          <th scope="col">Etat</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let iot of iots.heaters">
-          <td>{{iot.person.lastName}}</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+          <td>{{iot.person.firstName}}{{iot.person.lastName}}</td>
+          <td>{{iot.state}}</td>
         </tr>
         </tbody>
       </table>
@@ -105,15 +94,13 @@
         <thead>
         <tr>
           <th scope="col">Nom du propriètaire</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
+          <th scope="col">Etat</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let iot of iots.shutters">
-          <td>{{iot.person.lastName}}</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+          <td>{{iot.person.firstName}}{{iot.person.lastName}}</td>
+          <td>{{iot.state}}</td>
         </tr>
         </tbody>
       </table>
