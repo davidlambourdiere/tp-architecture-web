@@ -20,7 +20,9 @@ export class PersonService {
     return this.http.get<PersonDTO>(`api/person/findById/${id}`);
   }
 
-  verifyConnection(person: PersonDTO): Observable<any> {
+  verifyConnection(person: PersonDTO): Observable<PersonDTO> {
     return this.http.post<PersonDTO>(`api/person/verifyConnection`, person);
   }
+
+
 }

@@ -24,6 +24,9 @@ import {BillingComponent} from './components/billing/billing.component';
 import {ResidentComponent} from './components/resident/resident.component';
 import { LogementComponent } from './components/panne/logement/logement.component';
 import { ObjectListComponent } from './components/panne/object-list/object-list.component';
+import {AuthService} from "./service/AuthService";
+import {NotificationComponent} from "./components/notification/notification.component";
+import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
 
 @NgModule({
   declarations: [
@@ -34,6 +37,8 @@ import { ObjectListComponent } from './components/panne/object-list/object-list.
     ConnectionComponent,
     MonitoringComponent,
     PanneComponent,
+    NotificationComponent,
+    DetailIotComponent,
     GestionObjectComponent,
     ActivityAnalysisComponent,
     LocationComponent,
@@ -44,12 +49,13 @@ import { ObjectListComponent } from './components/panne/object-list/object-list.
     ObjectListComponent
   ],
   imports: [
+    // NgbModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

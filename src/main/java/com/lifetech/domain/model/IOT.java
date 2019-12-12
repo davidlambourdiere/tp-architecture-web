@@ -1,17 +1,29 @@
 package com.lifetech.domain.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 
-@Entity(name="iot")
-public class IOT extends PersistableElement {
+@MappedSuperclass
+public class IOT implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
+    private Long id;
+
+    @Version
+    @Column
+    protected Timestamp optlock;
 
     @Column(name="status")
     private String status;
 
     @Column(name="state")
     private String state;
+
+    @Column(name="ipadress")
+    private String ipadress;
 
     @Column(name="startdate")
     private Timestamp startdate;
@@ -22,20 +34,22 @@ public class IOT extends PersistableElement {
     @Column(name="maxvalueref")
     private String maxvalueref;
 
+    @Column(name="suspect")
+    private String suspect;
+
     @Column(name="activityduration")
     private Timestamp activityduration;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Person person;
 
-    public IOT(String status, String state, Timestamp startdate, String minvalueref, String maxvalueref, Timestamp activityduration, Person person) {
+    public IOT(String status, String state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration) {
         this.status = status;
         this.state = state;
+        this.ipadress = ipadress;
         this.startdate = startdate;
         this.minvalueref = minvalueref;
         this.maxvalueref = maxvalueref;
+        this.suspect = suspect;
         this.activityduration = activityduration;
-        this.person = person;
     }
 
     public IOT() {
@@ -89,11 +103,35 @@ public class IOT extends PersistableElement {
         this.activityduration = activityduration;
     }
 
-    public Person getPerson() {
-        return person;
+    public String getSuspect() {
+        return suspect;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setSuspect(String suspect) {
+        this.suspect = suspect;
+    }
+
+    public String getIpadress() {
+        return ipadress;
+    }
+
+    public void setIpadress(String ipadress) {
+        this.ipadress = ipadress;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Timestamp getOptlock() {
+        return optlock;
+    }
+
+    public void setOptlock(Timestamp optlock) {
+        this.optlock = optlock;
     }
 }

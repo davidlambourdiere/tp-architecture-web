@@ -12,52 +12,70 @@ import {MedicalControlComponent} from './components/medical.control/medical.cont
 import {BillingComponent} from './components/billing/billing.component';
 import {ResidentComponent} from './components/resident/resident.component';
 import {RouterModule, Routes} from "@angular/router";
+import {AuthGuardService} from './guards/auth-guard.service';
+import {NotificationComponent} from "./components/notification/notification.component";
+import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
 
 
 const routes: Routes = [
-  {
-    path:'',
-    component: ConnectionComponent
-  },
   {
     path: 'connexionPage',
     component: ConnectionComponent
   },
   {
     path:'home',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'monitoring',
-    component: MonitoringComponent
+    component: MonitoringComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'panne',
-    component: PanneComponent
+    component: PanneComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'gestionObject',
-    component: GestionObjectComponent
+    component: GestionObjectComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'activityAnalysis',
-    component: ActivityAnalysisComponent
+    component: ActivityAnalysisComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'location',
-    component: LocationComponent
+    component: LocationComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'medicalControl',
-    component: MedicalControlComponent
+    component: MedicalControlComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'billing',
-    component: BillingComponent
+    component: BillingComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'resident',
-    component: ResidentComponent
+    component: ResidentComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'notification',
+    component: NotificationComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'detailiot/:id',
+    component: DetailIotComponent,
+    canActivate: [AuthGuardService]
   }
 
 ];
