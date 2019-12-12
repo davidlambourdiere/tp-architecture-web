@@ -2,12 +2,13 @@ package com.lifetech.application.dto;
 
 import java.sql.Timestamp;
 
-public class ClockDTO {
+public class ClockDTO extends PersistableElementDTO{
     private String status;
     private String state;
     private Timestamp startdate;
     private String minvalueref;
     private String suspect;
+    private String ipadress;
     private String maxvalueref;
     private Timestamp activityduration;
     private Timestamp time;
@@ -86,5 +87,13 @@ public class ClockDTO {
 
     public void setTime(Timestamp time) {
         this.time = time;
+    }
+
+    public String getIpadress() {
+        return ipadress;
+    }
+
+    public void setIpadress(String ipadress) {
+        this.ipadress = ipadress;
     }
 }

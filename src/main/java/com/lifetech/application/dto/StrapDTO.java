@@ -2,7 +2,7 @@ package com.lifetech.application.dto;
 
 import java.sql.Timestamp;
 
-public class StrapDTO {
+public class StrapDTO extends PersistableElementDTO{
 
     private String status;
     private String state;
@@ -10,6 +10,7 @@ public class StrapDTO {
     private String minvalueref;
     private String suspect;
     private String maxvalueref;
+    private String ipadress;
     private Timestamp activityduration;
     private String minsysto;
     private String maxsysto;
@@ -132,5 +133,13 @@ public class StrapDTO {
 
     public void setMinsteps(String minsteps) {
         this.minsteps = minsteps;
+    }
+
+    public String getIpadress() {
+        return ipadress;
+    }
+
+    public void setIpadress(String ipadress) {
+        this.ipadress = ipadress;
     }
 }

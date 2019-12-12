@@ -8,6 +8,7 @@ public class ShutterDTO extends  PersistableElementDTO{
     private Timestamp startdate;
     private String minvalueref;
     private String suspect;
+    private String ipadress;
     private String maxvalueref;
     private Timestamp activityduration;
     private String percentage;
@@ -86,5 +87,13 @@ public class ShutterDTO extends  PersistableElementDTO{
 
     public void setPercentage(String percentage) {
         this.percentage = percentage;
+    }
+
+    public String getIpadress() {
+        return ipadress;
+    }
+
+    public void setIpadress(String ipadress) {
+        this.ipadress = ipadress;
     }
 }

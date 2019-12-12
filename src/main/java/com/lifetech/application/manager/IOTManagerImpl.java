@@ -3,6 +3,8 @@ package com.lifetech.application.manager;
 import com.lifetech.application.dto.*;
 import com.lifetech.domain.OrikaBeanMapper;
 import com.lifetech.domain.dao.*;
+import com.lifetech.domain.model.Person;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,15 +22,18 @@ public class IOTManagerImpl implements IOTManager{
 
     private final StrapDAO strapDAO;
 
+    private final PersonDAO personDAO;
+
     private final OrikaBeanMapper orikaBeanMapper;
 
-    public IOTManagerImpl(ClockDAO clockDAO, HeaterDAO heaterDAO, LightDAO lightDAO, ShutterDAO shutterDAO, StrapDAO strapDAO, OrikaBeanMapper orikaBeanMapper) {
+    public IOTManagerImpl(ClockDAO clockDAO, HeaterDAO heaterDAO, LightDAO lightDAO, ShutterDAO shutterDAO, StrapDAO strapDAO, OrikaBeanMapper orikaBeanMapper, PersonDAO personDAO) {
         this.clockDAO = clockDAO;
         this.heaterDAO = heaterDAO;
         this.lightDAO = lightDAO;
         this.shutterDAO = shutterDAO;
         this.strapDAO = strapDAO;
         this.orikaBeanMapper = orikaBeanMapper;
+        this.personDAO = personDAO;
     }
 
 
@@ -73,6 +78,14 @@ public class IOTManagerImpl implements IOTManager{
             default :
                 return null;
         }
+        return iotToReturn;
+    }
+
+    public IOTDTO findByPerson(String id) {
+        IOTDTO iotToReturn = new IOTDTO();
+        Person person = personDAO.findById(Long.parseLong(id)).orElse(null);
+        List<ClockDTO> clocks= orikaBeanMapper.convertListDTO(clockDAO.findByPerson(person), ClockDTO.class);
+        iotToReturn.setClocks(clocks);
         return iotToReturn;
     }
 }

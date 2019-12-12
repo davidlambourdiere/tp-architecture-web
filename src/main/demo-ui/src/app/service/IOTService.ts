@@ -19,6 +19,6 @@ export class IOTService {
   }
 
   findIOTByPerson(idperson: string): Observable<any> {
-    return this.http.get(`api/iot/findByPerson/${idperson}`);
+    return this.http.get(`api/iots/findByPerson/${idperson}`);
   }
 }
