@@ -7,5 +7,5 @@ import java.util.List;
 public interface PersonManager {
     List<PersonDTO> findAll();
 
-    boolean verifyConnexion(PersonDTO connectedLogs);
+    PersonDTO verifyConnexion(PersonDTO connectedLogs);
 }
