@@ -12,6 +12,7 @@ public class HeaterDTO extends PersistableElementDTO{
     private String maxvalueref;
     private Timestamp activityduration;
     private PersonDTO person;
+    private Double price ;
 
     public HeaterDTO() {
     }

@@ -19,6 +19,7 @@ public class StrapDTO extends PersistableElementDTO{
     private String maxglyc;
     private String minsteps;
     private PersonDTO person;
+    private Double price ;
 
     public StrapDTO() {
     }
@@ -142,4 +143,8 @@ public class StrapDTO extends PersistableElementDTO{
     public void setIpadress(String ipadress) {
         this.ipadress = ipadress;
     }
+
+    public Double getPrice() { return price; }
+
+    public void setPrice(Double price) { this.price = price; }
 }
