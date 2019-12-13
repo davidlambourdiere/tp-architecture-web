@@ -3,4 +3,6 @@ export class PersonDTO{
   lastName: string;
   login: string;
   password: string;
+  userevaluation: string;
+  userrole: string;
 }

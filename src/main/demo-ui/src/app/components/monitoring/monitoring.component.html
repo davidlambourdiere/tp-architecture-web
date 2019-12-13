@@ -1,2 +1,149 @@
 <home></home>
-Louis monitoring
+<br>
+<div class="container">
+  <form class="form-inline">
+    <div class="form-group mb-2">
+
+      <select class="custom-select mr-sm-2" [(ngModel)]="type" [ngModelOptions]="{standalone: true}">
+        <option value='all'>All objects</option>
+        <option value='Heater'>Heater</option>
+        <option value='Clock'>Clock</option>
+        <option value='Strap'>Strap</option>
+        <option value='Light'>Light</option>
+        <option value='Shutter'>Shutter</option>
+      </select>
+    </div>
+    <div class="form-group mb-2 mx-sm-5">
+      <input type="text" class="form-control" placeholder="Lastname owner" [(ngModel)]="owner"
+             [ngModelOptions]="{standalone: true}">
+    </div>
+  </form>
+  <div *ngIf="show===true">
+    <div *ngIf="iots!==null && iots.lights!==null" [ngClass]="{'display-none': type!=='Light' && type!=='all',
+    'display-visibility': type==='all' || type==='Light'}">
+      <h2>Lights</h2>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Owner</th>
+          <th scope="col">State</th>
+          <th scope="col">Ip adress</th>
+          <th scope="col">Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let iot of iots.lights">
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.person.firstName}} {{iot.person.lastName}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.state}}
+            <span class="fa fa-check-circle" *ngIf="iot.state==='on'"></span>
+            <span class="fa fa-times-circle" *ngIf="iot.state==='off'"></span>
+          </td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.ipadress}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''" [routerLink]="['/detailiot', iot.id]">Voir le détail</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="iots!==null && iots.straps!==null" [ngClass]="{'display-none': type!=='Strap' && type!=='all',
+    'display-visibility': type==='all' || type==='Strap'}">
+      <h2>Straps</h2>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Owner</th>
+          <th scope="col">State</th>
+          <th scope="col">Ip adress</th>
+          <th scope="col">Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let iot of iots.straps">
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.person.firstName}} {{iot.person.lastName}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.state}}
+            <span class="fa fa-check-circle" *ngIf="iot.state==='on'"></span>
+            <span class="fa fa-times-circle" *ngIf="iot.state==='off'"></span>
+          </td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.ipadress}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''" [routerLink]="['/detailiot', iot.id]">Voir le détail</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="iots!==null && iots.clocks!==null" [ngClass]="{'display-none': type!=='Clock' && type!=='all',
+    'display-visibility': type==='all' || type==='Clock'}">
+      <h2>Clocks</h2>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Owner</th>
+          <th scope="col">State</th>
+          <th scope="col">Ip adress</th>
+          <th scope="col">Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let iot of iots.clocks">
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.person.firstName}} {{iot.person.lastName}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.state}}
+            <span class="fa fa-check-circle" *ngIf="iot.state==='on'"></span>
+            <span class="fa fa-times-circle" *ngIf="iot.state==='off'"></span>
+          </td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.ipadress}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''" [routerLink]="['/detailiot', iot.id]">Voir le détail</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="iots!==null && iots.heaters!==null" [ngClass]="{'display-none': type!=='Heater' && type!=='all',
+    'display-visibility': type==='all' || type==='Heater'}">
+      <h2>Heaters</h2>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Owner</th>
+          <th scope="col">State</th>
+          <th scope="col">Ip adress</th>
+          <th scope="col">Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let iot of iots.heaters">
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.person.firstName}} {{iot.person.lastName}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.state}}
+            <span class="fa fa-check-circle" *ngIf="iot.state==='on'"></span>
+            <span class="fa fa-times-circle" *ngIf="iot.state==='off'"></span>
+          </td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.ipadress}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''" [routerLink]="['/detailiot', iot.id]">Voir le détail</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="iots!==null && iots.shutters!==null" [ngClass]="{'display-none': type!=='Shutter' && type!=='all',
+    'display-visibility': type==='all' || type==='Shutter'}">
+      <h2>Shutters</h2>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Owner</th>
+          <th scope="col">State</th>
+          <th scope="col">Ip adress</th>
+          <th scope="col">Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let iot of iots.shutters">
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.person.firstName}} {{iot.person.lastName}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.state}}
+            <span class="fa fa-check-circle" *ngIf="iot.state==='on'"></span>
+            <span class="fa fa-times-circle" *ngIf="iot.state==='off'"></span>
+          </td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.ipadress}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''" [routerLink]="['/detailiot', iot.id]">Voir le détail</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

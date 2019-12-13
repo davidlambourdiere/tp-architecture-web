@@ -20,6 +20,10 @@ import {ActivityAnalysisComponent} from './components/activity.analysis/activity
 import {LocationComponent} from './components/location/location.component';
 import {MedicalControlComponent} from './components/medical.control/medical.control.component';
 import {BillingComponent} from './components/billing/billing.component';
+import {ResidentComponent} from './components/resident/resident.component';
+import {AuthService} from "./service/AuthService";
+import {NotificationComponent} from "./components/notification/notification.component";
+import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
 
 @NgModule({
   declarations: [
@@ -30,19 +34,23 @@ import {BillingComponent} from './components/billing/billing.component';
     ConnectionComponent,
     MonitoringComponent,
     PanneComponent,
+    NotificationComponent,
+    DetailIotComponent,
     GestionObjectComponent,
     ActivityAnalysisComponent,
     LocationComponent,
     MedicalControlComponent,
-    BillingComponent
+    BillingComponent,
+    ResidentComponent
   ],
   imports: [
+    // NgbModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

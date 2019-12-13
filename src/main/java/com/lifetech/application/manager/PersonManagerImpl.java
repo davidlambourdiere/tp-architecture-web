@@ -25,14 +25,13 @@ public class PersonManagerImpl implements PersonManager {
         this.personService = personService;
     }
 
-    public List<PersonDTO> findAll() {
-        return orikaBeanMapper.mapAsList(personDAO.findAll(), PersonDTO.class);
+    public List<PersonDTO> findAll() {return orikaBeanMapper.mapAsList(personDAO.findAll(), PersonDTO.class);
     }
 
     @Override
-    public boolean verifyConnexion(PersonDTO connectedLogs) {
+    public PersonDTO verifyConnexion(PersonDTO connectedLogs) {
         List<Person> people = personDAO.findAll();
         Person person = orikaBeanMapper.map(connectedLogs, Person.class);
-        return personService.verifyConnection(people, person);
+        return orikaBeanMapper.map(personService.verifyConnection(people, person), PersonDTO.class);
     }
 }

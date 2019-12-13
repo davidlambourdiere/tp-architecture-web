@@ -1,30 +1,36 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/home">Home</a>
+  <a class="navbar-brand" [routerLink]="'/home'">Home</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" >
-        <a class="nav-link" href="/monitoring"><i class="fa fa-calendar"></i>Monitoring</a>
+        <a class="nav-link" [routerLink]="'/monitoring'"><i class="fa fa-calendar"></i>Monitoring</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/panne">Pannes</a>
+        <a class="nav-link" [routerLink]="'/panne'"><i class="fa fa-wrench"></i>Pannes</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/gestionObject">Gestion des objets connectés</a>
+        <a class="nav-link" [routerLink]="'/gestionObject'"><i class="fa fa-tasks"></i>Gestion des objets connectés</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/activityAnalysis">Analyser l'activité de la résidence</a>
+        <a class="nav-link" [routerLink]="'/activityAnalysis'"><i class="fa fa-line-chart"></i>Analyser l'activité de la résidence</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/location">Localisation</a>
+        <a class="nav-link" [routerLink]="'/location'"><i class="fa fa-location-arrow"></i>Localisation</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/medicalControl">Contrôle médical</a>
+        <a class="nav-link" [routerLink]="'/medicalControl'"><i class="fa fa-medkit"></i>Contrôle médical</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/billing">Billing</a>
+        <a class="nav-link" [routerLink]="'/billing'"><i class="fa fa-bank"></i>Billing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'/resident'"> <i class="fa fa-address-book"></i>Resident</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'/notification'"> <i class="fa fa-comment"></i>Notification</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -32,4 +38,3 @@
     </form>
   </div>
 </nav>
-<!--<app-person></app-person>-->
