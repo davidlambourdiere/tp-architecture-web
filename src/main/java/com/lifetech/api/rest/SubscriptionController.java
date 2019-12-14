@@ -19,25 +19,28 @@ public class SubscriptionController extends RestBaseController {
         this.subscriptionManager = subscriptionManager;
     }
 
-    @GetMapping("subscription/findAll")
+    @GetMapping("subscription")
     private List<SubscriptionDTO> findAllSubscription(){
-        return subscriptionManager.findAll();
+        return subscriptionManager.findAllSubscription();
     }
 
     @GetMapping("subscription/findById/{id}")
     private ResponseEntity<SubscriptionDTO> getSubscriptionById(@PathVariable(value = "id") Long subscriptionId) {
-        SubscriptionDTO sub = subscriptionManager.findById(subscriptionId);
+        SubscriptionDTO sub = subscriptionManager.findSubscriptionById(subscriptionId);
 
 
         return ResponseEntity.ok().body(sub);
     }
 
+
+
     @PutMapping("subscription/updateSubscription/{id}")
     private ResponseEntity<SubscriptionDTO> updateSubscription(@PathVariable(value = "id") Long subscriptionId,
                                                                @Valid @RequestBody SubscriptionDTO subDetails)  {
-        SubscriptionDTO s = subscriptionManager.findById(subscriptionId);
+        SubscriptionDTO s = subscriptionManager.findSubscriptionById(subscriptionId);
 
 
+        s.setName(subDetails.getName());
         s.setListofiot(subDetails.getListofiot());
         s.setListofservice(subDetails.getListofservice());
         s.setPrice(subDetails.getPrice());
@@ -53,7 +56,7 @@ public class SubscriptionController extends RestBaseController {
 
     @DeleteMapping("subscription/deleteSubscription/{id}")
     private boolean deleteEmployee(@PathVariable(value = "id") Long personId)  {
-        SubscriptionDTO s = subscriptionManager.findById(personId) ;
+        SubscriptionDTO s = subscriptionManager.findSubscriptionById(personId) ;
 
         boolean response = false;
         try {

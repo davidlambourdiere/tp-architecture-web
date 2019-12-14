@@ -6,9 +6,9 @@ import com.lifetech.domain.model.Subscription;
 import java.util.List;
 
 public interface SubscriptionManager {
-    List<SubscriptionDTO> findAll();
+    List<SubscriptionDTO> findAllSubscription();
 
-    SubscriptionDTO findById(Long subscriptionId);
+    SubscriptionDTO findSubscriptionById(Long subscriptionId);
 
     SubscriptionDTO save(SubscriptionDTO updatedSubscription);
 

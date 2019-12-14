@@ -14,6 +14,7 @@ import {ResidentComponent} from './components/resident/resident.component';
 import {AuthGuardService} from './guards/auth-guard.service';
 import {NotificationComponent} from "./components/notification/notification.component";
 import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
+import {SubscriptionComponent} from "./components/subscription/subscription.component";
 
 
 const routes: Routes = [
@@ -74,6 +75,11 @@ const routes: Routes = [
   {
     path: 'detailiot/:id',
     component: DetailIotComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'subscription',
+    component: SubscriptionComponent,
     canActivate: [AuthGuardService]
   }
 

@@ -19,12 +19,12 @@ public class SubscriptionManagerImp implements SubscriptionManager{
         this.orikaBeanMapper = orikaBeanMapper;
     }
 
-    public List<SubscriptionDTO> findAll() {
+    public List<SubscriptionDTO> findAllSubscription() {
         return orikaBeanMapper.mapAsList(subscriptionDAO.findAll(), SubscriptionDTO.class);
 
     }
     @Override
-    public SubscriptionDTO findById(Long subscriptionId) {
+    public SubscriptionDTO findSubscriptionById(Long subscriptionId) {
         Subscription s = subscriptionDAO.findById(subscriptionId).orElse(null);
         if(s!=null){
             SubscriptionDTO DTO = orikaBeanMapper.map(s, SubscriptionDTO.class);
