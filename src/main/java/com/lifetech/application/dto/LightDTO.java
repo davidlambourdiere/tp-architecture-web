@@ -14,6 +14,7 @@ public class LightDTO extends PersistableElementDTO {
     private String color;
     private String percentage;
     private PersonDTO person;
+    private RoomDTO room;
 
     public LightDTO() {
     }
@@ -105,4 +106,8 @@ public class LightDTO extends PersistableElementDTO {
     public void setIpadress(String ipadress) {
         this.ipadress = ipadress;
     }
+
+    public RoomDTO getRoom() { return room; }
+
+    public void setRoom(RoomDTO room) { this.room = room; }
 }

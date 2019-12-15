@@ -13,6 +13,7 @@ public class ClockDTO extends PersistableElementDTO{
     private Timestamp activityduration;
     private Timestamp time;
     private PersonDTO person;
+    private RoomDTO room;
 
     public ClockDTO() {
     }
@@ -96,4 +97,8 @@ public class ClockDTO extends PersistableElementDTO{
     public void setIpadress(String ipadress) {
         this.ipadress = ipadress;
     }
+
+    public RoomDTO getRoom() { return room; }
+
+    public void setRoom(RoomDTO room) { this.room = room; }
 }

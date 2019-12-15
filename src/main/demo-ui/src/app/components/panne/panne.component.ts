@@ -1,5 +1,11 @@
 import {Component, Input} from "@angular/core";
 import {forEachComment} from "tslint";
+import {ActivatedRoute, Router} from "@angular/router";
+import {IOTService} from "../../service/IOTService";
+import {IOTDTO} from "../../dto/IOTDTO";
+import {ClockDTO} from "../../dto/ClockDTO";
+
+
 
 @Component({
   selector: 'panne',
@@ -7,6 +13,9 @@ import {forEachComment} from "tslint";
   styleUrls: ['./panne.component.scss']
 })
 export class PanneComponent {
+  iots: IOTDTO = new IOTDTO;
+  RoomBreakdown : number = 0;
+
   logements = [
     {
       num: 1,
@@ -78,8 +87,24 @@ export class PanneComponent {
 
   }
 
-  constructor(){
+  constructor(private router: Router, private route: ActivatedRoute, private iotservice: IOTService){
     this.breakdownLogement();
   }
+
+  findIOTByPerson(){
+    this.route.params.subscribe(params => {
+      this.iotservice.findIOTByPerson('1').subscribe(data => {
+        this.iots = data;
+        const states = Object.values(this.iots)
+            .filter(Boolean)
+            .reduce((res, value) => res.concat(value.map(ot => ({id:ot.id, state: ot.state}))), [])
+          .filter(iot => iot.state !== "ok");
+        console.log(states);
+
+      })
+    })
+  }
+
+
 
 }
