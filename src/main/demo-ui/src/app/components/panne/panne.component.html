@@ -26,8 +26,6 @@
         <h4 style="font-family: gubblebum-blocky">Infos des objets du logement</h4>
         <div class="info">
           <ul class="list-group">
-            <app-object-list *ngFor="let object of objects" [IOTType]="object.type"
-                             [IOTStatus]="object.status"></app-object-list>
             <li class="list-group-item" *ngFor="let iot of iots.clocks"> Montre connecté -- {{iot.state}}</li>
           </ul>
         </div>
