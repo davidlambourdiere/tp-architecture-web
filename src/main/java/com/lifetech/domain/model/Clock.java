@@ -9,8 +9,8 @@ import java.sql.Timestamp;
 @Entity(name="clock")
 public class Clock extends IOT {
 
-    @Column(name="time")
-    private Timestamp time;
+//    @Column(name="time")
+//    private Timestamp time;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Person person;
@@ -20,7 +20,7 @@ public class Clock extends IOT {
 
     public Clock(Double price, String status, String state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration, Timestamp time, Person person, Room room) {
         super(price, status, state, ipadress, startdate, minvalueref, maxvalueref, suspect, activityduration);
-        this.time = time;
+//        this.time = time;
         this.person = person;
         this.room = room;
     }
@@ -28,13 +28,13 @@ public class Clock extends IOT {
     public Clock() {
     }
 
-    public Timestamp getTime() {
-        return time;
-    }
-
-    public void setTime(Timestamp time) {
-        this.time = time;
-    }
+//    public Timestamp getTime() {
+//        return time;
+//    }
+//
+//    public void setTime(Timestamp time) {
+//        this.time = time;
+//    }
 
     public Person getPerson() {
         return person;

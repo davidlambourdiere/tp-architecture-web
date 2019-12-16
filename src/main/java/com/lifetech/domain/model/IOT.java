@@ -28,9 +28,6 @@ public class IOT implements Serializable {
     @Column(name="ipadress")
     private String ipadress;
 
-    @Column(name="startdate")
-    private Timestamp startdate;
-
     @Column(name="minvalueref")
     private String minvalueref;
 
@@ -40,19 +37,15 @@ public class IOT implements Serializable {
     @Column(name="suspect")
     private String suspect;
 
-    @Column(name="activityduration")
-    private Timestamp activityduration;
 
 
     public IOT(Double price, String status, String state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration) {
         this.status = status;
         this.state = state;
         this.ipadress = ipadress;
-        this.startdate = startdate;
         this.minvalueref = minvalueref;
         this.maxvalueref = maxvalueref;
         this.suspect = suspect;
-        this.activityduration = activityduration;
         this.price = price;
     }
 
@@ -75,14 +68,6 @@ public class IOT implements Serializable {
         this.state = state;
     }
 
-    public Timestamp getStartdate() {
-        return startdate;
-    }
-
-    public void setStartdate(Timestamp startdate) {
-        this.startdate = startdate;
-    }
-
     public String getMinvalueref() {
         return minvalueref;
     }
@@ -97,14 +82,6 @@ public class IOT implements Serializable {
 
     public void setMaxvalueref(String maxvalueref) {
         this.maxvalueref = maxvalueref;
-    }
-
-    public Timestamp getActivityduration() {
-        return activityduration;
-    }
-
-    public void setActivityduration(Timestamp activityduration) {
-        this.activityduration = activityduration;
     }
 
     public String getSuspect() {
