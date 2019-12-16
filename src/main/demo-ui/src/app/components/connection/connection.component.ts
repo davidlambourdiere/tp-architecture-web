@@ -35,4 +35,8 @@ export class ConnectionComponent implements OnInit {
     })
 
   }
+
+  redirectionSurvey() {
+      window.location.replace("/survey")
+  }
 }

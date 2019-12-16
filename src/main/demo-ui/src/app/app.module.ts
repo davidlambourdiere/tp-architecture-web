@@ -12,8 +12,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {HeadComponent} from './components/head/head.component';
 import {HomeComponent} from './components/home/home.component';
 import {ConnectionComponent} from './components/connection/connection.component';
-// @ts-ignore
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MonitoringComponent} from './components/monitoring/monitoring.component';
 import {PanneComponent} from './components/panne/panne.component';
 import {GestionObjectComponent} from './components/gestion.object/gestion.object.component';
@@ -28,6 +27,7 @@ import {NotificationComponent} from "./components/notification/notification.comp
 import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
 import { SubscriptionComponent } from './components/subscription/subscription.component';
 import {BillingComponent} from "./components/billing/billing.component";
+import {SurveyComponent} from "./components/survey/survey.component";
 
 @NgModule({
   declarations: [
@@ -48,7 +48,8 @@ import {BillingComponent} from "./components/billing/billing.component";
     ResidentComponent,
     SubscriptionComponent,
     LogementComponent,
-    ObjectListComponent
+    ObjectListComponent,
+    SurveyComponent
   ],
   imports: [
     // NgbModule,
@@ -56,6 +57,7 @@ import {BillingComponent} from "./components/billing/billing.component";
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
