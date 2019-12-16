@@ -20,7 +20,7 @@ import {SubscriptionComponent} from "./components/subscription/subscription.comp
 
 const routes: Routes = [
   {
-    path: 'connexionPage',
+    path: '',
     component: ConnectionComponent
   },
   {

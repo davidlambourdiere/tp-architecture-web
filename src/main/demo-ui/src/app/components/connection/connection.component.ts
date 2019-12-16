@@ -27,7 +27,7 @@ export class ConnectionComponent implements OnInit {
         if (data != null) {
           this.person = data;
           this.authService.setSession(data);
-          this.router.navigate(['/home']);
+          this.router.navigate(['']);
         } else {
           this.isConnectionGood = false;
         }
@@ -36,7 +36,4 @@ export class ConnectionComponent implements OnInit {
 
   }
 
-  redirectionSurvey() {
-      window.location.replace("/survey")
-  }
 }
