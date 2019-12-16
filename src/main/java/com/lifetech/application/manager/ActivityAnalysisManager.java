@@ -1,12 +1,14 @@
 package com.lifetech.application.manager;
 
+import com.lifetech.application.dto.ActivityAnalaysisDTO;
+
 import java.util.Map;
 
 public interface ActivityAnalysisManager {
 
-    Map<String, Long> countIOTByPerson(long personId);
+    ActivityAnalaysisDTO countIOTByPerson(String personId);
 
-    Map<String, Long> countIOTByResidence(long residenceId);
+    ActivityAnalaysisDTO countIOTByResidence(long residenceId);
 
-    Map<String, Long> countIOT();
+    ActivityAnalaysisDTO countIOT();
 }

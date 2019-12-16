@@ -15,5 +15,5 @@ public interface LightDAO  extends JpaRepository<Light, Long> {
 
     Long countByPerson(Person person);
 
-    //List<Light> findAllByResidence(Residence residence);
+
 }

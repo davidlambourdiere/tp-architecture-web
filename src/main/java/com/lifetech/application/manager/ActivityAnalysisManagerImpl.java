@@ -1,15 +1,12 @@
 package com.lifetech.application.manager;
 
+import com.lifetech.application.dto.ActivityAnalaysisDTO;
 import com.lifetech.domain.OrikaBeanMapper;
 import com.lifetech.domain.dao.*;
 import com.lifetech.domain.model.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Service
 public class ActivityAnalysisManagerImpl implements ActivityAnalysisManager {
@@ -31,31 +28,42 @@ public class ActivityAnalysisManagerImpl implements ActivityAnalysisManager {
     }
 
     @Override
-    public Map<String, Long> countIOTByPerson(long personId) {
-        HashMap<String, Long> nIOT = new HashMap<String,Long>();
-        Person person = personDAO.findById(personId).orElse(null);
-        nIOT.put("nClock",clockDAO.countByPerson(person));
-        nIOT.put("nHeater",heaterDAO.countByPerson(person));
-        nIOT.put("nLight",lightDAO.countByPerson(person));
-        return nIOT;
+    public ActivityAnalaysisDTO countIOTByPerson(String personLogin) {
+        ActivityAnalaysisDTO activityAnalaysisDTO = new ActivityAnalaysisDTO();
+        Person person = personDAO.findByLogin(personLogin).orElse(null);
+        activityAnalaysisDTO.setPersonName(person.getFirstName() + " " + person.getLastName());
+        activityAnalaysisDTO.setnClock(clockDAO.countByPerson(person));
+        activityAnalaysisDTO.setnHeather(heaterDAO.countByPerson(person));
+        activityAnalaysisDTO.setnLight(lightDAO.countByPerson(person));
+        return activityAnalaysisDTO;
     }
 
     @Override
-    public Map<String, Long> countIOTByResidence(long residenceId) {
-        HashMap<String, Long> nIOT = new HashMap<String,Long>();
-        /*Residence residence = residenceDAO.findById(residenceId).orElse(null);
-        List<Clock> listClocks = clockDAO.findAllByResidence(residence);
-        List<Heater> listHeaters = heaterDAO.findAllByResidence(residence);
-        List<Light> listLights = lightDAO.findAllByResidence(residence);
-        nIOT.put("nClock", (long) listClocks.size());
-        nIOT.put("nHeater", (long) listHeaters.size());
-        nIOT.put("nLight", (long) listLights.size());*/
-        return nIOT;
+    public ActivityAnalaysisDTO countIOTByResidence(long residenceId) {
+        ActivityAnalaysisDTO activityAnalaysisDTO = new ActivityAnalaysisDTO();
+        Residence residence = residenceDAO.findById(residenceId).orElse(null);
+        List<Person> personList = personDAO.findAllByResidenceId(residenceId);
+        Long nClock, nHeather, nLight;
+        nClock = nHeather = nLight = new Long(0);
+        for (Person person : personList) {
+            nClock += clockDAO.countByPerson(person);
+            nHeather += heaterDAO.countByPerson(person);
+            nLight += lightDAO.countByPerson(person);
+        }
+
+        activityAnalaysisDTO.setnClock(nClock);
+        activityAnalaysisDTO.setnHeather(nHeather);
+        activityAnalaysisDTO.setnLight(nLight);
+
+        return activityAnalaysisDTO;
     }
 
     @Override
-    public Map<String, Long> countIOT() {
-        Map<String, Long> nIOT = new HashMap<String,Long>();
-        return nIOT;
+    public ActivityAnalaysisDTO countIOT() {
+        ActivityAnalaysisDTO activityAnalaysisDTO = new ActivityAnalaysisDTO();
+        activityAnalaysisDTO.setnClock(clockDAO.count());
+        activityAnalaysisDTO.setnHeather(heaterDAO.count());
+        activityAnalaysisDTO.setnLight(lightDAO.count());
+        return activityAnalaysisDTO;
     }
 }
