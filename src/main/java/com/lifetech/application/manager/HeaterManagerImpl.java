@@ -21,4 +21,9 @@ public class HeaterManagerImpl implements HeaterManager{
     public HeaterDTO findById(String id) {
         return null;
     }
+
+    @Override
+    public HeaterDTO findByRoom(String id) {
+        return null;
+    }
 }

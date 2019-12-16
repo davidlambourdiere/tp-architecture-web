@@ -1,6 +1,6 @@
 // @ts-ignore
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+
 import {ConnectionComponent} from './components/connection/connection.component';
 import {HomeComponent} from './components/home/home.component';
 import {MonitoringComponent} from './components/monitoring/monitoring.component';
@@ -11,9 +11,11 @@ import {LocationComponent} from './components/location/location.component';
 import {MedicalControlComponent} from './components/medical.control/medical.control.component';
 import {BillingComponent} from './components/billing/billing.component';
 import {ResidentComponent} from './components/resident/resident.component';
+import {RouterModule, Routes} from "@angular/router";
 import {AuthGuardService} from './guards/auth-guard.service';
 import {NotificationComponent} from "./components/notification/notification.component";
 import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
+import {SubscriptionComponent} from "./components/subscription/subscription.component";
 
 
 const routes: Routes = [
@@ -75,10 +77,16 @@ const routes: Routes = [
     path: 'detailiot/:id',
     component: DetailIotComponent,
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'subscription',
+    component: SubscriptionComponent,
+    canActivate: [AuthGuardService]
   }
 
 ];
 
+// @ts-ignore
 @NgModule({
   declarations: [],
   imports: [RouterModule.forRoot(routes)],

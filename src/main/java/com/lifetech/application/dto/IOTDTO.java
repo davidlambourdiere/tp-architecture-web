@@ -9,6 +9,7 @@ public class IOTDTO {
     private List<ShutterDTO> shutters;
     private List<StrapDTO> straps;
 
+
     public IOTDTO() {
     }
 

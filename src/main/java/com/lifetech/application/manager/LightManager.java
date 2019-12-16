@@ -11,4 +11,6 @@ public interface LightManager {
     List<LightDTO> findLightByPerson(String id);
 
     LightDTO findById(String id);
+
+    LightDTO findByRoom(String id);
 }

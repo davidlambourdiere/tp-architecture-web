@@ -1,0 +1,31 @@
+<home></home>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+
+    <h2>Subscription List</h2>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>List of IOT</th>
+        <th>List of Services</th>
+        <th>Price</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let subscription of subscriptions ">
+        <td>{{subscription.name}}</td>
+        <td>{{subscription.description}}</td>
+        <td>{{subscription.listofiot}}</td>
+        <td>{{subscription.listofservice}}</td>
+        <td>{{subscription.price}}</td>
+      </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+</div>
