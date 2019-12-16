@@ -55,8 +55,8 @@ public class SubscriptionController extends RestBaseController {
     }
 
     @DeleteMapping("subscription/deleteSubscription/{id}")
-    private boolean deleteEmployee(@PathVariable(value = "id") Long personId)  {
-        SubscriptionDTO s = subscriptionManager.findSubscriptionById(personId) ;
+    private boolean deleteSubscription(@PathVariable(value = "id") Long subscriptionId)  {
+        SubscriptionDTO s = subscriptionManager.findSubscriptionById(subscriptionId) ;
 
         boolean response = false;
         try {
