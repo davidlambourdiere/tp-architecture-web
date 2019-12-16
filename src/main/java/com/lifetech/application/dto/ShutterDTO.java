@@ -13,6 +13,8 @@ public class ShutterDTO extends  PersistableElementDTO{
     private Timestamp activityduration;
     private String percentage;
     private PersonDTO person;
+    private Double price ;
+    private RoomDTO room;
 
     public ShutterDTO() {
     }
@@ -96,4 +98,12 @@ public class ShutterDTO extends  PersistableElementDTO{
     public void setIpadress(String ipadress) {
         this.ipadress = ipadress;
     }
+
+    public Double getPrice() { return price; }
+
+    public void setPrice(Double price) { this.price = price; }
+
+    public RoomDTO getRoom() { return room; }
+
+    public void setRoom(RoomDTO room) { this.room = room; }
 }

@@ -6,6 +6,7 @@ export class StrapDTO{
   state: string;
   minvalueref: string;
   suspect: string;
+  price: number;
   ipadress: string;
   maxvalueref: string;
   person: PersonDTO;

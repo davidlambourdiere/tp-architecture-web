@@ -6,6 +6,7 @@ export class LightDTO{
   state: string;
   minvalueref: string;
   suspect: string;
+  price: number;
   maxvalueref: string;
   ipadress: string;
   percentage: string;

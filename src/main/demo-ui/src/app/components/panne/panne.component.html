@@ -1,2 +1,36 @@
 <home></home>
-Marie component
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-11">
+      <h2 style="font-family: gubblebum-blocky">Gestion des objets en pannes</h2>
+      Ici vous pouvez gérer les objets en pannes. Dans la map ci-dessous, lorsqu'un logement est en rouge,
+      alors au moins un objet est en panne dans ce logement. Si le logement est en vert, tous les objets fonctionnent
+      bien.
+      <br/> Cliquez sur le logement pour avoir le détail des logements
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <div class="parent">
+        <h4 style="font-family: gubblebum-blocky">Carte</h4>
+        <div class="map">
+          <div class="row no-padding">
+            <app-logement class="col-3" *ngFor="let logement of logements" [IOTNum]="logement.num"
+                          [IOTBreakdown]="logement.breakdown"></app-logement>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="parent">
+        <h4 style="font-family: gubblebum-blocky">Infos des objets du logement</h4>
+        <div class="info">
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let iot of iots.clocks"> Montre connecté -- {{iot.state}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

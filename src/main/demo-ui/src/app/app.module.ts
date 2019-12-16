@@ -12,18 +12,22 @@ import {HttpClientModule} from '@angular/common/http';
 import {HeadComponent} from './components/head/head.component';
 import {HomeComponent} from './components/home/home.component';
 import {ConnectionComponent} from './components/connection/connection.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MonitoringComponent} from './components/monitoring/monitoring.component';
 import {PanneComponent} from './components/panne/panne.component';
 import {GestionObjectComponent} from './components/gestion.object/gestion.object.component';
 import {ActivityAnalysisComponent} from './components/activity.analysis/activity.analysis.component';
 import {LocationComponent} from './components/location/location.component';
 import {MedicalControlComponent} from './components/medical.control/medical.control.component';
-import {BillingComponent} from './components/billing/billing.component';
 import {ResidentComponent} from './components/resident/resident.component';
+import { LogementComponent } from './components/panne/logement/logement.component';
+import { ObjectListComponent } from './components/panne/object-list/object-list.component';
 import {AuthService} from "./service/AuthService";
 import {NotificationComponent} from "./components/notification/notification.component";
 import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
+import { SubscriptionComponent } from './components/subscription/subscription.component';
+import {BillingComponent} from "./components/billing/billing.component";
+import {SurveyComponent} from "./components/survey/survey.component";
 
 @NgModule({
   declarations: [
@@ -41,7 +45,11 @@ import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.
     LocationComponent,
     MedicalControlComponent,
     BillingComponent,
-    ResidentComponent
+    ResidentComponent,
+    SubscriptionComponent,
+    LogementComponent,
+    ObjectListComponent,
+    SurveyComponent
   ],
   imports: [
     // NgbModule,
@@ -49,6 +57,7 @@ import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
