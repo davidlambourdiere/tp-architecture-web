@@ -15,6 +15,7 @@ public class LightDTO extends PersistableElementDTO {
     private String percentage;
     private PersonDTO person;
     private Double price ;
+    private RoomDTO room;
 
     public LightDTO() {
     }
@@ -110,4 +111,8 @@ public class LightDTO extends PersistableElementDTO {
     public Double getPrice() { return price; }
 
     public void setPrice(Double price) { this.price = price; }
+
+    public RoomDTO getRoom() { return room; }
+
+    public void setRoom(RoomDTO room) { this.room = room; }
 }

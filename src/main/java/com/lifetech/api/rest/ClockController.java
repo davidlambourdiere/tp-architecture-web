@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class ClockController extends RestBaseController {
 
@@ -20,4 +22,7 @@ public class ClockController extends RestBaseController {
     private ClockDTO findById(@PathVariable("id") String id){
         return clockManager.findById(id);
     }
+
+    @GetMapping("clock/findByRoom/{id}")
+    private List<ClockDTO> findByRoom(@PathVariable("id") String id){ return clockManager.findByRoom(id); }
 }

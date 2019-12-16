@@ -35,4 +35,9 @@ public class LightManagerImpl implements LightManager {
         Light light = lightDAO.findById(Long.parseLong(id)).orElse(null);
         return orikaBeanMapper.map(light, LightDTO.class);
     }
+
+    @Override
+    public LightDTO findByRoom(String id) {
+        return null;
+    }
 }

@@ -12,6 +12,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {HeadComponent} from './components/head/head.component';
 import {HomeComponent} from './components/home/home.component';
 import {ConnectionComponent} from './components/connection/connection.component';
+// @ts-ignore
 import {FormsModule} from '@angular/forms';
 import {MonitoringComponent} from './components/monitoring/monitoring.component';
 import {PanneComponent} from './components/panne/panne.component';
@@ -20,6 +21,8 @@ import {ActivityAnalysisComponent} from './components/activity.analysis/activity
 import {LocationComponent} from './components/location/location.component';
 import {MedicalControlComponent} from './components/medical.control/medical.control.component';
 import {ResidentComponent} from './components/resident/resident.component';
+import { LogementComponent } from './components/panne/logement/logement.component';
+import { ObjectListComponent } from './components/panne/object-list/object-list.component';
 import {AuthService} from "./service/AuthService";
 import {NotificationComponent} from "./components/notification/notification.component";
 import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
@@ -43,7 +46,9 @@ import {BillingComponent} from "./components/billing/billing.component";
     MedicalControlComponent,
     BillingComponent,
     ResidentComponent,
-    SubscriptionComponent
+    SubscriptionComponent,
+    LogementComponent,
+    ObjectListComponent
   ],
   imports: [
     // NgbModule,

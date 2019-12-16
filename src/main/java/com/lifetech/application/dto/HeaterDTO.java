@@ -13,6 +13,7 @@ public class HeaterDTO extends PersistableElementDTO{
     private String maxvalueref;
     private Timestamp activityduration;
     private PersonDTO person;
+    private RoomDTO room;
 
     public HeaterDTO() {
     }
@@ -96,4 +97,8 @@ public class HeaterDTO extends PersistableElementDTO{
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    public RoomDTO getRoom() { return room; }
+
+    public void setRoom(RoomDTO room) { this.room = room; }
 }
