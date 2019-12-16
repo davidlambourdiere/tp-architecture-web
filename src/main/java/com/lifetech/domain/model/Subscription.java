@@ -21,8 +21,8 @@ public class Subscription extends PersistableElement{
     @Column(name="listofservice")
     private String listofservice ;
 
-    @Column(name="subscriptiondate")
-    private Timestamp subscriptiondate ;
+//    @Column(name="subscriptiondate")
+//    private Timestamp subscriptiondate ;
 
 
     public Subscription(String name, Double price, String description,String listofiot,String listofservice, Timestamp subscriptiondate) {
@@ -32,7 +32,6 @@ public class Subscription extends PersistableElement{
         this.description = description;
         this.listofiot = listofiot ;
         this.listofservice = listofservice ;
-        this.subscriptiondate = subscriptiondate;
     }
     public Subscription() {
 
@@ -60,14 +59,6 @@ public class Subscription extends PersistableElement{
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Timestamp getSubscriptiondate() {
-        return subscriptiondate;
-    }
-
-    public void setSubscriptiondate(Timestamp subscriptiondate) {
-        this.subscriptiondate = subscriptiondate;
     }
 
     public String getListofiot() { return listofiot; }
