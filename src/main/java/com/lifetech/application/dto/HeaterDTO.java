@@ -1,6 +1,7 @@
 package com.lifetech.application.dto;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class HeaterDTO extends PersistableElementDTO{
     private String status;
@@ -101,4 +102,7 @@ public class HeaterDTO extends PersistableElementDTO{
     public RoomDTO getRoom() { return room; }
 
     public void setRoom(RoomDTO room) { this.room = room; }
+
+    public void setHeaters(List<HeaterDTO> heaters) {
+    }
 }
