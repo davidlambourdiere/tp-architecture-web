@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 public class HeaterDTO extends PersistableElementDTO{
     private String status;
     private String state;
+    private Double price;
     private Timestamp startdate;
     private String minvalueref;
     private String ipadress;
@@ -86,5 +87,13 @@ public class HeaterDTO extends PersistableElementDTO{
 
     public void setIpadress(String ipadress) {
         this.ipadress = ipadress;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

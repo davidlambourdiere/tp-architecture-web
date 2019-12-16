@@ -6,6 +6,7 @@ export class ShutterDTO{
   state: string;
   minvalueref: string;
   suspect: string;
+  price: number;
   ipadress: string;
   maxvalueref: string;
   percentage: string;

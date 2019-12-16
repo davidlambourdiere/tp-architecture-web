@@ -5,6 +5,7 @@ export class ClockDTO{
   status: string;
   state: string;
   minvalueref: string;
+  price: number;
   suspect: string;
   maxvalueref: string;
   ipadress: string;

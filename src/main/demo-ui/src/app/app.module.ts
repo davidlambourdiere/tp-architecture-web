@@ -19,11 +19,12 @@ import {GestionObjectComponent} from './components/gestion.object/gestion.object
 import {ActivityAnalysisComponent} from './components/activity.analysis/activity.analysis.component';
 import {LocationComponent} from './components/location/location.component';
 import {MedicalControlComponent} from './components/medical.control/medical.control.component';
-import {BillingComponent} from './components/billing/billing.component';
 import {ResidentComponent} from './components/resident/resident.component';
 import {AuthService} from "./service/AuthService";
 import {NotificationComponent} from "./components/notification/notification.component";
 import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
+import { SubscriptionComponent } from './components/subscription/subscription.component';
+import {BillingComponent} from "./components/billing/billing.component";
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.
     LocationComponent,
     MedicalControlComponent,
     BillingComponent,
-    ResidentComponent
+    ResidentComponent,
+    SubscriptionComponent
   ],
   imports: [
     // NgbModule,
