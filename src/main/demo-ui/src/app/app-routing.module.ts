@@ -11,6 +11,7 @@ import {LocationComponent} from './components/location/location.component';
 import {MedicalControlComponent} from './components/medical.control/medical.control.component';
 import {BillingComponent} from './components/billing/billing.component';
 import {ResidentComponent} from './components/resident/resident.component';
+import {SurveyComponent} from "./components/survey/survey.component";
 
 
 const routes: Routes = [
@@ -57,6 +58,10 @@ const routes: Routes = [
   {
     path: 'resident',
     component: ResidentComponent
+  },
+  {
+    path: 'survey',
+    component: SurveyComponent
   }
 
 ];
