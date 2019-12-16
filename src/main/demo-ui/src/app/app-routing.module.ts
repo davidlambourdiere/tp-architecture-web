@@ -24,6 +24,10 @@ const routes: Routes = [
     component: ConnectionComponent
   },
   {
+    path: 'connexionPage',
+    component: ConnectionComponent
+  },
+  {
     path:'home',
     component: HomeComponent,
     canActivate: [AuthGuardService]
