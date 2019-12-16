@@ -28,8 +28,8 @@ public class Strap extends IOT{
     @OneToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     private Person person;
 
-    public Strap(String status, String state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration, String minsysto, String maxsysto, String maxdiasto, String minglyc, String maxglyc, String minsteps, Person person) {
-        super(status, state, ipadress, startdate, minvalueref, maxvalueref, suspect, activityduration);
+    public Strap(Double price, String status, String state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration, String minsysto, String maxsysto, String maxdiasto, String minglyc, String maxglyc, String minsteps, Person person) {
+        super(price, status, state, ipadress, startdate, minvalueref, maxvalueref, suspect, activityduration);
         this.minsysto = minsysto;
         this.maxsysto = maxsysto;
         this.maxdiasto = maxdiasto;
