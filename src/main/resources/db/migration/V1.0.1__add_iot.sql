@@ -53,7 +53,6 @@ price double,
 ipadress VARCHAR(255),
 minvalueref VARCHAR (255),
 maxvalueref VARCHAR(255),
-time TIMESTAMP(3),
 person_id  BIGINT UNSIGNED NOT NULL,
 CONSTRAINT FK_clock_person_id FOREIGN KEY (person_id) REFERENCES person(id)
 );
