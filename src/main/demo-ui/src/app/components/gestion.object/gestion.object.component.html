@@ -10,7 +10,7 @@
 
 </head>
 
-<body onload="refresh_time()">
+<body onload="refreshTime()">
 
 <div id="premierdiv">
   <div class="float1">
@@ -188,7 +188,9 @@
   </div>
 </div>
 
-
+<div *ngFor="let heater of heaters ">
+  <div>{{heater.state}}</div>
+</div>
 
 </body>
 
