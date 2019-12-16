@@ -15,7 +15,9 @@ export class PersonService {
     return this.http.get(`api/person/findAll`);
   }
 
-  verifyConnection(person: PersonDTO): Observable<any> {
+  verifyConnection(person: PersonDTO): Observable<PersonDTO> {
     return this.http.post<PersonDTO>(`api/person/verifyConnection`, person);
   }
+
+
 }

@@ -19,8 +19,12 @@ import {GestionObjectComponent} from './components/gestion.object/gestion.object
 import {ActivityAnalysisComponent} from './components/activity.analysis/activity.analysis.component';
 import {LocationComponent} from './components/location/location.component';
 import {MedicalControlComponent} from './components/medical.control/medical.control.component';
-import {BillingComponent} from './components/billing/billing.component';
 import {ResidentComponent} from './components/resident/resident.component';
+import {AuthService} from "./service/AuthService";
+import {NotificationComponent} from "./components/notification/notification.component";
+import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
+import { SubscriptionComponent } from './components/subscription/subscription.component';
+import {BillingComponent} from "./components/billing/billing.component";
 import {SurveyComponent} from "./components/survey/survey.component";
 
 @NgModule({
@@ -32,22 +36,26 @@ import {SurveyComponent} from "./components/survey/survey.component";
     ConnectionComponent,
     MonitoringComponent,
     PanneComponent,
+    NotificationComponent,
+    DetailIotComponent,
     GestionObjectComponent,
     ActivityAnalysisComponent,
     LocationComponent,
     MedicalControlComponent,
     BillingComponent,
     ResidentComponent,
+    SubscriptionComponent
     SurveyComponent
   ],
   imports: [
+    // NgbModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

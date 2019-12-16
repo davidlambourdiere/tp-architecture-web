@@ -2,29 +2,34 @@ import {Component, OnInit} from '@angular/core';
 import {PersonDTO} from "../../dto/PersonDTO";
 import {PersonService} from "../../service/PersonService";
 import {ActivatedRoute, Router} from "@angular/router";
+import {AuthService} from "../../service/AuthService";
 
 @Component({
   selector: 'connection',
   templateUrl: './connection.component.html',
   styleUrls: ['./connection.component.scss']
 })
-export class ConnectionComponent implements OnInit{
+export class ConnectionComponent implements OnInit {
 
   person: PersonDTO;
-  isConnectionGood: boolean;
+  isConnectionGood: boolean=null;
 
-  constructor(private personService: PersonService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private personService: PersonService, private router: Router, private route: ActivatedRoute, private authService: AuthService) {
+  }
 
   ngOnInit(): void {
     this.person = new PersonDTO();
   }
 
-  verifyConnection(){
-    this.route.params.subscribe(params=> {
-      this.personService.verifyConnection(this.person).subscribe(data=>{
-        this.isConnectionGood = data;
-        if(this.isConnectionGood === true){
-          window.location.replace("/home");
+  verifyConnection() {
+    this.route.params.subscribe(params => {
+      this.personService.verifyConnection(this.person).subscribe(data => {
+        if (data != null) {
+          this.person = data;
+          this.authService.setSession(data);
+          this.router.navigate(['/home']);
+        } else {
+          this.isConnectionGood = false;
         }
       })
     })
