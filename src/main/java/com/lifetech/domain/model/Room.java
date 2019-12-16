@@ -6,6 +6,11 @@ import java.util.List;
 @Entity(name = "room")
 public class Room extends PersistableElement {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "serial")
+    private Long id;
+
     @Column (name="num")
     private String num;
 
