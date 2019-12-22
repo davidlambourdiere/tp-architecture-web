@@ -5,6 +5,7 @@ import com.lifetech.application.dto.PersonDTO;
 import java.util.List;
 
 public interface PersonManager {
+
     List<PersonDTO> findAll();
 
     PersonDTO verifyConnexion(PersonDTO connectedLogs);
