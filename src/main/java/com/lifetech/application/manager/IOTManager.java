@@ -8,4 +8,5 @@ public interface IOTManager {
     IOTDTO findIOTByType(String type);
 
     IOTDTO findByPerson(String id);
+
 }
