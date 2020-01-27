@@ -1,5 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
+import {ClockDetailDTO} from "../../../dto/ClockDetailDTO";
+import {IOTService} from "../../../service/IOTService";
 
 @Component({
   selector: 'detailiot',
@@ -9,11 +11,17 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class DetailIotComponent implements OnInit {
 
   id: String;
+  clockWithDetail: ClockDetailDTO;
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(private router: Router, private route: ActivatedRoute, private iotservice: IOTService) {
   }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
+    this.route.params.subscribe(params => {
+      this.iotservice.findClockDetailWithHistoric(this.route.snapshot.paramMap.get('id')).subscribe(data => {
+        this.clockWithDetail = data;
+      })
+    })
   }
 }
