@@ -1,6 +1,7 @@
 package com.lifetech.api.rest;
 
 import com.lifetech.application.dto.ShutterDTO;
+import com.lifetech.application.dto.ShutterDetailDTO;
 import com.lifetech.application.manager.ShutterManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +25,7 @@ public class ShutterController extends RestBaseController{
     }
 
     @GetMapping("shutter/findHistoric/{id}")
-    private List<ShutterDTO> findByHistoric(@PathVariable("id") String id) {
-        return null;
+    private ShutterDetailDTO findByHistoric(@PathVariable("id") String id) {
+        return shutterManager.findByHistoric(id);
     }
 }

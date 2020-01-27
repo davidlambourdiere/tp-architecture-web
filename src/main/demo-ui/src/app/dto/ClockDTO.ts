@@ -1,6 +1,7 @@
 import {PersonDTO} from './PersonDTO';
+import {RoomDTO} from './RoomDTO';
 
-export class ClockDTO{
+export class ClockDTO {
   id: bigint;
   status: string;
   state: string;
@@ -10,4 +11,5 @@ export class ClockDTO{
   maxvalueref: string;
   ipadress: string;
   person: PersonDTO;
+  room: RoomDTO;
 }

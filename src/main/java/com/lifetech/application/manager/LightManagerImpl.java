@@ -1,6 +1,7 @@
 package com.lifetech.application.manager;
 
 import com.lifetech.application.dto.LightDTO;
+import com.lifetech.application.dto.LightDetailDTO;
 import com.lifetech.domain.OrikaBeanMapper;
 import com.lifetech.domain.dao.LightDAO;
 import com.lifetech.domain.model.Light;
@@ -39,5 +40,14 @@ public class LightManagerImpl implements LightManager {
     @Override
     public LightDTO findByRoom(String id) {
         return null;
+    }
+
+    @Override
+    public LightDetailDTO findByHistoric(String id) {
+        Light light = lightDAO.findById(Long.parseLong(id)).orElse(null);
+        LightDTO lightDTO = orikaBeanMapper.map(light, LightDTO.class);
+        LightDetailDTO lightDetailDTO = new LightDetailDTO();
+        lightDetailDTO.setLight(lightDTO);
+        return lightDetailDTO;
     }
 }

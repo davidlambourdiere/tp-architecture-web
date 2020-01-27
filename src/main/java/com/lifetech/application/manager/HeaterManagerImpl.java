@@ -3,6 +3,7 @@ package com.lifetech.application.manager;
 import com.lifetech.application.dto.*;
 import com.lifetech.domain.OrikaBeanMapper;
 import com.lifetech.domain.dao.HeaterDAO;
+import com.lifetech.domain.model.Heater;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +38,14 @@ public class HeaterManagerImpl implements HeaterManager{
     @Override
     public HeaterDTO findByRoom(String id) {
         return null;
+    }
+
+    @Override
+    public HeaterDetailDTO findByHistoric(String id) {
+        Heater heater = heaterDAO.findById(Long.parseLong(id)).orElse(null);
+        HeaterDTO heaterDTO = orikaBeanMapper.map(heater, HeaterDTO.class);
+        HeaterDetailDTO heaterDetailDTO = new HeaterDetailDTO();
+        heaterDetailDTO.setHeater(heaterDTO);
+        return heaterDetailDTO;
     }
 }

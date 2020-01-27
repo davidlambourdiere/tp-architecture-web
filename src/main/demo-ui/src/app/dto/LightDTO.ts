@@ -1,4 +1,5 @@
 import {PersonDTO} from './PersonDTO';
+import {RoomDTO} from "./RoomDTO";
 
 export class LightDTO{
   id: bigint;
@@ -12,5 +13,6 @@ export class LightDTO{
   percentage: string;
   color: string;
   person: PersonDTO;
+  room: RoomDTO;
 }
 

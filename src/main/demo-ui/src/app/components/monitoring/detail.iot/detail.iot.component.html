@@ -2,41 +2,85 @@
 <h4>
   <a [routerLink]="'/monitoring'"><span class="fa fa-undo"></span>Retour</a>
 </h4>
-{{id}}
-{{state}}
+
 
 <div class="container">
-    <form>
+  <h2 *ngIf="state==='Clock'">Clock</h2>
+  <h2 *ngIf="state==='Heater'">Heater</h2>
+  <h2 *ngIf="state==='Shutter'">Shutter</h2>
+  <h2 *ngIf="state==='Strap'">Strap</h2>
+  <h2 *ngIf="state==='Light'">Light</h2>
+  <form>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label>Etat</label>
-          <input type="text" class="form-control" value="{{clockWithDetail.clock.state}}" disabled>
+          <input *ngIf="state === 'Clock' " type="text" class="form-control" value="{{clockWithDetail.clock.state}}" disabled>
+          <input *ngIf="state === 'Heater' "type="text" class="form-control" value="{{heaterWithDetail.heater.state}}" disabled>
+          <input *ngIf="state === 'Shutter' "type="text" class="form-control" value="{{shutterWithDetail.shutter.state}}" disabled>
+          <input *ngIf="state === 'Strap'" type="text" class="form-control" value="{{strapWithDetail.strap.state}}" disabled>
+          <input *ngIf="state === 'Light'" type="text" class="form-control" value="{{lightWithDetail.light.state}}" disabled>
         </div>
         <div class="form-group col-md-6">
-          <label for="room">Room</label>
-          <input type="text" class="form-control" id="room" placeholder="Room">
+          <label>Room number</label>
+          <input *ngIf="state==='Clock' " type="text" class="form-control" value="{{clockWithDetail.clock.room.num}}" disabled>
+          <input *ngIf="state==='Heater' " type="text" class="form-control" value="{{heaterWithDetail.heater.room.num}}" disabled>
+          <input *ngIf="state==='Shutter' " type="text" class="form-control" value="{{shutterWithDetail.shutter.room.num}}" disabled>
+          <input *ngIf="state==='Strap' " type="text" class="form-control" value="{{strapWithDetail.strap.room.num}}" disabled>
+          <input *ngIf="state==='Light' " type="text" class="form-control" value="{{lightWithDetail.light.room.num}}" disabled>
         </div>
       </div>
       <div class="form-group">
-        <label for="Owner">Owner</label>
-        <input type="text" class="form-control" id="Owner" placeholder="Owner">
-      </div>
-      <div class="form-group">
-        <label for="useLastMonth">useLastMonth</label>
-        <input type="text" class="form-control" id="useLastMonth" placeholder="useLastMonth">
+        <label>Owner</label>
+        <input *ngIf="state==='Clock' " type="text" class="form-control" value="{{clockWithDetail.clock.person.lastName}} {{clockWithDetail.clock.person.firstName}}" disabled>
+        <input *ngIf="state==='Heater' " type="text" class="form-control" value="{{heaterWithDetail.heater.person.lastName}} {{heaterWithDetail.heater.person.firstName}}" disabled>
+        <input *ngIf="state==='Shutter' " type="text" class="form-control" value="{{shutterWithDetail.shutter.person.lastName}} {{shutterWithDetail.shutter.person.firstName}}" disabled>
+        <input *ngIf="state==='Strap' " type="text" class="form-control" value="{{strapWithDetail.strap.person.lastName}} {{strapWithDetail.strap.person.firstName}}" disabled>
+        <input *ngIf="state==='Light' " type="text" class="form-control" value="{{lightWithDetail.light.person.lastName}} {{lightWithDetail.light.person.firstName}}" disabled>
       </div>
       <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="minValue">MinValue</label>
-          <input type="text" class="form-control" id="MinValue">
+        <div class="form-group col-md-3">
+          <label>Min Value</label>
+          <input *ngIf="state==='Clock' " type="text" class="form-control" value="{{clockWithDetail.clock.minvalueref}}" disabled>
+          <input *ngIf="state==='Heater' " type="text" class="form-control" value="{{heaterWithDetail.heater.minvalueref}}" disabled>
+          <input *ngIf="state==='Shutter' " type="text" class="form-control" value="{{shutterWithDetail.shutter.minvalueref}}" disabled>
+          <input *ngIf="state==='Strap' " type="text" class="form-control" value="{{strapWithDetail.strap.minvalueref}}" disabled>
+          <input *ngIf="state==='Light' " type="text" class="form-control" value="{{lightWithDetail.light.minvalueref}}" disabled>
         </div>
         <div class="form-group col-md-4">
-          <label for="maxValue">State</label>
-          <input type="text" class="form-control" id="maxValue">
+          <label>Max Value</label>
+          <input *ngIf="state==='Clock' " type="text" class="form-control" value="{{clockWithDetail.clock.maxvalueref}}" disabled>
+          <input *ngIf="state==='Heater' " type="text" class="form-control" value="{{heaterWithDetail.heater.maxvalueref}}" disabled>
+          <input *ngIf="state==='Shutter' " type="text" class="form-control" value="{{shutterWithDetail.shutter.maxvalueref}}" disabled>
+          <input *ngIf="state==='Strap' " type="text" class="form-control" value="{{strapWithDetail.strap.maxvalueref}}" disabled>
+          <input *ngIf="state==='Light' " type="text" class="form-control" value="{{lightWithDetail.light.maxvalueref}}" disabled>
         </div>
-        <div class="form-group col-md-2">
-          <label for="percentageOnLastMonth">percentageOnLastMonth</label>
-          <input type="text" class="form-control" id="percentageOnLastMonth">
+        <div class="form-group col-md-5">
+          <label>Percentage On Last Month</label>
+          <input *ngIf="state==='Clock' " type="text" class="form-control" value="{{clockWithDetail.percentageOnLastMonth}}" disabled>
+          <input *ngIf="state==='Heater' " type="text" class="form-control" value="{{heaterWithDetail.percentageOnLastMonth}}" disabled>
+          <input *ngIf="state==='Shutter' " type="text" class="form-control" value="{{shutterWithDetail.percentageOnLastMonth}}" disabled>
+          <input *ngIf="state==='Strap' " type="text" class="form-control" value="{{strapWithDetail.percentageOnLastMonth}}" disabled>
+          <input *ngIf="state==='Light' " type="text" class="form-control" value="{{lightWithDetail.percentageOnLastMonth}}" disabled>
+        </div>
+        <div *ngIf="state==='Strap' " class="form-group col-md-4">
+          <label>Minimum Systo</label>
+          <input type="text" class="form-control" value="{{strapWithDetail.strap.minsysto}}" disabled>
+        </div>
+        <div *ngIf="state==='Strap' " class="form-group col-md-4">
+          <label>Maximum Systo</label>
+          <input type="text" class="form-control" value="{{strapWithDetail.strap.maxsysto}}" disabled>
+        </div>
+        <div *ngIf="state==='Strap' " class="form-group col-md-4">
+          <label>Maximum Diasto</label>
+          <input type="text" class="form-control" value="{{strapWithDetail.strap.maxdiasto}}" disabled>
+        </div>
+        <div *ngIf="state==='Strap' " class="form-group col-md-6">
+          <label>Max Glyc</label>
+          <input type="text" class="form-control" value="{{strapWithDetail.strap.maxglyc}}" disabled>
+        </div>
+        <div *ngIf="state==='Strap' " class="form-group col-md-6">
+          <label>Min Glyc</label>
+          <input type="text" class="form-control" value="{{strapWithDetail.strap.minglyc}}" disabled>
         </div>
       </div>
     </form>

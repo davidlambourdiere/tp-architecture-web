@@ -1,4 +1,5 @@
 import {PersonDTO} from './PersonDTO';
+import {RoomDTO} from "./RoomDTO";
 
 export class ShutterDTO{
   id: bigint;
@@ -11,5 +12,6 @@ export class ShutterDTO{
   maxvalueref: string;
   percentage: string;
   person: PersonDTO;
+  room: RoomDTO;
 }
 
