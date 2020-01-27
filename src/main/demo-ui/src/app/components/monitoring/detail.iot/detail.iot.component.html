@@ -3,3 +3,40 @@
   <a [routerLink]="'/monitoring'"><span class="fa fa-undo"></span>Retour</a>
 </h4>
 {{id}}
+
+<div class="container">
+    <form>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label>Etat</label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="room">Room</label>
+          <input type="text" class="form-control" id="room" placeholder="Room">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="Owner">Owner</label>
+        <input type="text" class="form-control" id="Owner" placeholder="Owner">
+      </div>
+      <div class="form-group">
+        <label for="useLastMonth">useLastMonth</label>
+        <input type="text" class="form-control" id="useLastMonth" placeholder="useLastMonth">
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="minValue">MinValue</label>
+          <input type="text" class="form-control" id="MinValue">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="maxValue">State</label>
+          <input type="text" class="form-control" id="maxValue">
+        </div>
+        <div class="form-group col-md-2">
+          <label for="percentageOnLastMonth">percentageOnLastMonth</label>
+          <input type="text" class="form-control" id="percentageOnLastMonth">
+        </div>
+      </div>
+    </form>
+</div>
