@@ -23,16 +23,16 @@ public class HealthHistoric extends PersistableElement{
     @Column(name="stepcounter")
     private String stepcounter;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Strap strap;
+    @Column(name="strapId")
+    private Long strapId;
 
-    public HealthHistoric(String hearthrate, String systolic, String diastolic, String sugarlevel, String stepcounter, Strap strap) {
+    public HealthHistoric(String hearthrate, String systolic, String diastolic, String sugarlevel, String stepcounter, Long strap) {
         this.hearthrate = hearthrate;
         this.systolic = systolic;
         this.diastolic = diastolic;
         this.sugarlevel = sugarlevel;
         this.stepcounter = stepcounter;
-        this.strap = strap;
+        this.strapId = strap;
     }
 
     public HealthHistoric(){}
@@ -78,16 +78,12 @@ public class HealthHistoric extends PersistableElement{
         this.stepcounter = stepcounter;
     }
 
-    public Strap getStrap() {
-        return strap;
+    public Long getStrapId() {
+        return strapId;
     }
 
-    public void setStrap(Strap strap) {
-        this.strap = strap;
-    }
-
-    public void removeStrap() {
-        this.strap = null;
+    public void setStrapId(Long strapId) {
+        this.strapId = strapId;
     }
 
     @Override
