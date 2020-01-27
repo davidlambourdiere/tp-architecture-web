@@ -1,0 +1,15 @@
+CREATE TABLE `personprofile` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `age` int(11) NOT NULL,
+  `adress` varchar(300) NOT NULL,
+  `postal_code` int(11) NOT NULL,
+  `adress_email` varchar(300) NOT NULL,
+  `tel_number` int(11) NOT NULL,
+  `chronic_disease` varchar(300) NOT NULL,
+  `estimated_mobility` int(11) NOT NULL,
+  `smoking` tinyint(1) NOT NULL,
+  `drinker` tinyint(1) NOT NULL,
+  `medical_emergencies` tinyint(1) NOT NULL,
+  `Hobbies` varchar(300) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ;

@@ -27,4 +27,9 @@ public class PersonController extends RestBaseController{
     private PersonDTO verifyConnexion(@RequestBody PersonDTO connectedLogs){
         return personManager.verifyConnexion(connectedLogs);
     }
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 }
