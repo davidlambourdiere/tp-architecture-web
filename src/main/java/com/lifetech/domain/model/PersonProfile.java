@@ -9,10 +9,6 @@ import javax.persistence.Id;
 @Entity(name = "personProfile")
 public class PersonProfile extends Person {
 
-    @Id
-    @GeneratedValue
-    int id;
-
     @Column(name="age")
     private int age;
 
@@ -63,8 +59,7 @@ public class PersonProfile extends Person {
     @Override
     public String toString() {
         return "PersonProfile{" +
-                "id=" + id +
-                ", age=" + age +
+                "age=" + age +
                 ", adress='" + adress + '\'' +
                 ", postal_code=" + postal_code +
                 ", adress_email='" + adress_email + '\'' +
