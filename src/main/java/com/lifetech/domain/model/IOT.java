@@ -37,8 +37,6 @@ public class IOT implements Serializable {
     @Column(name="suspect")
     private String suspect;
 
-
-
     public IOT(Double price, String status, String state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration) {
         this.status = status;
         this.state = state;

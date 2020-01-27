@@ -11,6 +11,7 @@ import {IOTService} from "../../../service/IOTService";
 export class DetailIotComponent implements OnInit {
 
   id: String;
+  state: String;
   clockWithDetail: ClockDetailDTO;
 
   constructor(private router: Router, private route: ActivatedRoute, private iotservice: IOTService) {
@@ -18,6 +19,7 @@ export class DetailIotComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
+    this.state = this.route.snapshot.paramMap.get('state');
     this.route.params.subscribe(params => {
       this.iotservice.findClockDetailWithHistoric(this.route.snapshot.paramMap.get('id')).subscribe(data => {
         this.clockWithDetail = data;

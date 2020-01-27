@@ -1,6 +1,7 @@
 package com.lifetech.application.manager;
 
 import com.lifetech.application.dto.ClockDTO;
+import com.lifetech.application.dto.ClockDetailDTO;
 import com.lifetech.domain.OrikaBeanMapper;
 import com.lifetech.domain.dao.ClockDAO;
 import com.lifetech.domain.dao.RoomDAO;
@@ -38,6 +39,15 @@ public class ClockManagerImpl implements  ClockManager {
         Room room = roomDao.findById(Long.parseLong(id)).orElse(null);
         List<Clock> clocks = clockDAO.findByRoom(room);
         return orikaBeanMapper.mapAsList(clocks, ClockDTO.class);
+    }
+
+    @Override
+    public ClockDetailDTO findByHistoric(String id) {
+        Clock clock = clockDAO.findById(Long.parseLong(id)).orElse(null);
+        ClockDTO clockDTO = orikaBeanMapper.map(clock, ClockDTO.class);
+        ClockDetailDTO clockDetailDTO = new ClockDetailDTO();
+        clockDetailDTO.setClock(clockDTO);
+        return clockDetailDTO;
     }
 
 

@@ -3,13 +3,14 @@
   <a [routerLink]="'/monitoring'"><span class="fa fa-undo"></span>Retour</a>
 </h4>
 {{id}}
+{{state}}
 
 <div class="container">
     <form>
       <div class="form-row">
         <div class="form-group col-md-6">
           <label>Etat</label>
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" value="{{clockWithDetail.clock.state}}" disabled>
         </div>
         <div class="form-group col-md-6">
           <label for="room">Room</label>

@@ -1,6 +1,7 @@
 package com.lifetech.api.rest;
 
 import com.lifetech.application.dto.ClockDTO;
+import com.lifetech.application.dto.ClockDetailDTO;
 import com.lifetech.application.manager.ClockManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,4 +26,9 @@ public class ClockController extends RestBaseController {
 
     @GetMapping("clock/findByRoom/{id}")
     private List<ClockDTO> findByRoom(@PathVariable("id") String id){ return clockManager.findByRoom(id); }
+
+    @GetMapping("clock/findHistoric/{id}")
+    private ClockDetailDTO findByHistoric(@PathVariable("id") String id) {
+        return clockManager.findByHistoric(id);
+    }
 }
