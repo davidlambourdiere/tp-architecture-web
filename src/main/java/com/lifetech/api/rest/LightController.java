@@ -1,7 +1,9 @@
 package com.lifetech.api.rest;
 
 import com.lifetech.application.dto.ClockDTO;
+import com.lifetech.application.dto.ClockDetailDTO;
 import com.lifetech.application.dto.LightDTO;
+import com.lifetech.application.dto.LightDetailDTO;
 import com.lifetech.application.manager.LightManager;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,7 +36,7 @@ public class LightController extends RestBaseController{
     }
 
     @GetMapping("light/findHistoric/{id}")
-    private List<ClockDTO> findByHistoric(@PathVariable("id") String id) {
-        return null;
+    private LightDetailDTO findByHistoric(@PathVariable("id") String id) {
+        return lightManager.findByHistoric(id);
     }
 }

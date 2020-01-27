@@ -1,6 +1,7 @@
 package com.lifetech.api.rest;
 
 import com.lifetech.application.dto.StrapDTO;
+import com.lifetech.application.dto.StrapDetailDTO;
 import com.lifetech.application.manager.StrapManager;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +24,7 @@ public class StrapController extends RestBaseController{
     }
 
     @GetMapping("strap/findHistoric/{id}")
-    private List<StrapDTO> findByHistoric(@PathVariable("id") String id) {
-        return null;
+    private StrapDetailDTO findByHistoric(@PathVariable("id") String id) {
+        return strapManager.findByHistoric(id);
     }
 }
