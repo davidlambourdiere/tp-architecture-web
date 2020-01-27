@@ -5,6 +5,7 @@ export class HeaterDTO{
   status: string;
   state: string;
   minvalueref: string;
+  price: number;
   suspect: string;
   ipadress: string;
   maxvalueref: string;

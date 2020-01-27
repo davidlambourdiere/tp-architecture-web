@@ -11,8 +11,13 @@ export class PersonService {
   constructor(private http: HttpClient) {
   }
 
-  findAllPerson(): Observable<any> {
-    return this.http.get(`api/person/findAll`);
+  findAllPerson(): Observable<PersonDTO[]> {
+    return this.http.get<PersonDTO[]>(`api/person/findAll`);
+  }
+
+
+  find(id: number) :Observable<PersonDTO>{
+    return this.http.get<PersonDTO>(`api/person/findById/${id}`);
   }
 
   verifyConnection(person: PersonDTO): Observable<PersonDTO> {

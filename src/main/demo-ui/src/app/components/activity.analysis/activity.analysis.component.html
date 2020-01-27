@@ -1,2 +1,75 @@
 <home></home>
-david component
+<div class="container">
+  <div class="row my-1">
+    <div class="col-sm">
+      <h1>IOT Indicators</h1>
+    </div>
+  </div>
+  <div class="row my-1">
+    <div class="col-sm">
+      <h2>Person</h2>
+    </div>
+    <div class="col-sm">
+      <form class="form-inline">
+        <select class="form-control mr-2 my-1" #selectperson>
+          <option *ngFor="let person of personlist" value="{{person.login}}" >
+            {{person.firstName}} {{person.lastName}}
+          </option>
+        </select>
+        <button type="submit" class="btn btn-primary my-1" (click)="countIOTByPerson(selectperson.value)">Search</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm my-1">
+      <h3>{{activityanalysisperson.personName}}</h3>
+    </div>
+    <div class="col-sm py-2">
+      <p><strong>Clock : </strong> {{activityanalysisperson.nClock}}</p>
+      <p><strong>Heather : </strong> {{activityanalysisperson.nHeather}}</p>
+      <p><strong>Light : </strong> {{activityanalysisperson.nLight}}</p>
+
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row my-1">
+    <div class="col-sm">
+      <h2>Residence</h2>
+    </div>
+    <div class="col-sm">
+      <form class="form-inline">
+        <select class="form-control mr-2 my-1">
+          <option value="1">{{activityanalysisresidence.residenceName}} </option>
+        </select>
+        <button type="submit" class="btn btn-primary my-1" (click)="countIOTByResidence()">Search</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row my-1">
+    <div class="col-sm">
+      <h3>Residence name</h3>
+    </div>
+    <div class="col-sm py-2">
+      <p><strong>Clock : </strong> {{activityanalysisresidence.nClock}}</p>
+      <p><strong>Heather : </strong> {{activityanalysisresidence.nHeather}}</p>
+      <p><strong>Light : </strong> {{activityanalysisresidence.nLight}}</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row my-1">
+    <div class="col-sm">
+      <h2>Total</h2>
+    </div>
+    <div class="col-sm py-2">
+      <p><strong>Clock : </strong> {{activityanalysistotal.nClock}}</p>
+      <p><strong>Heather : </strong> {{activityanalysistotal.nHeather}}</p>
+      <p><strong>Light : </strong> {{activityanalysistotal.nLight}}</p>
+    </div>
+  </div>
+</div>

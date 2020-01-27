@@ -4,4 +4,7 @@ import com.lifetech.application.dto.HeaterDTO;
 
 public interface HeaterManager {
     HeaterDTO findById(String id);
+    HeaterDTO findAllHeater();
+    HeaterDTO findByRoom(String id);
 }
+

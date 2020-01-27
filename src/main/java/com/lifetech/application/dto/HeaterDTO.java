@@ -1,10 +1,12 @@
 package com.lifetech.application.dto;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class HeaterDTO extends PersistableElementDTO{
     private String status;
     private String state;
+    private Double price;
     private Timestamp startdate;
     private String minvalueref;
     private String ipadress;
@@ -12,6 +14,7 @@ public class HeaterDTO extends PersistableElementDTO{
     private String maxvalueref;
     private Timestamp activityduration;
     private PersonDTO person;
+    private RoomDTO room;
 
     public HeaterDTO() {
     }
@@ -86,5 +89,20 @@ public class HeaterDTO extends PersistableElementDTO{
 
     public void setIpadress(String ipadress) {
         this.ipadress = ipadress;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public RoomDTO getRoom() { return room; }
+
+    public void setRoom(RoomDTO room) { this.room = room; }
+
+    public void setHeaters(List<HeaterDTO> heaters) {
     }
 }
