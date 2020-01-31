@@ -60,7 +60,7 @@ export class SurveyComponent implements OnInit {
 
     }
     Hide("bad_otonomie");
-    Hide("fumeur");
+    Hide("BAD_Autonomie");
 
   }
   /*Nom= new FormControl( 'laiouar', [Validators.required]);
