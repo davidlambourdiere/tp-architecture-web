@@ -21,10 +21,10 @@ public class HeaterController extends RestBaseController{
     }
 
 
-    @GetMapping("heater/{id}")
+   /* @GetMapping("heater/{id}")
     private HeaterDTO findAllHeater(@PathVariable("id") String id){
         return heaterManager.findAllHeater();
-    }
+    }*/
 
     @GetMapping("heater/findHistoric/{id}")
     private HeaterDetailDTO findByHistoric(@PathVariable("id") String id) {

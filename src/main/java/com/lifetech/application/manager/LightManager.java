@@ -16,4 +16,5 @@ public interface LightManager {
     LightDTO findByRoom(String id);
 
     LightDetailDTO findByHistoric(String id);
+    LightDTO updateLight( String id, LightDTO lightDtoReceived);
 }

@@ -50,4 +50,19 @@ public class LightManagerImpl implements LightManager {
         lightDetailDTO.setLight(lightDTO);
         return lightDetailDTO;
     }
+
+
+    @Override
+    public LightDTO updateLight(String id, LightDTO lightDtoReceived) {
+        // light trouvé par l'id reçu  p r front
+        Light light = lightDAO.findById(Long.parseLong(id)).orElse(null);
+        // converti en DTO pour modifier
+        LightDTO updatedLightDTO = orikaBeanMapper.map(light, LightDTO.class);
+
+        updatedLightDTO.setColor(lightDtoReceived.getColor());
+        updatedLightDTO.setStatus(lightDtoReceived.getStatus());
+        Light lightsaved = orikaBeanMapper.map(updatedLightDTO, Light.class);
+        System.out.println(lightsaved);
+        return orikaBeanMapper.map(lightDAO.save(lightsaved), LightDTO.class);
+    }
 }
