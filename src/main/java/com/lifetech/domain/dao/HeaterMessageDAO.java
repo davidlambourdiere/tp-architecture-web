@@ -11,7 +11,7 @@ import java.util.List;
 public interface HeaterMessageDAO extends JpaRepository<HeaterMessage, Long> {
     List<HeaterMessage> findHeaterMessageByHeater (Heater id);
 
-    HeaterMessage findFirstByOrderByInsertDateIdDesc();
+    //HeaterMessage findFirstByOrderByInsertDateIdDesc();
 
 
 

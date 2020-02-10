@@ -30,9 +30,9 @@ public class HeaterMessageManagerImpl implements HeaterMessageManager {
         return orikaBeanMapper.mapAsList(messages, HeaterMessageDTO.class);
     }
 
-    @Override
-    public HeaterMessageDTO findLastHeaterMessage() {
-        HeaterMessage heaterMessage = heatermessagedao.findFirstByOrderByInsertDateIdDesc();
-        return orikaBeanMapper.map(heaterMessage, HeaterMessageDTO.class);
-    }
+//    @Override
+//    public HeaterMessageDTO findLastHeaterMessage() {
+//        //HeaterMessage heaterMessage = heatermessagedao.findFirstByOrderByInsertDateIdDesc();
+//        return orikaBeanMapper.map(heaterMessage, HeaterMessageDTO.class);
+//    }
 }
