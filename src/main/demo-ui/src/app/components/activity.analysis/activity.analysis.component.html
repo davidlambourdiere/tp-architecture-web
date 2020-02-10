@@ -41,10 +41,10 @@
     </div>
     <div class="col-sm">
       <form class="form-inline">
-        <select class="form-control mr-2 my-1">
-          <option value="1">{{activityanalysisresidence.residenceName}} </option>
+        <select class="form-control mr-2 my-1" #selectresidence>
+          <option *ngFor="let residence of residencelist" value="1">{{residence.adress}} </option>
         </select>
-        <button type="submit" class="btn btn-primary my-1" (click)="countIOTByResidence()">Search</button>
+        <button type="submit" class="btn btn-primary my-1" (click)="countIOTByResidence(selectresidence.value)">Search</button>
       </form>
     </div>
   </div>
