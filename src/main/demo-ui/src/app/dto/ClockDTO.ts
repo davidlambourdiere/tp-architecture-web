@@ -3,7 +3,7 @@ import {RoomDTO} from './RoomDTO';
 
 export class ClockDTO {
   id: bigint;
-  status: string;
+  breakdownstatus: string;
   state: string;
   minvalueref: string;
   price: number;

@@ -9,6 +9,7 @@ import com.lifetech.domain.dao.RoomDAO;
 import com.lifetech.domain.model.Clock;
 import com.lifetech.domain.model.ClockHistoric;
 import com.lifetech.domain.model.Room;
+import com.lifetech.domain.model.StateEnum;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -63,9 +64,9 @@ public class ClockManagerImpl implements ClockManager {
                 if ((Instant.ofEpochMilli(clockHistoric.getStartDate().getTime())
                         .atZone(ZoneId.systemDefault())
                         .toLocalDate()).isAfter(d)) {
-                    if (clockHistoric.getState().equals("on")) {
+                    if (clockHistoric.getState().equals(StateEnum.ON)) {
                         timeOn = timeOn + (int) (clockHistoric.getEndingDate().getTime()/100000 - clockHistoric.getStartDate().getTime()/100000);
-                    } else if (clockHistoric.getState().equals("off")) {
+                    } else if (clockHistoric.getState().equals(StateEnum.OFF)) {
                         timeOff = timeOff + (int) (clockHistoric.getEndingDate().getTime()/100000 - clockHistoric.getStartDate().getTime()/100000);
                     }
                 }

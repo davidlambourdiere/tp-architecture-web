@@ -16,7 +16,7 @@ personid BIGINT UNSIGNED NOT NULL,
 amount float,
 programdate int,
 primary key(id, subscriptionid, personid),
-CONSTRAINT fk_subscription_bill_id foreign key (subscriptionid) references subscription (id),
-CONSTRAINT fk_subscription_person_id foreign key (personid) references person (id)
+CONSTRAINT fk_subscription_bill_id foreign key (subscriptionid) references lifetech.subscription (id),
+CONSTRAINT fk_subscription_person_id foreign key (personid) references lifetech.person (id)
 );
 

@@ -25,5 +25,5 @@ ismobile VARCHAR(255),
 userevaluation INT,
 userrole VARCHAR (255),
 residence_id  BIGINT UNSIGNED NOT NULL,
-CONSTRAINT FK_person_residence_id FOREIGN KEY (residence_id) REFERENCES residence(id)
+CONSTRAINT FK_person_residence_id FOREIGN KEY (residence_id) REFERENCES lifetech.residence(id)
 );

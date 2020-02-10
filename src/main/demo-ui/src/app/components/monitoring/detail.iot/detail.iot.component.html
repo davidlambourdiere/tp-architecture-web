@@ -84,4 +84,22 @@
         </div>
       </div>
     </form>
+  <table class="table table-striped" *ngIf="state==='Light'">
+    <thead>
+    <tr>
+      <th scope="col">Schedule</th>
+      <th scope="col">Color</th>
+      <th scope="col">State</th>
+      <th scope="col">Breakdown Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let historic of lightWithDetail.lightshistoric">
+      <td>{{historic.startdate}} - {{historic.endingdate}}</td>
+      <td>{{historic.color}}</td>
+      <td>{{historic.state}}</td>
+      <td>{{historic.breakdownstatus}}</td>
+    </tr>
+    </tbody>
+  </table>
 </div>
