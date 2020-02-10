@@ -20,8 +20,6 @@ import {ActivityAnalysisComponent} from './components/activity.analysis/activity
 import {LocationComponent} from './components/location/location.component';
 import {MedicalControlComponent} from './components/medical.control/medical.control.component';
 import {ResidentComponent} from './components/resident/resident.component';
-import { LogementComponent } from './components/panne/logement/logement.component';
-import { ObjectListComponent } from './components/panne/object-list/object-list.component';
 import {AuthService} from "./service/AuthService";
 import {NotificationComponent} from "./components/notification/notification.component";
 import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
@@ -47,8 +45,6 @@ import {SurveyComponent} from "./components/survey/survey.component";
     BillingComponent,
     ResidentComponent,
     SubscriptionComponent,
-    LogementComponent,
-    ObjectListComponent,
     SurveyComponent
   ],
   imports: [

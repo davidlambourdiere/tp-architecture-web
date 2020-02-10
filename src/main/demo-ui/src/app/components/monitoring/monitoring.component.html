@@ -39,7 +39,7 @@
             <span class="fa fa-times-circle" *ngIf="iot.state==='off'"></span>
           </td>
           <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.ipadress}}</td>
-          <td [hidden]="owner!==iot.person.lastName && owner!==''" [routerLink]="['/detailiot', iot.id]">Voir le détail</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''" [routerLink]="['/detailiot', iot.id, 'Light']">Voir le détail</td>
         </tr>
         </tbody>
       </table>
@@ -64,7 +64,7 @@
             <span class="fa fa-times-circle" *ngIf="iot.state==='off'"></span>
           </td>
           <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.ipadress}}</td>
-          <td [hidden]="owner!==iot.person.lastName && owner!==''" [routerLink]="['/detailiot', iot.id]">Voir le détail</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''" [routerLink]="['/detailiot', iot.id, 'Strap']">Voir le détail</td>
         </tr>
         </tbody>
       </table>
@@ -89,7 +89,7 @@
             <span class="fa fa-times-circle" *ngIf="iot.state==='off'"></span>
           </td>
           <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.ipadress}}</td>
-          <td [hidden]="owner!==iot.person.lastName && owner!==''" [routerLink]="['/detailiot', iot.id]">Voir le détail</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''" [routerLink]="['/detailiot', iot.id, 'Clock']">Voir le détail</td>
         </tr>
         </tbody>
       </table>
@@ -114,7 +114,7 @@
             <span class="fa fa-times-circle" *ngIf="iot.state==='off'"></span>
           </td>
           <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.ipadress}}</td>
-          <td [hidden]="owner!==iot.person.lastName && owner!==''" [routerLink]="['/detailiot', iot.id]">Voir le détail</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''" [routerLink]="['/detailiot', iot.id, 'Heater']">Voir le détail</td>
         </tr>
         </tbody>
       </table>
@@ -139,7 +139,7 @@
             <span class="fa fa-times-circle" *ngIf="iot.state==='off'"></span>
           </td>
           <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.ipadress}}</td>
-          <td [hidden]="owner!==iot.person.lastName && owner!==''" [routerLink]="['/detailiot', iot.id]">Voir le détail</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''" [routerLink]="['/detailiot', iot.id, 'Shutter']">Voir le détail</td>
         </tr>
         </tbody>
       </table>

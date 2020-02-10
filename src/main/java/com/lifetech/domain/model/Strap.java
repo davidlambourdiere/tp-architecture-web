@@ -2,6 +2,8 @@ package com.lifetech.domain.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name="strap")
 public class Strap extends IOT{
@@ -28,8 +30,8 @@ public class Strap extends IOT{
     @OneToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     private Person person;
 
-    public Strap(Double price, String status, String state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration, String minsysto, String maxsysto, String maxdiasto, String minglyc, String maxglyc, String minsteps, Person person) {
-        super(price, status, state, ipadress, startdate, minvalueref, maxvalueref, suspect, activityduration);
+    public Strap(Double price, StatusEnum breakdownstatus, StateEnum state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration, String minsysto, String maxsysto, String maxdiasto, String minglyc, String maxglyc, String minsteps, Person person) {
+        super(price, breakdownstatus, state, ipadress, startdate, minvalueref, maxvalueref, suspect, activityduration);
         this.minsysto = minsysto;
         this.maxsysto = maxsysto;
         this.maxdiasto = maxdiasto;
@@ -39,8 +41,7 @@ public class Strap extends IOT{
         this.person = person;
     }
 
-    public Strap() {
-    }
+    public Strap() {}
 
     public String getMinsysto() {
         return minsysto;
@@ -95,6 +96,7 @@ public class Strap extends IOT{
     }
 
     public void setPerson(Person person) {
+        person.setStrap(this);
         this.person = person;
     }
 }

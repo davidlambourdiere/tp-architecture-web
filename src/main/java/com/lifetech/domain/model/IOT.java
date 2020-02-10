@@ -16,11 +16,11 @@ public class IOT implements Serializable {
     @Column
     protected Timestamp optlock;
 
-    @Column(name="status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private StatusEnum breakdownstatus;
 
-    @Column(name="state")
-    private String state;
+    @Enumerated(EnumType.STRING)
+    private StateEnum state;
 
     @Column(name="price")
     private Double price;
@@ -37,10 +37,8 @@ public class IOT implements Serializable {
     @Column(name="suspect")
     private String suspect;
 
-
-
-    public IOT(Double price, String status, String state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration) {
-        this.status = status;
+    public IOT(Double price, StatusEnum breakdownstatus, StateEnum state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration) {
+        this.breakdownstatus = breakdownstatus;
         this.state = state;
         this.ipadress = ipadress;
         this.minvalueref = minvalueref;
@@ -52,19 +50,19 @@ public class IOT implements Serializable {
     public IOT() {
     }
 
-    public String getStatus() {
-        return status;
+    public StatusEnum getBreakdownstatus() {
+        return breakdownstatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setBreakdownstatus(StatusEnum breakdownstatus) {
+        this.breakdownstatus = breakdownstatus;
     }
 
-    public String getState() {
+    public StateEnum getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(StateEnum state) {
         this.state = state;
     }
 

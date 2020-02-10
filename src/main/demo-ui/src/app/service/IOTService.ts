@@ -25,4 +25,24 @@ export class IOTService {
   findIOTByIdAndType(idperson: string, type: string): Observable<any>{
     return null;
   }
+
+  findClockDetailWithHistoric(id: string): Observable<any>{
+    return this.http.get(`api/clock/findHistoric/${id}`);
+  }
+
+  findLightDetailWithHistoric(id: string): Observable<any>{
+    return this.http.get(`api/light/findHistoric/${id}`);
+  }
+
+  findShutterDetailWithHistoric(id: string): Observable<any>{
+    return this.http.get(`api/shutter/findHistoric/${id}`);
+  }
+
+  findStrapDetailWithHistoric(id: string): Observable<any>{
+    return this.http.get(`api/strap/findHistoric/${id}`);
+  }
+
+  findHeaterDetailWithHistoric(id: string): Observable<any>{
+    return this.http.get(`api/heater/findHistoric/${id}`);
+  }
 }
