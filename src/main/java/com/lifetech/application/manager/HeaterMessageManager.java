@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface HeaterMessageManager {
     List<HeaterMessageDTO> findHeaterMessageByHeater (String id);
+
+    HeaterMessageDTO findLastHeaterMessage();
 }

@@ -8,6 +8,7 @@ import com.lifetech.domain.model.Heater;
 import com.lifetech.domain.model.HeaterMessage;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Service
@@ -27,5 +28,11 @@ public class HeaterMessageManagerImpl implements HeaterMessageManager {
         Heater heater = heaterdao.findById(Long.parseLong(id)).orElse(null);
         List<HeaterMessage> messages = heatermessagedao.findHeaterMessageByHeater(heater);
         return orikaBeanMapper.mapAsList(messages, HeaterMessageDTO.class);
+    }
+
+    @Override
+    public HeaterMessageDTO findLastHeaterMessage() {
+        HeaterMessage heaterMessage = heatermessagedao.findFirstByOrderByInsertDateIdDesc();
+        return orikaBeanMapper.map(heaterMessage, HeaterMessageDTO.class);
     }
 }
