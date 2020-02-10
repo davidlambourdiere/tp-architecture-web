@@ -1,4 +1,3 @@
-export class RoomDTO {
-  id: bigint;
-  num: number;
+export class RoomDTO{
+  num: string;
 }

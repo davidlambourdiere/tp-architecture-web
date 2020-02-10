@@ -30,11 +30,8 @@ public class Strap extends IOT{
     @OneToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     private Person person;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "strap")
-    private List<HealthHistoric> healthhistorics;
-
-    public Strap(Double price, String status, String state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration, String minsysto, String maxsysto, String maxdiasto, String minglyc, String maxglyc, String minsteps, Person person) {
-        super(price, status, state, ipadress, startdate, minvalueref, maxvalueref, suspect, activityduration);
+    public Strap(Double price, StatusEnum breakdownstatus, StateEnum state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration, String minsysto, String maxsysto, String maxdiasto, String minglyc, String maxglyc, String minsteps, Person person) {
+        super(price, breakdownstatus, state, ipadress, startdate, minvalueref, maxvalueref, suspect, activityduration);
         this.minsysto = minsysto;
         this.maxsysto = maxsysto;
         this.maxdiasto = maxdiasto;
@@ -42,12 +39,9 @@ public class Strap extends IOT{
         this.maxglyc = maxglyc;
         this.minsteps = minsteps;
         this.person = person;
-        healthhistorics = new ArrayList<>();
     }
 
-    public Strap() {
-        healthhistorics = new ArrayList<>();
-    }
+    public Strap() {}
 
     public String getMinsysto() {
         return minsysto;
@@ -104,30 +98,5 @@ public class Strap extends IOT{
     public void setPerson(Person person) {
         person.setStrap(this);
         this.person = person;
-    }
-    public List<HealthHistoric> getHealthhistorics() {
-        return healthhistorics;
-    }
-
-    public void setHealthhistorics(List<HealthHistoric> healthhistorics) {
-        this.healthhistorics = healthhistorics;
-    }
-
-    public void addHealthHistocic(HealthHistoric historic){System.out.println(historic);
-        if(healthhistorics==null) healthhistorics=new ArrayList<>();
-
-        if(!healthhistorics.contains(historic)){
-            healthhistorics.add(historic);
-            historic.setStrap(this);
-        }
-    }
-
-    public void removeHealthHistocic(HealthHistoric historic){
-        if(healthhistorics==null) healthhistorics=new ArrayList<>();
-
-        if(healthhistorics.contains(historic)){
-            healthhistorics.remove(historic);
-            historic.removeStrap();
-        }
     }
 }
