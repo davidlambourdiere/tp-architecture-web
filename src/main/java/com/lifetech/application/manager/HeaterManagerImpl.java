@@ -50,6 +50,7 @@ public class HeaterManagerImpl implements HeaterManager{
         Heater heater = heaterDAO.findById(Long.parseLong(id)).orElse(null);
         HeaterDTO heaterDTO = orikaBeanMapper.map(heater, HeaterDTO.class);
         List<HeaterHistoric> heaterHistorics = heaterHistoricDAO.findAllByHeaterId(Long.parseLong(id));
+
         HeaterDetailDTO heaterDetailDTO = new HeaterDetailDTO();
         heaterDetailDTO.setHeater(heaterDTO);
         return heaterDetailDTO;

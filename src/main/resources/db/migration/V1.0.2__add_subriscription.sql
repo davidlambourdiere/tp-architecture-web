@@ -1,4 +1,4 @@
-create table subscription (
+create table lifetech.subscription (
 id SERIAL PRIMARY KEY,
 optlock TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 name VARCHAR(255),
@@ -9,7 +9,7 @@ listofservice VARCHAR(255)
 );
 
 
-create table bill(
+create table lifetech.bill(
 id SERIAL,
 subscriptionid BIGINT UNSIGNED NOT NULL,
 personid BIGINT UNSIGNED NOT NULL,

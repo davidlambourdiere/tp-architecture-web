@@ -11,10 +11,14 @@ import com.lifetech.domain.model.ClockHistoric;
 import com.lifetech.domain.model.Room;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 @Service
-public class ClockManagerImpl implements  ClockManager {
+public class ClockManagerImpl implements ClockManager {
 
     private final ClockDAO clockDAO;
 
@@ -50,8 +54,28 @@ public class ClockManagerImpl implements  ClockManager {
         Clock clock = clockDAO.findById(Long.parseLong(id)).orElse(null);
         ClockDTO clockDTO = orikaBeanMapper.map(clock, ClockDTO.class);
         List<ClockHistoric> clockHistorics = clockHistoricDAO.findAllByClockId(Long.parseLong(id));
-
+        LocalDate d = LocalDate.now().minusMonths(1);
+        String percentageLastMonth = null;
+        if (clockHistorics != null && !clockHistorics.isEmpty()) {
+            int timeOn = 0;
+            int timeOff = 0;
+            for (ClockHistoric clockHistoric : clockHistorics) {
+                if ((Instant.ofEpochMilli(clockHistoric.getStartDate().getTime())
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate()).isAfter(d)) {
+                    if (clockHistoric.getState().equals("on")) {
+                        timeOn = timeOn + (int) (clockHistoric.getEndingDate().getTime()/100000 - clockHistoric.getStartDate().getTime()/100000);
+                    } else if (clockHistoric.getState().equals("off")) {
+                        timeOff = timeOff + (int) (clockHistoric.getEndingDate().getTime()/100000 - clockHistoric.getStartDate().getTime()/100000);
+                    }
+                }
+            }
+            int totalTime = timeOn + timeOff;
+            float percentageOnLastMonth = ((float)timeOn / (float)totalTime)*100;
+            percentageLastMonth = String.valueOf(percentageOnLastMonth);
+        }
         ClockDetailDTO clockDetailDTO = new ClockDetailDTO();
+        clockDetailDTO.setPercentageOnLastMonth(percentageLastMonth);
         clockDetailDTO.setClock(clockDTO);
         return clockDetailDTO;
     }

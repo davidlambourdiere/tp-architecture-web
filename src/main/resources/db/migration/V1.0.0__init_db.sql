@@ -1,4 +1,4 @@
-CREATE TABLE residence (
+CREATE TABLE lifetech.residence (
 id SERIAL PRIMARY KEY,
 optlock TIMESTAMP (3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 adress VARCHAR(255),
@@ -8,7 +8,7 @@ email VARCHAR(55)
 
 
 
-CREATE TABLE person (
+CREATE TABLE lifetech.person (
 id SERIAL PRIMARY KEY,
 optlock TIMESTAMP (3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 firstname VARCHAR (255),

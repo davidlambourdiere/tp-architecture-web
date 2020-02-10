@@ -1,4 +1,4 @@
-CREATE TABLE  light (
+CREATE TABLE  lifetech.light (
 id SERIAL PRIMARY KEY,
 optlock TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 status VARCHAR(255),
@@ -14,7 +14,7 @@ person_id  BIGINT UNSIGNED NOT NULL,
 CONSTRAINT FK_iot_person_id FOREIGN KEY (person_id) REFERENCES person(id)
 );
 
-CREATE TABLE  shutter (
+CREATE TABLE  lifetech.shutter (
 id SERIAL PRIMARY KEY,
 optlock TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 status VARCHAR(255),
@@ -29,7 +29,7 @@ person_id  BIGINT UNSIGNED NOT NULL,
 CONSTRAINT FK_shutter_person_id FOREIGN KEY (person_id) REFERENCES person(id)
 );
 
-CREATE TABLE  heater (
+CREATE TABLE  lifetech.heater (
 id SERIAL PRIMARY KEY,
 optlock TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 status VARCHAR(255),
@@ -43,7 +43,7 @@ person_id  BIGINT UNSIGNED NOT NULL,
 CONSTRAINT FK_heater_person_id FOREIGN KEY (person_id) REFERENCES person(id)
 );
 
-CREATE TABLE  clock (
+CREATE TABLE  lifetech.clock (
 id SERIAL PRIMARY KEY,
 optlock TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 status VARCHAR(255),
@@ -57,7 +57,7 @@ person_id  BIGINT UNSIGNED NOT NULL,
 CONSTRAINT FK_clock_person_id FOREIGN KEY (person_id) REFERENCES person(id)
 );
 
-CREATE TABLE  strap (
+CREATE TABLE  lifetech.strap (
 id SERIAL PRIMARY KEY,
 optlock TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 status VARCHAR(255),
