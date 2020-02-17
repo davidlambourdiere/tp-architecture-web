@@ -6,4 +6,5 @@ export class LightDetailDTO{
   light: LightDTO;
   lightshistoric: LightHistoricDTO[];
   percentageOnLastMonth: string;
+  usedlastmonth: boolean;
 }

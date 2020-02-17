@@ -48,10 +48,6 @@ public class LightManagerImpl implements LightManager {
         return orikaBeanMapper.map(light, LightDTO.class);
     }
 
-    @Override
-    public LightDTO findByRoom(String id) {
-        return null;
-    }
 
     @Override
     public LightDetailDTO findByHistoric(String id) {
@@ -61,6 +57,7 @@ public class LightManagerImpl implements LightManager {
         List<LightHistoricDTO> lightHistoricDTOS = new ArrayList<>();
         LocalDate d = LocalDate.now().minusMonths(1);
         String percentageLastMonth = null;
+        boolean usedlastmonth = true;
         if (lightHistorics != null && !lightHistorics.isEmpty()) {
             int timeOn = 0;
             int timeOff = 0;
@@ -84,10 +81,17 @@ public class LightManagerImpl implements LightManager {
             }
             int totalTime = timeOn + timeOff;
             float percentageOnLastMonth = ((float)timeOn / (float)totalTime)*100;
+
+            if(percentageOnLastMonth<30){
+                usedlastmonth = false;
+            } else {
+                usedlastmonth = true;
+            }
             percentageLastMonth = String.valueOf(percentageOnLastMonth);
         }
         LightDetailDTO lightDetailDTO = new LightDetailDTO();
         lightDetailDTO.setPercentageOnLastMonth(percentageLastMonth);
+        lightDetailDTO.setUsedlastmonth(usedlastmonth);
         lightDetailDTO.setLightshistoric(lightHistoricDTOS);
         lightDetailDTO.setLight(lightDTO);
 

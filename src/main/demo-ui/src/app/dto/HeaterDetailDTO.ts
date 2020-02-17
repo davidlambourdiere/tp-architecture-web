@@ -5,4 +5,5 @@ export class HeaterDetailDTO{
   heater: HeaterDTO;
   heaterhistorics: HeaterHistoricDTO[];
   percentageOnLastMonth: string;
+  usedlastmonth: boolean;
 }

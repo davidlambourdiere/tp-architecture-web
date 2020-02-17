@@ -10,10 +10,13 @@ import java.util.Date;
 public class HeaterHistoric extends PersistableElement{
 
     @Column(name="startdate")
-    private Date startDate;
+    private Date startdate;
 
     @Column(name="endingdate")
-    private Date endingDate;
+    private Date endingdate;
+
+    @Column(name="temperature")
+    private String temperature;
 
     @Enumerated(EnumType.STRING)
     private StatusEnum breakdownstatus;
@@ -27,20 +30,20 @@ public class HeaterHistoric extends PersistableElement{
     public HeaterHistoric() {
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Date getStartdate() {
+        return startdate;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setStartdate(Date startdate) {
+        this.startdate = startdate;
     }
 
-    public Date getEndingDate() {
-        return endingDate;
+    public Date getEndingdate() {
+        return endingdate;
     }
 
-    public void setEndingDate(Date endingDate) {
-        this.endingDate = endingDate;
+    public void setEndingdate(Date endingdate) {
+        this.endingdate = endingdate;
     }
 
     public StateEnum getState() {
@@ -65,5 +68,13 @@ public class HeaterHistoric extends PersistableElement{
 
     public void setBreakdownstatus(StatusEnum breakdownstatus) {
         this.breakdownstatus = breakdownstatus;
+    }
+
+    public String getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(String temperature) {
+        this.temperature = temperature;
     }
 }
