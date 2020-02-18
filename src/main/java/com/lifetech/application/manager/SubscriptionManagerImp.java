@@ -49,68 +49,6 @@ public class SubscriptionManagerImp implements SubscriptionManager{
 
 
 
-   public SubscriptionDTO findSubscriptionByProfile(String name) {
-        SubscriptionDTO subToReturn = new SubscriptionDTO();
-        switch(name){
-            case "essential":
-
-                Subscription essential = subscriptionDAO.findEssentialSubscription();
-                essential.setPrice(subscriptionDAO.sumProfileEssentialSecure());
-                if(essential!=null) {
-                    return orikaBeanMapper.map(essential, SubscriptionDTO.class);
-
-                }
-                break;
-
-            case "serenity":
-
-
-                Subscription serenity = subscriptionDAO.findEssentialSubscription();
-                serenity.setPrice(subscriptionDAO.sumProfileSerenity());
-                if(serenity!=null) {
-                    SubscriptionDTO serenityDTO = orikaBeanMapper.map(serenity, SubscriptionDTO.class);
-                    return serenityDTO;
-                }
-                break;
-
-
-            case "confort":
-              //  subToReturn.setPrice(subscriptionDAO.sumProfileConfort());
-                Subscription confort = subscriptionDAO.findEssentialSubscription();
-                confort.setPrice(subscriptionDAO.sumProfileConfort());
-                if(confort!=null) {
-                    SubscriptionDTO confortDTO = orikaBeanMapper.map(confort, SubscriptionDTO.class);
-                    return confortDTO;
-                }
-                break;
-
-            case "totalconfort":
-                Subscription totalconfort = subscriptionDAO.findEssentialSubscription();
-                totalconfort.setPrice(subscriptionDAO.sumProfileTotalConfort());
-                if(totalconfort!=null) {
-                    SubscriptionDTO totalconfortDTO = orikaBeanMapper.map(totalconfort, SubscriptionDTO.class);
-                    return totalconfortDTO;
-                }
-                break;
-
-            default :
-                return null;
-        }
-
-       return subToReturn;
-   }
-
-   @Override
-    public SubscriptionDTO findSubscriptionByName(String subscriptionName) {
-        Subscription subscriptionN = subscriptionDAO.findByName(subscriptionName) ;
-        if(subscriptionName!=null){
-            SubscriptionDTO DTO = orikaBeanMapper.map(subscriptionName, SubscriptionDTO.class);
-            return DTO;
-        }
-        return null;
-
-    }
-
 
 
 }

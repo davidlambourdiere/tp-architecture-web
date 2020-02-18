@@ -14,6 +14,7 @@ import java.util.List;
 @Repository
 public interface ClockDAO extends JpaRepository<Clock, Long> {
     List<Clock> findByPerson(Person person);
+
     Long countByPerson(Person person);
 
     List<Clock> findByRoom(Room id);
