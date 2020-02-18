@@ -2,7 +2,6 @@ create table subscription (
 id SERIAL PRIMARY KEY,
 optlock TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 name VARCHAR(255),
-price DOUBLE ,
 description VARCHAR(255),
 listofiot VARCHAR(255),
 listofservice VARCHAR(255)

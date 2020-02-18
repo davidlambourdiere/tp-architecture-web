@@ -45,9 +45,7 @@ public class Subscription extends PersistableElement{
         this.name = name;
     }
 
-    public Double getPrice() {
-        return price;
-    }
+    public Double getPrice() { return price; }
 
     public void setPrice(Double price) {
         this.price = price;
