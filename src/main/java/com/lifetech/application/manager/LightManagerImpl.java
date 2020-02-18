@@ -9,6 +9,8 @@ import com.lifetech.domain.dao.LightHistoricDAO;
 import com.lifetech.domain.model.Light;
 import com.lifetech.domain.model.LightHistoric;
 import com.lifetech.domain.model.StateEnum;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -19,6 +21,9 @@ import java.util.List;
 
 @Service
 public class LightManagerImpl implements LightManager {
+
+    private static final Logger LOG = LoggerFactory.getLogger(LightManagerImpl.class);
+
 
     private final LightDAO lightDAO;
 
@@ -82,7 +87,7 @@ public class LightManagerImpl implements LightManager {
             int totalTime = timeOn + timeOff;
             float percentageOnLastMonth = ((float)timeOn / (float)totalTime)*100;
 
-            if(percentageOnLastMonth<30){
+            if(percentageOnLastMonth<20){
                 usedlastmonth = false;
             } else {
                 usedlastmonth = true;

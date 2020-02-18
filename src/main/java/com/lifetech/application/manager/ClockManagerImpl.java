@@ -10,6 +10,8 @@ import com.lifetech.domain.model.Clock;
 import com.lifetech.domain.model.ClockHistoric;
 import com.lifetech.domain.model.Room;
 import com.lifetech.domain.model.StateEnum;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -20,6 +22,8 @@ import java.util.List;
 
 @Service
 public class ClockManagerImpl implements ClockManager {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ClockManagerImpl.class);
 
     private final ClockDAO clockDAO;
 

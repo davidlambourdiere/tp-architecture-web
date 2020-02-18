@@ -7,6 +7,8 @@ import com.lifetech.domain.dao.StrapDAO;
 import com.lifetech.domain.dao.StrapHistoricDAO;
 import com.lifetech.domain.model.Strap;
 import com.lifetech.domain.model.StrapHistoric;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -17,6 +19,7 @@ import java.util.List;
 @Service
 public class StrapManagerImpl implements StrapManager {
 
+    private static final Logger LOG = LoggerFactory.getLogger(StrapManagerImpl.class);
 
     private final StrapDAO strapDAO;
 

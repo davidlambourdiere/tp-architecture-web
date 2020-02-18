@@ -86,3 +86,39 @@ INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,bre
 INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2019-12-26","2020-01-02","26",'OFF',"NOT_BREAKDOWN",1);
 INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2019-12-24","2019-12-26","14",'ON',"NOT_BREAKDOWN",1);
 INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-12-20","2020-12-24","12",'OFF',"NOT_BREAKDOWN",1);
+
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state, breakdownstatus,heaterid) VALUES ("2020-02-08","2020-02-10","10",'ON',"NOT_BREAKDOWN",2);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-02-06","2020-02-08","25",'ON',"NOT_BREAKDOWN",2);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-02-03","2020-02-06","0",'ON',"NOT_BREAKDOWN",2);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-01-28","2020-02-03","0",'OFF',"NOT_BREAKDOWN",2);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-01-26","2020-01-28","0",'OFF',"BREAKDOWN",2);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-01-22","2020-01-26","0",'ON',"NOT_BREAKDOWN",2);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-01-17","2020-01-22","9",'ON',"NOT_BREAKDOWN",2);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-01-12","2020-01-17","15",'ON',"NOT_BREAKDOWN",2);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-01-06","2020-01-12","15",'OFF',"NOT_BREAKDOWN",2);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-01-02","2020-01-06","15",'ON',"NOT_BREAKDOWN",2);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2019-12-26","2020-01-02","26",'ON',"NOT_BREAKDOWN",2);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2019-12-24","2019-12-26","14",'ON',"NOT_BREAKDOWN",2);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-12-20","2020-12-24","12",'OFF',"NOT_BREAKDOWN",2);
+
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state, breakdownstatus,heaterid) VALUES ("2020-02-08","2020-02-10","10",'ON',"NOT_BREAKDOWN",3);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-02-06","2020-02-08","25",'ON',"NOT_BREAKDOWN",3);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-02-03","2020-02-06","0",'ON',"NOT_BREAKDOWN",3);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-01-28","2020-02-03","0",'OFF',"BREAKDOWN",3);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-01-12","2020-01-28","0",'OFF',"NOT_BREAKDOWN",3);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-01-06","2020-01-12","15",'OFF',"NOT_BREAKDOWN",3);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-01-02","2020-01-06","15",'ON',"NOT_BREAKDOWN",3);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2019-12-26","2020-01-02","45",'ON',"NOT_BREAKDOWN",3);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2019-12-24","2019-12-26","14",'ON',"NOT_BREAKDOWN",3);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-12-20","2020-12-24","12",'OFF',"NOT_BREAKDOWN",3);
+
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state, breakdownstatus,heaterid) VALUES ("2020-02-08","2020-02-10","25",'OFF',"NOT_BREAKDOWN",4);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-02-06","2020-02-08","25",'ON',"NOT_BREAKDOWN",4);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-02-05","2020-02-06","0",'ON',"NOT_BREAKDOWN",4);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-01-28","2020-02-05","0",'OFF',"BREAKDOWN",4);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-01-12","2020-01-28","0",'OFF',"NOT_BREAKDOWN",4);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-01-06","2020-01-12","15",'OFF',"NOT_BREAKDOWN",4);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-01-05","2020-01-06","15",'ON',"NOT_BREAKDOWN",4);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2019-12-26","2020-01-05","15",'OFF',"NOT_BREAKDOWN",4);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2019-12-24","2019-12-26","15",'ON',"NOT_BREAKDOWN",4);
+INSERT INTO lifetech.heaterhistoric (startdate, endingdate,temperature,state,breakdownstatus,heaterid) VALUES ("2020-12-20","2020-12-24","15",'OFF',"NOT_BREAKDOWN",4);

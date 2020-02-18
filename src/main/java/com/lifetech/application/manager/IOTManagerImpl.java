@@ -4,6 +4,8 @@ import com.lifetech.application.dto.*;
 import com.lifetech.domain.OrikaBeanMapper;
 import com.lifetech.domain.dao.*;
 import com.lifetech.domain.model.Person;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,8 @@ import java.util.List;
 
 @Service
 public class IOTManagerImpl implements IOTManager{
+
+    private static final Logger LOG = LoggerFactory.getLogger(IOTManagerImpl.class);
 
     private final ClockDAO clockDAO;
 
@@ -38,11 +42,13 @@ public class IOTManagerImpl implements IOTManager{
 
 
     public IOTDTO findAllIOT() {
+        LOG.info("IOTs will be load");
         List<ClockDTO> clocks= orikaBeanMapper.convertListDTO(clockDAO.findAll(), ClockDTO.class);
         List<HeaterDTO> heaters = orikaBeanMapper.convertListDTO(heaterDAO.findAll(), HeaterDTO.class);
         List<LightDTO> lights = orikaBeanMapper.convertListDTO(lightDAO.findAll(), LightDTO.class);
         List<ShutterDTO> shutters = orikaBeanMapper.convertListDTO(shutterDAO.findAll(), ShutterDTO.class);
         List<StrapDTO> straps = orikaBeanMapper.convertListDTO(strapDAO.findAll(), StrapDTO.class);
+        LOG.info("IOTs loaded");
         IOTDTO iotToReturn = new IOTDTO();
         iotToReturn.setClocks(clocks);
         iotToReturn.setHeaters(heaters);

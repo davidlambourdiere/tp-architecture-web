@@ -7,6 +7,8 @@ import com.lifetech.domain.dao.ShutterDAO;
 import com.lifetech.domain.dao.ShutterHistoricDAO;
 import com.lifetech.domain.model.Shutter;
 import com.lifetech.domain.model.ShutterHistoric;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -16,6 +18,8 @@ import java.util.List;
 
 @Service
 public class ShutterManagerImpl implements ShutterManager {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ShutterManagerImpl.class);
 
     private final ShutterDAO shutterDAO;
 

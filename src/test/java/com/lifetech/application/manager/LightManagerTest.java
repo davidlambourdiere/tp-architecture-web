@@ -16,9 +16,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LightManagerTest {
 
     @Autowired
-    public LightManager lightManager;
-
-    @Autowired
     public LightDAO lightDAO;
 
 //    @Test
@@ -30,9 +27,9 @@ public class LightManagerTest {
 //
 //    @Test
 //    public void findByHistoric(){
-//        Light light = new Light();
-//        LightHistoric lightHistoric = new LightHistoric();
-//
+////        Light light = new Light();
+////        LightHistoric lightHistoric = new LightHistoric();
+////
 //        assertThat(true).isEqualTo(true);
 //    }
 

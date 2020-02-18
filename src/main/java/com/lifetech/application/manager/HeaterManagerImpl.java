@@ -7,6 +7,8 @@ import com.lifetech.domain.dao.HeaterHistoricDAO;
 import com.lifetech.domain.model.Heater;
 import com.lifetech.domain.model.HeaterHistoric;
 import com.lifetech.domain.model.StateEnum;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,9 @@ import java.util.List;
 
 @Service
 public class HeaterManagerImpl implements HeaterManager{
+
+    private static final Logger LOG = LoggerFactory.getLogger(HeaterManagerImpl.class);
+
 
     private final HeaterDAO heaterDAO;
 
@@ -89,7 +94,7 @@ public class HeaterManagerImpl implements HeaterManager{
             }
             int totalTime = timeOn + timeOff;
             float percentageOnLastMonth = ((float)timeOn / (float)totalTime)*100;
-            if(percentageOnLastMonth<30){
+            if(percentageOnLastMonth<20){
                 usedlastmonth = false;
             } else {
                 usedlastmonth = true;
