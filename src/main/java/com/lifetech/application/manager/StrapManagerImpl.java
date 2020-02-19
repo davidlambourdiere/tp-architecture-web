@@ -5,6 +5,7 @@ import com.lifetech.application.dto.StrapDetailDTO;
 import com.lifetech.domain.OrikaBeanMapper;
 import com.lifetech.domain.dao.StrapDAO;
 import com.lifetech.domain.dao.StrapHistoricDAO;
+import com.lifetech.domain.model.StatusEnum;
 import com.lifetech.domain.model.Strap;
 import com.lifetech.domain.model.StrapHistoric;
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -61,5 +63,26 @@ public class StrapManagerImpl implements StrapManager {
         strapDetailDTO.setPercentageOnLastMonth(percentageLastMonth);
         strapDetailDTO.setStrap(strapDTO);
         return strapDetailDTO;
+    }
+
+    @Override
+    public List<Strap> findAllStrapMalFunctionning() {
+        List<Strap> straps = strapDAO.findAll();
+        List<StrapHistoric> strapHistorics = strapHistoricDAO.findAll();
+        List<Strap> strapsToReturn = new ArrayList<>();
+        for(Strap strap: straps){
+            List<StrapHistoric> historicToVerify= new ArrayList<>();
+            for(StrapHistoric strapHistoric: strapHistorics){
+                if(strapHistoric.getStrapId().equals(strap.getId())){
+                    historicToVerify.add(strapHistoric);
+                }
+            }
+            for(StrapHistoric strapHistoric: historicToVerify){
+                if(strapHistoric.getBreakdownstatus().equals(StatusEnum.BREAKDOWN)){
+                    strapsToReturn.add(strap);
+                }
+            }
+        }
+        return strapsToReturn;
     }
 }

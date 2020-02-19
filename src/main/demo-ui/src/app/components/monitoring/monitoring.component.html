@@ -17,9 +17,15 @@
       <input type="text" class="form-control" placeholder="Lastname owner" [(ngModel)]="owner"
              [ngModelOptions]="{standalone: true}">
     </div>
+    <div class="form-group mb-2 mx-sm-3">
+      <button class="btn btn-outline-success" (click)="findAllIOT()">Show all objects</button>
+    </div>
+    <div class="form-group mb-2 mx-sm-3">
+      <button class="btn btn-outline-danger" (click)="findAllIOTWithMalfunctionning()">Show all objects with malfunctionning</button>
+    </div>
   </form>
   <div *ngIf="show===true">
-    <div *ngIf="iots!==null && iots.lights!==null" [ngClass]="{'display-none': type!=='Light' && type!=='all',
+    <div *ngIf="iots!==null && iots.lights!==null && iots.lights.length!==0" [ngClass]="{'display-none': type!=='Light' && type!=='all',
     'display-visibility': type==='all' || type==='Light'}">
       <h2>Lights</h2>
       <table class="table table-striped">
@@ -44,7 +50,7 @@
         </tbody>
       </table>
     </div>
-    <div *ngIf="iots!==null && iots.straps!==null" [ngClass]="{'display-none': type!=='Strap' && type!=='all',
+    <div *ngIf="iots!==null && iots.straps!==null && iots.straps.length!==0" [ngClass]="{'display-none': type!=='Strap' && type!=='all',
     'display-visibility': type==='all' || type==='Strap'}">
       <h2>Straps</h2>
       <table class="table table-striped">
@@ -67,7 +73,7 @@
         </tbody>
       </table>
     </div>
-    <div *ngIf="iots!==null && iots.clocks!==null" [ngClass]="{'display-none': type!=='Clock' && type!=='all',
+    <div *ngIf="iots!==null && iots.clocks!==null && iots.clocks.length!==0" [ngClass]="{'display-none': type!=='Clock' && type!=='all',
     'display-visibility': type==='all' || type==='Clock'}">
       <h2>Clocks</h2>
       <table class="table table-striped">
@@ -92,7 +98,7 @@
         </tbody>
       </table>
     </div>
-    <div *ngIf="iots!==null && iots.heaters!==null" [ngClass]="{'display-none': type!=='Heater' && type!=='all',
+    <div *ngIf="iots!==null && iots.heaters!==null && iots.heaters.length!==0" [ngClass]="{'display-none': type!=='Heater' && type!=='all',
     'display-visibility': type==='all' || type==='Heater'}">
       <h2>Heaters</h2>
       <table class="table table-striped">
@@ -117,7 +123,7 @@
         </tbody>
       </table>
     </div>
-    <div *ngIf="iots!==null && iots.shutters!==null" [ngClass]="{'display-none': type!=='Shutter' && type!=='all',
+    <div *ngIf="iots!==null && iots.shutters!==null && iots.shutters.length!==0" [ngClass]="{'display-none': type!=='Shutter' && type!=='all',
     'display-visibility': type==='all' || type==='Shutter'}">
       <h2>Shutters</h2>
       <table class="table table-striped">

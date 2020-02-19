@@ -31,6 +31,15 @@ export class MonitoringComponent implements OnInit {
     })
   }
 
+  findAllIOTWithMalfunctionning(){
+    this.route.params.subscribe(params => {
+      this.iotservice.findAllIOTWithMalfunctionning().subscribe(data => {
+        this.iots = data;
+        this.show = true;
+      })
+    })
+  }
+
   findByType(){
     this.route.params.subscribe(params => {
       this.iotservice.findIOTByType(this.type).subscribe(data => {

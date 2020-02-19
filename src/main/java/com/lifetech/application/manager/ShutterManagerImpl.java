@@ -7,6 +7,7 @@ import com.lifetech.domain.dao.ShutterDAO;
 import com.lifetech.domain.dao.ShutterHistoricDAO;
 import com.lifetech.domain.model.Shutter;
 import com.lifetech.domain.model.ShutterHistoric;
+import com.lifetech.domain.model.StatusEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -66,5 +68,26 @@ public class ShutterManagerImpl implements ShutterManager {
         shutterDetailDTO.setPercentageOnLastMonth(percentageLastMonth);
         shutterDetailDTO.setShutter(shutterDTO);
         return shutterDetailDTO;
+    }
+
+    @Override
+    public List<Shutter> findAllShutterMalFunctionning() {
+        List<Shutter> shutters = shutterDAO.findAll();
+        List<ShutterHistoric> shutterHistorics = shutterHistoricDAO.findAll();
+        List<Shutter> shuttersToReturn = new ArrayList<>();
+        for(Shutter shutter: shutters){
+            List<ShutterHistoric> historicToVerify= new ArrayList<>();
+            for(ShutterHistoric shutterHistoric: shutterHistorics){
+                if(shutterHistoric.getShutterId().equals(shutter.getId())){
+                    historicToVerify.add(shutterHistoric);
+                }
+            }
+            for(ShutterHistoric shutterHistoric: historicToVerify){
+                if(shutterHistoric.getBreakdownstatus().equals(StatusEnum.BREAKDOWN)){
+                    shuttersToReturn.add(shutter);
+                }
+            }
+        }
+        return shuttersToReturn;
     }
 }

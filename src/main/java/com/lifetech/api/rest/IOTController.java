@@ -21,6 +21,11 @@ public class IOTController extends RestBaseController {
         return iotManager.findAllIOT();
     }
 
+    @GetMapping("iots/malfunctionning")
+    private IOTDTO findAllIOTWithMalfunctionning(){
+        return iotManager.findAllIOTWithMalfunctionning();
+    }
+
     @PostMapping("iots/findByType")
     private IOTDTO findIOTByType(){
         return iotManager.findIOTByType("heater");

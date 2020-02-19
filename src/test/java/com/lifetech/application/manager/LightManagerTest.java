@@ -26,7 +26,7 @@ public class LightManagerTest {
 //    }
 //
 //    @Test
-//    public void findByHistoric(){
+//    public void findByHistoricTest(){
 ////        Light light = new Light();
 ////        LightHistoric lightHistoric = new LightHistoric();
 ////

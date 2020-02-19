@@ -9,6 +9,7 @@ import com.lifetech.domain.dao.LightHistoricDAO;
 import com.lifetech.domain.model.Light;
 import com.lifetech.domain.model.LightHistoric;
 import com.lifetech.domain.model.StateEnum;
+import com.lifetech.domain.model.StatusEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -101,5 +102,26 @@ public class LightManagerImpl implements LightManager {
         lightDetailDTO.setLight(lightDTO);
 
         return lightDetailDTO;
+    }
+
+    @Override
+    public List<Light> findAllLightMalFunctionning() {
+        List<Light> lights = lightDAO.findAll();
+        List<LightHistoric> lightHistorics = lightHistoricDAO.findAll();
+        List<Light> lightToReturn = new ArrayList<>();
+        for(Light light: lights){
+            List<LightHistoric> historicToVerify= new ArrayList<>();
+            for(LightHistoric lightHistoric: lightHistorics){
+                if(lightHistoric.getLightId().equals(light.getId())){
+                    historicToVerify.add(lightHistoric);
+                }
+            }
+            for(LightHistoric lightHistoric: historicToVerify){
+                if(lightHistoric.getBreakdownstatus().equals(StatusEnum.BREAKDOWN)){
+                    lightToReturn.add(light);
+                }
+            }
+        }
+        return lightToReturn;
     }
 }

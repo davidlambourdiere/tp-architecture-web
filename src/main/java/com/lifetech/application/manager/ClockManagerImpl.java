@@ -6,10 +6,7 @@ import com.lifetech.domain.OrikaBeanMapper;
 import com.lifetech.domain.dao.ClockDAO;
 import com.lifetech.domain.dao.ClockHistoricDAO;
 import com.lifetech.domain.dao.RoomDAO;
-import com.lifetech.domain.model.Clock;
-import com.lifetech.domain.model.ClockHistoric;
-import com.lifetech.domain.model.Room;
-import com.lifetech.domain.model.StateEnum;
+import com.lifetech.domain.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -17,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -83,6 +81,27 @@ public class ClockManagerImpl implements ClockManager {
         clockDetailDTO.setPercentageOnLastMonth(percentageLastMonth);
         clockDetailDTO.setClock(clockDTO);
         return clockDetailDTO;
+    }
+
+    @Override
+    public List<Clock> findAllClockMalFunctionning() {
+        List<Clock> clocks = clockDAO.findAll();
+        List<ClockHistoric> clockHistorics = clockHistoricDAO.findAll();
+        List<Clock> clockToReturn = new ArrayList<>();
+        for(Clock clock: clocks){
+            List<ClockHistoric> historicToVerify= new ArrayList<>();
+            for(ClockHistoric clockHistoric: clockHistorics){
+                if(clockHistoric.getClockId().equals(clock.getId())){
+                    historicToVerify.add(clockHistoric);
+                }
+            }
+            for(ClockHistoric clockHistoric: historicToVerify){
+                if(clockHistoric.getBreakdownstatus().equals(StatusEnum.BREAKDOWN)){
+                    clockToReturn.add(clock);
+                }
+            }
+        }
+        return clockToReturn;
     }
 
 
