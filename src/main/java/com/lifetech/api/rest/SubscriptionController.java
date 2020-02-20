@@ -20,7 +20,7 @@ public class SubscriptionController extends RestBaseController {
     }
 
     @GetMapping("subscription")
-    private List<SubscriptionDTO> findAllSubscription(){
+    private List<SubscriptionDTO> findAllSubscription() {
         return subscriptionManager.findAllSubscription();
     }
 
@@ -32,41 +32,17 @@ public class SubscriptionController extends RestBaseController {
         return ResponseEntity.ok().body(sub);
     }
 
-
-
-    @PutMapping("subscription/updateSubscription/{id}")
-    private ResponseEntity<SubscriptionDTO> updateSubscription(@PathVariable(value = "id") Long subscriptionId,
-                                                               @Valid @RequestBody SubscriptionDTO subDetails)  {
-        SubscriptionDTO s = subscriptionManager.findSubscriptionById(subscriptionId);
-
-
-        s.setName(subDetails.getName());
-        s.setListofiot(subDetails.getListofiot());
-        s.setListofservice(subDetails.getListofservice());
-        s.setPrice(subDetails.getPrice());
-        final SubscriptionDTO updatedSubscription = subscriptionManager.save(s);
-        return ResponseEntity.ok(updatedSubscription);
-    }
-
-
     @PostMapping("subscription/createSubscription")
     private SubscriptionDTO createSubscription(@Valid @RequestBody SubscriptionDTO s) {
         return subscriptionManager.save(s);
     }
 
-    @DeleteMapping("subscription/deleteSubscription/{id}")
-    private boolean deleteSubscription(@PathVariable(value = "id") Long subscriptionId)  {
-        SubscriptionDTO s = subscriptionManager.findSubscriptionById(subscriptionId) ;
 
-        boolean response = false;
-        try {
-            subscriptionManager.delete(s);
-            response = true;
-        }catch (Exception ex){}
+    @GetMapping("subscription/findSubscriptionByProfile/{name}")
+    private SubscriptionDTO findSubscriptionByProfile(@PathVariable(value = "name") String name) {
+        return subscriptionManager.findSubscriptionByProfile(name);
 
-        return response;
+
     }
-
-
 
 }
