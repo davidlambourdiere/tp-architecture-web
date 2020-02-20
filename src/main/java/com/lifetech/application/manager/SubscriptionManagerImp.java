@@ -49,6 +49,52 @@ public class SubscriptionManagerImp implements SubscriptionManager{
 
 
 
+   public SubscriptionDTO findSubscriptionByProfile(String name) {
+        SubscriptionDTO subToReturn = new SubscriptionDTO();
+        switch(name){
+            case "essential":
+                Subscription essential = subscriptionDAO.findByName(name);
+                essential.setPrice(subscriptionDAO.sumProfileEssentialSecure());
+                return orikaBeanMapper.map(essential, SubscriptionDTO.class);
+
+            case "serenity":
+                Subscription serenity = subscriptionDAO.findByName(name);
+                serenity.setPrice(subscriptionDAO.sumProfileSerenity());
+                if(serenity!=null) {
+                    SubscriptionDTO serenityDTO = orikaBeanMapper.map(serenity, SubscriptionDTO.class);
+                    return serenityDTO;
+                }
+                break;
+
+            case "confort":
+                Subscription confort = subscriptionDAO.findByName(name);
+                confort.setPrice(subscriptionDAO.sumProfileConfort());
+                if(confort!=null) {
+                    SubscriptionDTO confortDTO = orikaBeanMapper.map(confort, SubscriptionDTO.class);
+                    return confortDTO;
+                }
+                break;
+
+            case "total confort":
+                Subscription totalconfort = subscriptionDAO.findByName(name);
+                totalconfort.setPrice(subscriptionDAO.sumProfileTotalConfort());
+                if(totalconfort!=null) {
+                    SubscriptionDTO totalconfortDTO = orikaBeanMapper.map(totalconfort, SubscriptionDTO.class);
+                    return totalconfortDTO;
+                }
+                break;
+
+            default :
+                return null;
+        }
+
+       return subToReturn;
+   }
 
 
-}
+
+    }
+
+
+
+
