@@ -2,6 +2,7 @@ package com.lifetech.application.manager;
 
 import com.lifetech.application.dto.ClockDTO;
 import com.lifetech.application.dto.ClockDetailDTO;
+import com.lifetech.application.dto.ClockHistoricDTO;
 import com.lifetech.domain.OrikaBeanMapper;
 import com.lifetech.domain.dao.ClockDAO;
 import com.lifetech.domain.dao.ClockHistoricDAO;
@@ -14,9 +15,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ClockManagerImpl implements ClockManager {
@@ -57,27 +56,27 @@ public class ClockManagerImpl implements ClockManager {
         Clock clock = clockDAO.findById(Long.parseLong(id)).orElse(null);
         ClockDTO clockDTO = orikaBeanMapper.map(clock, ClockDTO.class);
         List<ClockHistoric> clockHistorics = clockHistoricDAO.findAllByClockId(Long.parseLong(id));
-        LocalDate d = LocalDate.now().minusMonths(1);
+        List<ClockHistoricDTO> clockHistoricDTOS = new ArrayList<>();
+
+
         String percentageLastMonth = null;
         if (clockHistorics != null && !clockHistorics.isEmpty()) {
             int timeOn = 0;
             int timeOff = 0;
             for (ClockHistoric clockHistoric : clockHistorics) {
-                if ((Instant.ofEpochMilli(clockHistoric.getStartDate().getTime())
-                        .atZone(ZoneId.systemDefault())
-                        .toLocalDate()).isAfter(d)) {
-                    if (clockHistoric.getState().equals(StateEnum.ON)) {
-                        timeOn = timeOn + (int) (clockHistoric.getEndingDate().getTime()/100000 - clockHistoric.getStartDate().getTime()/100000);
-                    } else if (clockHistoric.getState().equals(StateEnum.OFF)) {
-                        timeOff = timeOff + (int) (clockHistoric.getEndingDate().getTime()/100000 - clockHistoric.getStartDate().getTime()/100000);
-                    }
-                }
+                ClockHistoricDTO clockHistoricDTO = new ClockHistoricDTO();
+                clockHistoricDTO.setEndingdate(clockHistoric.getEndingDate().toString());
+                clockHistoricDTO.setStartdate(clockHistoric.getStartDate().toString());
+                clockHistoricDTO.setState(clockHistoric.getState().toString());
+                clockHistoricDTO.setBreakdownstatus(clockHistoric.getBreakdownstatus().toString());
+                clockHistoricDTOS.add(clockHistoricDTO);
             }
             int totalTime = timeOn + timeOff;
-            float percentageOnLastMonth = ((float)timeOn / (float)totalTime)*100;
+            float percentageOnLastMonth = (calculateTimeOnLastMonth(clockHistorics));
             percentageLastMonth = String.valueOf(percentageOnLastMonth);
         }
         ClockDetailDTO clockDetailDTO = new ClockDetailDTO();
+        clockDetailDTO.setClockhistorics(clockHistoricDTOS);
         clockDetailDTO.setPercentageOnLastMonth(percentageLastMonth);
         clockDetailDTO.setClock(clockDTO);
         return clockDetailDTO;
@@ -87,7 +86,7 @@ public class ClockManagerImpl implements ClockManager {
     public List<Clock> findAllClockMalFunctionning() {
         List<Clock> clocks = clockDAO.findAll();
         List<ClockHistoric> clockHistorics = clockHistoricDAO.findAll();
-        List<Clock> clockToReturn = new ArrayList<>();
+        Set<Clock> distinctClockToReturn = new HashSet<>();
         for(Clock clock: clocks){
             List<ClockHistoric> historicToVerify= new ArrayList<>();
             for(ClockHistoric clockHistoric: clockHistorics){
@@ -95,14 +94,44 @@ public class ClockManagerImpl implements ClockManager {
                     historicToVerify.add(clockHistoric);
                 }
             }
+            //TODO changer la fonction met des doublons quand breakdown et le time rentrent dans les critères
             for(ClockHistoric clockHistoric: historicToVerify){
                 if(clockHistoric.getBreakdownstatus().equals(StatusEnum.BREAKDOWN)){
-                    clockToReturn.add(clock);
+                    distinctClockToReturn.add(clock);
                 }
             }
+            float timeOnLastMonth = calculateTimeOnLastMonth(historicToVerify);
+            if((timeOnLastMonth<20 || timeOnLastMonth>80) && timeOnLastMonth>0){
+                distinctClockToReturn.add(clock);
+            }
         }
+        List<Clock> clockToReturn = new ArrayList<>();
+        clockToReturn.addAll(distinctClockToReturn);
         return clockToReturn;
     }
 
-
+    private float calculateTimeOnLastMonth(List<ClockHistoric> clockHistorics) {
+        LocalDate d = LocalDate.now().minusMonths(1); //Pick date one month ago
+        float percentageOnLastMonth = 0;
+        if (clockHistorics != null && !clockHistorics.isEmpty()) { //verify that historic for the iot exist
+            int timeOn = 0;
+            int timeOff = 0;
+            for (ClockHistoric clockHistoric : clockHistorics) {
+                if ((Instant.ofEpochMilli(clockHistoric.getStartDate().getTime())
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate()).isAfter(d)) { //verify that we're just getting historic from the last month to today
+                    //calculate time on and time off
+                    if (clockHistoric.getState().equals(StateEnum.ON)) {
+                        timeOn = timeOn + (int) (clockHistoric.getEndingDate().getTime() / 100000 - clockHistoric.getStartDate().getTime() / 100000);
+                    } else if (clockHistoric.getState().equals(StateEnum.OFF)) {
+                        timeOff = timeOff + (int) (clockHistoric.getEndingDate().getTime() / 100000 - clockHistoric.getStartDate().getTime() / 100000);
+                    }
+                }
+            }
+            //calcultate time global when the heater was on last month (in percent)
+            int totalTime = timeOn + timeOff;
+            percentageOnLastMonth = ((float) timeOn / (float) totalTime) * 100;
+        }
+        return percentageOnLastMonth;
+    }
 }

@@ -18,10 +18,12 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
-public class HeaterManagerImpl implements HeaterManager{
+public class HeaterManagerImpl implements HeaterManager {
 
     private static final Logger LOG = LoggerFactory.getLogger(HeaterManagerImpl.class);
 
@@ -63,26 +65,13 @@ public class HeaterManagerImpl implements HeaterManager{
         HeaterDTO heaterDTO = orikaBeanMapper.map(heater, HeaterDTO.class);
         List<HeaterHistoric> heaterHistorics = heaterHistoricDAO.findAllByHeaterId(Long.parseLong(id));
         List<HeaterHistoricDTO> heaterHistoricDTOS = new ArrayList<>();
-        LocalDate d = LocalDate.now().minusMonths(1); //Pick date one month ago
         String percentageLastMonth = null;
         boolean usedlastmonth = true;
         if (heaterHistorics != null && !heaterHistorics.isEmpty()) { //verify that historic for the iot exist
-            int timeOn = 0;
-            int timeOff = 0;
             for (HeaterHistoric heaterHistoric : heaterHistorics) {
-                if ((Instant.ofEpochMilli(heaterHistoric.getStartdate().getTime())
-                        .atZone(ZoneId.systemDefault())
-                        .toLocalDate()).isAfter(d)) { //verify that we're just getting historic from the last month to today
-                    //calculate time on and time off
-                    if (heaterHistoric.getState().equals(StateEnum.ON)) {
-                        timeOn = timeOn + (int) (heaterHistoric.getEndingdate().getTime()/100000 - heaterHistoric.getStartdate().getTime()/100000);
-                    } else if (heaterHistoric.getState().equals(StateEnum.OFF)) {
-                        timeOff = timeOff + (int) (heaterHistoric.getEndingdate().getTime()/100000 - heaterHistoric.getStartdate().getTime()/100000);
-                    }
-                }
                 boolean temperaturetohot = false;
                 // TODO do try catch if convert don't work correctly
-                if(Integer.parseInt(heaterHistoric.getTemperature())>30){
+                if (Integer.parseInt(heaterHistoric.getTemperature()) > 30) {
                     temperaturetohot = true;
                 }
                 //Create the object to return in the ui
@@ -96,9 +85,8 @@ public class HeaterManagerImpl implements HeaterManager{
                 heaterHistoricDTOS.add(heaterHistoricDTO);
             }
             //calcultate time global when the heater was on last month (in percent)
-            int totalTime = timeOn + timeOff;
-            float percentageOnLastMonth = ((float)timeOn / (float)totalTime)*100;
-            if(percentageOnLastMonth<20 || percentageOnLastMonth>80){
+            float percentageOnLastMonth = calculateTimeOnLastMonth(heaterHistorics);
+            if (percentageOnLastMonth < 20 || percentageOnLastMonth > 80) {
                 usedlastmonth = false;
             } else {
                 usedlastmonth = true;
@@ -118,21 +106,52 @@ public class HeaterManagerImpl implements HeaterManager{
     public List<Heater> findAllHeaterMalFunctionning() {
         List<Heater> heaters = heaterDAO.findAll();
         List<HeaterHistoric> heaterHistorics = heaterHistoricDAO.findAll();
-        List<Heater> heaterToReturn = new ArrayList<>();
-        for(Heater heater: heaters){
-            List<HeaterHistoric> historicToVerify= new ArrayList<>();
-            for(HeaterHistoric heaterHistoric: heaterHistorics){
-                if(heaterHistoric.getHeaterId().equals(heater.getId())){
+        Set<Heater> distinctHeaterToReturn = new HashSet<>();
+        for (Heater heater : heaters) {
+            List<HeaterHistoric> historicToVerify = new ArrayList<>();
+            for (HeaterHistoric heaterHistoric : heaterHistorics) {
+                if (heaterHistoric.getHeaterId().equals(heater.getId())) {
                     historicToVerify.add(heaterHistoric);
                 }
             }
-            for(HeaterHistoric heaterHistoric: historicToVerify){
-                if(heaterHistoric.getBreakdownstatus().equals(StatusEnum.BREAKDOWN) ||
-                        Integer.parseInt(heaterHistoric.getTemperature())>30){
-                    heaterToReturn.add(heater);
+            for (HeaterHistoric heaterHistoric : historicToVerify) {
+                if (heaterHistoric.getBreakdownstatus().equals(StatusEnum.BREAKDOWN) ||
+                        Integer.parseInt(heaterHistoric.getTemperature()) > 30) {
+                    distinctHeaterToReturn.add(heater);
                 }
             }
+            float timeOnLastMonth = calculateTimeOnLastMonth(historicToVerify);
+            if((timeOnLastMonth<20 || timeOnLastMonth>80) && timeOnLastMonth>0){
+                distinctHeaterToReturn.add(heater);
+            }
         }
+        List<Heater> heaterToReturn =new ArrayList<>();
+        heaterToReturn.addAll(distinctHeaterToReturn);
         return heaterToReturn;
+    }
+
+    private float calculateTimeOnLastMonth(List<HeaterHistoric> heaterHistorics) {
+        LocalDate d = LocalDate.now().minusMonths(1); //Pick date one month ago
+        float percentageOnLastMonth = 0;
+        if (heaterHistorics != null && !heaterHistorics.isEmpty()) { //verify that historic for the iot exist
+            int timeOn = 0;
+            int timeOff = 0;
+            for (HeaterHistoric heaterHistoric : heaterHistorics) {
+                if ((Instant.ofEpochMilli(heaterHistoric.getStartdate().getTime())
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate()).isAfter(d)) { //verify that we're just getting historic from the last month to today
+                    //calculate time on and time off
+                    if (heaterHistoric.getState().equals(StateEnum.ON)) {
+                        timeOn = timeOn + (int) (heaterHistoric.getEndingdate().getTime() / 100000 - heaterHistoric.getStartdate().getTime() / 100000);
+                    } else if (heaterHistoric.getState().equals(StateEnum.OFF)) {
+                        timeOff = timeOff + (int) (heaterHistoric.getEndingdate().getTime() / 100000 - heaterHistoric.getStartdate().getTime() / 100000);
+                    }
+                }
+            }
+            //calcultate time global when the heater was on last month (in percent)
+            int totalTime = timeOn + timeOff;
+            percentageOnLastMonth = ((float) timeOn / (float) totalTime) * 100;
+        }
+        return percentageOnLastMonth;
     }
 }

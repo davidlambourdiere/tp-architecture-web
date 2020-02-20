@@ -1,9 +1,12 @@
 package com.lifetech.application.dto;
 
+import java.util.List;
+
 public class ShutterDetailDTO extends PersistableElementDTO{
     private ShutterDTO shutter;
     private String percentageOnLastMonth;
     private String percentage;
+    private List<ShutterHistoricDTO> shutterHistorics;
 
     public ShutterDetailDTO() {
     }
@@ -30,5 +33,13 @@ public class ShutterDetailDTO extends PersistableElementDTO{
 
     public void setPercentage(String percentage) {
         this.percentage = percentage;
+    }
+
+    public List<ShutterHistoricDTO> getShutterHistorics() {
+        return shutterHistorics;
+    }
+
+    public void setShutterHistorics(List<ShutterHistoricDTO> shutterHistorics) {
+        this.shutterHistorics = shutterHistorics;
     }
 }

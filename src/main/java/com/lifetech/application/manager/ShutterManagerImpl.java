@@ -2,11 +2,13 @@ package com.lifetech.application.manager;
 
 import com.lifetech.application.dto.ShutterDTO;
 import com.lifetech.application.dto.ShutterDetailDTO;
+import com.lifetech.application.dto.ShutterHistoricDTO;
 import com.lifetech.domain.OrikaBeanMapper;
 import com.lifetech.domain.dao.ShutterDAO;
 import com.lifetech.domain.dao.ShutterHistoricDAO;
 import com.lifetech.domain.model.Shutter;
 import com.lifetech.domain.model.ShutterHistoric;
+import com.lifetech.domain.model.StateEnum;
 import com.lifetech.domain.model.StatusEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +18,9 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ShutterManagerImpl implements ShutterManager {
@@ -44,27 +48,22 @@ public class ShutterManagerImpl implements ShutterManager {
         Shutter shutter = shutterDAO.findById(Long.parseLong(id)).orElse(null);
         ShutterDTO shutterDTO = orikaBeanMapper.map(shutter, ShutterDTO.class);
         List<ShutterHistoric> shutterHistorics = shutterHistoricDAO.findAllByShutterId(Long.parseLong(id));
-        LocalDate d = LocalDate.now().minusMonths(1);
+        List<ShutterHistoricDTO> shutterHistoricDTOS = new ArrayList<>();
         String percentageLastMonth = null;
         if (shutterHistorics != null && !shutterHistorics.isEmpty()) {
-            int timeOn = 0;
-            int timeOff = 0;
             for (ShutterHistoric shutterHistoric : shutterHistorics) {
-                if ((Instant.ofEpochMilli(shutterHistoric.getStartDate().getTime())
-                        .atZone(ZoneId.systemDefault())
-                        .toLocalDate()).isAfter(d)) {
-                    if (shutterHistoric.getState().equals("on")) {
-                        timeOn = timeOn + (int) (shutterHistoric.getEndingDate().getTime()/100000 - shutterHistoric.getStartDate().getTime()/100000);
-                    } else if (shutterHistoric.getState().equals("off")) {
-                        timeOff = timeOff + (int) (shutterHistoric.getEndingDate().getTime()/100000 - shutterHistoric.getStartDate().getTime()/100000);
-                    }
-                }
+                ShutterHistoricDTO shutterHistoricDTO = new ShutterHistoricDTO();
+                shutterHistoricDTO.setEndingdate(shutterHistoric.getEndingDate().toString());
+                shutterHistoricDTO.setStartdate(shutterHistoric.getStartDate().toString());
+                shutterHistoricDTO.setState(shutterHistoric.getState().toString());
+                shutterHistoricDTO.setBreakdownstatus(shutterHistoric.getBreakdownstatus().toString());
+                shutterHistoricDTOS.add(shutterHistoricDTO);
             }
-            int totalTime = timeOn + timeOff;
-            float percentageOnLastMonth = ((float)timeOn / (float)totalTime)*100;
+            float percentageOnLastMonth = calculateTimeOnLastMonth(shutterHistorics);
             percentageLastMonth = String.valueOf(percentageOnLastMonth);
         }
         ShutterDetailDTO shutterDetailDTO = new ShutterDetailDTO();
+        shutterDetailDTO.setShutterHistorics(shutterHistoricDTOS);
         shutterDetailDTO.setPercentageOnLastMonth(percentageLastMonth);
         shutterDetailDTO.setShutter(shutterDTO);
         return shutterDetailDTO;
@@ -74,7 +73,7 @@ public class ShutterManagerImpl implements ShutterManager {
     public List<Shutter> findAllShutterMalFunctionning() {
         List<Shutter> shutters = shutterDAO.findAll();
         List<ShutterHistoric> shutterHistorics = shutterHistoricDAO.findAll();
-        List<Shutter> shuttersToReturn = new ArrayList<>();
+        Set<Shutter> distinctShuttersToReturn = new HashSet<>();
         for(Shutter shutter: shutters){
             List<ShutterHistoric> historicToVerify= new ArrayList<>();
             for(ShutterHistoric shutterHistoric: shutterHistorics){
@@ -84,10 +83,41 @@ public class ShutterManagerImpl implements ShutterManager {
             }
             for(ShutterHistoric shutterHistoric: historicToVerify){
                 if(shutterHistoric.getBreakdownstatus().equals(StatusEnum.BREAKDOWN)){
-                    shuttersToReturn.add(shutter);
+                    distinctShuttersToReturn.add(shutter);
                 }
             }
+            float timeOnLastMonth = calculateTimeOnLastMonth(historicToVerify);
+            if((timeOnLastMonth<20 || timeOnLastMonth>80) && timeOnLastMonth>0){
+                distinctShuttersToReturn.add(shutter);
+            }
         }
+        List<Shutter> shuttersToReturn = new ArrayList<>();
+        shuttersToReturn.addAll(distinctShuttersToReturn);
         return shuttersToReturn;
+    }
+
+    private float calculateTimeOnLastMonth(List<ShutterHistoric> shutterHistorics) {
+        LocalDate d = LocalDate.now().minusMonths(1); //Pick date one month ago
+        float percentageOnLastMonth = 0;
+        if (shutterHistorics != null && !shutterHistorics.isEmpty()) { //verify that historic for the iot exist
+            int timeOn = 0;
+            int timeOff = 0;
+            for (ShutterHistoric shutterHistoric : shutterHistorics) {
+                if ((Instant.ofEpochMilli(shutterHistoric.getStartDate().getTime())
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate()).isAfter(d)) { //verify that we're just getting historic from the last month to today
+                    //calculate time on and time off
+                    if (shutterHistoric.getState().equals(StateEnum.ON)) {
+                        timeOn = timeOn + (int) (shutterHistoric.getEndingDate().getTime() / 100000 - shutterHistoric.getStartDate().getTime() / 100000);
+                    } else if (shutterHistoric.getState().equals(StateEnum.OFF)) {
+                        timeOff = timeOff + (int) (shutterHistoric.getEndingDate().getTime() / 100000 - shutterHistoric.getStartDate().getTime() / 100000);
+                    }
+                }
+            }
+            //calcultate time global when the heater was on last month (in percent)
+            int totalTime = timeOn + timeOff;
+            percentageOnLastMonth = ((float) timeOn / (float) totalTime) * 100;
+        }
+        return percentageOnLastMonth;
     }
 }
