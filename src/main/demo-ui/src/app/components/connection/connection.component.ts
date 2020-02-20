@@ -25,9 +25,21 @@ export class ConnectionComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.personService.verifyConnection(this.person).subscribe(data => {
         if (data != null) {
+
           this.person = data;
+         console.log(JSON.stringify(this.person.profileType));
           this.authService.setSession(data);
-          this.router.navigate(['/home']);
+          if (this.person.profileType == "confort")
+            this.router.navigate(['/confort']);
+          if (this.person.profileType == "essential") {
+            this.router.navigate(['/essential']);
+          }
+          if (this.person.profileType == "serenity")
+            this.router.navigate(['/serenity']);
+          if (this.person.profileType == "totalconfort")
+            this.router.navigate(['/total-confort']);
+          if (this.person.profileType == null)
+            this.router.navigate(['/home']);
         } else {
           this.isConnectionGood = false;
         }
