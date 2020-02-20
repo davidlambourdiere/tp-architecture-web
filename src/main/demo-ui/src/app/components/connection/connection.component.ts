@@ -27,6 +27,7 @@ export class ConnectionComponent implements OnInit {
         if (data != null) {
           this.person = data;
           this.authService.setSession(data);
+          localStorage.setItem('user', JSON.stringify(this.person));
           this.router.navigate(['/home']);
         } else {
           this.isConnectionGood = false;
