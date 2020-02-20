@@ -4,7 +4,6 @@ import {Observable} from 'rxjs';
 import {SubscriptionDTO} from '../dto/SubscriptionDTO';
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -20,5 +19,7 @@ export class SubscriptionService{
     return this.http.post<SubscriptionDTO>(`api/subscription/findById`, idSubscription);
   }
 
-
+  findSubscriptionByProfile(name: string): Observable<any> {
+    return this.http.get<SubscriptionDTO>(`api/subscription/findSubscriptionByProfile/${name}`);
+  }
 }
