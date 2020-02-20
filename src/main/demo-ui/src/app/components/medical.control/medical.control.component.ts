@@ -3,7 +3,9 @@ import {PersonDTO} from "../../dto/PersonDTO";
 import {PersonService} from "../../service/PersonService";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../service/AuthService";
+import {MedicalHomeComponent} from "./medical.home/medical.home.component";
 declare  var jQuery:  any;
+
 @Component({
   selector: 'medicalControl',
   templateUrl: './medical.control.component.html',

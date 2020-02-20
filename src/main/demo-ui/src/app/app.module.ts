@@ -28,6 +28,7 @@ import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.
 import { SubscriptionComponent } from './components/subscription/subscription.component';
 import {BillingComponent} from "./components/billing/billing.component";
 import {SurveyComponent} from "./components/survey/survey.component";
+import {MedicalHomeComponent} from './components/medical.control/medical.home/medical.home.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {SurveyComponent} from "./components/survey/survey.component";
     SubscriptionComponent,
     LogementComponent,
     ObjectListComponent,
-    SurveyComponent
+    SurveyComponent,
+    MedicalHomeComponent
   ],
   imports: [
     // NgbModule,
