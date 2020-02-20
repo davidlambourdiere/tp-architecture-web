@@ -5,4 +5,5 @@ export class PersonDTO{
   password: string;
   userevaluation: string;
   userrole: string;
+  profileType: string ;
 }
