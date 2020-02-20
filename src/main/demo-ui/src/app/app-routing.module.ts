@@ -17,6 +17,10 @@ import {NotificationComponent} from "./components/notification/notification.comp
 import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
 import {SubscriptionComponent} from "./components/subscription/subscription.component";
 import {SurveyComponent} from "./components/survey/survey.component";
+import {ConfortComponent} from "./components/subscription/confort/confort.component";
+import {EssentialComponent} from "./components/subscription/essential/essential.component";
+import {SerenityComponent} from "./components/subscription/serenity/serenity.component";
+import {TotalconfortComponent} from "./components/subscription/totalconfort/totalconfort.component";
 
 
 const routes: Routes = [
@@ -27,6 +31,26 @@ const routes: Routes = [
   {
     path:'home',
     component: HomeComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path:'confort',
+    component: ConfortComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path:'essential',
+    component: EssentialComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path:'serenity',
+    component: SerenityComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path:'total-confort',
+    component: TotalconfortComponent,
     canActivate: [AuthGuardService]
   },
   {
