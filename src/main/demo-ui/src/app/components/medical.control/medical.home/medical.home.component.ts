@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {PersonService} from "../../../service/PersonService";
+import {ActivatedRoute, Router} from "@angular/router";
+import {AuthService} from "../../../service/AuthService";
 
 @Component({
   selector: 'app-medicalhome',
@@ -7,7 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MedicalHomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private personService: PersonService, private router: Router, private route: ActivatedRoute, private authService: AuthService) {
+  }
 
   ngOnInit() {
   }
