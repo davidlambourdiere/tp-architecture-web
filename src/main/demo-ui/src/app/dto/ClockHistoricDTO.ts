@@ -1,4 +1,4 @@
-export class ClockHistoricDTO{
+export class ClockHistoricDTO {
   startdate: string;
   endingdate: string;
   state: string;

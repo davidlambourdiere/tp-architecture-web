@@ -55,14 +55,11 @@ public class ClockManagerImpl implements ClockManager {
     public ClockDetailDTO findByHistoric(String id) {
         Clock clock = clockDAO.findById(Long.parseLong(id)).orElse(null);
         ClockDTO clockDTO = orikaBeanMapper.map(clock, ClockDTO.class);
-        List<ClockHistoric> clockHistorics = clockHistoricDAO.findAllByClockId(Long.parseLong(id));
+        List<ClockHistoric> clockHistorics = clockHistoricDAO.findAllByClockid(Long.parseLong(id));
         List<ClockHistoricDTO> clockHistoricDTOS = new ArrayList<>();
-
-
+        boolean usedlastmonth = true;
         String percentageLastMonth = null;
         if (clockHistorics != null && !clockHistorics.isEmpty()) {
-            int timeOn = 0;
-            int timeOff = 0;
             for (ClockHistoric clockHistoric : clockHistorics) {
                 ClockHistoricDTO clockHistoricDTO = new ClockHistoricDTO();
                 clockHistoricDTO.setEndingdate(clockHistoric.getEndingDate().toString());
@@ -71,12 +68,18 @@ public class ClockManagerImpl implements ClockManager {
                 clockHistoricDTO.setBreakdownstatus(clockHistoric.getBreakdownstatus().toString());
                 clockHistoricDTOS.add(clockHistoricDTO);
             }
-            int totalTime = timeOn + timeOff;
             float percentageOnLastMonth = (calculateTimeOnLastMonth(clockHistorics));
+            if((percentageOnLastMonth<20 || percentageOnLastMonth>95) && percentageOnLastMonth>0){
+                //TODO
+                usedlastmonth = false;
+            } else {
+                usedlastmonth = true;
+            }
             percentageLastMonth = String.valueOf(percentageOnLastMonth);
         }
         ClockDetailDTO clockDetailDTO = new ClockDetailDTO();
         clockDetailDTO.setClockhistorics(clockHistoricDTOS);
+        clockDetailDTO.setUsedlastmonth(usedlastmonth);
         clockDetailDTO.setPercentageOnLastMonth(percentageLastMonth);
         clockDetailDTO.setClock(clockDTO);
         return clockDetailDTO;
@@ -90,7 +93,7 @@ public class ClockManagerImpl implements ClockManager {
         for(Clock clock: clocks){
             List<ClockHistoric> historicToVerify= new ArrayList<>();
             for(ClockHistoric clockHistoric: clockHistorics){
-                if(clockHistoric.getClockId().equals(clock.getId())){
+                if(clockHistoric.getClockid().equals(clock.getId())){
                     historicToVerify.add(clockHistoric);
                 }
             }
@@ -101,7 +104,7 @@ public class ClockManagerImpl implements ClockManager {
                 }
             }
             float timeOnLastMonth = calculateTimeOnLastMonth(historicToVerify);
-            if((timeOnLastMonth<20 || timeOnLastMonth>80) && timeOnLastMonth>0){
+            if((timeOnLastMonth<20 || timeOnLastMonth>95) && timeOnLastMonth>0){
                 distinctClockToReturn.add(clock);
             }
         }
@@ -121,7 +124,7 @@ public class ClockManagerImpl implements ClockManager {
                         .atZone(ZoneId.systemDefault())
                         .toLocalDate()).isAfter(d)) { //verify that we're just getting historic from the last month to today
                     //calculate time on and time off
-                    if (clockHistoric.getState().equals(StateEnum.ON)) {
+                    if (clockHistoric.getState().equals(StateEnum.ON) || clockHistoric.getState().equals(StateEnum.STANDBY)) {
                         timeOn = timeOn + (int) (clockHistoric.getEndingDate().getTime() / 100000 - clockHistoric.getStartDate().getTime() / 100000);
                     } else if (clockHistoric.getState().equals(StateEnum.OFF)) {
                         timeOff = timeOff + (int) (clockHistoric.getEndingDate().getTime() / 100000 - clockHistoric.getStartDate().getTime() / 100000);

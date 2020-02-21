@@ -6,6 +6,7 @@ public class StrapDetailDTO extends PersistableElementDTO {
     private StrapDTO strap;
     private String percentageOnLastMonth;
     private List<StrapHistoricDTO> straphistorics;
+    private boolean usedlastmonth;
 
     public StrapDetailDTO() {
     }
@@ -32,5 +33,13 @@ public class StrapDetailDTO extends PersistableElementDTO {
 
     public void setStraphistorics(List<StrapHistoricDTO> straphistorics) {
         this.straphistorics = straphistorics;
+    }
+
+    public boolean isUsedlastmonth() {
+        return usedlastmonth;
+    }
+
+    public void setUsedlastmonth(boolean usedlastmonth) {
+        this.usedlastmonth = usedlastmonth;
     }
 }

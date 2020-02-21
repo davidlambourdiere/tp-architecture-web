@@ -20,8 +20,8 @@ public class ShutterHistoric extends PersistableElement {
     @Enumerated(EnumType.STRING)
     private StatusEnum breakdownstatus;
 
-    @Column(name = "shutterId")
-    private Long shutterId;
+    @Column(name = "shutterid")
+    private Long shutterid;
 
     @Column(name = "percentage")
     private String percentage;
@@ -53,12 +53,12 @@ public class ShutterHistoric extends PersistableElement {
         this.state = state;
     }
 
-    public Long getShutterId() {
-        return shutterId;
+    public Long getShutterid() {
+        return shutterid;
     }
 
-    public void setShutterId(Long shutterId) {
-        this.shutterId = shutterId;
+    public void setShutterid(Long shutterid) {
+        this.shutterid = shutterid;
     }
 
     public String getPercentage() {

@@ -4,6 +4,7 @@ import {StrapHistoricDTO} from "./StrapHistoricDTO";
 
 export class StrapDetailDTO{
   strap: StrapDTO;
-  percentageOnLastMonth: string;
   straphistorics: StrapHistoricDTO[];
+  percentageOnLastMonth: string;
+  usedlastmonth: boolean;
 }

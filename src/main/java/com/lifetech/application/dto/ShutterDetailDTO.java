@@ -6,7 +6,8 @@ public class ShutterDetailDTO extends PersistableElementDTO{
     private ShutterDTO shutter;
     private String percentageOnLastMonth;
     private String percentage;
-    private List<ShutterHistoricDTO> shutterHistorics;
+    private boolean usedlastmonth;
+    private List<ShutterHistoricDTO> shutterhistorics;
 
     public ShutterDetailDTO() {
     }
@@ -35,11 +36,19 @@ public class ShutterDetailDTO extends PersistableElementDTO{
         this.percentage = percentage;
     }
 
-    public List<ShutterHistoricDTO> getShutterHistorics() {
-        return shutterHistorics;
+    public List<ShutterHistoricDTO> getShutterhistorics() {
+        return shutterhistorics;
     }
 
-    public void setShutterHistorics(List<ShutterHistoricDTO> shutterHistorics) {
-        this.shutterHistorics = shutterHistorics;
+    public void setShutterhistorics(List<ShutterHistoricDTO> shutterhistorics) {
+        this.shutterhistorics = shutterhistorics;
+    }
+
+    public boolean isUsedlastmonth() {
+        return usedlastmonth;
+    }
+
+    public void setUsedlastmonth(boolean usedlastmonth) {
+        this.usedlastmonth = usedlastmonth;
     }
 }

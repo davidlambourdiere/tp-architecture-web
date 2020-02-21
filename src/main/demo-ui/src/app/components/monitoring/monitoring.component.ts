@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IOTService} from '../../service/IOTService';
 import {IOTDTO} from "../../dto/IOTDTO";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'monitoring',
@@ -14,12 +15,20 @@ export class MonitoringComponent implements OnInit {
   show: boolean = false;
   type: string = 'all';
   owner: string= '';
+  iotToReturn: string;
 
   constructor(private router: Router, private route: ActivatedRoute, private iotservice: IOTService) {
+    console.log('construct');
+    this.iotToReturn = 'alliot';
   }
 
   ngOnInit(): void {
-    this.findAllIOT();
+    console.log(this.iotToReturn);
+    if(this.iotToReturn==='alliot'){
+      this.findAllIOT();
+    } else if (this.iotToReturn==='iotmalfunctionning'){
+      this.findAllIOTWithMalfunctionning();
+    }
   }
 
   findAllIOT() {
@@ -36,24 +45,7 @@ export class MonitoringComponent implements OnInit {
       this.iotservice.findAllIOTWithMalfunctionning().subscribe(data => {
         this.iots = data;
         this.show = true;
-      })
-    })
-  }
-
-  findByType(){
-    this.route.params.subscribe(params => {
-      this.iotservice.findIOTByType(this.type).subscribe(data => {
-       this.iots = data;
-        this.show = true;
-      })
-    })
-  }
-
-  findIOTByPerson(){
-    this.route.params.subscribe(params => {
-      this.iotservice.findIOTByPerson('1').subscribe(data => {
-        this.iots = data;
-        this.show = true;
+        this.iotToReturn = 'iotmalfunctionning';
       })
     })
   }

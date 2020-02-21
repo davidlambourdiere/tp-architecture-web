@@ -67,6 +67,7 @@
           <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.state}}
             <span class="fa fa-check-circle" *ngIf="iot.state==='ON'"></span>
             <span class="fa fa-times-circle" *ngIf="iot.state==='OFF'"></span>
+            <span class="fa fa-hourglass-half" *ngIf="iot.state==='STANDBY'"></span>
           </td>
           <td [hidden]="owner!==iot.person.lastName && owner!==''" [routerLink]="['/detailiot', iot.id, 'Strap']">Voir le détail</td>
         </tr>
@@ -91,6 +92,7 @@
           <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.state}}
             <span class="fa fa-check-circle" *ngIf="iot.state==='ON'"></span>
             <span class="fa fa-times-circle" *ngIf="iot.state==='OFF'"></span>
+            <span class="fa fa-hourglass-half" *ngIf="iot.state==='STANDBY'"></span>
           </td>
           <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.room.num}}</td>
           <td [hidden]="owner!==iot.person.lastName && owner!==''" [routerLink]="['/detailiot', iot.id, 'Clock']">Voir le détail</td>
@@ -141,6 +143,7 @@
           <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.state}}
             <span class="fa fa-check-circle" *ngIf="iot.state==='ON'"></span>
             <span class="fa fa-times-circle" *ngIf="iot.state==='OFF'"></span>
+            <span class="fa fa-hourglass-half" *ngIf="iot.state==='STANDBY'"></span>
           </td>
           <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.room.num}}</td>
           <td [hidden]="owner!==iot.person.lastName && owner!==''" [routerLink]="['/detailiot', iot.id, 'Shutter']">Voir le détail</td>

@@ -76,7 +76,7 @@ public class LightManagerImpl implements LightManager {
                 lightHistoricDTOS.add(lightHistoricDTO);
             }
             float percentageOnLastMonth = calculateTimeOnLastMonth(lightHistorics);
-            if(percentageOnLastMonth<20){
+            if((percentageOnLastMonth<15 || percentageOnLastMonth>70) && percentageOnLastMonth>0){
                 usedlastmonth = false;
             } else {
                 usedlastmonth = true;
@@ -109,7 +109,7 @@ public class LightManagerImpl implements LightManager {
                 }
             }
             float timeOnLastMonth = calculateTimeOnLastMonth(historicToVerify);
-            if((timeOnLastMonth<20 || timeOnLastMonth>80) && timeOnLastMonth>0){
+            if((timeOnLastMonth<15 || timeOnLastMonth>70) && timeOnLastMonth>0){
                 distinctLightToReturn.add(light);
             }
         }

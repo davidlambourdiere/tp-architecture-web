@@ -43,8 +43,9 @@ public class StrapManagerImpl implements StrapManager {
     public StrapDetailDTO findByHistoric(String id) {
         Strap strap = strapDAO.findById(Long.parseLong(id)).orElse(null);
         StrapDTO strapDTO = orikaBeanMapper.map(strap, StrapDTO.class);
-        List<StrapHistoric> strapHistorics = strapHistoricDAO.findAllByStrapId(Long.parseLong(id));
+        List<StrapHistoric> strapHistorics = strapHistoricDAO.findAllByStrapid(Long.parseLong(id));
         List<StrapHistoricDTO> strapHistoricDTOS = new ArrayList<>();
+        boolean usedlastmonth = true;
         String percentageLastMonth = null;
         if (strapHistorics != null && !strapHistorics.isEmpty()) {
 
@@ -57,11 +58,18 @@ public class StrapManagerImpl implements StrapManager {
                 strapHistoricDTOS.add(strapHistoricDTO);
             }
             float percentageOnLastMonth = calculateTimeOnLastMonth(strapHistorics);
+            if (percentageOnLastMonth < 30 && percentageOnLastMonth > 0) {
+                //TODO
+                usedlastmonth = false;
+            } else {
+                usedlastmonth = true;
+            }
             percentageLastMonth = String.valueOf(percentageOnLastMonth);
         }
         StrapDetailDTO strapDetailDTO = new StrapDetailDTO();
         strapDetailDTO.setPercentageOnLastMonth(percentageLastMonth);
         strapDetailDTO.setStraphistorics(strapHistoricDTOS);
+        strapDetailDTO.setUsedlastmonth(usedlastmonth);
         strapDetailDTO.setStrap(strapDTO);
         return strapDetailDTO;
     }
@@ -74,7 +82,7 @@ public class StrapManagerImpl implements StrapManager {
         for (Strap strap : straps) {
             List<StrapHistoric> historicToVerify = new ArrayList<>();
             for (StrapHistoric strapHistoric : strapHistorics) {
-                if (strapHistoric.getStrapId().equals(strap.getId())) {
+                if (strapHistoric.getStrapid().equals(strap.getId())) {
                     historicToVerify.add(strapHistoric);
                 }
             }
@@ -84,7 +92,7 @@ public class StrapManagerImpl implements StrapManager {
                 }
             }
             float timeOnLastMonth = calculateTimeOnLastMonth(historicToVerify);
-            if ((timeOnLastMonth < 20 || timeOnLastMonth > 80) && timeOnLastMonth>0) {
+            if (timeOnLastMonth < 30 && timeOnLastMonth > 0) {
                 distinctStrapsToReturn.add(strap);
             }
         }
@@ -104,7 +112,7 @@ public class StrapManagerImpl implements StrapManager {
                         .atZone(ZoneId.systemDefault())
                         .toLocalDate()).isAfter(d)) { //verify that we're just getting historic from the last month to today
                     //calculate time on and time off
-                    if (strapHistoric.getState().equals(StateEnum.ON)) {
+                    if (strapHistoric.getState().equals(StateEnum.ON) || strapHistoric.getState().equals(StateEnum.STANDBY)) {
                         timeOn = timeOn + (int) (strapHistoric.getEndingDate().getTime() / 100000 - strapHistoric.getStartDate().getTime() / 100000);
                     } else if (strapHistoric.getState().equals(StateEnum.OFF)) {
                         timeOff = timeOff + (int) (strapHistoric.getEndingDate().getTime() / 100000 - strapHistoric.getStartDate().getTime() / 100000);

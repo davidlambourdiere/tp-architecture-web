@@ -47,9 +47,10 @@ public class ShutterManagerImpl implements ShutterManager {
     public ShutterDetailDTO findByHistoric(String id) {
         Shutter shutter = shutterDAO.findById(Long.parseLong(id)).orElse(null);
         ShutterDTO shutterDTO = orikaBeanMapper.map(shutter, ShutterDTO.class);
-        List<ShutterHistoric> shutterHistorics = shutterHistoricDAO.findAllByShutterId(Long.parseLong(id));
+        List<ShutterHistoric> shutterHistorics = shutterHistoricDAO.findAllByShutterid(Long.parseLong(id));
         List<ShutterHistoricDTO> shutterHistoricDTOS = new ArrayList<>();
         String percentageLastMonth = null;
+        boolean usedlastmonth = true;
         if (shutterHistorics != null && !shutterHistorics.isEmpty()) {
             for (ShutterHistoric shutterHistoric : shutterHistorics) {
                 ShutterHistoricDTO shutterHistoricDTO = new ShutterHistoricDTO();
@@ -60,10 +61,18 @@ public class ShutterManagerImpl implements ShutterManager {
                 shutterHistoricDTOS.add(shutterHistoricDTO);
             }
             float percentageOnLastMonth = calculateTimeOnLastMonth(shutterHistorics);
+            if((percentageOnLastMonth>80 || percentageOnLastMonth<0.5) && percentageOnLastMonth>0){
+                usedlastmonth = false;
+            } else {
+                usedlastmonth = true;
+            }
+
+
             percentageLastMonth = String.valueOf(percentageOnLastMonth);
         }
         ShutterDetailDTO shutterDetailDTO = new ShutterDetailDTO();
-        shutterDetailDTO.setShutterHistorics(shutterHistoricDTOS);
+        shutterDetailDTO.setShutterhistorics(shutterHistoricDTOS);
+        shutterDetailDTO.setUsedlastmonth(usedlastmonth);
         shutterDetailDTO.setPercentageOnLastMonth(percentageLastMonth);
         shutterDetailDTO.setShutter(shutterDTO);
         return shutterDetailDTO;
@@ -77,7 +86,7 @@ public class ShutterManagerImpl implements ShutterManager {
         for(Shutter shutter: shutters){
             List<ShutterHistoric> historicToVerify= new ArrayList<>();
             for(ShutterHistoric shutterHistoric: shutterHistorics){
-                if(shutterHistoric.getShutterId().equals(shutter.getId())){
+                if(shutterHistoric.getShutterid().equals(shutter.getId())){
                     historicToVerify.add(shutterHistoric);
                 }
             }
@@ -87,7 +96,7 @@ public class ShutterManagerImpl implements ShutterManager {
                 }
             }
             float timeOnLastMonth = calculateTimeOnLastMonth(historicToVerify);
-            if((timeOnLastMonth<20 || timeOnLastMonth>80) && timeOnLastMonth>0){
+            if((timeOnLastMonth<0.5 || timeOnLastMonth>80) && timeOnLastMonth>0){
                 distinctShuttersToReturn.add(shutter);
             }
         }
@@ -107,7 +116,7 @@ public class ShutterManagerImpl implements ShutterManager {
                         .atZone(ZoneId.systemDefault())
                         .toLocalDate()).isAfter(d)) { //verify that we're just getting historic from the last month to today
                     //calculate time on and time off
-                    if (shutterHistoric.getState().equals(StateEnum.ON)) {
+                    if ((shutterHistoric.getState().equals(StateEnum.ON)) ||shutterHistoric.getState().equals(StateEnum.STANDBY)) {
                         timeOn = timeOn + (int) (shutterHistoric.getEndingDate().getTime() / 100000 - shutterHistoric.getStartDate().getTime() / 100000);
                     } else if (shutterHistoric.getState().equals(StateEnum.OFF)) {
                         timeOff = timeOff + (int) (shutterHistoric.getEndingDate().getTime() / 100000 - shutterHistoric.getStartDate().getTime() / 100000);

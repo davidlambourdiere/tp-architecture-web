@@ -86,7 +86,7 @@ public class HeaterManagerImpl implements HeaterManager {
             }
             //calcultate time global when the heater was on last month (in percent)
             float percentageOnLastMonth = calculateTimeOnLastMonth(heaterHistorics);
-            if (percentageOnLastMonth < 20 || percentageOnLastMonth > 80) {
+            if ( percentageOnLastMonth > 75 && percentageOnLastMonth>0) {
                 usedlastmonth = false;
             } else {
                 usedlastmonth = true;
@@ -121,7 +121,7 @@ public class HeaterManagerImpl implements HeaterManager {
                 }
             }
             float timeOnLastMonth = calculateTimeOnLastMonth(historicToVerify);
-            if((timeOnLastMonth<20 || timeOnLastMonth>80) && timeOnLastMonth>0){
+            if( timeOnLastMonth>75 && timeOnLastMonth>0){
                 distinctHeaterToReturn.add(heater);
             }
         }

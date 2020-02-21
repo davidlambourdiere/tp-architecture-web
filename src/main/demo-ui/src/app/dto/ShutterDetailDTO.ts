@@ -5,5 +5,6 @@ export class ShutterDetailDTO{
   shutter: ShutterDTO;
   percentageOnLastMonth: string;
   percentage: string;
+  usedlastmonth: boolean;
   shutterhistorics: ShutterHistoricDTO[];
 }

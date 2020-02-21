@@ -21,14 +21,21 @@ export class DetailIotComponent implements OnInit {
   heaterWithDetail: HeaterDetailDTO;
   shutterWithDetail: ShutterDetailDTO;
   strapWithDetail: StrapDetailDTO;
+  warningOnly: boolean;
 
   constructor(private router: Router, private route: ActivatedRoute, private iotservice: IOTService) {
+    this.warningOnly = false;
   }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.state = this.route.snapshot.paramMap.get('state');
     this.findDetailAndHistoricForIOT();
+  }
+
+
+  displayOnlyWarningHistoric(): void {
+    this.warningOnly = !this.warningOnly;
   }
 
   findDetailAndHistoricForIOT(): void {
