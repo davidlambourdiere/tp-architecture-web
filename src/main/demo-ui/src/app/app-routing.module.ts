@@ -15,7 +15,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {AuthGuardService} from './guards/auth-guard.service';
 import {NotificationComponent} from "./components/notification/notification.component";
 import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
-import {SubscriptionComponent} from "./components/subscription/subscription.component";
+import {CustomComponent} from "./components/subscription/custom.component";
 import {SurveyComponent} from "./components/survey/survey.component";
 import {ConfortComponent} from "./components/subscription/confort/confort.component";
 import {EssentialComponent} from "./components/subscription/essential/essential.component";
@@ -104,8 +104,8 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
-    path: 'subscription',
-    component: SubscriptionComponent,
+    path: 'custom',
+    component: CustomComponent,
     canActivate: [AuthGuardService]
   },
   {
