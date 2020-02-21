@@ -35,8 +35,8 @@ public class SubscriptionManagerImp implements SubscriptionManager{
 
 
     @Override
-    public  SubscriptionDTO save(SubscriptionDTO updatedPerson) {
-        Subscription s = subscriptionDAO.save(orikaBeanMapper.map(updatedPerson, Subscription.class));
+    public  SubscriptionDTO save(SubscriptionDTO createSubscription) {
+        Subscription s = subscriptionDAO.save(orikaBeanMapper.map(createSubscription, Subscription.class));
         return orikaBeanMapper.map(s, SubscriptionDTO.class);
     }
 
