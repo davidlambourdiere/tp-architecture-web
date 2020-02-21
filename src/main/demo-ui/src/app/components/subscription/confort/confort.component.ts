@@ -21,6 +21,14 @@ export class ConfortComponent implements OnInit {
     this.showSubscriptionConfort();
   }
 
+  validate(){
+    this.router.navigate(["home"]);
+  }
+
+  redirectToCustomPage(){
+    this.router.navigate(["custom"]);
+  }
+
   showSubscriptionConfort() {
     this.route.params.subscribe(params => {
       this.subservice.findSubscriptionByProfile(this.name).subscribe(data => {
