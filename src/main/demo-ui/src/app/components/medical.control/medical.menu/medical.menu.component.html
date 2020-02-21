@@ -1,0 +1,30 @@
+<nav id="sidebar">
+  <div class="custom-menu">
+    <button type="button" id="sidebarCollapse" class="btn btn-primary">
+    </button>
+  </div>
+  <div class="img bg-wrap text-center py-4" style="background-color: #009688">
+    <div class="user-logo">
+      <div class="img" style="background-image: url(assets/img/logo-doc.jpg);"></div>
+      <h3>Welcome home {{person.firstName}} {{person.lastName}}!</h3>
+    </div>
+  </div>
+  <ul class="list-unstyled components mb-5">
+    <li class="active">
+      <a class="nav-link" [routerLink]="'/medicalControl'"><span class="fa fa-home mr-3"></span> Home</a>
+    </li>
+    <li>
+      <a class="nav-link" [routerLink]="'/activityAnalysis'"><span class="fa fa-download mr-3 notif"><small class="d-flex align-items-center justify-content-center">5</small></span> Aerts</a>
+    </li>
+    <li>
+      <a href="#"><span class="fa fa-gift mr-3"></span> Residents</a>
+    </li>
+    <li>
+      <a href="#"><span class="fa fa-trophy mr-3"></span> Doctors</a>
+    </li>
+    <li>
+      <a href="#"><span class="fa fa-cog mr-3"></span> Settings</a>
+    </li>
+  </ul>
+
+</nav>

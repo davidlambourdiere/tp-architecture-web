@@ -29,6 +29,7 @@ import { SubscriptionComponent } from './components/subscription/subscription.co
 import {BillingComponent} from "./components/billing/billing.component";
 import {SurveyComponent} from "./components/survey/survey.component";
 import {MedicalHomeComponent} from './components/medical.control/medical.home/medical.home.component';
+import { MedicalMenuComponent } from './components/medical.control/medical.menu/medical.menu.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {MedicalHomeComponent} from './components/medical.control/medical.home/me
     LogementComponent,
     ObjectListComponent,
     SurveyComponent,
-    MedicalHomeComponent
+    MedicalHomeComponent,
+    MedicalMenuComponent
   ],
   imports: [
     // NgbModule,
