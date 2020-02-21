@@ -13,7 +13,7 @@ class HeaterMessageManagerImplTest {
 
     @Test
     public void shouldReturnLastMessageFromDataBase(){
-        
+
         //HeaterMessageManagerImpl heaterMessageManager = new HeaterMessageManagerImpl(heaterdao,heatermessagedao,orikaBeanMapper);
 
         //HeaterMessageDTO output = heaterMessageManager.findFirstByOrderByInsertDateDesc();

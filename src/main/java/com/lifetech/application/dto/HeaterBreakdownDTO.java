@@ -15,6 +15,16 @@ public class HeaterBreakdownDTO extends PersistableElementDTO{
     public HeaterBreakdownDTO() {
     }
 
+    public HeaterBreakdownDTO(String numheaterbreakdown, String startdateheaterbreakdown, String enddateheaterbreakdown, String suspectheaterbreakdown, String stopheaterbreakdown, String messageheaterbreakdown, Heater iotheaterbreakdown) {
+        this.numheaterbreakdown = numheaterbreakdown;
+        this.startdateheaterbreakdown = startdateheaterbreakdown;
+        this.enddateheaterbreakdown = enddateheaterbreakdown;
+        this.suspectheaterbreakdown = suspectheaterbreakdown;
+        this.stopheaterbreakdown = stopheaterbreakdown;
+        this.messageheaterbreakdown = messageheaterbreakdown;
+        this.iotheaterbreakdown = iotheaterbreakdown;
+    }
+
     public String getNumheaterbreakdown() {
         return numheaterbreakdown;
     }

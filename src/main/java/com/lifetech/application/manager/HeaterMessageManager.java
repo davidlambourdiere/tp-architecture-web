@@ -8,6 +8,8 @@ import java.util.List;
 public interface HeaterMessageManager {
     List<HeaterMessageDTO> findHeaterMessageByHeater (String id);
 
-    HeaterMessageDTO findFirstByOrderByInsertDateDesc();
+    //HeaterMessageDTO findFirstByOrderByInsertDateDesc();
+
+    boolean breakdownDetection();
 
 }
