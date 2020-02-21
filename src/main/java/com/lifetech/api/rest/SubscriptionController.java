@@ -33,8 +33,8 @@ public class SubscriptionController extends RestBaseController {
     }
 
     @PostMapping("subscription/createSubscription")
-    private SubscriptionDTO createSubscription(@Valid @RequestBody SubscriptionDTO s) {
-        return subscriptionManager.save(s);
+    private SubscriptionDTO createSubscriptionByResident(@Valid @RequestBody SubscriptionDTO createSubscription) {
+        return subscriptionManager.save(createSubscription);
     }
 
 
