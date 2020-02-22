@@ -26,7 +26,4 @@ export class HeaterService {
     return this.http.get(`api/iots/findByPerson/${idperson}`);
   }
 
-  breakdownDetection(): Observable<any> {
-    return this.http.get(`api/heaters/breakdownDetection`);
-  }
 }

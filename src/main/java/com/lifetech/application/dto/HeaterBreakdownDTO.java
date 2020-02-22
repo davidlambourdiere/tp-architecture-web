@@ -25,6 +25,10 @@ public class HeaterBreakdownDTO extends PersistableElementDTO{
         this.iotheaterbreakdown = iotheaterbreakdown;
     }
 
+    public HeaterBreakdownDTO(String numheaterbreakdown, String dateAsString, String enddateheaterbreakdown, String yes, String no, String messageheaterbreakdown, HeaterDTO heater) {
+        super();
+    }
+
     public String getNumheaterbreakdown() {
         return numheaterbreakdown;
     }

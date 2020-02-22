@@ -6,10 +6,10 @@ import com.lifetech.application.dto.HeaterMessageDTO;
 import java.util.List;
 
 public interface HeaterMessageManager {
-    List<HeaterMessageDTO> findHeaterMessageByHeater (String id);
+    List<HeaterMessageDTO> findAllByHeater (String id);
 
     //HeaterMessageDTO findFirstByOrderByInsertDateDesc();
 
-    boolean breakdownDetection();
+    boolean breakdownDetection(String id);
 
 }

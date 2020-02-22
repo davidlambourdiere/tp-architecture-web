@@ -7,7 +7,10 @@ import {Observable, OperatorFunction, Subscription} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {RoomService} from '../../service/RoomService';
 import {RoomDTO} from '../../dto/RoomDTO';
-import {HeaterService} from "../../service/HeaterService";
+import {HeaterMessageService} from '../../service/HeaterMessageService';
+import {HeaterMessageDTO} from "../../dto/HeaterMessageDTO";
+
+
 
 
 
@@ -20,14 +23,15 @@ import {HeaterService} from "../../service/HeaterService";
 export class PanneComponent implements OnInit {
 
   // tslint:disable-next-line:max-line-length
-  constructor(private router: Router, private route: ActivatedRoute, private iotservice: IOTService, private clockService: ClockService, private roomService: RoomService, private heaterService: HeaterService ) {
+  constructor(private router: Router, private route: ActivatedRoute, private iotservice: IOTService, private clockService: ClockService, private roomService: RoomService, private heaterMessageService: HeaterMessageService) {
 
   }
   object: Observable<any>;
   rooms: Observable<any>;
-  heaterBreakdown: Observable<any>;
+  // tslint:disable-next-line:ban-types
+  heaterBreakdown: Object = new HeaterMessageDTO();
 
-  breakdowns = [3, 2, 0];
+  breakdowns = [3, 2, 1];
 
   ngOnInit() {
     this.rooms = this.roomService.findAllRoom();
@@ -39,8 +43,8 @@ export class PanneComponent implements OnInit {
   }
 
   breakdownHeaterDetection() {
-    this.heaterBreakdown = this.heaterService.breakdownDetection();
-    console.log(this.heaterBreakdown);
+    // tslint:disable-next-line:max-line-length
+    this.heaterMessageService.breakdownDetection('3').subscribe(data => {this.heaterBreakdown = data; console.log('le heater 3 est en panne', data); } );
   }
 
   // Define the number of object in breakdown in a housing
@@ -60,6 +64,7 @@ export class PanneComponent implements OnInit {
     ).subscribe(toto => {
       this.breakdowns[index] = toto;
       console.log(index, ' - ', toto); });
+    console.log(this.rooms);
   }
 
 
