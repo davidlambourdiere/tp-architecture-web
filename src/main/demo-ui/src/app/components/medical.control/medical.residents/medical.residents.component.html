@@ -68,25 +68,16 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td><button type="button" class="btn btn-danger"></button></td>
-                    <td>Jean</td>
-                    <td>Dupont</td>
-                    <td>20/02/1960</td>
-                    <td>HYPERTENSION CRISIS – HYPERGLYCEMIA CRISIS</td>
-                    <td><button type="button" class="btn btn-info">Details</button></td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
+                  <tr *ngFor="let person of this.personlist; index as i">
+                    <td>{{i+1}}</td>
                     <td><button type="button" class="btn btn-success"></button></td>
-                    <td>Jean</td>
-                    <td>Dulac</td>
-                    <td>30/12/1945</td>
-                    <td>HYPERTENSION CRISIS – HYPERGLYCEMIA CRISIS</td>
-                    <td><button type="button" class="btn btn-info">Details</button></td>
+                    <td>{{person.firstName}}</td>
+                    <td>{{person.lastName}}</td>
+                    <td>{{person.birthdate}}</td>
+                    <td>{{person.deseas}}</td>
+                    <td><button  class="btn btn-info" style="margin-left: 10px">Details</button>
+                    </td>
                   </tr>
-
                   </tbody>
                 </table>
               </div>
