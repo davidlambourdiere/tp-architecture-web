@@ -26,4 +26,8 @@ export class HeaterService {
     return this.http.get(`api/iots/findByPerson/${idperson}`);
   }
 
+  countHeaters() {
+    return this.http.get(`api/heater/countHeaters`);
+  }
+
 }

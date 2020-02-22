@@ -42,6 +42,11 @@ public class HeaterManagerImpl implements HeaterManager{
         return iotToReturn;
     }
 
+    public int countHeaters(){
+        List<Heater> heaters = heaterDAO.findAll();
+        return heaters.size();
+    }
+
 
     @Override
     public HeaterDTO findByRoom(String id) {

@@ -9,6 +9,7 @@ import {RoomService} from '../../service/RoomService';
 import {RoomDTO} from '../../dto/RoomDTO';
 import {HeaterMessageService} from '../../service/HeaterMessageService';
 import {HeaterMessageDTO} from "../../dto/HeaterMessageDTO";
+import {HeaterService} from "../../service/HeaterService";
 
 
 
@@ -23,7 +24,13 @@ import {HeaterMessageDTO} from "../../dto/HeaterMessageDTO";
 export class PanneComponent implements OnInit {
 
   // tslint:disable-next-line:max-line-length
-  constructor(private router: Router, private route: ActivatedRoute, private iotservice: IOTService, private clockService: ClockService, private roomService: RoomService, private heaterMessageService: HeaterMessageService) {
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private iotservice: IOTService,
+              private clockService: ClockService,
+              private heaterService: HeaterService,
+              private roomService: RoomService,
+              private heaterMessageService: HeaterMessageService) {
 
   }
   object: Observable<any>;
@@ -43,8 +50,11 @@ export class PanneComponent implements OnInit {
   }
 
   breakdownHeatersDetection() {
-    this.breakdownHeaterDetection('3');
-    this.breakdownHeaterDetection('2');
+    this.heaterService.countHeaters().subscribe( data => {
+      for (let i = 0; i < data; i++) {
+        this.breakdownHeaterDetection(i.toString());
+      }
+    });
   }
 
   private breakdownHeaterDetection(id: string) {

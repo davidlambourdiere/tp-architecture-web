@@ -11,5 +11,7 @@ public interface HeaterManager {
     HeaterDTO findByRoom(String id);
 
     HeaterDetailDTO findByHistoric(String id);
+
+    int countHeaters();
 }
 
