@@ -13,16 +13,14 @@
 <body onload="refreshTime()">
 
 <div >
-  "La Light que vous possédez est "  {{lights.percentage}}
-
+  La Light que vous  possédez aura une luminosité à  {{lights.percentage}} elle est  {{lights.status}}  et la lumière est de couleur {{lights.color}}
+<br>  Le Shutter que vous  possédez est ouvert à  {{shutters.percentage}}
 </div>
+<br><br><br><br>
 
 <div class="row">
   <div class="col-sm-8 col-sm-offset-2">
-
-
-
-
+<h1> LIGHT </h1>
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
 
       <div class="form-group">
@@ -50,18 +48,44 @@
         <label for="intensite">
           Intensite de l'appareil
         </label>
-        <select id="intensite" class="form-control" name="intensite" [ngModel]="defaultIntensite">
-          <option value="faible">Faible</option>
-          <option value="moyenne">Moyenne</option>
-          <option value="forte">Forte</option>
+        <select id="intensite" class="form-control" name="intensite"  required [(ngModel)]="lights.percentage">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30000">30000</option>
         </select>
       </div>
+
 
       <button class="btn btn-primary" type="submit">Enregistrer</button>
 
     </form>
   </div>
 </div>
+
+
+<br><br><br><br><br><br>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h1> SHUTTER </h1>
+    <form (ngSubmit)="onSubmitShutter(g)" #g="ngForm">
+
+      <div class="form-group">
+        <label for="percentage">
+          Pourcentage d'ouverture du SHUTTER
+        </label>
+        <select id="percentage" class="form-control" name="percentage"  required [(ngModel)]="shutters.percentage">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30000">30000</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" type="submit">Enregistrer le shutter</button>
+
+    </form>
+  </div>
+</div>
+<button (click)="runScenario()" class="btn scenario" type="submit">Aller se coucher </button>
 
 
 </body>

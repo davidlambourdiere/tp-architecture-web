@@ -1,5 +1,6 @@
 package com.lifetech.domain.dao;
 
+import com.lifetech.domain.model.Person;
 import com.lifetech.domain.model.Room;
 import com.lifetech.domain.model.Shutter;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,4 +11,10 @@ import java.util.List;
 @Repository
 public interface ShutterDAO extends JpaRepository<Shutter, Long> {
     List<Shutter> findByRoom(Room room);
+
+    List<Shutter> findAllByPersonId(Long id);
+
+    Long countByPerson(Person person);
+
+
 }
