@@ -42,10 +42,23 @@ export class PanneComponent implements OnInit {
     this.object = this.clockService.findIOTByRoom(String(room.num));
   }
 
-  breakdownHeaterDetection() {
-    // tslint:disable-next-line:max-line-length
-    this.heaterMessageService.breakdownDetection('3').subscribe(data => {this.heaterBreakdown = data; console.log('le heater 3 est en panne', data); } );
+  breakdownHeatersDetection() {
+    this.breakdownHeaterDetection('3');
+    this.breakdownHeaterDetection('2');
   }
+
+  private breakdownHeaterDetection(id: string) {
+    // tslint:disable-next-line:max-line-length
+    this.heaterMessageService.breakdownDetection(id).subscribe(data => {
+      this.heaterBreakdown = data;
+      if (data) {
+        const toto = 'le radiateur ' + id + ' est en panne';
+        alert(toto);
+      }
+      console.log('le radiateur', id , 'est en panne', data);
+    } );
+  }
+
 
   // Define the number of object in breakdown in a housing
   breakdownRooms() {
@@ -66,8 +79,6 @@ export class PanneComponent implements OnInit {
       console.log(index, ' - ', toto); });
     console.log(this.rooms);
   }
-
-
 
 
 
