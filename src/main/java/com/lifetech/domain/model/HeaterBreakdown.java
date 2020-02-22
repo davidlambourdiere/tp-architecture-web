@@ -1,5 +1,7 @@
 package com.lifetech.domain.model;
 
+import com.lifetech.application.dto.HeaterDTO;
+
 import javax.persistence.*;
 
 @Entity(name="heaterbreakdown")
@@ -43,6 +45,7 @@ public class HeaterBreakdown extends PersistableElement {
         this.messageheaterbreakdown = messageheaterbreakdown;
         this.iotheaterbreakdown = iotheaterbreakdown;
     }
+
 
     @Override
     public Long getId() {
