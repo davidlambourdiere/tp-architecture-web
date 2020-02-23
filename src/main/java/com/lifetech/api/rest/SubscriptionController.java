@@ -21,10 +21,7 @@ public class SubscriptionController extends RestBaseController {
         this.subscriptionResidentManager = subscriptionResidentManager;
     }
 
-    @GetMapping("subscription")
-    private List<SubscriptionDTO> findAllSubscription() {
-        return subscriptionManager.findAllSubscription();
-    }
+
 
     @GetMapping("subscription/findById/{id}")
     private ResponseEntity<SubscriptionDTO> getSubscriptionById(@PathVariable(value = "id") Long subscriptionId) {
@@ -34,12 +31,7 @@ public class SubscriptionController extends RestBaseController {
         return ResponseEntity.ok().body(sub);
     }
 
-    @PostMapping("subscription/createSubscription")
-    private SubscriptionDTO createSubscriptionByResident(@Valid @RequestBody SubscriptionDTO createSubscription) {
-        return subscriptionManager.save(createSubscription);
-    }
-
-
+    
     @GetMapping("subscription/findSubscriptionByProfile/{name}")
     private SubscriptionDTO findSubscriptionByProfile(@PathVariable(value = "name") String name) {
         return subscriptionManager.findSubscriptionByProfile(name);
