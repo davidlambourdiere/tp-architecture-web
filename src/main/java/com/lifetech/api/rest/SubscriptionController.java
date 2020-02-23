@@ -1,9 +1,9 @@
 package com.lifetech.api.rest;
 
 import com.lifetech.application.dto.SubscriptionDTO;
+import com.lifetech.application.dto.SubscriptionResidentDTO;
 import com.lifetech.application.manager.SubscriptionManager;
-import com.lifetech.infrastructure.exception.LifetechException;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.lifetech.application.manager.SubscriptionResidentManager;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +14,11 @@ import java.util.List;
 public class SubscriptionController extends RestBaseController {
 
     private final SubscriptionManager subscriptionManager;
+    private final SubscriptionResidentManager subscriptionResidentManager;
 
-    public SubscriptionController(SubscriptionManager subscriptionManager) {
+    public SubscriptionController(SubscriptionManager subscriptionManager, SubscriptionResidentManager subscriptionResidentManager) {
         this.subscriptionManager = subscriptionManager;
+        this.subscriptionResidentManager = subscriptionResidentManager;
     }
 
     @GetMapping("subscription")
@@ -44,5 +46,10 @@ public class SubscriptionController extends RestBaseController {
 
 
     }
+    @PostMapping("subscription/insertSubscriptionForResident")
+    private SubscriptionResidentDTO insertNewResidentInSubscription(@Valid @RequestBody SubscriptionDTO newSubscription) {
+        return subscriptionResidentManager.save(newSubscription);
 
+
+    }
 }
