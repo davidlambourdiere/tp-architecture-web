@@ -13,4 +13,6 @@ public interface PersonManager {
     PersonDTO findById(String id);
 
     int findNumberOfPersonByRole(PersonStatus personStatus);
+
+    List<PersonDTO> findPersonByRole(PersonStatus personStatus);
 }

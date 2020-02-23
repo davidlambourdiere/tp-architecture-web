@@ -35,4 +35,8 @@ public class PersonController extends RestBaseController{
         return personManager.findNumberOfPersonByRole(personStatus);
     }
 
+    @PostMapping("person/findPersonByRole")
+    private List<PersonDTO> findPersonByRole(@RequestBody PersonStatus personStatus){
+        return personManager.findPersonByRole(personStatus);
+    }
 }

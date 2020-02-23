@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PersonService} from "../../../service/PersonService";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AuthService} from "../../../service/AuthService";
 import {PersonDTO} from "../../../dto/PersonDTO";
-import {Observable} from "rxjs";
 import {PersonStatusDTO} from "../../../dto/PersonStatusDTO";
 import {AlertHealthService} from "../../../service/AlertHealthService";
 
@@ -30,14 +28,14 @@ export class MedicalResidentsComponent implements OnInit {
 
   reloadData() {
     // @ts-ignore
-    this.personlist = this.findAllPeron();
+    this.personlist = this.findAllResident();
     this.findNewAlertsNumber();
     this.findResidentNumber();
   }
 
-  private findAllPeron() {
+  private findAllResident() {
     this.route.params.subscribe(params =>{
-      this.personService.findAllPerson().subscribe(data=>{
+      this.personService.findPersonByRole(PersonStatusDTO.RESIDENT).subscribe(data=>{
         this.personlist = data;
       });
     });

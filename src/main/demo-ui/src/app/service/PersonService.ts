@@ -28,4 +28,8 @@ export class PersonService {
   findNumberOfPersonByRole( personStatus : PersonStatusDTO) : Observable<Number> {
     return this.http.post<Number>(`api/person/findNumberOfPersonByRole`, personStatus);
   }
+
+  findPersonByRole( personStatus : PersonStatusDTO){
+    return this.http.post<PersonDTO[]>(`api/person/findPersonByRole`, personStatus);
+  }
 }

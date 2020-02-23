@@ -44,4 +44,9 @@ public class PersonManagerImpl implements PersonManager {
     public int findNumberOfPersonByRole(PersonStatus personStatus) {
         return personDAO.countByUserrole(personStatus);
     }
+
+    @Override
+    public List<PersonDTO> findPersonByRole(PersonStatus personStatus) {
+        return orikaBeanMapper.mapAsList(personDAO.findByUserrole(personStatus), PersonDTO.class);
+    }
 }
