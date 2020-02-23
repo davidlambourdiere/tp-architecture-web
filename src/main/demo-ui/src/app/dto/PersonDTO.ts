@@ -1,3 +1,5 @@
+import {StrapDTO} from "./StrapDTO";
+
 export class PersonDTO{
   firstName: string;
   lastName: string;
@@ -12,4 +14,5 @@ export class PersonDTO{
   password: string;
   userevaluation: string;
   userrole: string;
+  strap : StrapDTO;
 }

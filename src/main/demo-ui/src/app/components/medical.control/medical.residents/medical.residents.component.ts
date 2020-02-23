@@ -57,4 +57,12 @@ export class MedicalResidentsComponent implements OnInit {
       });
     });
   }
+
+  private findAlertNumberByPerson(id: Number){
+    this.route.params.subscribe(params =>{
+      this.alertHealthService.findAlertNumberByPerson(id).subscribe(data=>{
+        return data;
+      });
+    });
+  }
 }

@@ -29,4 +29,8 @@ export class AlertHealthService {
   findAlertNumber() {
     return this.http.get<Number>(`api/alert/health/findAlertNumber`);
   }
+
+  findAlertNumberByPerson(id: Number) {
+    return this.http.get<Number>(`api/alert/health/findAlertNumberByPerson/${id}`);
+  }
 }
