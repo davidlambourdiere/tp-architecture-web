@@ -11,12 +11,38 @@
 </head>
 
 <body onload="refreshTime()">
+<br>
+<div class="noteAlt">
+<br>
+  La Light que vous  possédez a une luminosité à  {{lights.percentage}} elle est  {{lights.status}}  et la lumière est de couleur {{lights.color}}
+<br> Le Shutter que vous  possédez est ouvert à  {{shutters.percentage}}
+  <br> Votre reveil est actuellement réglé à Xh pour demain.
+  <br> Votre chauffage est actuellement à {{heaters.actualval}} degrés
 
-<div >
-  La Light que vous  possédez aura une luminosité à  {{lights.percentage}} elle est  {{lights.status}}  et la lumière est de couleur {{lights.color}}
-<br>  Le Shutter que vous  possédez est ouvert à  {{shutters.percentage}}
+
 </div>
 <br><br><br><br>
+
+
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h1> CLOCK </h1>
+    <form >
+
+      <div >
+
+        <label >
+          Choisir une heure à laquelle se reveiller le lendemain
+        </label>
+
+      </div>
+
+      <button class="btn btn-primary" type="submit">Enregistrer </button>
+
+    </form>
+  </div>
+</div>
+<br><br><br><br><br><br>
 
 <div class="row">
   <div class="col-sm-8 col-sm-offset-2">
@@ -66,6 +92,31 @@
 <br><br><br><br><br><br>
 <div class="row">
   <div class="col-sm-8 col-sm-offset-2">
+    <h1> HEATER </h1>
+    <form (ngSubmit)="onSubmitHeater(h)" #h="ngForm">
+
+      <div class="form-group">
+        <label for="actualval">
+          Degrés du Chauffage
+        </label>
+        <select id="actualval" class="form-control" name="actualval"  required [(ngModel)]="heaters.actualval">
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="23">23</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" type="submit">Enregistrer </button>
+
+    </form>
+  </div>
+</div>
+<br>
+
+
+<br><br><br><br><br><br>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
     <h1> SHUTTER </h1>
     <form (ngSubmit)="onSubmitShutter(g)" #g="ngForm">
 
@@ -85,7 +136,10 @@
     </form>
   </div>
 </div>
-<button (click)="runScenario()" class="btn scenario" type="submit">Aller se coucher </button>
+<br>
+<br>
+<br>
+<button (click)="runScenario()" class="btn btn-primary" type="submit">Aller se coucher </button>
 
 
 </body>

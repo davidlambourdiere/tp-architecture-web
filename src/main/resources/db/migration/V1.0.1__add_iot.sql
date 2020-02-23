@@ -38,6 +38,7 @@ suspect VARCHAR(255),
 price double,
 ipadress VARCHAR(255),
 minvalueref VARCHAR (255),
+actualval VARCHAR (255),
 maxvalueref VARCHAR(255),
 person_id  BIGINT UNSIGNED NOT NULL,
 CONSTRAINT FK_heater_person_id FOREIGN KEY (person_id) REFERENCES person(id)

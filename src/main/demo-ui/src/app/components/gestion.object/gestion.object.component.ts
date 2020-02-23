@@ -11,6 +11,7 @@ import {LightService} from "../../service/LightService";
 import {LightDTO} from "../../dto/LightDTO";
 import {ShutterDTO} from "../../dto/ShutterDTO";
 import {ShutterService} from "../../service/ShutterService";
+import {$} from "protractor";
 
 
 
@@ -18,29 +19,33 @@ import {ShutterService} from "../../service/ShutterService";
   selector: 'gestion-object',
   templateUrl: './gestion.object.component.html',
   styleUrls: ['./gestion.object.component.scss']
+
 })
 
 
 
 export class GestionObjectComponent implements OnInit {
-  heaters: HeaterDTO = new HeaterDTO();
+  heaters: HeaterDTO ;
   lights: LightDTO ;
   shutters: ShutterDTO ;
+
 
   defaultOnOff = 'éteint';
   defaultIntensite ='50';
   defaultCouleur ='bleu';
 
-  constructor(private personService: PersonService, private router: Router, private route: ActivatedRoute, private heaterService: HeaterService, private lightservice: LightService, private shutterservice : ShutterService) {
+  constructor(private personService: PersonService, private router: Router, private route: ActivatedRoute, private heaterservice: HeaterService, private lightservice: LightService, private shutterservice : ShutterService) {
   }
 
   ngOnInit(): void {
 
     this.lights = new LightDTO();
     this.shutters = new ShutterDTO();
+    this.heaters = new HeaterDTO();
 
     console.log(this.shutters);
     console.log(this.lights);
+    console.log(this.heaters);
 
     this.route.params.subscribe(params => {
       this.lightservice.findbyId(1).subscribe(data => {
@@ -49,10 +54,21 @@ export class GestionObjectComponent implements OnInit {
       console.log(this.lights.ipadress);
     })
 
+
+    this.route.params.subscribe(params => {
+      this.heaterservice.findbyId(1).subscribe(data => {
+        this.heaters = data, error => console.log(error);
+      })
+    })
+
+
+
     this.route.params.subscribe(params => {
       this.shutterservice.findbyId(1).subscribe(data => {
         this.shutters = data, error => console.log(error);
       })
+
+
       console.log("coucou");
       console.log(this.shutters.state);
     })
@@ -76,6 +92,17 @@ export class GestionObjectComponent implements OnInit {
 
 
   }
+
+  onSubmitHeater(h: NgForm) {
+    console.log(h.value);
+    this.route.params.subscribe(params => {
+      this.heaterservice.updateHeater(3, this.heaters).subscribe(data => console.log(data), error => console.log(error));
+    })
+    console.log("update"+this.heaters);
+
+
+  }
+
 
 
 
@@ -133,6 +160,9 @@ resultatShutter =0;
 
 
   }
+
+
+
 
 
 }
