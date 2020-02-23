@@ -8,7 +8,6 @@ import java.util.List;
 @Entity(name="strap")
 public class Strap extends IOT{
 
-
     @Column(name="minsysto")
     private String minsysto;
 
