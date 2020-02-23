@@ -11,4 +11,6 @@ public interface AlertHealthManager {
     List<AlertHealthDTO> findNewAlerts();
 
     int findAlertNumber();
+
+    int findAlertNumberByPerson(String id);
 }
