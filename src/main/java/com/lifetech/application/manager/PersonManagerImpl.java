@@ -4,6 +4,7 @@ import com.lifetech.application.dto.PersonDTO;
 import com.lifetech.domain.OrikaBeanMapper;
 import com.lifetech.domain.dao.PersonDAO;
 import com.lifetech.domain.model.Person;
+import com.lifetech.domain.model.PersonStatus;
 import com.lifetech.domain.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,10 @@ public class PersonManagerImpl implements PersonManager {
     @Override
     public PersonDTO findById(String id) {
         return orikaBeanMapper.map(personDAO.findById(Long.parseLong(id)).orElse(null), PersonDTO.class);
+    }
+
+    @Override
+    public int findResidentNumber() {
+        return personDAO.countByUserrole(PersonStatus.RESIDENT);
     }
 }

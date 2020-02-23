@@ -37,6 +37,7 @@ public class AlertHealthManagerImpl implements AlertHealthManager {
         return fillStrapAndDoctor(alertHealths);
     }
 
+
     //fill Straps and doctors by alerts
     private List<AlertHealthDTO> fillStrapAndDoctor(List<AlertHealth> alertHealths){
         List<AlertHealthDTO> alertHealthsDTO = orikaBeanMapper.mapAsList(alertHealths, AlertHealthDTO.class);

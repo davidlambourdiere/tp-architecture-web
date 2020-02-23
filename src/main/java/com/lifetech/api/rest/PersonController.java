@@ -29,4 +29,9 @@ public class PersonController extends RestBaseController{
         return personManager.verifyConnexion(connectedLogs);
     }
 
+    @GetMapping("person/findResidentNumber")
+    private int findResidentNumber(){
+        return personManager.findResidentNumber();
+    }
+
 }

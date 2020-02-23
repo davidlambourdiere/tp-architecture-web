@@ -8,5 +8,8 @@ public interface PersonManager {
     List<PersonDTO> findAll();
 
     PersonDTO verifyConnexion(PersonDTO connectedLogs);
+
     PersonDTO findById(String id);
+
+    int findResidentNumber();
 }
