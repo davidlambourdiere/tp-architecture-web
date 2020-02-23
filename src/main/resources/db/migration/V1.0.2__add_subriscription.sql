@@ -1,8 +1,8 @@
-create table subscription (
+create table subscription(
 id SERIAL PRIMARY KEY,
 optlock TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 name VARCHAR(255),
-price DOUBLE ,
+price DOUBLE,
 description VARCHAR(255),
 listofiot VARCHAR(255),
 listofservice VARCHAR(255)
@@ -20,23 +20,24 @@ CONSTRAINT fk_subscription_bill_id foreign key (subscriptionid) references subsc
 CONSTRAINT fk_subscription_person_id foreign key (personid) references person(id)
 );
 
-create table referencesIOT(
+create table referencesPrices(
 id SERIAL PRIMARY KEY,
 numSerie VARCHAR(255),
 type VARCHAR(255),
-brand VARCHAR(255),
+nameService VARCHAR (255),
+descriptionService VARCHAR(255),
 price DOUBLE
 );
 
-create table referencesServices(
+create table subscription_resident(
 id SERIAL PRIMARY KEY,
+optlock TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 name VARCHAR(255),
 description VARCHAR(255),
+listofiot VARCHAR(255),
+listofservice VARCHAR(255),
 price DOUBLE,
+id_person INTEGER ,
+CONSTRAINT FK_person_subscription_id FOREIGN KEY (id_person) REFERENCES person(id)
 );
-
-
-
-
-)
 
