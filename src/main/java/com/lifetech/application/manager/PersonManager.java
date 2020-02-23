@@ -1,6 +1,7 @@
 package com.lifetech.application.manager;
 
 import com.lifetech.application.dto.PersonDTO;
+import com.lifetech.domain.model.PersonStatus;
 
 import java.util.List;
 
@@ -11,5 +12,5 @@ public interface PersonManager {
 
     PersonDTO findById(String id);
 
-    int findResidentNumber();
+    int findNumberOfPersonByRole(PersonStatus personStatus);
 }

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ALertHealthDTO} from "../../../dto/AlertHealthDTO";
 import {AlertHealthService} from "../../../service/AlertHealthService";
 import {PersonService} from "../../../service/PersonService";
-import {ActivityAnalysisDTO} from "../../../dto/ActivityAnalysisDTO";
+import {PersonStatusDTO} from "../../../dto/PersonStatusDTO";
 
 
 @Component({
@@ -15,13 +15,21 @@ export class MedicalHomeComponent implements OnInit {
 
   alertHealthlList: ALertHealthDTO[]= [];
   residentNumber: Number;
+  doctorNumber: Number;
+  agentNumber: Number;
+
   constructor(private alertHealthService: AlertHealthService, private router: Router, private route: ActivatedRoute, private personService: PersonService) {
   this.alertHealthlList = [];
+  this.residentNumber =0;
+  this.doctorNumber=0;
+  this.agentNumber=0;
   }
 
   ngOnInit() {
     this.reloadData();
     this.findResidentNumber();
+    this.findDoctorNumber();
+    this.findAgentNumber();
   }
 
   reloadData() {
@@ -40,10 +48,24 @@ export class MedicalHomeComponent implements OnInit {
 
   private findResidentNumber() {
     this.route.params.subscribe(params =>{
-      this.personService.findResidentNumber().subscribe(data=>{
+      this.personService.findNumberOfPersonByRole(PersonStatusDTO.RESIDENT).subscribe(data=>{
         this.residentNumber = data;
       });
     });
   }
+  private findDoctorNumber() {
+    this.route.params.subscribe(params =>{
+      this.personService.findNumberOfPersonByRole(PersonStatusDTO.DOCTOR).subscribe(data=>{
+        this.doctorNumber = data;
+      });
+    });
+  }
 
+  private findAgentNumber() {
+    this.route.params.subscribe(params =>{
+      this.personService.findNumberOfPersonByRole(PersonStatusDTO.AGENT).subscribe(data=>{
+        this.agentNumber = data;
+      });
+    });
+  }
 }

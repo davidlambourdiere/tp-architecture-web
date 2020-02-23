@@ -6,7 +6,6 @@ import com.lifetech.domain.dao.PersonDAO;
 import com.lifetech.domain.model.Person;
 import com.lifetech.domain.model.PersonStatus;
 import com.lifetech.domain.service.PersonService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,7 +41,7 @@ public class PersonManagerImpl implements PersonManager {
     }
 
     @Override
-    public int findResidentNumber() {
-        return personDAO.countByUserrole(PersonStatus.RESIDENT);
+    public int findNumberOfPersonByRole(PersonStatus personStatus) {
+        return personDAO.countByUserrole(personStatus);
     }
 }

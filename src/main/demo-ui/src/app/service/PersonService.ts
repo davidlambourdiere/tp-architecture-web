@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {PersonDTO} from '../dto/PersonDTO';
+import {PersonStatusDTO} from '../dto/PersonStatusDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,7 @@ export class PersonService {
     return this.http.post<PersonDTO>(`api/person/verifyConnection`, person);
   }
 
-
-  findResidentNumber() {
-    return this.http.get<Number>(`api/person/findResidentNumber`);
+  findNumberOfPersonByRole( personStatus : PersonStatusDTO) : Observable<Number> {
+    return this.http.post<Number>(`api/person/findNumberOfPersonByRole`, personStatus);
   }
 }
