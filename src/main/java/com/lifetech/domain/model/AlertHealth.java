@@ -15,14 +15,22 @@ public class AlertHealth extends PersistableElement{
     @Column(name="criticity")
     private String criticity;
 
+    @Column(name="status")
+    private String status;
+
     @Column(name="strapid")
     private Long strap;
 
-    public AlertHealth(String message, Timestamp startdate, String criticity, Long strap) {
+    @Column(name="doctorid")
+    private Long doctor;
+
+    public AlertHealth(String message, Timestamp startdate, String criticity, String status, Long strap, Long doctor) {
         this.message = message;
         this.startdate = startdate;
         this.criticity = criticity;
+        this.status = status;
         this.strap = strap;
+        this.doctor = doctor;
     }
 
     public AlertHealth(){}
@@ -59,13 +67,19 @@ public class AlertHealth extends PersistableElement{
         this.strap = strap;
     }
 
-    @Override
-    public String toString() {
-        return "AlertHealth{" +
-                "message='" + message + '\'' +
-                ", startdate=" + startdate +
-                ", criticity='" + criticity + '\'' +
-                ", strap=" + strap +
-                '}';
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Long getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Long doctor) {
+        this.doctor = doctor;
     }
 }

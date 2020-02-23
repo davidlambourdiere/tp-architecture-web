@@ -34,4 +34,9 @@ public class PersonManagerImpl implements PersonManager {
         Person person = orikaBeanMapper.map(connectedLogs, Person.class);
         return orikaBeanMapper.map(personService.verifyConnection(people, person), PersonDTO.class);
     }
+
+    @Override
+    public PersonDTO findById(String id) {
+        return orikaBeanMapper.map(personDAO.findById(Long.parseLong(id)).orElse(null), PersonDTO.class);
+    }
 }

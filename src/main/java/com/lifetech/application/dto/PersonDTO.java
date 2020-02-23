@@ -123,4 +123,23 @@ public class PersonDTO extends PersistableElementDTO {
     public void setResidence(ResidenceDTO residence) {
         this.residence = residence;
     }
+
+    @Override
+    public String toString() {
+        return "PersonDTO{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", userevaluation='" + userevaluation + '\'' +
+                ", userrole='" + userrole + '\'' +
+                ", birthdate='" + birthdate + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", handicap='" + handicap + '\'' +
+                ", averageincome='" + averageincome + '\'' +
+                ", deseas='" + deseas + '\'' +
+                ", residence=" + residence +
+                '}';
+    }
 }

@@ -9,7 +9,11 @@ public class AlertHealthDTO {
 
     private String criticity;
 
+    private String status;
+
     private StrapDTO strap;
+
+    private PersonDTO doctor;
 
     public AlertHealthDTO() {
     }
@@ -38,6 +42,14 @@ public class AlertHealthDTO {
         this.criticity = criticity;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public StrapDTO getStrap() {
         return strap;
     }
@@ -46,13 +58,11 @@ public class AlertHealthDTO {
         this.strap = strap;
     }
 
-    @Override
-    public String toString() {
-        return "AlertHealthDTO{" +
-                "message='" + message + '\'' +
-                ", startdate=" + startdate +
-                ", criticity='" + criticity + '\'' +
-                ", strap=" + strap +
-                '}';
+    public PersonDTO getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(PersonDTO doctor) {
+        this.doctor = doctor;
     }
 }
