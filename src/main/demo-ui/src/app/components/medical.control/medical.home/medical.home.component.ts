@@ -21,12 +21,12 @@ export class MedicalHomeComponent implements OnInit {
 
   reloadData() {
     // @ts-ignore
-    alertHealthlList = this.findAllAlertHealth();
+    alertHealthlList = this.findNewAlerts()();
   }
 
-  private findAllAlertHealth() {
+  private findNewAlerts() {
     this.route.params.subscribe(params =>{
-      this.alertHealthService.findAll().subscribe(data=>{
+      this.alertHealthService.findNewAlerts().subscribe(data=>{
         this.alertHealthlList = data;
       });
     });
