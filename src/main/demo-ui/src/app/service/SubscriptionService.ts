@@ -13,11 +13,7 @@ export class SubscriptionService{
   constructor(private http: HttpClient) {
   }
 
-  findAllSubscription(): Observable<SubscriptionDTO> {
-    return this.http.get<SubscriptionDTO>(`api/subscription`);
-  }
-
-  findSubscriptionbyId(idSubscription: string): Observable<SubscriptionDTO> {
+    findSubscriptionbyId(idSubscription: string): Observable<SubscriptionDTO> {
     return this.http.post<SubscriptionDTO>(`api/subscription/findById`, idSubscription);
   }
 
