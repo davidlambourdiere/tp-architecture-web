@@ -6,6 +6,7 @@ import com.lifetech.domain.model.PersonStatus;
 import java.util.List;
 
 public interface PersonManager {
+
     List<PersonDTO> findAll();
 
     PersonDTO verifyConnexion(PersonDTO connectedLogs);

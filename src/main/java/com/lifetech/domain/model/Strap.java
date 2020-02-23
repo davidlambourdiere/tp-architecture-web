@@ -8,7 +8,6 @@ import java.util.List;
 @Entity(name="strap")
 public class Strap extends IOT{
 
-
     @Column(name="minsysto")
     private String minsysto;
 
@@ -31,8 +30,8 @@ public class Strap extends IOT{
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person person;
 
-    public Strap(Double price, String status, String state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration, String minsysto, String maxsysto, String maxdiasto, String minglyc, String maxglyc, String minsteps, Person person) {
-        super(price, status, state, ipadress, startdate, minvalueref, maxvalueref, suspect, activityduration);
+    public Strap(Double price, StatusEnum breakdownstatus, StateEnum state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration, String minsysto, String maxsysto, String maxdiasto, String minglyc, String maxglyc, String minsteps, Person person) {
+        super(price, breakdownstatus, state, ipadress, startdate, minvalueref, maxvalueref, suspect, activityduration);
         this.minsysto = minsysto;
         this.maxsysto = maxsysto;
         this.maxdiasto = maxdiasto;

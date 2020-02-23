@@ -14,7 +14,7 @@
       <a class="nav-link" [routerLink]="'/medicalControl'"><span class="fa fa-home mr-3"></span> Home</a>
     </li>
     <li>
-      <a class="nav-link" [routerLink]="'/medicalControl'"><span *ngIf="newAlertsNumber>0" class="fa fa-warning mr-3 notif"><small class="d-flex align-items-center justify-content-center">{{this.newAlertsNumber}}</small></span> Alerts</a>
+      <a class="nav-link" [routerLink]="'/medicalControl'"><span class="fa fa-warning mr-3 notif"><small *ngIf="newAlertsNumber>0" class="d-flex align-items-center justify-content-center">{{this.newAlertsNumber}}</small></span> Alerts</a>
     </li>
     <li>
       <a  class="nav-link" [routerLink]="'/medicalControl/residents'"><span class="fa fa-users mr-3"></span> Residents</a>

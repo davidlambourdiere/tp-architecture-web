@@ -1,4 +1,4 @@
-CREATE TABLE healthhistoric (
+CREATE TABLE lifetech.healthhistoric (
 id SERIAL PRIMARY KEY,
 optlock TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 hearthrate VARCHAR(255),
