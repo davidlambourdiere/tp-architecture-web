@@ -142,13 +142,4 @@ public class LightManagerImpl implements LightManager {
         }
         return percentageOnLastMonth;
     }
-
-    @Override
-    public LightDetailDTO findByHistoric(String id) {
-        Light light = lightDAO.findById(Long.parseLong(id)).orElse(null);
-        LightDTO lightDTO = orikaBeanMapper.map(light, LightDTO.class);
-        LightDetailDTO lightDetailDTO = new LightDetailDTO();
-        lightDetailDTO.setLight(lightDTO);
-        return lightDetailDTO;
-    }
 }
