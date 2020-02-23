@@ -24,10 +24,6 @@ public class SubscriptionManagerImp implements SubscriptionManager{
         this.orikaBeanMapper = orikaBeanMapper;
     }
 
-    public List<SubscriptionDTO> findAllSubscription() {
-        return orikaBeanMapper.mapAsList(subscriptionDAO.findAll(), SubscriptionDTO.class);
-
-    }
     @Override
     public SubscriptionDTO findSubscriptionById(Long subscriptionId) {
         Subscription s = subscriptionDAO.findById(subscriptionId).orElse(null);
@@ -37,21 +33,6 @@ public class SubscriptionManagerImp implements SubscriptionManager{
         }
         return null;
     }
-
-
-    @Override
-    public  SubscriptionDTO save(SubscriptionDTO createSubscription) {
-        Subscription s = subscriptionDAO.save(orikaBeanMapper.map(createSubscription, Subscription.class));
-        return orikaBeanMapper.map(s, SubscriptionDTO.class);
-    }
-
-    @Override
-    public boolean delete(SubscriptionDTO s) {
-        try{subscriptionDAO.delete(orikaBeanMapper.map(s, Subscription.class)); return true;}
-        catch (Exception ex){return false;}
-
-    }
-
 
 
    public SubscriptionDTO findSubscriptionByProfile(String name) {
