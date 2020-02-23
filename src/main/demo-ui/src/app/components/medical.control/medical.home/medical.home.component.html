@@ -4,7 +4,7 @@
         <div class="panel panel-bd cardbox" style="background-color:#F94005;">
           <div class="panel-body" align="center">
             <div class="statistic-box">
-              <h2><span class="count-number">15</span>
+              <h2><span class="count-number">{{alertHealthlList.length}}</span>
               </h2>
             </div>
             <div class="items pull-center">
@@ -78,21 +78,17 @@
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>1</td>
-                <td>Jean Dupont</td>
-                <td><button type="button" class="btn btn-danger"></button></td>
-                <td>HYPERTENSION CRISIS – HYPERGLYCEMIA CRISIS</td>
-                <td><button type="button" class="btn btn-info">Details</button></td>
+              <tr *ngFor="let alert of this.alertHealthlList; index as i">
+                <td>{{i+1}}</td>
+                <td>TOTO</td>
+                <td>
+                  <button *ngIf="alert.criticity<=1" type="button" class="btn btn-warning">{{alert.criticity}}</button>
+                  <button *ngIf="alert.criticity>1" type="button" class="btn btn-danger">{{alert.criticity}}</button>
+                </td>
+                <td>{{alert.message}}</td>
+                <td><button  class="btn btn-info" style="margin-left: 10px">Details</button>
+                </td>
               </tr>
-              <tr>
-                <td>2</td>
-                <td>Jean Dulac</td>
-                <td><button type="button" class="btn btn-warning"></button></td>
-                <td>HYPERTENSION CRISIS</td>
-                <td><button type="button" class="btn btn-info">Details</button></td>
-              </tr>
-
               </tbody>
             </table>
           </div>

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {PersonService} from "../../../service/PersonService";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AuthService} from "../../../service/AuthService";
+import {ALertHealthDTO} from "../../../dto/AlertHealthDTO";
+import {AlertHealthService} from "../../../service/AlertHealthService";
+
 
 @Component({
   selector: 'app-medicalhome',
@@ -10,10 +11,25 @@ import {AuthService} from "../../../service/AuthService";
 })
 export class MedicalHomeComponent implements OnInit {
 
-  constructor(private personService: PersonService, private router: Router, private route: ActivatedRoute, private authService: AuthService) {
+  alertHealthlList: ALertHealthDTO[];
+  constructor(private alertHealthService: AlertHealthService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.reloadData();
+  }
+
+  reloadData() {
+    // @ts-ignore
+    alertHealthlList = this.findAllAlertHealth();
+  }
+
+  private findAllAlertHealth() {
+    this.route.params.subscribe(params =>{
+      this.alertHealthService.findAll().subscribe(data=>{
+        this.alertHealthlList = data;
+      });
+    });
   }
 
 }
