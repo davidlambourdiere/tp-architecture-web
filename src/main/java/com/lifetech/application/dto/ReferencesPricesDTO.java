@@ -1,13 +1,15 @@
 package com.lifetech.application.dto;
 
-public class ReferencesIOTDTO {
+public class ReferencesPricesDTO {
     private String name;
     private String numSerie;
     private String type;
+    private String nameService;
+    private String descriptionService;
     private String brand ;
     private Double price ;
 
-    public ReferencesIOTDTO() {
+    public ReferencesPricesDTO() {
     }
 
     public String getName() {
@@ -49,4 +51,12 @@ public class ReferencesIOTDTO {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    public String getNameService() { return nameService; }
+
+    public void setNameService(String nameService) { this.nameService = nameService; }
+
+    public String getDescriptionService() { return descriptionService; }
+
+    public void setDescriptionService(String descriptionService) { this.descriptionService = descriptionService; }
 }
