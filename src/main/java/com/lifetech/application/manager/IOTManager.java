@@ -9,4 +9,5 @@ public interface IOTManager {
 
     IOTDTO findByPerson(String id);
 
+    IOTDTO findAllIOTWithMalfunctionning();
 }

@@ -2,6 +2,8 @@ package com.lifetech.domain.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.util.Date;
 
 @Entity(name="clockhistoric")
@@ -13,11 +15,14 @@ public class ClockHistoric extends PersistableElement{
     @Column(name="endingdate")
     private Date endingDate;
 
-    @Column(name="state")
-    private String state;
+    @Enumerated(EnumType.STRING)
+    private StateEnum state;
+
+    @Enumerated(EnumType.STRING)
+    private StatusEnum breakdownstatus;
 
     @Column(name="clockid")
-    private Long clockId;
+    private Long clockid;
 
     public ClockHistoric() {
     }
@@ -38,19 +43,27 @@ public class ClockHistoric extends PersistableElement{
         this.endingDate = endingDate;
     }
 
-    public String getState() {
+    public StateEnum getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(StateEnum state) {
         this.state = state;
     }
 
-    public Long getClockId() {
-        return clockId;
+    public Long getClockid() {
+        return clockid;
     }
 
-    public void setClockId(Long clockId) {
-        this.clockId = clockId;
+    public void setClockid(Long clockid) {
+        this.clockid = clockid;
+    }
+
+    public StatusEnum getBreakdownstatus() {
+        return breakdownstatus;
+    }
+
+    public void setBreakdownstatus(StatusEnum breakdownstatus) {
+        this.breakdownstatus = breakdownstatus;
     }
 }

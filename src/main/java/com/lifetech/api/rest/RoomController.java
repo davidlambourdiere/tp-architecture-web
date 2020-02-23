@@ -16,10 +16,10 @@ public class RoomController extends RestBaseController {
     public RoomController(RoomManager roomManager) { this.roomManager = roomManager; }
 
 
-    @GetMapping("room/findAll")
+    @GetMapping("rooms")
     private List<RoomDTO> findAllRoom() { return roomManager.findAllRoom(); }
 
-    @GetMapping("room/{id}")
+    @GetMapping("rooms/{id}")
     private RoomDTO findById(@PathVariable("id") String id){
         return roomManager.findById(id);
     }

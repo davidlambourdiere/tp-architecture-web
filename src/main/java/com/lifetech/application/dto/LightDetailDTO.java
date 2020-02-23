@@ -1,10 +1,12 @@
 package com.lifetech.application.dto;
 
+import java.util.List;
+
 public class LightDetailDTO  extends PersistableElementDTO{
     private LightDTO light;
     private String percentageOnLastMonth;
-    private String percentage;
-    private String color;
+    private boolean usedlastmonth;
+    private List<LightHistoricDTO> lightshistoric;
 
     public LightDetailDTO() {
     }
@@ -25,19 +27,19 @@ public class LightDetailDTO  extends PersistableElementDTO{
         this.percentageOnLastMonth = percentageOnLastMonth;
     }
 
-    public String getPercentage() {
-        return percentage;
+    public List<LightHistoricDTO> getLightshistoric() {
+        return lightshistoric;
     }
 
-    public void setPercentage(String percentage) {
-        this.percentage = percentage;
+    public void setLightshistoric(List<LightHistoricDTO> lightshistoric) {
+        this.lightshistoric = lightshistoric;
     }
 
-    public String getColor() {
-        return color;
+    public boolean isUsedlastmonth() {
+        return usedlastmonth;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setUsedlastmonth(boolean usedlastmonth) {
+        this.usedlastmonth = usedlastmonth;
     }
 }
