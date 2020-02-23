@@ -8,5 +8,5 @@ import java.util.List;
 public interface AlertHealthManager {
     List<AlertHealthDTO> findAll();
 
-
+    List<AlertHealthDTO> findNewAlerts();
 }
