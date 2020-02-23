@@ -28,6 +28,7 @@ public class Strap extends IOT{
     private String minsteps;
 
     @OneToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person person;
 
     public Strap(Double price, String status, String state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration, String minsysto, String maxsysto, String maxdiasto, String minglyc, String maxglyc, String minsteps, Person person) {
@@ -96,7 +97,19 @@ public class Strap extends IOT{
     }
 
     public void setPerson(Person person) {
-        person.setStrap(this);
         this.person = person;
+    }
+
+    @Override
+    public String toString() {
+        return "Strap{" +
+                "minsysto='" + minsysto + '\'' +
+                ", maxsysto='" + maxsysto + '\'' +
+                ", maxdiasto='" + maxdiasto + '\'' +
+                ", minglyc='" + minglyc + '\'' +
+                ", maxglyc='" + maxglyc + '\'' +
+                ", minsteps='" + minsteps + '\'' +
+                ", person=" + person +
+                '}';
     }
 }

@@ -15,6 +15,7 @@ public class PersonDTO extends PersistableElementDTO {
     private String handicap;
     private String averageincome;
     private String deseas;
+    private ResidenceDTO residence;
 
     public PersonDTO() {
     }
@@ -115,4 +116,11 @@ public class PersonDTO extends PersistableElementDTO {
         this.deseas = deseas;
     }
 
+    public ResidenceDTO getResidence() {
+        return residence;
+    }
+
+    public void setResidence(ResidenceDTO residence) {
+        this.residence = residence;
+    }
 }

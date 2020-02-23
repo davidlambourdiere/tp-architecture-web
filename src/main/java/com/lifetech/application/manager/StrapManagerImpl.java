@@ -4,6 +4,7 @@ import com.lifetech.application.dto.StrapDTO;
 import com.lifetech.application.dto.StrapDetailDTO;
 import com.lifetech.domain.OrikaBeanMapper;
 import com.lifetech.domain.dao.StrapDAO;
+import com.lifetech.domain.model.Person;
 import com.lifetech.domain.model.Strap;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +27,11 @@ public class StrapManagerImpl implements StrapManager {
         StrapDetailDTO strapDetailDTO = new StrapDetailDTO();
         strapDetailDTO.setStrap(strapDTO);
         return strapDetailDTO;
+    }
+
+    @Override
+    public StrapDTO findById(String id) {
+        Strap strap= strapDAO.findById(Long.parseLong(id)).orElse(null);
+        return orikaBeanMapper.map(strap, StrapDTO.class);
     }
 }

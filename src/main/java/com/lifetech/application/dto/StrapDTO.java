@@ -77,16 +77,20 @@ public class StrapDTO extends PersistableElementDTO{
         return person;
     }
 
-    public void setPerson(PersonDTO person) {
-        this.person = person;
-    }
-
     public String getSuspect() {
         return suspect;
     }
 
     public void setSuspect(String suspect) {
         this.suspect = suspect;
+    }
+
+    public String getIpadress() {
+        return ipadress;
+    }
+
+    public void setIpadress(String ipadress) {
+        this.ipadress = ipadress;
     }
 
     public String getMinsysto() {
@@ -137,17 +141,9 @@ public class StrapDTO extends PersistableElementDTO{
         this.minsteps = minsteps;
     }
 
-    public String getIpadress() {
-        return ipadress;
+    public void setPerson(PersonDTO person) {
+        this.person = person;
     }
-
-    public void setIpadress(String ipadress) {
-        this.ipadress = ipadress;
-    }
-
-    public Double getPrice() { return price; }
-
-    public void setPrice(Double price) { this.price = price; }
 
     public RoomDTO getRoom() {
         return room;
@@ -156,4 +152,13 @@ public class StrapDTO extends PersistableElementDTO{
     public void setRoom(RoomDTO room) {
         this.room = room;
     }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
 }
