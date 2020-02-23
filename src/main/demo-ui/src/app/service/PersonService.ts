@@ -25,4 +25,7 @@ export class PersonService {
   }
 
 
+  findResidentNumber() {
+    return this.http.get<Number>(`api/person/findResidentNumber`);
+  }
 }
