@@ -25,7 +25,10 @@ public class AlertHealthController extends RestBaseController {
     private List<AlertHealthDTO> findNewAlerts(){
         return alertHealthManager.findNewAlerts();
     }
-
+    @GetMapping("alert/health/findAlertNumber")
+    private int findAlertNumber(){
+        return alertHealthManager.findAlertNumber();
+    }
 
 
 

@@ -9,4 +9,6 @@ public interface AlertHealthManager {
     List<AlertHealthDTO> findAll();
 
     List<AlertHealthDTO> findNewAlerts();
+
+    int findAlertNumber();
 }

@@ -37,6 +37,11 @@ public class AlertHealthManagerImpl implements AlertHealthManager {
         return fillStrapAndDoctor(alertHealths);
     }
 
+    @Override
+    public int findAlertNumber() {
+        return alertHealthDAO.countByStatus("NEW");
+    }
+
 
     //fill Straps and doctors by alerts
     private List<AlertHealthDTO> fillStrapAndDoctor(List<AlertHealth> alertHealths){

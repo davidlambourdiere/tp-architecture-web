@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface AlertHealthDAO extends JpaRepository<AlertHealth, Long> {
     List<AlertHealth> findByStatus(String status);
+
+    int countByStatus(String status);
 }

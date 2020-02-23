@@ -25,4 +25,8 @@ export class AlertHealthService {
   findNewAlerts() {
     return this.http.get<ALertHealthDTO[]>(`api/alert/health/findNewAlerts`);
   }
+
+  findAlertNumber() {
+    return this.http.get<Number>(`api/alert/health/findAlertNumber`);
+  }
 }
