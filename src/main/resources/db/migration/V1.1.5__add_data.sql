@@ -8,10 +8,10 @@ INSERT INTO lifetech.person (firstname, lastname, login, password, residence_id)
 INSERT INTO lifetech.person (firstname, lastname, login, password, residence_id) VALUES ('Mohammed', 'Henni', 'Momo', 'Momodu13', 1);
 INSERT INTO lifetech.person (firstname, lastname, login, password, residence_id) VALUES ('Henry', 'Dupont', 'Henry', 'henry', 1);
 
-INSERT INTO lifetech.person(firstname,lastname,login,password,profile_type,residence_id) VALUES ('Mohamed','Emam','mohamed','mohamed','essential',1);
-INSERT INTO lifetech.person(firstname,lastname,login,password,profile_type,residence_id) VALUES ('Lucas','Meunier','lucas','lucas','serenity',1);
-INSERT INTO lifetech.person(firstname,lastname,login,password,profile_type,residence_id) VALUES ('Tristan','Da Silva','tristan','tristan','confort',1);
-INSERT INTO lifetech.person(firstname,lastname,login,password,profile_type,residence_id) VALUES ('Alexis','Boisseau','alexis','alexis','total-confort',1);
+INSERT INTO lifetech.person(firstname,lastname,login,password,profileType,residence_id) VALUES ('Mohamed','Emam','mohamed','mohamed','essential',1);
+INSERT INTO lifetech.person(firstname,lastname,login,password,profileType,residence_id) VALUES ('Lucas','Meunier','lucas','lucas','serenity',1);
+INSERT INTO lifetech.person(firstname,lastname,login,password,profileType,residence_id) VALUES ('Tristan','Da Silva','tristan','tristan','confort',1);
+INSERT INTO lifetech.person(firstname,lastname,login,password,profileType,residence_id) VALUES ('Alexis','Boisseau','alexis','alexis','total-confort',1);
 
 INSERT INTO lifetech.room (num) VALUES (1);
 INSERT INTO lifetech.room (num) VALUES (2);
@@ -133,14 +133,13 @@ INSERT INTO lifetech.straphistoric (startdate, endingdate,state, breakdownstatus
 INSERT INTO lifetech.straphistoric (startdate, endingdate,state, breakdownstatus,strapid) VALUES ("2020-01-25 00:00:00","2020-02-22 00:00:00",'ON',"NOT_BREAKDOWN",1);
 INSERT INTO lifetech.straphistoric (startdate, endingdate,state, breakdownstatus,strapid) VALUES ("2020-01-24 00:00:00","2020-01-25 00:00:00",'OFF',"NOT_BREAKDOWN",1);
 
-INSERT INTO `subscription` (`id`, `optlock`, `name`,`description`, `listofiot`, `listofservice`) VALUES (NULL, '2019-12-05 00:00:00.000', 'essential','This subscription is for our residents who enjoy tranquility and security.', 'Strap,Heater', 'Sport');
-INSERT INTO `subscription` (`id`, `optlock`, `name`,`description`, `listofiot`, `listofservice`) VALUES (NULL, '2019-12-01 00:00:00.000', 'serenity', 'This subscription is intended for our resident who like pratice and love connected objects','Strap,Light,Heater', 'Bingo,Yoga');
-INSERT INTO `subscription` (`id`, `optlock`, `name`,`description`, `listofiot`, `listofservice`) VALUES (NULL, '2019-12-05 00:00:00.000', 'confort','This subscription is intended for our residents who can not stay in place and want to associate activites ans connected objects', 'Strap,Light,Heater,Shutter', 'Cultural Visite,Sport,Cinema');
-INSERT INTO `subscription` (`id`, `optlock`, `name`,`description`, `listofiot`, `listofservice`) VALUES (NULL, '2019-12-01 00:00:00.000', 'total-confort','This subscription is for our residents who need connected objects to help them in everyday life', 'Strap,Light,Shutter,Heater,Clock', 'Bingo');
+INSERT INTO lifetech.subscription (name,description, listofiot,listofservice) VALUES ('essential','This subscription is for our residents who enjoy tranquility and security.', 'Strap,Heater', 'Sport');
+INSERT INTO lifetech.subscription (name,description,listofiot,listofservice) VALUES ('serenity', 'This subscription is intended for our resident who like pratice and love connected objects','Strap,Light,Heater', 'Bingo,Yoga');
+INSERT INTO lifetech.subscription (name,description,listofiot,listofservice) VALUES ('confort','This subscription is intended for our residents who can not stay in place and want to associate activites ans connected objects', 'Strap,Light,Heater,Shutter', 'Cultural Visite,Sport,Cinema');
+INSERT INTO lifetech.subscription (name,description, listofiot,listofservice) VALUES ('total-confort','This subscription is for our residents who need connected objects to help them in everyday life', 'Strap,Light,Shutter,Heater,Clock', 'Bingo');
 
-INSERT INTO `references_prices` (`id`, `optlock`, `description_service`, `name_service`, `num_serie`, `price`, `type`) VALUES (NULL, NULL, 'blabla', 'bingo', NULL, '25', NULL);
-INSERT INTO `references_prices` (`id`, `optlock`, `description_service`, `name_service`, `num_serie`, `price`, `type`) VALUES (NULL, NULL, 'blabla', 'cinéma', NULL, '100', NULL);
-INSERT INTO `references_prices` (`id`, `optlock`, `description_service`, `name_service`, `num_serie`, `price`, `type`) VALUES (NULL, NULL, 'blabla', 'sport', NULL, '45', NULL);
-INSERT INTO `references_prices` (`id`, `optlock`, `description_service`, `name_service`, `num_serie`, `price`, `type`) VALUES (NULL, NULL, 'blabla', 'yoga', NULL, '30', NULL);
-INSERT INTO `references_prices` (`id`, `optlock`, `description_service`, `name_service`, `num_serie`, `price`, `type`) VALUES (NULL, NULL, 'blabla', 'viste culturel', NULL, '50', NULL);
-UPDATE `references_prices` SET `num_serie` = 'S01' WHERE `references_prices`.`id` = 1; UPDATE `references_prices` SET `num_serie` = 'A01' WHERE `references_prices`.`id` = 2; UPDATE `references_prices` SET `num_serie` = 'A01' WHERE `references_prices`.`id` = 3; UPDATE `references_prices` SET `num_serie` = 'S01' WHERE `references_prices`.`id` = 4; UPDATE `references_prices` SET `num_serie` = 'A01' WHERE `references_prices`.`id` = 5;
+INSERT INTO lifetech.referencesprices (descriptionService, nameService, numSerie, price, type) VALUES ('blabla', 'bingo','S01', '25', NULL);
+INSERT INTO lifetech.referencesprices (descriptionService, nameService, numSerie, price, type) VALUES ('blabla', 'cinéma','A01', '100', NULL);
+INSERT INTO lifetech.referencesprices (descriptionService, nameService, numSerie, price, type) VALUES ('blabla', 'sport', 'A01', '45', NULL);
+INSERT INTO lifetech.referencesprices (descriptionService, nameService, numSerie, price, type) VALUES ('blabla', 'yoga', 'S01', '30', NULL);
+INSERT INTO lifetech.referencesprices (descriptionService, nameService, numSerie, price, type) VALUES ('blabla', 'viste culturel', 'A01', '50', NULL);
