@@ -37,7 +37,7 @@ description VARCHAR(255),
 listofiot VARCHAR(255),
 listofservice VARCHAR(255),
 price DOUBLE,
-id_person INTEGER ,
-CONSTRAINT FK_person_subscription_id FOREIGN KEY (id_person) REFERENCES person(id)
+id_person BIGINT UNSIGNED NOT NULL,
+CONSTRAINT FK_person_subscription_id FOREIGN KEY (id_person) REFERENCES lifetech.person(id)
 );
 
