@@ -13,7 +13,7 @@
   <form>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label>Etat</label>
+        <label>State</label>
         <input *ngIf="state === 'Clock' " type="text" class="form-control" value="{{clockWithDetail.clock.state}}"
                disabled>
         <input *ngIf="state === 'Heater' " type="text" class="form-control" value="{{heaterWithDetail.heater.state}}"
@@ -26,16 +26,17 @@
                disabled>
       </div>
       <div class="form-group col-md-6">
-        <label>Room number</label>
+        <label *ngIf="state!=='Strap'">Room number</label>
         <input *ngIf="state==='Clock' " type="text" class="form-control" value="{{clockWithDetail.clock.room.num}}"
                disabled>
         <input *ngIf="state==='Heater' " type="text" class="form-control" value="{{heaterWithDetail.heater.room.num}}"
                disabled>
         <input *ngIf="state==='Shutter' " type="text" class="form-control"
                value="{{shutterWithDetail.shutter.room.num}}" disabled>
-        <input *ngIf="state==='Strap' " type="text" class="form-control" value="{{strapWithDetail.strap.room.num}}"
-               disabled>
         <input *ngIf="state==='Light' " type="text" class="form-control" value="{{lightWithDetail.light.room.num}}"
+               disabled>
+        <label *ngIf="state==='Strap'">Min Glyc</label>
+        <input *ngIf="state==='Strap' " type="text" class="form-control" value="{{strapWithDetail.strap.minglyc}}"
                disabled>
       </div>
     </div>
@@ -57,50 +58,64 @@
       </div>
       <div class="form-group col-md-6">
         <label>Percentage On Last Month</label>
-        <input *ngIf="state==='Clock' " type="text" class="form-control"
-               value="{{clockWithDetail.percentageOnLastMonth}}"
-               disabled>
-        <input *ngIf="state==='Heater' " type="text" class="form-control"
-               value="{{heaterWithDetail.percentageOnLastMonth}}" disabled>
-        <input *ngIf="state==='Shutter' " type="text" class="form-control"
-               value="{{shutterWithDetail.percentageOnLastMonth}}" disabled>
-        <input *ngIf="state==='Strap' " type="text" class="form-control"
-               value="{{strapWithDetail.percentageOnLastMonth}}"
-               disabled>
-        <input *ngIf="state==='Light' " type="text" class="form-control"
-               value="{{lightWithDetail.percentageOnLastMonth}}"
-               disabled>
+        <input *ngIf="state==='Clock' && clockWithDetail.usedlastmonth===true" type="text" class="form-control"
+               value="{{clockWithDetail.percentageOnLastMonth}} %" disabled [ngStyle]="{color: 'green'}">
+        <input *ngIf="state==='Clock' && clockWithDetail.usedlastmonth===false" type="text" class="form-control"
+               value="{{clockWithDetail.percentageOnLastMonth}} %" disabled [ngStyle]="{color: 'red'}">
+
+        <input *ngIf="state==='Heater' && heaterWithDetail.usedlastmonth===true" type="text" class="form-control"
+               value="{{heaterWithDetail.percentageOnLastMonth}} %" disabled [ngStyle]="{color: 'green'}">
+        <input *ngIf="state==='Heater'  && heaterWithDetail.usedlastmonth===false" type="text" class="form-control"
+               value="{{heaterWithDetail.percentageOnLastMonth}} %" disabled [ngStyle]="{color: 'red'}">
+
+        <input *ngIf="state==='Shutter' && shutterWithDetail.usedlastmonth===true" type="text" class="form-control"
+               value="{{shutterWithDetail.percentageOnLastMonth}} %" disabled [ngStyle]="{color: 'green'}">
+        <input *ngIf="state==='Shutter' && shutterWithDetail.usedlastmonth===false" type="text" class="form-control"
+               value="{{shutterWithDetail.percentageOnLastMonth}} %" disabled [ngStyle]="{color: 'red'}">
+
+        <input *ngIf="state==='Strap' && strapWithDetail.usedlastmonth===true" type="text" class="form-control"
+               value="{{strapWithDetail.percentageOnLastMonth}} %" disabled [ngStyle]="{color: 'green'}">
+        <input *ngIf="state==='Strap' && strapWithDetail.usedlastmonth===false" type="text" class="form-control"
+               value="{{strapWithDetail.percentageOnLastMonth}} %" disabled [ngStyle]="{color: 'red'}">
+
+        <input *ngIf="state==='Light' && lightWithDetail.usedlastmonth===true " type="text" class="form-control"
+               value="{{lightWithDetail.percentageOnLastMonth}} %" disabled [ngStyle]="{color: 'green'}">
+        <input *ngIf="state==='Light' && lightWithDetail.usedlastmonth===false " type="text" class="form-control"
+               value="{{lightWithDetail.percentageOnLastMonth}} %" disabled [ngStyle]="{color: 'red'}">
       </div>
     </div>
     <div class="form-row">
-      <div *ngIf="state==='Strap' " class="form-group col-md-4">
+      <div *ngIf="state==='Strap' " class="form-group col-md-3">
         <label>Minimum Systo</label>
         <input type="text" class="form-control" value="{{strapWithDetail.strap.minsysto}}" disabled>
       </div>
-      <div *ngIf="state==='Strap' " class="form-group col-md-4">
+      <div *ngIf="state==='Strap' " class="form-group col-md-3">
         <label>Maximum Systo</label>
         <input type="text" class="form-control" value="{{strapWithDetail.strap.maxsysto}}" disabled>
       </div>
-      <div *ngIf="state==='Strap' " class="form-group col-md-4">
+      <div *ngIf="state==='Strap' " class="form-group col-md-3">
         <label>Maximum Diasto</label>
         <input type="text" class="form-control" value="{{strapWithDetail.strap.maxdiasto}}" disabled>
       </div>
-      <div *ngIf="state==='Strap' " class="form-group col-md-6">
+      <div *ngIf="state==='Strap' " class="form-group col-md-3">
         <label>Max Glyc</label>
         <input type="text" class="form-control" value="{{strapWithDetail.strap.maxglyc}}" disabled>
-      </div>
-      <div *ngIf="state==='Strap' " class="form-group col-md-6">
-        <label>Min Glyc</label>
-        <input type="text" class="form-control" value="{{strapWithDetail.strap.minglyc}}" disabled>
       </div>
     </div>
   </form>
 
-  <table class="table table-striped" *ngIf="state==='Light'">
+  <table class="table table-striped" *ngIf="state==='Light' && lightWithDetail.lightshistoric.length!==0">
     <thead>
     <TR>
       <TH COLSPAN="4">
-        <H3><BR>Light historic for last month</H3>
+        <H3><BR>Light historic for last month
+          <button class="btn btn-outline-warning" (click)="displayOnlyWarningHistoric()" *ngIf="warningOnly===false">
+            Show only historic line with warnings
+          </button>
+          <button class="btn btn-outline-success" (click)="displayOnlyWarningHistoric()" *ngIf="warningOnly===true">
+            Show all historics
+          </button>
+        </H3>
       </TH>
     </TR>
     <tr>
@@ -111,11 +126,154 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let historic of lightWithDetail.lightshistoric" >
-      <td>{{historic.startdate}} - {{historic.endingdate}}</td>
-      <td>{{historic.color}}</td>
-      <td>{{historic.state}}</td>
-      <td>{{historic.breakdownstatus}}</td>
+    <tr *ngFor="let historic of lightWithDetail.lightshistoric">
+      <td *ngIf="warningOnly === false && historic.breakdownstatus==='NOT_BREAKDOWN'" >{{historic.startdate}} - {{historic.endingdate}}</td>
+      <td *ngIf="warningOnly === false && historic.breakdownstatus==='NOT_BREAKDOWN'" >{{historic.color}}</td>
+      <td *ngIf="warningOnly === false && historic.breakdownstatus==='NOT_BREAKDOWN'" >{{historic.state}}</td>
+      <td [ngStyle]="{color:'green'}"
+          *ngIf=" warningOnly === false && historic.breakdownstatus==='NOT_BREAKDOWN'">{{historic.breakdownstatus}}</td>
+
+      <td *ngIf="historic.breakdownstatus==='BREAKDOWN'">{{historic.startdate}} - {{historic.endingdate}}</td>
+      <td *ngIf="historic.breakdownstatus==='BREAKDOWN'" >{{historic.color}}</td>
+      <td *ngIf="historic.breakdownstatus==='BREAKDOWN'">{{historic.state}}</td>
+      <td [ngStyle]="{color:'red'}" *ngIf="historic.breakdownstatus==='BREAKDOWN'">{{historic.breakdownstatus}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <table class="table table-striped" *ngIf="state==='Heater' && heaterWithDetail.heaterhistorics.length!==0">
+    <thead>
+    <TR>
+      <TH COLSPAN="4">
+        <H3><BR>Heater historic for last month
+          <button class="btn btn-outline-warning" (click)="displayOnlyWarningHistoric()" *ngIf="warningOnly===false">
+            Show only historic line with warnings
+          </button>
+          <button class="btn btn-outline-success" (click)="displayOnlyWarningHistoric()" *ngIf="warningOnly===true">
+            Show all historics
+          </button>
+        </H3>
+      </TH>
+    </TR>
+    <tr>
+      <th scope="col">Schedule</th>
+      <th scope="col">State</th>
+      <th scope="col">Temperature</th>
+      <th scope="col">Breakdown Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let historic of heaterWithDetail.heaterhistorics">
+      <td *ngIf="warningOnly === false && historic.breakdownstatus==='NOT_BREAKDOWN' && historic.temperaturetohot===false">{{historic.startdate}} - {{historic.endingdate}}</td>
+      <td *ngIf="warningOnly === false && historic.breakdownstatus==='NOT_BREAKDOWN' && historic.temperaturetohot===false">{{historic.state}}</td>
+      <td [ngStyle]="{color:'green'}" *ngIf="warningOnly === false && historic.breakdownstatus==='NOT_BREAKDOWN' && historic.temperaturetohot===false">
+        {{historic.temperature}} °c</td>
+      <td [ngStyle]="{color:'green'}"
+          *ngIf="warningOnly === false && historic.breakdownstatus==='NOT_BREAKDOWN' && historic.temperaturetohot===false">{{historic.breakdownstatus}}</td>
+
+
+
+      <td *ngIf="historic.breakdownstatus==='BREAKDOWN' || historic.temperaturetohot===true">{{historic.startdate}} - {{historic.endingdate}}</td>
+      <td *ngIf="historic.breakdownstatus==='BREAKDOWN' || historic.temperaturetohot===true" >{{historic.state}}</td>
+      <td [ngStyle]="{color:'red'}" *ngIf="historic.temperaturetohot===true">{{historic.temperature}} °c</td>
+      <td [ngStyle]="{color:'green'}" *ngIf="historic.breakdownstatus==='BREAKDOWN'">{{historic.temperature}} °c</td>
+      <td [ngStyle]="{color:'green'}" *ngIf="historic.temperaturetohot===true">{{historic.breakdownstatus}}</td>
+      <td [ngStyle]="{color:'red'}" *ngIf="historic.breakdownstatus==='BREAKDOWN'">{{historic.breakdownstatus}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <table class="table table-striped" *ngIf="state==='Shutter' && shutterWithDetail.shutterhistorics.length!==0">
+    <thead>
+    <TR>
+      <TH COLSPAN="4">
+        <H3><BR>Shutter historic for last month
+          <button class="btn btn-outline-warning" (click)="displayOnlyWarningHistoric()" *ngIf="warningOnly===false">
+            Show only historic line with warnings
+          </button>
+          <button class="btn btn-outline-success" (click)="displayOnlyWarningHistoric()" *ngIf="warningOnly===true">
+            Show all historics
+          </button>
+        </H3>
+      </TH>
+    </TR>
+    <tr>
+      <th scope="col">Schedule</th>
+      <th scope="col">State</th>
+      <th scope="col">Breakdown Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let historic of shutterWithDetail.shutterhistorics">
+      <td *ngIf="warningOnly === false && historic.breakdownstatus==='NOT_BREAKDOWN'" >{{historic.startdate}} - {{historic.endingdate}}</td>
+      <td *ngIf="warningOnly === false && historic.breakdownstatus==='NOT_BREAKDOWN'" >{{historic.state}}</td>
+      <td [ngStyle]="{color:'green'}" *ngIf="warningOnly === false && historic.breakdownstatus==='NOT_BREAKDOWN'" >{{historic.breakdownstatus}}</td>
+
+      <td *ngIf="historic.breakdownstatus==='BREAKDOWN'">{{historic.startdate}} - {{historic.endingdate}}</td>
+      <td *ngIf="historic.breakdownstatus==='BREAKDOWN'">{{historic.state}}</td>
+      <td [ngStyle]="{color:'red'}" *ngIf="historic.breakdownstatus==='BREAKDOWN'">{{historic.breakdownstatus}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <table class="table table-striped" *ngIf="state==='Clock' && clockWithDetail.clockhistorics.length!==0">
+    <thead>
+    <TR>
+      <TH COLSPAN="4">
+        <H3><BR>Clock historic for last month
+          <button class="btn btn-outline-warning" (click)="displayOnlyWarningHistoric()" *ngIf="warningOnly===false">
+            Show only historic line with warnings
+          </button>
+          <button class="btn btn-outline-success" (click)="displayOnlyWarningHistoric()" *ngIf="warningOnly===true">
+            Show all historics
+          </button>
+        </H3>
+      </TH>
+    </TR>
+    <tr>
+      <th scope="col">Schedule</th>
+      <th scope="col">State</th>
+      <th scope="col">Breakdown Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let historic of clockWithDetail.clockhistorics">
+      <td *ngIf="warningOnly === false && historic.breakdownstatus==='NOT_BREAKDOWN'" >{{historic.startdate}} - {{historic.endingdate}}</td>
+      <td *ngIf="warningOnly === false && historic.breakdownstatus==='NOT_BREAKDOWN'" >{{historic.state}}</td>
+      <td [ngStyle]="{color:'green'}" *ngIf="warningOnly === false && historic.breakdownstatus==='NOT_BREAKDOWN'" >{{historic.breakdownstatus}}</td>
+
+      <td *ngIf="historic.breakdownstatus==='BREAKDOWN'">{{historic.startdate}} - {{historic.endingdate}}</td>
+      <td *ngIf="historic.breakdownstatus==='BREAKDOWN'">{{historic.state}}</td>
+      <td [ngStyle]="{color:'red'}" *ngIf="historic.breakdownstatus==='BREAKDOWN'">{{historic.breakdownstatus}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <table class="table table-striped" *ngIf="state==='Strap' &&  strapWithDetail.straphistorics.length!==0">
+    <thead>
+    <TR>
+      <TH COLSPAN="4">
+        <H3><BR>Strap historic for last month
+          <button class="btn btn-outline-warning" (click)="displayOnlyWarningHistoric()" *ngIf="warningOnly===false">
+            Show only historic line with warnings
+          </button>
+          <button class="btn btn-outline-success" (click)="displayOnlyWarningHistoric()" *ngIf="warningOnly===true">
+            Show all historics
+          </button>
+        </H3>
+      </TH>
+    </TR>
+    <tr>
+      <th scope="col">Schedule</th>
+      <th scope="col">State</th>
+      <th scope="col">Breakdown Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let historic of strapWithDetail.straphistorics">
+      <td *ngIf="warningOnly === false && historic.breakdownstatus==='NOT_BREAKDOWN'" >{{historic.startdate}} - {{historic.endingdate}}</td>
+      <td *ngIf="warningOnly === false && historic.breakdownstatus==='NOT_BREAKDOWN'" >{{historic.state}}</td>
+      <td [ngStyle]="{color:'green'}" *ngIf="warningOnly === false && historic.breakdownstatus==='NOT_BREAKDOWN'" >{{historic.breakdownstatus}}</td>
+
+      <td *ngIf="historic.breakdownstatus==='BREAKDOWN'">{{historic.startdate}} - {{historic.endingdate}}</td>
+      <td *ngIf="historic.breakdownstatus==='BREAKDOWN'">{{historic.state}}</td>
+      <td [ngStyle]="{color:'red'}" *ngIf="historic.breakdownstatus==='BREAKDOWN'">{{historic.breakdownstatus}}</td>
     </tr>
     </tbody>
   </table>

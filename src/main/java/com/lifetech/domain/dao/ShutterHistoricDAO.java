@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ShutterHistoricDAO extends JpaRepository<ShutterHistoric, Long> {
-    List<ShutterHistoric> findAllByShutterId(Long id);
+    List<ShutterHistoric> findAllByShutterid(Long id);
 
 }

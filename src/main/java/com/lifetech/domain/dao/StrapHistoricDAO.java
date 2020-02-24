@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface StrapHistoricDAO extends JpaRepository<StrapHistoric, Long> {
-    List<StrapHistoric> findAllByStrapId(Long id);
+    List<StrapHistoric> findAllByStrapid(Long id);
 
 }

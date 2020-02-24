@@ -22,7 +22,7 @@ public class ClockHistoric extends PersistableElement{
     private StatusEnum breakdownstatus;
 
     @Column(name="clockid")
-    private Long clockId;
+    private Long clockid;
 
     public ClockHistoric() {
     }
@@ -51,12 +51,12 @@ public class ClockHistoric extends PersistableElement{
         this.state = state;
     }
 
-    public Long getClockId() {
-        return clockId;
+    public Long getClockid() {
+        return clockid;
     }
 
-    public void setClockId(Long clockId) {
-        this.clockId = clockId;
+    public void setClockid(Long clockid) {
+        this.clockid = clockid;
     }
 
     public StatusEnum getBreakdownstatus() {

@@ -1,9 +1,6 @@
 package com.lifetech.domain.dao;
 
-import com.lifetech.domain.model.Clock;
-import com.lifetech.domain.model.Person;
-import com.lifetech.domain.model.Residence;
-import com.lifetech.domain.model.Room;
+import com.lifetech.domain.model.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,5 +15,7 @@ public interface ClockDAO extends JpaRepository<Clock, Long> {
     Long countByPerson(Person person);
 
     List<Clock> findByRoom(Room id);
+
+    List<Clock> findAllByBreakdownstatus(StatusEnum statusEnum);
 
 }
