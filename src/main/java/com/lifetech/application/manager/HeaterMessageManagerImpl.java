@@ -31,6 +31,7 @@ public class HeaterMessageManagerImpl implements HeaterMessageManager {
     }
 
 
+
     @Override
     public List<HeaterMessageDTO> findAllByHeater(String id) {
         Heater heater = heaterdao.findById(Long.parseLong(id)).orElse(null);
