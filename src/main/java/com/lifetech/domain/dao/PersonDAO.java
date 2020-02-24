@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface PersonDAO extends JpaRepository<Person, Long> {
     List<Person> findAllByResidenceId(long residenceId);
 
-    Optional<Person> findByLogin(String personLogin);
+    Person findByLogin(String personLogin);
 }
