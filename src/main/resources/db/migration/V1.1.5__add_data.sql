@@ -26,6 +26,8 @@ INSERT INTO lifetech.light (ipadress, state, breakdownstatus, percentage, color,
 INSERT INTO lifetech.heater (ipadress, state,breakdownstatus, person_id, room_id,price) VALUES ('172.163.92.4','ON','NOT_BREAKDOWN', 3, 3,150);
 INSERT INTO lifetech.heater (ipadress, state,breakdownstatus, person_id, room_id) VALUES ('172.163.92.5','OFF','NOT_BREAKDOWN', 4, 4);
 INSERT INTO lifetech.heater (ipadress, state,breakdownstatus, person_id, room_id) VALUES ('172.163.92.6','ON','NOT_BREAKDOWN', 5, 5);
+INSERT INTO lifetech.heater (ipadress, state,breakdownstatus, person_id, room_id) VALUES ('172.163.92.6','ON','NOT_BREAKDOWN', 5, 3);
+
 
 
 INSERT INTO lifetech.clock (ipadress, state,breakdownstatus, person_id, room_id,price) VALUES ('172.163.92.8','ON','NOT_BREAKDOWN', 1, 1,150);
@@ -143,3 +145,16 @@ INSERT INTO lifetech.referencesprices (descriptionService, nameService, numSerie
 INSERT INTO lifetech.referencesprices (descriptionService, nameService, numSerie, price, type) VALUES ('blabla', 'sport', 'A01', '45', NULL);
 INSERT INTO lifetech.referencesprices (descriptionService, nameService, numSerie, price, type) VALUES ('blabla', 'yoga', 'S01', '30', NULL);
 INSERT INTO lifetech.referencesprices (descriptionService, nameService, numSerie, price, type) VALUES ('blabla', 'viste culturel', 'A01', '50', NULL);
+INSERT INTO lifetech.heatermessage (minvaluerefmessage,maxvaluerefmessage,statemessage,temperaturemessage,insertdate,heater_id) VALUES ('5','4','ON','105','2020-01-21 15:05:29',3);
+INSERT INTO lifetech.heatermessage (minvaluerefmessage,maxvaluerefmessage,statemessage,temperaturemessage,insertdate,heater_id)  VALUES ('5','4','ON','24','2020-01-21 15:06:29',3);
+INSERT INTO lifetech.heatermessage (minvaluerefmessage,maxvaluerefmessage,statemessage,temperaturemessage,insertdate,heater_id) VALUES ('5','4','ON','24','2020-01-21 15:05:29',2);
+INSERT INTO lifetech.heatermessage (minvaluerefmessage,maxvaluerefmessage,statemessage,temperaturemessage,insertdate,heater_id)  VALUES ('5','4','ON','24','2020-01-21 15:06:29',2);
+INSERT INTO lifetech.heatermessage (minvaluerefmessage,maxvaluerefmessage,statemessage,temperaturemessage,insertdate,heater_id)  VALUES ('5','4','ON','24','2020-01-21 15:07:29',3);
+INSERT INTO lifetech.heatermessage (minvaluerefmessage,maxvaluerefmessage,statemessage,temperaturemessage,insertdate,heater_id) VALUES ('5','4','ON','105','2020-01-21 15:05:29',3);
+INSERT INTO lifetech.heatermessage (minvaluerefmessage,maxvaluerefmessage,statemessage,temperaturemessage,insertdate,heater_id)  VALUES ('5','4','ON','105','2020-01-22 15:05:29',3);
+INSERT INTO lifetech.heatermessage (minvaluerefmessage,maxvaluerefmessage,statemessage,temperaturemessage,insertdate,heater_id)  VALUES ('5','4','ON','107','2020-01-23 15:05:29',3);
+INSERT INTO lifetech.heatermessage (minvaluerefmessage,maxvaluerefmessage,statemessage,temperaturemessage,insertdate,heater_id)  VALUES ('5','4','ON','68','2020-01-22 15:05:29',3);
+INSERT INTO lifetech.heatermessage (minvaluerefmessage,maxvaluerefmessage,statemessage,temperaturemessage,insertdate,heater_id)  VALUES ('5','4','ON','107','2020-01-23 15:05:29',4);
+INSERT INTO lifetech.heatermessage (minvaluerefmessage,maxvaluerefmessage,statemessage,temperaturemessage,insertdate,heater_id)  VALUES ('5','4','ON','68','2020-01-22 15:05:29',1);
+
+

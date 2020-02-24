@@ -18,6 +18,13 @@ public class HeaterMessageController extends RestBaseController {
         this.heaterMessageManager = heaterMessageManager;
     }
 
-    @GetMapping("heatermessage/findHeaterMessageByHeater/{id}")
-    private List<HeaterMessageDTO> findHeaterMessageByHeater(@PathVariable("id") String id){ return heaterMessageManager.findHeaterMessageByHeater(id); }
+    @GetMapping("heaterMessages/findAllByHeater/{id}")
+    private List<HeaterMessageDTO> findAllByHeater(@PathVariable("id") String id){ return heaterMessageManager.findAllByHeater(id); }
+
+    //@GetMapping("findFirstByOrderByInsertDateDesc")
+    //private HeaterMessageDTO findFirstByOrderByInsertDateDesc(){ return heaterMessageManager.findFirstByOrderByInsertDateDesc(); }
+
+    @GetMapping("heaterMessages/breakdownDetection/{id}")
+    private boolean breakdownDetection(@PathVariable("id") String id){ return heaterMessageManager.breakdownDetection(id); }
+
 }

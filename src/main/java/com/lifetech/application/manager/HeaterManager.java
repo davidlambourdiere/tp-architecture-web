@@ -9,10 +9,13 @@ import java.util.List;
 public interface HeaterManager {
     HeaterDTO findById(String id);
     HeaterDTO findAllHeater();
-    HeaterDTO findByRoom(String id);
+
+    List<HeaterDTO> findByRoom(String id);
 
     HeaterDetailDTO findByHistoric(String id);
 
     List<Heater> findAllHeaterMalFunctionning();
+
+    int countHeaters();
 }
 

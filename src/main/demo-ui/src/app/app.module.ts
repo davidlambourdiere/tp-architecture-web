@@ -34,6 +34,9 @@ import {ConfortComponent} from "./components/subscription/confort/confort.compon
 import {CustomComponent} from "./components/subscription/custom.component";
 
 
+import { MedicalHomeComponent} from './components/medical.control/medical.home/medical.home.component';
+import { MedicalMenuComponent } from './components/medical.control/medical.menu/medical.menu.component';
+import { MedicalResidentsComponent } from './components/medical.control/medical.residents/medical.residents.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,12 @@ import {CustomComponent} from "./components/subscription/custom.component";
     ConfortComponent,
     EssentialComponent,
     TotalconfortComponent,
-    SerenityComponent
+    SerenityComponent,
+    SurveyComponent,
+    MedicalHomeComponent,
+    MedicalMenuComponent,
+    MedicalResidentsComponent,
+    SurveyComponent
   ],
   imports: [
     // NgbModule,

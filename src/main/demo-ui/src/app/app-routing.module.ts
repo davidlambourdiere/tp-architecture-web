@@ -21,6 +21,11 @@ import {ConfortComponent} from './components/subscription/confort/confort.compon
 import {EssentialComponent} from './components/subscription/essential/essential.component';
 import {SerenityComponent} from './components/subscription/serenity/serenity.component';
 import {TotalconfortComponent} from './components/subscription/totalconfort/totalconfort.component';
+import {NotificationComponent} from "./components/notification/notification.component";
+import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
+import {SubscriptionComponent} from "./components/subscription/subscription.component";
+import {SurveyComponent} from "./components/survey/survey.component";
+import {MedicalResidentsComponent} from "./components/medical.control/medical.residents/medical.residents.component";
 
 
 const routes: Routes = [
@@ -111,6 +116,11 @@ const routes: Routes = [
   {
     path: 'survey',
     component: SurveyComponent
+  },
+  {
+    path: 'medicalControl/residents',
+    component: MedicalResidentsComponent,
+    canActivate: [AuthGuardService]
   }
 
 ];
