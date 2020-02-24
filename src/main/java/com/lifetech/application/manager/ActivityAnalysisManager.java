@@ -11,4 +11,6 @@ public interface ActivityAnalysisManager {
     ActivityAnalaysisDTO countIOTByResidence(long residenceId);
 
     ActivityAnalaysisDTO countIOT();
+
+    ActivityAnalaysisDTO getBreakdownRate();
 }

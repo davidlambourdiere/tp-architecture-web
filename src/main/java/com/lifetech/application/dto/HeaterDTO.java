@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public class HeaterDTO extends PersistableElementDTO{
-    private String status;
+    private String breakdownstatus;
     private String state;
     private Double price;
     private Timestamp startdate;
@@ -16,16 +16,17 @@ public class HeaterDTO extends PersistableElementDTO{
     private Timestamp activityduration;
     private PersonDTO person;
     private RoomDTO room;
+    private String temperature;
 
     public HeaterDTO() {
     }
 
-    public String getStatus() {
-        return status;
+    public String getBreakdownstatus() {
+        return breakdownstatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setBreakdownstatus(String breakdownstatus) {
+        this.breakdownstatus = breakdownstatus;
     }
 
     public String getState() {
@@ -107,6 +108,14 @@ public class HeaterDTO extends PersistableElementDTO{
     public void setHeaters(List<HeaterDTO> heaters) {
     }
 
+    public String getStatus() {
+        return breakdownstatus;
+    }
+
+    public void setStatus(String status) {
+        this.breakdownstatus = breakdownstatus;
+    }
+
     public String getActualval() {
         return actualval;
     }
@@ -115,10 +124,18 @@ public class HeaterDTO extends PersistableElementDTO{
         this.actualval = actualval;
     }
 
+    public String getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(String temperature) {
+        this.temperature = temperature;
+
+    }
     @Override
     public String toString() {
         return "HeaterDTO{" +
-                "status='" + status + '\'' +
+                "breakdownstatus='" + breakdownstatus + '\'' +
                 ", state='" + state + '\'' +
                 ", price=" + price +
                 ", startdate=" + startdate +
@@ -131,6 +148,7 @@ public class HeaterDTO extends PersistableElementDTO{
                 ", person=" + person +
                 ", room=" + room +
                 '}';
-    }
-}
+
+
+}}
 

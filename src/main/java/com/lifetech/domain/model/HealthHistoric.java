@@ -23,8 +23,8 @@ public class HealthHistoric extends PersistableElement{
     @Column(name="stepcounter")
     private String stepcounter;
 
-    @Column(name="strapId")
-    private Long strapId;
+    @Column(name="strapid")
+    private Long strap;
 
     public HealthHistoric(String hearthrate, String systolic, String diastolic, String sugarlevel, String stepcounter, Long strap) {
         this.hearthrate = hearthrate;
@@ -32,7 +32,7 @@ public class HealthHistoric extends PersistableElement{
         this.diastolic = diastolic;
         this.sugarlevel = sugarlevel;
         this.stepcounter = stepcounter;
-        this.strapId = strap;
+        this.strap = strap;
     }
 
     public HealthHistoric(){}
@@ -79,21 +79,11 @@ public class HealthHistoric extends PersistableElement{
     }
 
     public Long getStrapId() {
-        return strapId;
+        return strap;
     }
 
     public void setStrapId(Long strapId) {
-        this.strapId = strapId;
+        this.strap = strapId;
     }
 
-    @Override
-    public String toString() {
-        return "HealthHistoric{" +
-                "hearthrate='" + hearthrate + '\'' +
-                ", systolic='" + systolic + '\'' +
-                ", diastolic='" + diastolic + '\'' +
-                ", sugarlevel='" + sugarlevel + '\'' +
-                ", stepcounter='" + stepcounter + '\'' +
-                '}';
-    }
 }
