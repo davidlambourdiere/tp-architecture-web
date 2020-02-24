@@ -2,6 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 // @ts-ignore
 import { NgModule } from '@angular/core';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,9 +24,19 @@ import {ResidentComponent} from './components/resident/resident.component';
 import {AuthService} from "./service/AuthService";
 import {NotificationComponent} from "./components/notification/notification.component";
 import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
-import { SubscriptionComponent } from './components/subscription/subscription.component';
+
 import {BillingComponent} from "./components/billing/billing.component";
 import {SurveyComponent} from "./components/survey/survey.component";
+import { EssentialComponent } from './components/subscription/essential/essential.component';
+import { TotalconfortComponent } from './components/subscription/totalconfort/totalconfort.component';
+import { SerenityComponent } from './components/subscription/serenity/serenity.component';
+import {ConfortComponent} from "./components/subscription/confort/confort.component";
+import {CustomComponent} from "./components/subscription/custom.component";
+
+
+import { MedicalHomeComponent} from './components/medical.control/medical.home/medical.home.component';
+import { MedicalMenuComponent } from './components/medical.control/medical.menu/medical.menu.component';
+import { MedicalResidentsComponent } from './components/medical.control/medical.residents/medical.residents.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +55,16 @@ import {SurveyComponent} from "./components/survey/survey.component";
     MedicalControlComponent,
     BillingComponent,
     ResidentComponent,
-    SubscriptionComponent,
+    CustomComponent,
+    SurveyComponent,
+    ConfortComponent,
+    EssentialComponent,
+    TotalconfortComponent,
+    SerenityComponent,
+    SurveyComponent,
+    MedicalHomeComponent,
+    MedicalMenuComponent,
+    MedicalResidentsComponent,
     SurveyComponent
   ],
   imports: [
@@ -53,6 +73,7 @@ import {SurveyComponent} from "./components/survey/survey.component";
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    FlexLayoutModule,
     ReactiveFormsModule,
   ],
   providers: [AuthService],

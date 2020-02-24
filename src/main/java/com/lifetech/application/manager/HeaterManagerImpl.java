@@ -4,6 +4,7 @@ import com.lifetech.application.dto.*;
 import com.lifetech.domain.OrikaBeanMapper;
 import com.lifetech.domain.dao.HeaterDAO;
 import com.lifetech.domain.dao.HeaterHistoricDAO;
+import com.lifetech.domain.dao.RoomDAO;
 import com.lifetech.domain.model.Heater;
 import com.lifetech.domain.model.HeaterHistoric;
 import com.lifetech.domain.model.StateEnum;
@@ -11,6 +12,7 @@ import com.lifetech.domain.model.StatusEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.lifetech.domain.model.Room;
 import org.springframework.stereotype.Service;
 
 import javax.management.StandardEmitterMBean;
@@ -32,11 +34,14 @@ public class HeaterManagerImpl implements HeaterManager {
 
     private final HeaterHistoricDAO heaterHistoricDAO;
 
+    private final RoomDAO roomDao;
+
     private final OrikaBeanMapper orikaBeanMapper;
 
-    public HeaterManagerImpl(HeaterHistoricDAO heaterHistoricDAO, HeaterDAO heaterDAO, OrikaBeanMapper orikaBeanMapper) {
+    public HeaterManagerImpl(HeaterHistoricDAO heaterHistoricDAO, HeaterDAO heaterDAO, RoomDAO roomDao, OrikaBeanMapper orikaBeanMapper) {
         this.heaterHistoricDAO = heaterHistoricDAO;
         this.heaterDAO = heaterDAO;
+        this.roomDao = roomDao;
         this.orikaBeanMapper = orikaBeanMapper;
     }
 
@@ -53,10 +58,17 @@ public class HeaterManagerImpl implements HeaterManager {
         return iotToReturn;
     }
 
+    public int countHeaters(){
+        List<Heater> heaters = heaterDAO.findAll();
+        return heaters.size();
+    }
+
 
     @Override
-    public HeaterDTO findByRoom(String id) {
-        return null;
+    public List<HeaterDTO> findByRoom(String id) {
+        Room room = roomDao.findById(Long.parseLong(id)).orElse(null);
+        List<Heater> heaters = heaterDAO.findByRoom(room);
+        return orikaBeanMapper.mapAsList(heaters, HeaterDTO.class);
     }
 
     @Override
