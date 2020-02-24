@@ -5,13 +5,13 @@
     <title>Survey</title>
 </head>
 <body>
-<form (ngSubmit)="control(f)" #f="ngForm">
+<form novalidate [formGroup]="loginForm" (ngSubmit)="control(loginForm)"> <!--#f="ngForm">-->
 
   <pre>
     {{ loginForm.value | json}}
-    {{getCurrentModel()}}
+      <!--{{getCurrentModel()}}-->
   </pre>
-  <p class="alert" *ngIf="!trackName.valid && trackName.touched"></p>
+  <!--<p class="alert" *ngIf="!trackName.valid && trackName.touched"></p-->
   <div class="form-group">
     <label>Nom</label>
     <input
@@ -21,44 +21,45 @@
     >
 
     <label>Prenom</label>
-    <input type="text"
-           formControlName="Prenom"
-           class="form-control"
-           ngModel required>
+    <input
+      class="form-control"
+      type="text"
+      formControlName="Prenom"
+    >
 
     <label>Age</label>
     <input type="number"
            formControlName="Age"
            class="form-control"
-           ngModel required>
+           >
   </div>
   <div class="form-group">
     <label>Adresse</label>
     <input type="text"
-           formControlName="Adresse"
+           formControlName="adress"
            class="form-control"
-           ngModel required>
+           >
   </div>
   <div class="form-group">
     <label>Code_Postal</label>
     <input type="text"
            formControlName="Code_Postal"
            class="form-control"
-           ngModel required>
+           >
   </div>
   <div class="form-group">
     <label>e-mail</label>
     <input type="email"
            formControlName="email"
            formclass="form-control"
-           ngModel required>
+           >
   </div>
   <div class="form-group">
     <label>Telephone</label>
     <input type="tel"
            formControlName="Telephone"
            class="form-control"
-           ngModel required>
+           >
   </div>
 
     <div class="form-group">
@@ -66,12 +67,10 @@
       <input type="number"
              id="autonomie"
              class="form-control"
-             name="autonomie"
-             ngModel="checked"
-             (click)="toggle('BAD_Autonomie');"
-             (click) ="toggle('bad_otonomie');"
+             formControlName="autonomie"
+             (change)="toggle('autonomie');"
       >
-
+      <!--(change)="toggle('bad_otonomie');"-->
   </div>
       <!--<div *ngIf="isavalable">Avez vous des problèmes de mobilité</div>-->
       <label id="bad_otonomie">Avez vous des problémes de mobilité ?</label>
@@ -88,6 +87,7 @@
     <div class="form-group">
       <label>Est-ce que vous fumez</label>
       <input type="checkbox"
+             id="fumeur_question"
              formControlName="fumeur"
              class="form-control"
              ngModel required
@@ -100,7 +100,7 @@
     <div class="form-group">
       <label>Depuis combien de temps fumez-vous ?</label>
       <input type="number"
-             formControlName="date_fumeur"
+             formControlName="fumeur"
              class="form-control"
              id="fumeur"
              ngModel required>
@@ -110,15 +110,16 @@
     <div class="form-group">
       <label>Est-ce que vous buvez ?</label>
       <input type="checkbox"
-             formControlName="buveur"
+             formControlName="buveur_question"
              class="form-control"
+             id="buveur_question"
              ngModel required>
     </div>
   </div>
   <div>
     <div class="form-group">
       <label> Etes vous traitez pour des maladies chroniques ?</label>
-      <select formControlName="maladie">
+      <select formControlName="maladie" id="maladie">
         <option value=""></option>
         <option value="Maladie cardiaque">Maladie cardiaque</option>
         <option value="Maladie et troubles oculaire">Maladie et troubles oculaire</option>
@@ -131,16 +132,22 @@
   <div>
     <div class="form-group">
       <label>Etes vous en situation d’urgences médicales ?</label>
-      <input type="checkbox" formControlName="urgence" class="form-control" ngModel required>
+      <input type="checkbox" formControlName="urgence" class="form-control" id="urgence" ngModel required>
     </div>
   </div>
   <div>
     <div class="form-group">
       <label>Quelles sont vos loisirs/modes de vie ?</label>
-      <input type="checkbox" formControlName="loisirs-modeVie">
-      <option value="a">Cuisine</option>
-      <option value="b">Lectures</option>
-      <option value="c">Sports</option>
+      <select formControlName="loisirsmodeVie" id="loisirsmodeVie">
+        <option value="a">Cuisine</option>
+        <option value="b">Lecture</option>
+        <option value="c">Sports</option>
+        <option value="d">Cuisine-Lecture</option>
+        <option value="e">Cuisine-Sports</option>
+        <option value="f">Sports-Lecture</option>
+        <option value="g">Sports-Cuisine-Lecture</option>
+        <option value="i">Autres</option>
+      </select>
     </div>
   </div>
   <div>
@@ -148,11 +155,13 @@
       <label>Votre Revenu moyen est de …?</label>
       <input type="number"
              formControlName="revenu"
+             id="revenu"
              class="form-control">
     </div>
   </div>
 
-  <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Submit</button>
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 </body>
 </html>
+<!--[disabled]="f.invalid"-->
