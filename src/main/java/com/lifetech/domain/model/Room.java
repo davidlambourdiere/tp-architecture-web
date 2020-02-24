@@ -23,4 +23,7 @@ public class Room extends PersistableElement {
 
     public String getNum() { return num; }
 
+    public void setNum(String num) {
+        this.num = num;
+    }
 }
