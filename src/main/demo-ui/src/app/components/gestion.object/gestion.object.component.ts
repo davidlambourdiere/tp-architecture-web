@@ -90,6 +90,7 @@ export class GestionObjectComponent implements OnInit {
       this.lightservice.updateLight(Number(this.lights.id), this.lights).subscribe(data => console.log(data), error => console.log(error));
     })
     console.log("update"+this.lights);
+    alert(" Done ! ");
   }
 
 
@@ -100,7 +101,7 @@ export class GestionObjectComponent implements OnInit {
       this.shutterservice.updateShutter(Number(this.shutters.id), this.shutters).subscribe(data => console.log(data), error => console.log(error));
     })
     console.log("update"+this.shutters);
-
+   alert(" Done ! ");
 
   }
 
@@ -110,7 +111,7 @@ export class GestionObjectComponent implements OnInit {
       this.heaterservice.updateHeater(Number(this.heaters.id), this.heaters).subscribe(data => console.log(data), error => console.log(error));
     })
     console.log("update"+this.heaters);
-
+    alert(" Done ! ");
 
   }
 
