@@ -1,6 +1,6 @@
 package com.lifetech.application.dto;
 
-public class PersonProfileDTO extends PersonDTO {
+public class PersonProfileDTO extends PersistableElementDTO {
 
     private int age;
     private String adress;
@@ -14,9 +14,7 @@ public class PersonProfileDTO extends PersonDTO {
     private boolean medical_emergencies;
     private String hobbies;
 
-    public PersonProfileDTO() {
-
-    }
+    public PersonProfileDTO(){}
 
     public int getAge() {
         return age;
