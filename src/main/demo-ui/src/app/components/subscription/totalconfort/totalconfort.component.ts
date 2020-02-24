@@ -18,17 +18,18 @@ export class TotalconfortComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private subservice: SubscriptionService) { }
 
   ngOnInit() {
-    this.name = 'totalconfort';
+    this.name = 'total-confort';
     console.log(JSON.stringify(this.name));
     this.showSubscriptionTotalConfort();
+    this.login = this.route.snapshot.paramMap.get('login');
   }
 
   validate() {
-    this.router.navigate(["home"]);
+    this.router.navigate(['home']);
   }
 
   redirectToCustomPage() {
-    this.router.navigate(["custom"]);
+    this.router.navigate(['custom']);
   }
 
   showSubscriptionTotalConfort() {
@@ -41,7 +42,6 @@ export class TotalconfortComponent implements OnInit {
   }
 
     insertSubscriptionResident() {
-      this.login = JSON.parse(localStorage.getItem('user'));
       console.log(this.login);
       this.route.params.subscribe(params => {
         this.subservice.insertNewResidentInSubscription(this.subscriptions, this.login).subscribe(data => {

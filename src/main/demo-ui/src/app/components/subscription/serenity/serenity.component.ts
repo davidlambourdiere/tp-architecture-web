@@ -3,6 +3,7 @@ import {SubscriptionDTO} from "../../../dto/SubscriptionDTO";
 import {ActivatedRoute, Router} from "@angular/router";
 import {SubscriptionService} from "../../../service/SubscriptionService";
 import {SubscriptionResidentDTO} from "../../../dto/SubscriptionResidentDTO";
+import {PersonDTO} from "../../../dto/PersonDTO";
 
 @Component({
   selector: 'app-serenity',
@@ -13,22 +14,23 @@ export class SerenityComponent implements OnInit {
   subscriptions: SubscriptionDTO = new SubscriptionDTO();
   name: string;
   login: string;
+  person: PersonDTO;
   residentSubscriptionDTO: SubscriptionResidentDTO;
 
   constructor(private router: Router, private route: ActivatedRoute, private subservice: SubscriptionService) { }
 
   ngOnInit() {
     this.name = 'serenity';
-    console.log(JSON.stringify(this.name));
     this.showSubscriptionSerenity();
+    this.login = this.route.snapshot.paramMap.get('login');
   }
 
   validate() {
-    this.router.navigate(["home"]);
+    this.router.navigate(['home']);
   }
 
   redirectToCustomPage() {
-    this.router.navigate(["custom"]);
+    this.router.navigate(['custom']);
   }
 
   showSubscriptionSerenity() {
@@ -41,7 +43,6 @@ export class SerenityComponent implements OnInit {
   }
 
   insertSubscriptionResident() {
-    this.login = JSON.parse(localStorage.getItem('user'));
     console.log(this.login);
     this.route.params.subscribe(params => {
       this.subservice.insertNewResidentInSubscription(this.subscriptions, this.login).subscribe(data => {

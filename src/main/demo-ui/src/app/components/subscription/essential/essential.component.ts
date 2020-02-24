@@ -3,6 +3,7 @@ import {SubscriptionDTO} from "../../../dto/SubscriptionDTO";
 import {ActivatedRoute, Router} from "@angular/router";
 import {SubscriptionService} from "../../../service/SubscriptionService";
 import {SubscriptionResidentDTO} from "../../../dto/SubscriptionResidentDTO";
+import {PersonDTO} from "../../../dto/PersonDTO";
 
 @Component({
   selector: 'app-essential',
@@ -13,24 +14,27 @@ export class EssentialComponent implements OnInit {
   subscriptions: SubscriptionDTO = new SubscriptionDTO();
   name: string;
   login: string;
+  person: PersonDTO;
   residentSubscriptionDTO: SubscriptionResidentDTO;
 
 
   constructor(private router: Router, private route: ActivatedRoute, private subservice: SubscriptionService) { }
 
   ngOnInit() {
-   // this.name = this.route.snapshot.paramMap.get('name');
+
+    // this.name = this.route.snapshot.paramMap.get('name');
   this.name = 'essential';
   console.log(JSON.stringify(this.name));
-    this.showSubscriptionEssential();
+  this.showSubscriptionEssential();
+  this.login = this.route.snapshot.paramMap.get('login');
   }
 
   validate() {
-    this.router.navigate(["home"]);
+    this.router.navigate(['home']);
   }
 
   redirectToCustomPage() {
-    this.router.navigate(["custom"]);
+    this.router.navigate(['custom']);
   }
 
   showSubscriptionEssential() {
