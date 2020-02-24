@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ClockHistoricDAO extends JpaRepository<ClockHistoric, Long> {
-    List<ClockHistoric> findAllByClockId(Long id);
+    List<ClockHistoric> findAllByClockid(Long id);
 }

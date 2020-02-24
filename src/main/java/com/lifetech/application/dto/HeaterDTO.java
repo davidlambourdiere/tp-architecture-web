@@ -15,6 +15,7 @@ public class HeaterDTO extends PersistableElementDTO{
     private Timestamp activityduration;
     private PersonDTO person;
     private RoomDTO room;
+    private String temperature;
 
     public HeaterDTO() {
     }
@@ -104,5 +105,13 @@ public class HeaterDTO extends PersistableElementDTO{
     public void setRoom(RoomDTO room) { this.room = room; }
 
     public void setHeaters(List<HeaterDTO> heaters) {
+    }
+
+    public String getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(String temperature) {
+        this.temperature = temperature;
     }
 }

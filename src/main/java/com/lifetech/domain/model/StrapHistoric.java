@@ -20,8 +20,8 @@ public class StrapHistoric extends PersistableElement {
     @Enumerated(EnumType.STRING)
     private StatusEnum breakdownstatus;
 
-    @Column(name="strapId")
-    private Long strapId;
+    @Column(name="strapid")
+    private Long strapid;
 
     public StrapHistoric() {
     }
@@ -50,12 +50,12 @@ public class StrapHistoric extends PersistableElement {
         this.state = state;
     }
 
-    public Long getStrapId() {
-        return strapId;
+    public Long getStrapid() {
+        return strapid;
     }
 
-    public void setStrapId(Long strapId) {
-        this.strapId = strapId;
+    public void setStrapid(Long strapid) {
+        this.strapid = strapid;
     }
 
     public StatusEnum getBreakdownstatus() {

@@ -1,8 +1,12 @@
 package com.lifetech.application.dto;
 
+import java.util.List;
+
 public class ClockDetailDTO extends PersistableElementDTO{
     private ClockDTO clock;
     private String percentageOnLastMonth;
+    private List<ClockHistoricDTO> clockhistorics;
+    private boolean usedlastmonth;
 
     public ClockDetailDTO() {
     }
@@ -21,5 +25,21 @@ public class ClockDetailDTO extends PersistableElementDTO{
 
     public void setPercentageOnLastMonth(String percentageOnLastMonth) {
         this.percentageOnLastMonth = percentageOnLastMonth;
+    }
+
+    public boolean isUsedlastmonth() {
+        return usedlastmonth;
+    }
+
+    public void setUsedlastmonth(boolean usedlastmonth) {
+        this.usedlastmonth = usedlastmonth;
+    }
+
+    public List<ClockHistoricDTO> getClockhistorics() {
+        return clockhistorics;
+    }
+
+    public void setClockhistorics(List<ClockHistoricDTO> clockhistorics) {
+        this.clockhistorics = clockhistorics;
     }
 }

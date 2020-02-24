@@ -5,6 +5,7 @@ import java.util.List;
 public class LightDetailDTO  extends PersistableElementDTO{
     private LightDTO light;
     private String percentageOnLastMonth;
+    private boolean usedlastmonth;
     private List<LightHistoricDTO> lightshistoric;
 
     public LightDetailDTO() {
@@ -32,5 +33,13 @@ public class LightDetailDTO  extends PersistableElementDTO{
 
     public void setLightshistoric(List<LightHistoricDTO> lightshistoric) {
         this.lightshistoric = lightshistoric;
+    }
+
+    public boolean isUsedlastmonth() {
+        return usedlastmonth;
+    }
+
+    public void setUsedlastmonth(boolean usedlastmonth) {
+        this.usedlastmonth = usedlastmonth;
     }
 }
