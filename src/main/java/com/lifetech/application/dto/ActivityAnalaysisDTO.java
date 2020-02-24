@@ -8,6 +8,7 @@ public class ActivityAnalaysisDTO {
     private Long nLight;
     private Long nAlert;
     private Long nBreakdown;
+    private Float breakdownRate;
 
     public ActivityAnalaysisDTO() {
     }
@@ -65,5 +66,13 @@ public class ActivityAnalaysisDTO {
 
     public void setResidenceName(String residenceName) {
         this.residenceName = residenceName;
+    }
+
+    public Float getBreakdownRate() {
+        return breakdownRate;
+    }
+
+    public void setBreakdownRate(Float breakdownRate) {
+        this.breakdownRate = breakdownRate;
     }
 }

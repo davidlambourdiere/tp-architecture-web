@@ -76,8 +76,10 @@ public class MockForActivityAnalysisManagerImpl implements MockForActivityAnalys
                 heaterList.add(heater);
 
                 if (heater.getBreakdownstatus().equals(StatusEnum.BREAKDOWN)) {
-                    HeaterBreakdown heaterBreakdown = heaterBreakdownFactory.createRandomHeaterBreakdown(heater);
-                    heaterBreakdownDAO.save(heaterBreakdown);
+                    for (int j = 1; j < 10; j++) {
+                        HeaterBreakdown heaterBreakdown = heaterBreakdownFactory.createRandomHeaterBreakdown(heater);
+                        heaterBreakdownDAO.save(heaterBreakdown);
+                    }
                 }
             }
             personDAO.saveAll(personList);

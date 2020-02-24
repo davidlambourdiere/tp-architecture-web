@@ -7,7 +7,7 @@ import java.util.Random;
 
 @Component
 public class HeaterFactoryImpl implements HeaterFactory {
-    Random rd = new Random();
+
     @Override
     public Heater createHeater() {
         return new Heater();
@@ -15,6 +15,7 @@ public class HeaterFactoryImpl implements HeaterFactory {
 
     @Override
     public Heater createRandomHeater(Person person, Room room) {
+        Random rd = new Random();
         Heater heater = new Heater();
         heater.setBreakdownstatus((rd.nextBoolean()) ? StatusEnum.BREAKDOWN : StatusEnum.NOT_BREAKDOWN);
         heater.setState(StateEnum.values()[rd.nextInt(StateEnum.values().length)]);
