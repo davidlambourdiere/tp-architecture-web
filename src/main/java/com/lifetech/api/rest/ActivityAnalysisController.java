@@ -30,4 +30,7 @@ public class ActivityAnalysisController extends RestBaseController{
     ActivityAnalaysisDTO countIOT(){
         return activityAnalysisManager.countIOT();
     }
+
+    @GetMapping("analysis/breakdownrate")
+    ActivityAnalaysisDTO getBreakdownRate() {return activityAnalysisManager.getBreakdownRate();}
 }
