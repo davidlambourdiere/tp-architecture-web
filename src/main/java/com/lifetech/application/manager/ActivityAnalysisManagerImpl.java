@@ -30,7 +30,7 @@ public class ActivityAnalysisManagerImpl implements ActivityAnalysisManager {
     @Override
     public ActivityAnalaysisDTO countIOTByPerson(String personLogin) {
         ActivityAnalaysisDTO activityAnalaysisDTO = new ActivityAnalaysisDTO();
-        Person person = personDAO.findByLogin(personLogin).orElse(null);
+        Person person = personDAO.findByLogin(personLogin);
         activityAnalaysisDTO.setPersonName(person.getFirstName() + " " + person.getLastName());
         activityAnalaysisDTO.setnClock(clockDAO.countByPerson(person));
         activityAnalaysisDTO.setnHeather(heaterDAO.countByPerson(person));

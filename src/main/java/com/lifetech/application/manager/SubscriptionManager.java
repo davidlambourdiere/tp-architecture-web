@@ -6,11 +6,13 @@ import com.lifetech.domain.model.Subscription;
 import java.util.List;
 
 public interface SubscriptionManager {
-    List<SubscriptionDTO> findAllSubscription();
 
     SubscriptionDTO findSubscriptionById(Long subscriptionId);
 
-    SubscriptionDTO save(SubscriptionDTO updatedSubscription);
+    SubscriptionDTO findSubscriptionByProfile(String subscriptionName);
 
-    boolean delete(SubscriptionDTO deletedSubscription);
+    //Dont work for the moment
+   // SubscriptionDTO sumPrice(String subscriptionName, List<String> typeList, List<String> serviceList);
+
+
 }

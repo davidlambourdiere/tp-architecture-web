@@ -12,7 +12,7 @@ import {AuthService} from "../../service/AuthService";
 export class ConnectionComponent implements OnInit {
 
   person: PersonDTO;
-  isConnectionGood: boolean=null;
+  isConnectionGood: boolean = null;
 
   constructor(private personService: PersonService, private router: Router, private route: ActivatedRoute, private authService: AuthService) {
   }
@@ -25,15 +25,30 @@ export class ConnectionComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.personService.verifyConnection(this.person).subscribe(data => {
         if (data != null) {
+
           this.person = data;
+          console.log(JSON.stringify(this.person.profiletype));
           this.authService.setSession(data);
-          localStorage.setItem('user', JSON.stringify(this.person));
-          this.router.navigate(['/home']);
+          if (this.person.profiletype === 'confort') {
+            this.router.navigate(['/confort', this.person.login]);
+          }
+          if (this.person.profiletype === 'essential') {
+            this.router.navigate(['/essential', this.person.login]);
+          }
+          if (this.person.profiletype === 'serenity') {
+            this.router.navigate(['/serenity', this.person.login]);
+          }
+          if (this.person.profiletype === 'total-confort') {
+            this.router.navigate(['/total-confort', this.person.login]);
+          }
+          if (this.person.profiletype == null) {
+            this.router.navigate(['/home']);
+          }
         } else {
           this.isConnectionGood = false;
         }
-      })
-    })
+      });
+    });
 
   }
 

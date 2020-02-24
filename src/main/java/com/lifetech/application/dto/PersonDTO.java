@@ -14,6 +14,7 @@ public class PersonDTO extends PersistableElementDTO {
     private String phone;
     private String handicap;
     private String averageincome;
+    private String profiletype;
     private String deseas;
     private ResidenceDTO residence;
 
@@ -142,4 +143,8 @@ public class PersonDTO extends PersistableElementDTO {
                 ", residence=" + residence +
                 '}';
     }
+
+    public String getProfiletype() { return profiletype; }
+
+    public void setProfiletype(String profiletype) { this.profiletype = profiletype; }
 }
