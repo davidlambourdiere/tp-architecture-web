@@ -11,16 +11,16 @@ import {LocationComponent} from './components/location/location.component';
 import {MedicalControlComponent} from './components/medical.control/medical.control.component';
 import {BillingComponent} from './components/billing/billing.component';
 import {ResidentComponent} from './components/resident/resident.component';
-import {RouterModule, Routes} from "@angular/router";
+import {RouterModule, Routes} from '@angular/router';
 import {AuthGuardService} from './guards/auth-guard.service';
-import {NotificationComponent} from "./components/notification/notification.component";
-import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
-import {CustomComponent} from "./components/subscription/custom.component";
-import {SurveyComponent} from "./components/survey/survey.component";
-import {ConfortComponent} from "./components/subscription/confort/confort.component";
-import {EssentialComponent} from "./components/subscription/essential/essential.component";
-import {SerenityComponent} from "./components/subscription/serenity/serenity.component";
-import {TotalconfortComponent} from "./components/subscription/totalconfort/totalconfort.component";
+import {NotificationComponent} from './components/notification/notification.component';
+import {DetailIotComponent} from './components/monitoring/detail.iot/detail.iot.component';
+import {CustomComponent} from './components/subscription/custom.component';
+import {SurveyComponent} from './components/survey/survey.component';
+import {ConfortComponent} from './components/subscription/confort/confort.component';
+import {EssentialComponent} from './components/subscription/essential/essential.component';
+import {SerenityComponent} from './components/subscription/serenity/serenity.component';
+import {TotalconfortComponent} from './components/subscription/totalconfort/totalconfort.component';
 
 
 const routes: Routes = [
@@ -29,27 +29,27 @@ const routes: Routes = [
     component: ConnectionComponent
   },
   {
-    path:'home',
+    path: 'home',
     component: HomeComponent,
     canActivate: [AuthGuardService]
   },
   {
-    path:'confort',
+    path: 'confort/:login',
     component: ConfortComponent,
     canActivate: [AuthGuardService]
   },
   {
-    path:'essential',
+    path: 'essential/:login' ,
     component: EssentialComponent,
     canActivate: [AuthGuardService]
   },
   {
-    path:'serenity',
+    path: 'serenity/:login',
     component: SerenityComponent,
     canActivate: [AuthGuardService]
   },
   {
-    path:'total-confort',
+    path: 'total-confort/:login',
     component: TotalconfortComponent,
     canActivate: [AuthGuardService]
   },

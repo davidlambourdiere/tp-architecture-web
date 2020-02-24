@@ -12,7 +12,7 @@ import {AuthService} from "../../service/AuthService";
 export class ConnectionComponent implements OnInit {
 
   person: PersonDTO;
-  isConnectionGood: boolean=null;
+  isConnectionGood: boolean = null;
 
   constructor(private personService: PersonService, private router: Router, private route: ActivatedRoute, private authService: AuthService) {
   }
@@ -27,24 +27,28 @@ export class ConnectionComponent implements OnInit {
         if (data != null) {
 
           this.person = data;
-         console.log(JSON.stringify(this.person.profileType));
+          console.log(JSON.stringify(this.person.profiletype));
           this.authService.setSession(data);
-          if (this.person.profileType == "confort")
-            this.router.navigate(['/confort']);
-          if (this.person.profileType == "essential") {
-            this.router.navigate(['/essential']);
+          if (this.person.profiletype === 'confort') {
+            this.router.navigate(['/confort', this.person.login]);
           }
-          if (this.person.profileType == "serenity")
-            this.router.navigate(['/serenity']);
-          if (this.person.profileType == "totalconfort")
-            this.router.navigate(['/total-confort']);
-          if (this.person.profileType == null)
+          if (this.person.profiletype === 'essential') {
+            this.router.navigate(['/essential', this.person.login]);
+          }
+          if (this.person.profiletype === 'serenity') {
+            this.router.navigate(['/serenity', this.person.login]);
+          }
+          if (this.person.profiletype === 'total-confort') {
+            this.router.navigate(['/total-confort', this.person.login]);
+          }
+          if (this.person.profiletype == null) {
             this.router.navigate(['/home']);
+          }
         } else {
           this.isConnectionGood = false;
         }
-      })
-    })
+      });
+    });
 
   }
 
