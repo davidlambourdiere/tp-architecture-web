@@ -1,12 +1,12 @@
 INSERT INTO lifetech.residence (adress) VALUES ("10 avenue de paris");
 
 
-INSERT INTO lifetech.person (firstname, lastname, login, password, residence_id) VALUES ('Jean-Paul', 'Gauthier', 'admin', 'admin', 1);
-INSERT INTO lifetech.person (firstname, lastname, login, password, residence_id) VALUES ('Justin', 'Aguesse', 'Justindu94', 'jujulebg', 1);
-INSERT INTO lifetech.person (firstname, lastname, login, password, residence_id) VALUES ('Louis', 'Beaudin', 'Loulou', 'Louis123', 1);
-INSERT INTO lifetech.person (firstname, lastname, login, password, residence_id) VALUES ('Marie', 'Collin', 'Coco', 'Marie145', 1);
-INSERT INTO lifetech.person (firstname, lastname, login, password, residence_id) VALUES ('Mohammed', 'Henni', 'Momo', 'Momodu13', 1);
-INSERT INTO lifetech.person (firstname, lastname, login, password, residence_id) VALUES ('Henry', 'Dupont', 'Henry', 'henry', 1);
+INSERT INTO lifetech.person (firstname, lastname, birthdate, login, password, userrole, residence_id) VALUES ('Jean-Paul', 'Gauthier', '1936-05-14', 'admin', 'admin', 'DOCTOR', 1);
+INSERT INTO lifetech.person (firstname, lastname, birthdate, login, password, userrole, residence_id) VALUES ('Justin', 'Aguesse', '1936-05-14', 'Justindu94', 'jujulebg', 'RESIDENT', 1);
+INSERT INTO lifetech.person (firstname, lastname, birthdate, login, password, userrole, residence_id) VALUES ('Louis', 'Beaudin', '1936-05-14', 'Loulou', 'Louis123', 'RESIDENT', 1);
+INSERT INTO lifetech.person (firstname, lastname, birthdate, login, password, userrole, residence_id) VALUES ('Marie', 'Collin', '1936-05-14', 'Coco', 'Marie145', 'RESIDENT', 1);
+INSERT INTO lifetech.person (firstname, lastname, birthdate, login, password, userrole, residence_id) VALUES ('Mohammed', 'Henni','1936-05-14',  'Momo', 'Momodu13', 'RESIDENT', 1);
+INSERT INTO lifetech.person (firstname, lastname, birthdate, login, password, userrole, residence_id) VALUES ('Henry', 'Dupont', '1936-05-14', 'Henry', 'henry', 'RESIDENT', 1);
 
 
 INSERT INTO lifetech.room (num) VALUES (1);
