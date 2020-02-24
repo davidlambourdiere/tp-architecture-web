@@ -38,7 +38,7 @@ export class PanneComponent implements OnInit {
   // tslint:disable-next-line:ban-types
   heaterBreakdown: Object = new HeaterMessageDTO();
 
-  breakdowns = [0, 0, 0];
+  breakdowns = [0, 0, 0, 0, 0];
 
   ngOnInit() {
     this.rooms = this.roomService.findAllRoom();
@@ -82,6 +82,8 @@ export class PanneComponent implements OnInit {
     this.breakdownRoom('1');
     this.breakdownRoom('2');
     this.breakdownRoom('3');
+    this.breakdownRoom('4');
+    this.breakdownRoom('5');
     setTimeout(() => {  this.refresh(); }, 2000);
   }
 
