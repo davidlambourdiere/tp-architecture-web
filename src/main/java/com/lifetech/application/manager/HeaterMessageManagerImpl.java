@@ -5,9 +5,11 @@ import com.lifetech.domain.OrikaBeanMapper;
 import com.lifetech.domain.dao.HeaterBreakdownDAO;
 import com.lifetech.domain.dao.HeaterDAO;
 import com.lifetech.domain.dao.HeaterMessageDAO;
+import com.lifetech.domain.factory.HeaterFactory;
 import com.lifetech.domain.model.Heater;
 import com.lifetech.domain.model.HeaterBreakdown;
 import com.lifetech.domain.model.HeaterMessage;
+import com.lifetech.domain.model.StatusEnum;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
@@ -50,7 +52,6 @@ public class HeaterMessageManagerImpl implements HeaterMessageManager {
         List<HeaterMessageDTO> listHeaterMessageDTO = this.findAllByHeater(id);
         listHeaterMessageDTO.sort(Comparator.comparing(HeaterMessageDTO::getInsertDate));
         HeaterMessageDTO heaterMessageDTO = listHeaterMessageDTO.get(listHeaterMessageDTO.size() - 1);
-
         // algorith : breakdown detection for heater
         String temperature = heaterMessageDTO.getTemperatureMessage();
         System.out.println("temperature du message " + temperature);
@@ -58,7 +59,10 @@ public class HeaterMessageManagerImpl implements HeaterMessageManager {
         int temperatureInt = Integer.parseInt(temperature);
         if (temperatureInt > 50 || temperatureInt < -10) {
             breakdown = true;
+            // inserting of new breakdown
             insertHeaterBreakdown(id, "YES", "NO", "Temperature suspecte !");
+            // updating of heater's status --> BREAKDOWN
+            updateHeaterStatus(id);
         }
         return breakdown;
     }
@@ -75,5 +79,13 @@ public class HeaterMessageManagerImpl implements HeaterMessageManager {
         HeaterBreakdown heaterBreakdown = new HeaterBreakdown("1", dateAsString, " ", suspect, breakdown, message, heater);
         System.out.println("je suis la panne à inserer " + heaterBreakdown);
         heaterBreakdownDAO.save(heaterBreakdown);
+    }
+
+    void updateHeaterStatus(String id) {
+        // The heater of the id
+        Heater heater = heaterdao.findById(Long.parseLong(id)).orElse(null);
+        // update of the status' heater
+        heater.setBreakdownstatus(StatusEnum.BREAKDOWN);
+        heaterdao.save(heater);
     }
 }

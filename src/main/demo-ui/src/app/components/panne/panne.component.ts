@@ -38,23 +38,29 @@ export class PanneComponent implements OnInit {
   // tslint:disable-next-line:ban-types
   heaterBreakdown: Object = new HeaterMessageDTO();
 
-  breakdowns = [3, 2, 1];
+  breakdowns = [0, 0, 0];
 
   ngOnInit() {
     this.rooms = this.roomService.findAllRoom();
-    this.breakdownRooms();
+    this.refresh();
   }
 
   RoomDetail(room: RoomDTO) {
-    this.object = this.clockService.findIOTByRoom(String(room.num));
+    this.object = this.heaterService.findIOTByRoom(String(room.num));
   }
 
   breakdownHeatersDetection() {
     this.heaterService.countHeaters().subscribe( data => {
-      for (let i = 0; i < data; i++) {
+      for (let i = 1; i <= data; i++) {
         this.breakdownHeaterDetection(i.toString());
       }
     });
+    setTimeout(() => {  this.refresh(); }, 2000);
+
+  }
+
+  async refresh() {
+    this.breakdownRooms();
   }
 
   private breakdownHeaterDetection(id: string) {
@@ -76,18 +82,19 @@ export class PanneComponent implements OnInit {
     this.breakdownRoom('1');
     this.breakdownRoom('2');
     this.breakdownRoom('3');
+    setTimeout(() => {  this.refresh(); }, 2000);
   }
 
   // define the number of object in breakdown and change the array breakdowns
   breakdownRoom(index: string) {
     // TODO : solve the problem with asynchronous functions
-    this.clockService.findIOTByRoom(String(index)).pipe(
+    this.heaterService.findIOTByRoom(String(index)).pipe(
       // tslint:disable-next-line:triple-equals
-      map(data => data.map(val => val.state).filter(x => x == 'off').length)
+      map(data => data.map(val => val.breakdownstatus).filter(x => x == 'BREAKDOWN').length)
     ).subscribe(toto => {
       this.breakdowns[index] = toto;
       console.log(index, ' - ', toto); });
-    console.log(this.rooms);
+    console.log('salut - ', this.rooms);
   }
 
 

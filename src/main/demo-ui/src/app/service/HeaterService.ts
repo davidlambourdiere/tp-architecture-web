@@ -26,6 +26,10 @@ export class HeaterService {
     return this.http.get(`api/iots/findByPerson/${idperson}`);
   }
 
+  findIOTByRoom(idroom: string): Observable<any> {
+    return this.http.get(`api/heater/findByRoom/${idroom}`);
+  }
+
   countHeaters() {
     return this.http.get(`api/heater/countHeaters`);
   }
