@@ -14,7 +14,7 @@ public class PersonDTO extends PersistableElementDTO {
     private String phone;
     private String handicap;
     private String averageincome;
-    private String profileType ;
+    private String profiletype;
 
     public PersonDTO() {
     }
@@ -107,7 +107,7 @@ public class PersonDTO extends PersistableElementDTO {
         this.averageincome = averageincome;
     }
 
-    public String getProfileType() { return profileType; }
+    public String getProfiletype() { return profiletype; }
 
-    public void setProfileType(String profileType) { this.profileType= profileType; }
+    public void setProfiletype(String profiletype) { this.profiletype = profiletype; }
 }
