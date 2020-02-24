@@ -7,9 +7,15 @@ import java.util.List;
 
 public interface HeaterManager {
     HeaterDTO findById(String id);
-    HeaterDTO findAllHeater();
+
     HeaterDTO findByRoom(String id);
 
     HeaterDetailDTO findByHistoric(String id);
+
+    List<HeaterDTO> findAllHeater();
+
+    List<HeaterDTO> findHeaterByPerson(String id);
+
+    HeaterDTO updateHeater( String id, HeaterDTO heaterDtoReceived);
 }
 

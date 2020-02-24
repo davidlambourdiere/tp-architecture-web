@@ -10,8 +10,13 @@ import java.sql.Timestamp;
 public class Heater  extends IOT{
     @Column(name = "minvalueref")
     private String minvalueref;
+
+    @Column(name = "actualval")
+    private String actualval;
+
     @Column(name = "maxvalueref")
     private String maxvalueref;
+
     @Column(name = "state")
     private String state;
 
@@ -22,12 +27,13 @@ public class Heater  extends IOT{
     @ManyToOne(cascade = CascadeType.ALL)
     private Room room;
 
-    public Heater(Double price, String status, String state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration, Person person, Room room) {
+    public Heater(Double price, String status, String state, String ipadress, Timestamp startdate, String minvalueref, String actualval, String maxvalueref, String suspect, Timestamp activityduration, Person person, Room room) {
         super(price, status, state, ipadress, startdate, minvalueref, maxvalueref, suspect, activityduration);
         this.person = person;
         this.room = room;
         this.state = state;
         this.minvalueref = minvalueref;
+        this.actualval = actualval;
         this.maxvalueref = maxvalueref;
     }
 
@@ -38,6 +44,8 @@ public class Heater  extends IOT{
     public void setMinvalueref(String minvalueref) {
         this.minvalueref = minvalueref;
     }
+
+
 
     @Override
     public void setMaxvalueref(String maxvalueref) {
@@ -53,6 +61,8 @@ public class Heater  extends IOT{
     public String getMinvalueref() {
         return minvalueref;
     }
+
+
 
     @Override
     public String getMaxvalueref() {
@@ -75,4 +85,24 @@ public class Heater  extends IOT{
     public Room getRoom() { return room; }
 
     public void setRoom(Room room) { this.room = room; }
+
+    public String getActualval() {
+        return actualval;
+    }
+
+    public void setActualval(String actualval) {
+        this.actualval = actualval;
+    }
+
+    @Override
+    public String toString() {
+        return "Heater{" +
+                "minvalueref='" + minvalueref + '\'' +
+                ", maxvalueref='" + maxvalueref + '\'' +
+                ", state='" + state + '\'' +
+                ", actualval='" + actualval + '\'' +
+                ", person=" + person +
+                ", room=" + room +
+                '}';
+    }
 }

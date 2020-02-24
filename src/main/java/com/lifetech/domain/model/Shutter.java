@@ -47,4 +47,13 @@ public class Shutter extends IOT{
     public Room getRoom() { return room; }
 
     public void setRoom(Room room) { this.room = room; }
+
+    @Override
+    public String toString() {
+        return "Shutter{" +
+                "percentage='" + percentage + '\'' +
+                ", person=" + person +
+                ", room=" + room +
+                '}';
+    }
 }
