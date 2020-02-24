@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface PersonService {
     Person verifyConnection(List<Person> people, Person person);
+
+
 }

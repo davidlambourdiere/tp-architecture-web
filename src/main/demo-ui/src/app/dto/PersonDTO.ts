@@ -14,5 +14,6 @@ export class PersonDTO{
   password: string;
   userevaluation: string;
   userrole: string;
+  profiletype: string ;
   strap : StrapDTO;
 }
