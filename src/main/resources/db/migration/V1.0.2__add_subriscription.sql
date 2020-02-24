@@ -20,7 +20,7 @@ CONSTRAINT fk_subscription_bill_id foreign key (subscriptionid) references subsc
 CONSTRAINT fk_subscription_person_id foreign key (personid) references person(id)
 );
 
-create table lifetech.referencesPrices(
+create table lifetech.referencesprices(
 id SERIAL PRIMARY KEY,
 numSerie VARCHAR(255),
 type VARCHAR(255),
