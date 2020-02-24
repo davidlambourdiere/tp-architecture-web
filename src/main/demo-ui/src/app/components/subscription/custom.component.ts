@@ -18,23 +18,11 @@ export class CustomComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private subservice: SubscriptionService) { }
 
   ngOnInit() {
-    this.showSubscription()
+
   }
 
   redirectToHomePage(){
     this.router.navigate(["home"]);
   }
-
-  showSubscription() {
-    this.route.params.subscribe(params => {
-      this.subservice.findAllSubscription().subscribe(data => {
-        this.subscriptions = data;
-
-      })
-    })
-  }
-
-
-
 
 }
