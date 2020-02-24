@@ -42,7 +42,12 @@ public class HeaterController extends RestBaseController{
     }
 
 
+    @PutMapping("heater/switchDownHeater/{id}")
+    public HeaterDTO switchDownHeater (@PathVariable(value = "id") String id,
+                                   @Valid @RequestBody HeaterDTO heaterDtoReceived) {
+        return heaterManager.switchDownHeater(id, heaterDtoReceived);
 
+    }
     @PutMapping("heater/updateHeater/{id}")
     public HeaterDTO updateHeater (@PathVariable(value = "id") String id,
                                  @Valid @RequestBody HeaterDTO heaterDtoReceived) {

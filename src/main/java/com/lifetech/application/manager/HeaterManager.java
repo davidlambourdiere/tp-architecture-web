@@ -17,5 +17,7 @@ public interface HeaterManager {
     List<HeaterDTO> findHeaterByPerson(String id);
 
     HeaterDTO updateHeater( String id, HeaterDTO heaterDtoReceived);
+
+    HeaterDTO switchDownHeater(String id, HeaterDTO heaterDtoReceived);
 }
 

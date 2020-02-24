@@ -22,4 +22,7 @@ export class HeaterService {
     return this.http.put<HeaterDTO>(`api/heater/updateHeater/${id}`, heater);
   }
 
+  findbyIpAdress(ipadress: string) :Observable<HeaterDTO>{
+      return this.http.get<HeaterDTO>(`api/heater/${ipadress}`);
+  }
 }

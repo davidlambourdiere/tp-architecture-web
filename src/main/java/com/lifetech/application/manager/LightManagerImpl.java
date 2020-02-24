@@ -60,7 +60,7 @@ public class LightManagerImpl implements LightManager {
         LightDTO updatedLightDTO = orikaBeanMapper.map(light, LightDTO.class);
 
         updatedLightDTO.setColor(lightDtoReceived.getColor());
-        updatedLightDTO.setStatus(lightDtoReceived.getStatus());
+        updatedLightDTO.setState(lightDtoReceived.getState());
         updatedLightDTO.setPercentage(lightDtoReceived.getPercentage());
         Light lightsaved = orikaBeanMapper.map(updatedLightDTO, Light.class);
         System.out.println(lightsaved);

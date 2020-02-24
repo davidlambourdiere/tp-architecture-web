@@ -12,6 +12,8 @@ import {LightDTO} from "../../dto/LightDTO";
 import {ShutterDTO} from "../../dto/ShutterDTO";
 import {ShutterService} from "../../service/ShutterService";
 import {$} from "protractor";
+import {IOTDTO} from "../../dto/IOTDTO";
+import {IOTService} from "../../service/IOTService";
 
 
 
@@ -28,21 +30,29 @@ export class GestionObjectComponent implements OnInit {
   heaters: HeaterDTO ;
   lights: LightDTO ;
   shutters: ShutterDTO ;
-
+  owner: string= '';
+  type: string = 'all';
+  iots:  IOTDTO;
+  show: boolean = false;
+  id: string= '';
+  temperatureactuelle : number ;
 
   defaultOnOff = 'éteint';
   defaultIntensite ='50';
   defaultCouleur ='bleu';
 
-  constructor(private personService: PersonService, private router: Router, private route: ActivatedRoute, private heaterservice: HeaterService, private lightservice: LightService, private shutterservice : ShutterService) {
+  constructor(private personService: PersonService, private router: Router, private route: ActivatedRoute, private heaterservice: HeaterService, private lightservice: LightService, private shutterservice : ShutterService, private iotservice: IOTService) {
   }
 
   ngOnInit(): void {
 
+    this.findAllIOT();
     this.lights = new LightDTO();
     this.shutters = new ShutterDTO();
     this.heaters = new HeaterDTO();
+    this.iots = new IOTDTO();
 
+    console.log(this.heaters.actualval);
     console.log(this.shutters);
     console.log(this.lights);
     console.log(this.heaters);
@@ -56,10 +66,12 @@ export class GestionObjectComponent implements OnInit {
 
 
     this.route.params.subscribe(params => {
-      this.heaterservice.findbyId(1).subscribe(data => {
+      this.heaterservice.findbyId(Number(this.heaters.id)).subscribe(data => {
         this.heaters = data, error => console.log(error);
       })
     })
+
+    this.temperatureactuelle = Number(this.heaters.actualval);
 
 
 
@@ -69,14 +81,13 @@ export class GestionObjectComponent implements OnInit {
       })
 
 
-      console.log("coucou");
       console.log(this.shutters.state);
     })
   }
   onSubmit(form: NgForm) {
     console.log(form.value);
     this.route.params.subscribe(params => {
-      this.lightservice.updateLight(1, this.lights).subscribe(data => console.log(data), error => console.log(error));
+      this.lightservice.updateLight(Number(this.lights.id), this.lights).subscribe(data => console.log(data), error => console.log(error));
     })
     console.log("update"+this.lights);
   }
@@ -86,7 +97,7 @@ export class GestionObjectComponent implements OnInit {
   onSubmitShutter(g: NgForm) {
     console.log(g.value);
     this.route.params.subscribe(params => {
-      this.shutterservice.updateShutter(1, this.shutters).subscribe(data => console.log(data), error => console.log(error));
+      this.shutterservice.updateShutter(Number(this.shutters.id), this.shutters).subscribe(data => console.log(data), error => console.log(error));
     })
     console.log("update"+this.shutters);
 
@@ -96,22 +107,37 @@ export class GestionObjectComponent implements OnInit {
   onSubmitHeater(h: NgForm) {
     console.log(h.value);
     this.route.params.subscribe(params => {
-      this.heaterservice.updateHeater(3, this.heaters).subscribe(data => console.log(data), error => console.log(error));
+      this.heaterservice.updateHeater(Number(this.heaters.id), this.heaters).subscribe(data => console.log(data), error => console.log(error));
     })
     console.log("update"+this.heaters);
 
 
   }
 
+SwitchDownHeat(){
+
+     this.temperatureactuelle = Number("400");
+      this.temperatureactuelle = this.temperatureactuelle -1;
+      console.log('La température baisse')
+      console.log('La température est maintenant de '  + this.temperatureactuelle)
 
 
-
-
+}
 
 
   delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
+
+  findAllIOT() {
+    this.route.params.subscribe(params => {
+      this.iotservice.findAllIOT().subscribe(data => {
+        this.iots = data;
+        this.show = true;
+      })
+    })
+  }
+
 
   runScenario(){
 

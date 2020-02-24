@@ -13,35 +13,132 @@
 <body onload="refreshTime()">
 <br>
 <div class="noteAlt">
-<br>
-  La Light que vous  possédez a une luminosité à  {{lights.percentage}} elle est  {{lights.status}}  et la lumière est de couleur {{lights.color}}
-<br> Le Shutter que vous  possédez est ouvert à  {{shutters.percentage}}
-  <br> Votre reveil est actuellement réglé à Xh pour demain.
-  <br> Votre chauffage est actuellement à {{heaters.actualval}} degrés
 
-
+  <br>
+  You'll find the list of your iots bellow
+  <br>
 </div>
-<br><br><br><br>
+  <br><br><br>
 
 
-<div class="row">
-  <div class="col-sm-8 col-sm-offset-2">
-    <h1> CLOCK </h1>
-    <form >
 
-      <div >
+  <div *ngIf="show===true">
+    <div *ngIf="iots!==null && iots.lights!==null" [ngClass]="{'display-none': type!=='Light' && type!=='all',
+    'display-visibility': type==='all' || type==='Light'}">
+      <h6>Lights</h6>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Id </th>
+          <th scope="col">State</th>
+          <th scope="col">Ip adress</th>
+          <th scope="col">Percentage of Brightness </th>
+          <th scope="col">Color</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let iot of iots.lights">
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.id}}
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.state}}
+            <span  *ngIf="iot.state==='on'"></span>
+            <span  *ngIf="iot.state==='off'"></span>
+          </td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{lights.ipadress}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{lights.percentage}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{lights.color}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
 
-        <label >
-          Choisir une heure à laquelle se reveiller le lendemain
-        </label>
-
-      </div>
-
-      <button class="btn btn-primary" type="submit">Enregistrer </button>
-
-    </form>
+    <div *ngIf="iots!==null && iots.heaters!==null" [ngClass]="{'display-none': type!=='Heater' && type!=='all',
+    'display-visibility': type==='all' || type==='Heater'}">
+      <h6>Heaters</h6>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Id </th>
+          <th scope="col">State</th>
+          <th scope="col">Ip adress</th>
+          <th scope="col"> Actual heat </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let iot of iots.heaters">
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.id}}
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.state}}
+            <span *ngIf="iot.state==='on'"></span>
+            <span *ngIf="iot.state==='off'"></span>
+          </td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.ipadress}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.actualval}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="iots!==null && iots.shutters!==null" [ngClass]="{'display-none': type!=='Shutter' && type!=='all',
+    'display-visibility': type==='all' || type==='Shutter'}">
+      <h6>Shutters</h6>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Id </th>
+          <th scope="col">State</th>
+          <th scope="col">Ip adress</th>
+          <th scope="col">Opening percentage </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let iot of iots.shutters">
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.id}}
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.state}}
+            <span *ngIf="iot.state==='on'"></span>
+            <span  *ngIf="iot.state==='off'"></span>
+          </td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.ipadress}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.percentage}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
+
+
+
+      <div *ngIf="iots!==null && iots.clocks!==null" [ngClass]="{'display-none': type!=='Clock' && type!=='all',
+    'display-visibility': type==='all' || type==='Clock'}">
+      <h6>Clocks</h6>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">State</th>
+          <th scope="col">Ip adress</th>
+          <th scope="col">Hour scheduled</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let iot of iots.clocks">
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.id}}
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.state}}
+            <span *ngIf="iot.state==='on'"></span>
+            <span  *ngIf="iot.state==='off'"></span>
+          </td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.ipadress}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''"> Not available yet </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+
+
+
+<br><br>
+
 <br><br><br><br><br><br>
 
 <div class="row">
@@ -50,39 +147,44 @@
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
 
       <div class="form-group">
+        <label for="lighti">Id of the Light you want to update</label>
+        <input type="text" class="form-control" id="lighti" name="id" required [(ngModel)]="lights.id">
+      </div>
+
+      <div class="form-group">
         <label for="couleur">
-          Couleur de la lumière
+          Light's color
         </label>
         <select id="couleur" class="form-control" name="couleur"  required [(ngModel)]="lights.color">
-          <option value="rouge">Rouge</option>
-          <option value="bleu">Bleu</option>
+          <option value="red" >Red</option>
+          <option value="blue">Blue</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label for="status">
-          État de l'appareil
+        <label for="state">
+         State of your Light
         </label>
-        <select id="status" class="form-control" name="status" required [(ngModel)]="lights.status">
-          <option value="allumé">Allumé</option>
-          <option value="éteint">Éteint</option>
+        <select id="state" class="form-control" name="state" required [(ngModel)]="lights.state">
+          <option value="on">On</option>
+          <option value="off">Off</option>
         </select>
       </div>
 
 
       <div class="form-group">
         <label for="intensite">
-          Intensite de l'appareil
+          Intensity of the Light
         </label>
         <select id="intensite" class="form-control" name="intensite"  required [(ngModel)]="lights.percentage">
+          <option value="1">1</option>
+          <option value="5">5</option>
           <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30000">30000</option>
         </select>
       </div>
 
 
-      <button class="btn btn-primary" type="submit">Enregistrer</button>
+      <button class="btn btn-primary" type="submit">Submit</button>
 
     </form>
   </div>
@@ -96,8 +198,13 @@
     <form (ngSubmit)="onSubmitHeater(h)" #h="ngForm">
 
       <div class="form-group">
+        <label for="exampleInputEmail1">Id of the Heater you want to update</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" name="id" required [(ngModel)]="heaters.id">
+      </div>
+
+      <div class="form-group">
         <label for="actualval">
-          Degrés du Chauffage
+          Heat
         </label>
         <select id="actualval" class="form-control" name="actualval"  required [(ngModel)]="heaters.actualval">
           <option value="20">20</option>
@@ -106,7 +213,22 @@
         </select>
       </div>
 
-      <button class="btn btn-primary" type="submit">Enregistrer </button>
+      <button (click)="SwitchDownHeat()" class="btn btn-primary" type="sub">Baisser </button>
+      <button class="btn btn-primary" type="sub">Augmenter </button>
+      <br><br>
+
+      <div class="form-group">
+        <label for="state">
+          State
+        </label>
+        <select id="state" class="form-control" name="state" required [(ngModel)]="heaters.state">
+          <option value="on">On</option>
+          <option value="off">Off</option>
+        </select>
+      </div>
+
+
+      <button class="btn btn-primary" type="submit">Submit </button>
 
     </form>
   </div>
@@ -120,18 +242,24 @@
     <h1> SHUTTER </h1>
     <form (ngSubmit)="onSubmitShutter(g)" #g="ngForm">
 
+
+      <div class="form-group">
+        <label for="idshut">Id of the Shutter you want to update</label>
+        <input type="text" class="form-control" id="idshut" name="id" required [(ngModel)]="shutters.id">
+      </div>
+
       <div class="form-group">
         <label for="percentage">
-          Pourcentage d'ouverture du SHUTTER
+          Percentage of opening
         </label>
         <select id="percentage" class="form-control" name="percentage"  required [(ngModel)]="shutters.percentage">
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30000">30000</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="70">70</option>
         </select>
       </div>
 
-      <button class="btn btn-primary" type="submit">Enregistrer le shutter</button>
+      <button class="btn btn-primary" type="submit">Submit</button>
 
     </form>
   </div>
@@ -139,8 +267,25 @@
 <br>
 <br>
 <br>
-<button (click)="runScenario()" class="btn btn-primary" type="submit">Aller se coucher </button>
+<button (click)="runScenario()" class="btn btn-primary" type="submit">Scenario : Go to Bed ! </button>
+<br><br><br>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h1> CLOCK </h1>
+    <form >
 
+      <div >
 
+        <label >
+          Please choose an hour to wake up for
+        </label>
+
+      </div>
+
+      <button class="btn btn-primary" type="submit">Submit </button>
+
+    </form>
+  </div>
+</div>
 </body>
 
