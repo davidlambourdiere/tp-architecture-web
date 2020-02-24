@@ -17,6 +17,7 @@ import {NotificationComponent} from "./components/notification/notification.comp
 import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
 import {SubscriptionComponent} from "./components/subscription/subscription.component";
 import {SurveyComponent} from "./components/survey/survey.component";
+import {MedicalResidentsComponent} from "./components/medical.control/medical.residents/medical.residents.component";
 
 
 const routes: Routes = [
@@ -87,6 +88,11 @@ const routes: Routes = [
   {
     path: 'survey',
     component: SurveyComponent
+  },
+  {
+    path: 'medicalControl/residents',
+    component: MedicalResidentsComponent,
+    canActivate: [AuthGuardService]
   }
 
 ];
