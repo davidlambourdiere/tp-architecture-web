@@ -63,9 +63,13 @@ public class HeaterMessageManagerImpl implements HeaterMessageManager {
             insertHeaterBreakdown(id, "YES", "NO", "Temperature suspecte !");
             // updating of heater's status --> BREAKDOWN
             updateHeaterStatus(id);
+        } else {
+            breakdown = false;
+            updateHeaterStatusNoBreakdown(id);
         }
         return breakdown;
     }
+
 
     void insertHeaterBreakdown(String id, String suspect, String breakdown, String message){
         // creation of the current date + parse in String
@@ -84,8 +88,16 @@ public class HeaterMessageManagerImpl implements HeaterMessageManager {
     void updateHeaterStatus(String id) {
         // The heater of the id
         Heater heater = heaterdao.findById(Long.parseLong(id)).orElse(null);
-        // update of the status' heater
+        // update of the status' heater --> BREAKDOWN
         heater.setBreakdownstatus(StatusEnum.BREAKDOWN);
+        heaterdao.save(heater);
+    }
+
+    void updateHeaterStatusNoBreakdown(String id) {
+        // The heater of the id
+        Heater heater = heaterdao.findById(Long.parseLong(id)).orElse(null);
+        //update of the status' heater --> NOT_BREAKDOWN
+        heater.setBreakdownstatus(StatusEnum.NOT_BREAKDOWN);
         heaterdao.save(heater);
     }
 }
