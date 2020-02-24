@@ -2,6 +2,8 @@ package com.lifetech.domain.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.util.Date;
 
 @Entity(name = "shutterhistoric")
@@ -12,11 +14,14 @@ public class ShutterHistoric extends PersistableElement {
     @Column(name = "endingdate")
     private Date endingDate;
 
-    @Column(name = "state")
-    private String state;
+    @Enumerated(EnumType.STRING)
+    private StateEnum state;
 
-    @Column(name = "shutterId")
-    private Long shutterId;
+    @Enumerated(EnumType.STRING)
+    private StatusEnum breakdownstatus;
+
+    @Column(name = "shutterid")
+    private Long shutterid;
 
     @Column(name = "percentage")
     private String percentage;
@@ -40,20 +45,20 @@ public class ShutterHistoric extends PersistableElement {
         this.endingDate = endingDate;
     }
 
-    public String getState() {
+    public StateEnum getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(StateEnum state) {
         this.state = state;
     }
 
-    public Long getShutterId() {
-        return shutterId;
+    public Long getShutterid() {
+        return shutterid;
     }
 
-    public void setShutterId(Long shutterId) {
-        this.shutterId = shutterId;
+    public void setShutterid(Long shutterid) {
+        this.shutterid = shutterid;
     }
 
     public String getPercentage() {
@@ -62,5 +67,13 @@ public class ShutterHistoric extends PersistableElement {
 
     public void setPercentage(String percentage) {
         this.percentage = percentage;
+    }
+
+    public StatusEnum getBreakdownstatus() {
+        return breakdownstatus;
+    }
+
+    public void setBreakdownstatus(StatusEnum breakdownstatus) {
+        this.breakdownstatus = breakdownstatus;
     }
 }

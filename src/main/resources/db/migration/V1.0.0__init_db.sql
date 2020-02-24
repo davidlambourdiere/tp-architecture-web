@@ -1,4 +1,4 @@
-CREATE TABLE residence (
+CREATE TABLE lifetech.residence (
 id SERIAL PRIMARY KEY,
 optlock TIMESTAMP (3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 adress VARCHAR(255),
@@ -8,7 +8,7 @@ email VARCHAR(55)
 
 
 
-CREATE TABLE person (
+CREATE TABLE lifetech.person (
 id SERIAL PRIMARY KEY,
 optlock TIMESTAMP (3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 firstname VARCHAR (255),
@@ -26,5 +26,5 @@ userevaluation INT,
 userrole VARCHAR (255),
 profileType VARCHAR(255),
 residence_id  BIGINT UNSIGNED NOT NULL,
-CONSTRAINT FK_person_residence_id FOREIGN KEY (residence_id) REFERENCES residence(id)
+CONSTRAINT FK_person_residence_id FOREIGN KEY (residence_id) REFERENCES lifetech.residence(id)
 );

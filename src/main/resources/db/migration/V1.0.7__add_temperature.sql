@@ -1,0 +1,1 @@
+ALTER TABLE lifetech.heater ADD COLUMN temperature VARCHAR(255);

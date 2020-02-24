@@ -14,6 +14,10 @@ export class IOTService {
     return this.http.get<IOTDTO>(`api/iots`);
   }
 
+  findAllIOTWithMalfunctionning(): Observable<IOTDTO> {
+    return this.http.get<IOTDTO>(`api/iots/malfunctionning`);
+  }
+
   findIOTByType(type: string): Observable<IOTDTO> {
     return this.http.post<IOTDTO>(`api/iots/findByType`, type);
   }
@@ -45,4 +49,7 @@ export class IOTService {
   findHeaterDetailWithHistoric(id: string): Observable<any>{
     return this.http.get(`api/heater/findHistoric/${id}`);
   }
+
+
+
 }
