@@ -1,6 +1,7 @@
 package com.lifetech.api.rest;
 
 import com.lifetech.application.dto.HeaterDTO;
+import com.lifetech.application.dto.HeaterDetailDTO;
 import com.lifetech.application.dto.SubscriptionDTO;
 import com.lifetech.application.manager.HeaterManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,4 +25,16 @@ public class HeaterController extends RestBaseController{
     private HeaterDTO findAllHeater(@PathVariable("id") String id){
         return heaterManager.findAllHeater();
     }
+
+    @GetMapping("heater/findHistoric/{id}")
+    private HeaterDetailDTO findByHistoric(@PathVariable("id") String id) {
+        return heaterManager.findByHistoric(id);
+    }
+
+    @GetMapping("heater/findByRoom/{id}")
+    private List<HeaterDTO> findByRoom(@PathVariable("id") String id){ return heaterManager.findByRoom(id); }
+
+
+    @GetMapping("heater/countHeaters")
+    private int countHeaters(){return heaterManager.countHeaters();}
 }

@@ -1,108 +1,102 @@
-import {Component, Input} from "@angular/core";
-import {forEachComment} from "tslint";
-import {ActivatedRoute, Router} from "@angular/router";
-import {IOTService} from "../../service/IOTService";
-import {IOTDTO} from "../../dto/IOTDTO";
-import {ClockDTO} from "../../dto/ClockDTO";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {IOTService} from '../../service/IOTService';
+import {IOTDTO} from '../../dto/IOTDTO';
+import {ClockService} from '../../service/ClockService';
+import {Observable, OperatorFunction, Subscription} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {RoomService} from '../../service/RoomService';
+import {RoomDTO} from '../../dto/RoomDTO';
+import {HeaterMessageService} from '../../service/HeaterMessageService';
+import {HeaterMessageDTO} from "../../dto/HeaterMessageDTO";
+import {HeaterService} from "../../service/HeaterService";
+
+
 
 
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'panne',
   templateUrl: './panne.component.html',
   styleUrls: ['./panne.component.scss']
 })
-export class PanneComponent {
-  iots: IOTDTO = new IOTDTO;
-  RoomBreakdown : number = 0;
+export class PanneComponent implements OnInit {
 
-  logements = [
-    {
-      num: 1,
-      breakdown: 0
-    },
-    {
-      num: 2,
-      breakdown: 0
-    },
-    {
-      num: 4,
-      breakdown: 0
-    },
-    {
-      num: 5,
-      breakdown: 0
-    },
-    {
-      num: 6,
-      breakdown: 0
-    },
-    {
-      num: 7,
-      breakdown: 0
-    },
-    {
-      num: 8,
-      breakdown: 0
-    },
-    {
-      num: 9,
-      breakdown: 0
-    },
-  ];
+  // tslint:disable-next-line:max-line-length
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private iotservice: IOTService,
+              private clockService: ClockService,
+              private heaterService: HeaterService,
+              private roomService: RoomService,
+              private heaterMessageService: HeaterMessageService) {
 
-  objects = [
-    {
-      type: 'Lumière',
-      status: 'Fonctionnel',
-      logement: 1
+  }
+  object: Observable<any>;
+  rooms: Observable<any>;
+  // tslint:disable-next-line:ban-types
+  heaterBreakdown: Object = new HeaterMessageDTO();
 
-    },
-    {
-      type: 'Four',
-      status: 'Fonctionnel',
-      logement: 1
+  breakdowns = [0, 0, 0, 0, 0];
 
-    },
-    {
-      type: 'Volet',
-      status: 'En panne',
-      logement: 1
+  ngOnInit() {
+    this.rooms = this.roomService.findAllRoom();
+    this.refresh();
+  }
 
-    },
-  ];
+  RoomDetail(room: RoomDTO) {
+    this.object = this.heaterService.findIOTByRoom(String(room.num));
+  }
 
-  //Define the number of object in breakdown in a housing
-  breakdownLogement(){
-    for (let logement of this.logements){
-      for (let object of this.objects){
-        if(object.logement == logement.num){
-          if(object.status == 'En panne'){
-            logement.breakdown = logement.breakdown+1;
-          }
-        }
+  breakdownHeatersDetection() {
+    this.heaterService.countHeaters().subscribe( data => {
+      for (let i = 1; i <= data; i++) {
+        this.breakdownHeaterDetection(i.toString());
       }
-    }
-
+    });
+    setTimeout(() => {  this.refresh(); }, 2000);
 
   }
 
-  constructor(private router: Router, private route: ActivatedRoute, private iotservice: IOTService){
-    this.breakdownLogement();
+  async refresh() {
+    this.breakdownRooms();
   }
 
-  findIOTByPerson(){
-    this.route.params.subscribe(params => {
-      this.iotservice.findIOTByPerson('1').subscribe(data => {
-        this.iots = data;
-        const states = Object.values(this.iots)
-            .filter(Boolean)
-            .reduce((res, value) => res.concat(value.map(ot => ({id:ot.id, state: ot.state}))), [])
-          .filter(iot => iot.state !== "ok");
-        console.log(states);
+  private breakdownHeaterDetection(id: string) {
+    // tslint:disable-next-line:max-line-length
+    this.heaterMessageService.breakdownDetection(id).subscribe(data => {
+      this.heaterBreakdown = data;
+      if (data) {
+        const toto = 'le radiateur ' + id + ' est en panne';
+        alert(toto);
+      }
+      console.log('le radiateur', id , 'est en panne', data);
+    } );
+  }
 
-      })
-    })
+
+  // Define the number of object in breakdown in a housing
+  breakdownRooms() {
+    // TODO : a loop with the number of rooms (ForEach?)
+    this.breakdownRoom('1');
+    this.breakdownRoom('2');
+    this.breakdownRoom('3');
+    this.breakdownRoom('4');
+    this.breakdownRoom('5');
+    setTimeout(() => {  this.refresh(); }, 2000);
+  }
+
+  // define the number of object in breakdown and change the array breakdowns
+  breakdownRoom(index: string) {
+    // TODO : solve the problem with asynchronous functions
+    this.heaterService.findIOTByRoom(String(index)).pipe(
+      // tslint:disable-next-line:triple-equals
+      map(data => data.map(val => val.breakdownstatus).filter(x => x == 'BREAKDOWN').length)
+    ).subscribe(toto => {
+      this.breakdowns[index] = toto;
+      console.log(index, ' - ', toto); });
+    console.log('salut - ', this.rooms);
   }
 
 

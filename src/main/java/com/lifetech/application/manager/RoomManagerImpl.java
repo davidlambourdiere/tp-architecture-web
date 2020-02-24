@@ -15,14 +15,13 @@ public class RoomManagerImpl implements RoomManager {
 
     private final OrikaBeanMapper orikaBeanMapper;
 
-    public RoomManagerImpl(RoomDAO roomDAO, OrikaBeanMapper orikaBeanMapper) {
-        this.roomDAO = roomDAO;
+    public RoomManagerImpl(OrikaBeanMapper orikaBeanMapper, RoomDAO roomDAO) {
         this.orikaBeanMapper = orikaBeanMapper;
+        this.roomDAO = roomDAO;
     }
 
     public List<RoomDTO> findAllRoom(){
-        List<Room> room = roomDAO.findAll();
-        return orikaBeanMapper.mapAsList(room, RoomDTO.class);
+        return orikaBeanMapper.mapAsList(roomDAO.findAll(), RoomDTO.class);
     }
 
     public RoomDTO findById(String id) {

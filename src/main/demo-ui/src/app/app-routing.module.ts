@@ -75,7 +75,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
-    path: 'detailiot/:id',
+    path: 'detailiot/:id/:state',
     component: DetailIotComponent,
     canActivate: [AuthGuardService]
   },

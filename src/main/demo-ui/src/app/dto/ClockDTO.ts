@@ -1,8 +1,9 @@
 import {PersonDTO} from './PersonDTO';
+import {RoomDTO} from './RoomDTO';
 
-export class ClockDTO{
+export class ClockDTO {
   id: bigint;
-  status: string;
+  breakdownstatus: string;
   state: string;
   minvalueref: string;
   price: number;
@@ -10,4 +11,5 @@ export class ClockDTO{
   maxvalueref: string;
   ipadress: string;
   person: PersonDTO;
+  room: RoomDTO;
 }

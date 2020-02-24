@@ -1,8 +1,9 @@
 import {PersonDTO} from './PersonDTO';
+import {RoomDTO} from "./RoomDTO";
 
 export class ShutterDTO{
   id: bigint;
-  status: string;
+  breakdownstatus: string;
   state: string;
   minvalueref: string;
   suspect: string;
@@ -11,5 +12,6 @@ export class ShutterDTO{
   maxvalueref: string;
   percentage: string;
   person: PersonDTO;
+  room: RoomDTO;
 }
 
