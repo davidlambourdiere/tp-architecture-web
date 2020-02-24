@@ -34,18 +34,18 @@ public class SubscriptionResidentManagerImpl implements SubscriptionResidentMana
     @Override
     public SubscriptionResidentDTO save(SubscriptionDTO createSubscriptionDTO) {
         SubscriptionResident createSubscriptionTranslate = new SubscriptionResident();
-        Optional<Person> person = personDAO.findByLogin(createSubscriptionDTO.getDescription());
+        Person person = personDAO.findByLogin(createSubscriptionDTO.getDescription());
         Subscription subscription = subscriptionDAO.findByName(createSubscriptionDTO.getName());
         createSubscriptionTranslate.setDescription(subscription.getDescription());
         createSubscriptionTranslate.setListofiot(createSubscriptionDTO.getListofiot());
         createSubscriptionTranslate.setListofservice(createSubscriptionDTO.getListofservice());
         createSubscriptionTranslate.setName(createSubscriptionDTO.getName());
         createSubscriptionTranslate.setPrice(createSubscriptionDTO.getPrice());
-        createSubscriptionTranslate.setPerson(person.get());
+        createSubscriptionTranslate.setPerson(person);
         logger.info("createSubscriptionDTO.getDescription()="+createSubscriptionDTO.getDescription());
         logger.info("subscription.getDescription()="+subscription.getDescription());
-        logger.info("person.get().getId()="+person.get().getId());
-        logger.info("person="+person.get());
+        logger.info("person.get().getId()="+person.getId());
+      //  logger.info("person="+person.get());
 
 
 
