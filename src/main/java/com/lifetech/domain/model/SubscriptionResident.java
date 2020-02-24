@@ -6,7 +6,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import java.sql.Timestamp;
 
-@Entity(name="subscription_resident")
+@Entity(name="subscriptionresident")
 public class SubscriptionResident extends PersistableElement{
     @Column(name="name")
     private String name;
