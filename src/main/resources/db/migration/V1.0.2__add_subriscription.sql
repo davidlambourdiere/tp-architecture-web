@@ -29,7 +29,7 @@ descriptionService VARCHAR(255),
 price DOUBLE
 );
 
-create table lifetech.subscription_resident(
+create table lifetech.subscriptionresident(
 id SERIAL PRIMARY KEY,
 optlock TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 name VARCHAR(255),
