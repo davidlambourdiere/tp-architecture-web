@@ -30,13 +30,16 @@ public class OrikaBeanMapper extends ConfigurableMapper {
         registerClassMap(Shutter.class, ShutterDTO.class);
         registerClassMap(Clock.class, ClockDTO.class);
         registerClassMap(Strap.class, StrapDTO.class);
+        registerClassMap(PersonProfile.class, PersonProfileDTO.class);
         registerClassMap(Subscription.class, SubscriptionDTO.class);
         registerClassMap(Room.class, RoomDTO.class);
+        registerClassMap(AlertHealth.class, AlertHealthDTO.class);
         registerClassMap(ClockBreakdown.class, ClockBreakdownDTO.class);
         registerClassMap(LightBreakdown.class, LightBreakdownDTO.class);
         registerClassMap(HeaterBreakdown.class, HeaterBreakdownDTO.class);
         registerClassMap(StrapBreakdown.class, StrapBreakdownDTO.class);
         registerClassMap(HeaterMessage.class, HeaterMessageDTO.class);
+
 
     }
 

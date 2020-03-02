@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 public class ResidenceDTO {
     private String adress;
+    private String name;
     private String email;
     private String phone;
     private Timestamp creationdate;

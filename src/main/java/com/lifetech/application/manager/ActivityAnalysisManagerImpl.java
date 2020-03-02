@@ -17,20 +17,22 @@ public class ActivityAnalysisManagerImpl implements ActivityAnalysisManager {
     private final OrikaBeanMapper orikaBeanMapper;
     private final PersonDAO personDAO;
     private final ResidenceDAO residenceDAO;
+    private final HeaterBreakdownDAO heaterBreakdownDAO;
 
-    public ActivityAnalysisManagerImpl(ClockDAO clockDAO, HeaterDAO heaterDAO, LightDAO lightDAO, OrikaBeanMapper orikaBeanMapper, PersonDAO personDAO, ResidenceDAO residenceDAO) {
+    public ActivityAnalysisManagerImpl(ClockDAO clockDAO, HeaterDAO heaterDAO, LightDAO lightDAO, OrikaBeanMapper orikaBeanMapper, PersonDAO personDAO, ResidenceDAO residenceDAO, HeaterBreakdownDAO heaterBreakdownDAO) {
         this.clockDAO = clockDAO;
         this.heaterDAO = heaterDAO;
         this.lightDAO = lightDAO;
         this.orikaBeanMapper = orikaBeanMapper;
         this.personDAO = personDAO;
         this.residenceDAO = residenceDAO;
+        this.heaterBreakdownDAO = heaterBreakdownDAO;
     }
 
     @Override
     public ActivityAnalaysisDTO countIOTByPerson(String personLogin) {
         ActivityAnalaysisDTO activityAnalaysisDTO = new ActivityAnalaysisDTO();
-        Person person = personDAO.findByLogin(personLogin).orElse(null);
+        Person person = personDAO.findByLogin(personLogin);
         activityAnalaysisDTO.setPersonName(person.getFirstName() + " " + person.getLastName());
         activityAnalaysisDTO.setnClock(clockDAO.countByPerson(person));
         activityAnalaysisDTO.setnHeather(heaterDAO.countByPerson(person));
@@ -64,6 +66,19 @@ public class ActivityAnalysisManagerImpl implements ActivityAnalysisManager {
         activityAnalaysisDTO.setnClock(clockDAO.count());
         activityAnalaysisDTO.setnHeather(heaterDAO.count());
         activityAnalaysisDTO.setnLight(lightDAO.count());
+        return activityAnalaysisDTO;
+    }
+
+    @Override
+    public ActivityAnalaysisDTO getBreakdownRate() {
+        ActivityAnalaysisDTO activityAnalaysisDTO = new ActivityAnalaysisDTO();
+        Long nHeater = heaterDAO.count();
+        List<HeaterBreakdown> heaterBreakdowns = heaterBreakdownDAO.findAllHeaterGroupByIOTId();
+        float nBreakdown = heaterBreakdowns.size();
+        System.out.println(nBreakdown);
+        System.out.println(nHeater);
+        System.out.println(nBreakdown/nHeater);
+        activityAnalaysisDTO.setBreakdownRate(nBreakdown/nHeater);
         return activityAnalaysisDTO;
     }
 }

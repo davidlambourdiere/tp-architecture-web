@@ -6,10 +6,10 @@ import {SubscriptionService} from "../../service/SubscriptionService";
 
 @Component({
   selector: 'app-subscription',
-  templateUrl: './subscription.component.html',
-  styleUrls: ['./subscription.component.scss']
+  templateUrl: './custom.component.html',
+  styleUrls: ['./custom.component.scss']
 })
-export class SubscriptionComponent implements OnInit {
+export class CustomComponent implements OnInit {
   subscriptions: SubscriptionDTO = new SubscriptionDTO();
   show: boolean = false;
   name: string = 'all';
@@ -18,19 +18,11 @@ export class SubscriptionComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private subservice: SubscriptionService) { }
 
   ngOnInit() {
-    this.showSubscription()
+
   }
 
-  showSubscription() {
-    this.route.params.subscribe(params => {
-      this.subservice.findAllSubscription().subscribe(data => {
-        this.subscriptions = data;
-
-      })
-    })
+  redirectToHomePage(){
+    this.router.navigate(["home"]);
   }
-
-
-
 
 }

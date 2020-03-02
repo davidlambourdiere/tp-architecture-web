@@ -13,6 +13,9 @@ public class Residence extends PersistableElement {
     @Column(name="adress")
     private String adress;
 
+    @Column(name="name")
+    private String name;
+
     @Column(name="phone")
     private String phone;
 
@@ -34,6 +37,10 @@ public class Residence extends PersistableElement {
 
     public Residence() {
     }
+
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
 
     public List<Person> getPeople() {
         return people;
