@@ -3,7 +3,7 @@ package com.lifetech.domain.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-@Entity(name = "referencesPrices")
+@Entity(name = "referencesprices")
 public class ReferencesPrices extends PersistableElement{
 
     @Column(name="numSerie")
