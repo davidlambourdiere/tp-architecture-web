@@ -6,8 +6,10 @@ systolic VARCHAR(255),
 diastolic VARCHAR(255),
 sugarlevel VARCHAR(255),
 stepcounter VARCHAR(255),
+startdate TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 strapid VARCHAR(255)
 );
+
 
 CREATE TABLE lifetech.personprofile (
   Id SERIAL PRIMARY KEY,

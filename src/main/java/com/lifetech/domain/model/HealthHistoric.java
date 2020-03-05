@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import java.sql.Timestamp;
 
 @Entity(name="healthhistoric")
 public class HealthHistoric extends PersistableElement{
@@ -22,6 +23,9 @@ public class HealthHistoric extends PersistableElement{
 
     @Column(name="stepcounter")
     private String stepcounter;
+
+    @Column(name="startdate")
+    private Timestamp startdate;
 
     @Column(name="strapid")
     private Long strap;
@@ -86,4 +90,11 @@ public class HealthHistoric extends PersistableElement{
         this.strap = strapId;
     }
 
+    public Timestamp getStartdate() {
+        return startdate;
+    }
+
+    public void setStartdate(Timestamp startdate) {
+        this.startdate = startdate;
+    }
 }

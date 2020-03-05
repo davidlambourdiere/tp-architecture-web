@@ -43,8 +43,8 @@ INSERT INTO lifetech.shutter (ipadress, state,breakdownstatus, percentage, perso
 
 
 INSERT INTO lifetech.strap (ipadress, state,breakdownstatus, minsysto, maxsysto, minsteps, person_id,price) VALUES ('172.163.92.16','ON','NOT_BREAKDOWN', '300mg', '600mg', '300', 2,125);
-INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, minsysto, maxsysto, minsteps,minglyc,maxglyc, person_id,price)
-VALUES ('50','180','172.163.92.17','ON','NOT_BREAKDOWN', '90', '130', '7000','0.45','1.26', 7,125);
+INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, minsysto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
+VALUES ('50','180','172.163.92.17','ON','NOT_BREAKDOWN', '120', '140','90', '7000','0.45','1.26', 7,125);
 
 
 INSERT INTO lifetech.lighthistoric (startdate, endingdate,color,state,breakdownstatus,lightid) VALUES ("2020-02-24 9:00:00","2020-02-24 12:00:00","WHITE",'ON',"NOT_BREAKDOWN",1);
