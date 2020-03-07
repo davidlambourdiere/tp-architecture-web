@@ -8,9 +8,10 @@ import {map} from 'rxjs/operators';
 import {RoomService} from '../../service/RoomService';
 import {RoomDTO} from '../../dto/RoomDTO';
 import {HeaterMessageService} from '../../service/HeaterMessageService';
-import {HeaterMessageDTO} from "../../dto/HeaterMessageDTO";
-import {HeaterService} from "../../service/HeaterService";
-
+import {HeaterMessageDTO} from '../../dto/HeaterMessageDTO';
+import {HeaterService} from '../../service/HeaterService';
+import {LightService} from '../../service/LightService';
+import {ShutterService} from '../../service/ShutterService';
 
 
 
@@ -29,11 +30,16 @@ export class PanneComponent implements OnInit {
               private iotservice: IOTService,
               private clockService: ClockService,
               private heaterService: HeaterService,
+              private lightService: LightService,
+              private shutterService: ShutterService,
               private roomService: RoomService,
               private heaterMessageService: HeaterMessageService) {
 
   }
-  object: Observable<any>;
+  heaters: Observable<any>;
+  clocks: Observable<any>;
+  lights: Observable<any>;
+  shutters: Observable<any>;
   rooms: Observable<any>;
   // tslint:disable-next-line:ban-types
   heaterBreakdown: Object = new HeaterMessageDTO();
@@ -46,7 +52,10 @@ export class PanneComponent implements OnInit {
   }
 
   RoomDetail(room: RoomDTO) {
-    this.object = this.heaterService.findIOTByRoom(String(room.num));
+    this.heaters = this.heaterService.findIOTByRoom(String(room.num));
+    this.clocks = this.clockService.findIOTByRoom(String(room.num));
+    this.shutters = this.shutterService.findIOTByRoom(String(room.num));
+    this.lights = this.lightService.findIOTByRoom(String(room.num));
   }
 
   breakdownHeatersDetection() {
@@ -84,19 +93,31 @@ export class PanneComponent implements OnInit {
     this.breakdownRoom('3');
     this.breakdownRoom('4');
     this.breakdownRoom('5');
-    setTimeout(() => {  this.refresh(); }, 2000);
+    // setTimeout(() => {  this.refresh(); }, 2000);
   }
 
   // define the number of object in breakdown and change the array breakdowns
   breakdownRoom(index: string) {
-    // TODO : solve the problem with asynchronous functions
     this.heaterService.findIOTByRoom(String(index)).pipe(
-      // tslint:disable-next-line:triple-equals
       map(data => data.map(val => val.breakdownstatus).filter(x => x == 'BREAKDOWN').length)
-    ).subscribe(toto => {
-      this.breakdowns[index] = toto;
-      console.log(index, ' - ', toto); });
-    console.log('salut - ', this.rooms);
+    ).subscribe(x => {
+      this.breakdowns[index] = x;
+      console.log(index, ' - ', x); });
+    this.clockService.findIOTByRoom(String(index)).pipe(
+      map(data => data.map(val => val.breakdownstatus).filter(x => x == 'BREAKDOWN').length)
+    ).subscribe(x => {
+      this.breakdowns[index] += x;
+      console.log(index, ' - ', x); });
+    this.lightService.findIOTByRoom(String(index)).pipe(
+      map(data => data.map(val => val.breakdownstatus).filter(x => x == 'BREAKDOWN').length)
+    ).subscribe(x => {
+      this.breakdowns[index] += x;
+      console.log(index, ' - ', x); });
+    this.shutterService.findIOTByRoom(String(index)).pipe(
+      map(data => data.map(val => val.breakdownstatus).filter(x => x == 'BREAKDOWN').length)
+    ).subscribe(x => {
+      this.breakdowns[index] += x;
+      console.log(index, ' - ', x); });
   }
 
 

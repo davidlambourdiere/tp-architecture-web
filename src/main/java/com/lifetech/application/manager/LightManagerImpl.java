@@ -6,10 +6,8 @@ import com.lifetech.application.dto.LightHistoricDTO;
 import com.lifetech.domain.OrikaBeanMapper;
 import com.lifetech.domain.dao.LightDAO;
 import com.lifetech.domain.dao.LightHistoricDAO;
-import com.lifetech.domain.model.Light;
-import com.lifetech.domain.model.LightHistoric;
-import com.lifetech.domain.model.StateEnum;
-import com.lifetech.domain.model.StatusEnum;
+import com.lifetech.domain.dao.RoomDAO;
+import com.lifetech.domain.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -32,12 +30,15 @@ public class LightManagerImpl implements LightManager {
 
     private final LightHistoricDAO lightHistoricDAO;
 
+    private final RoomDAO roomDao;
+
     private final OrikaBeanMapper orikaBeanMapper;
 
-    public LightManagerImpl(LightHistoricDAO lightHistoricDAO, LightDAO lightDAO, OrikaBeanMapper orikaBeanMapper) {
+    public LightManagerImpl(LightHistoricDAO lightHistoricDAO, LightDAO lightDAO, OrikaBeanMapper orikaBeanMapper, RoomDAO roomDao) {
         this.lightHistoricDAO = lightHistoricDAO;
         this.lightDAO = lightDAO;
         this.orikaBeanMapper = orikaBeanMapper;
+        this.roomDao = roomDao;
     }
 
     public List<LightDTO> findAllLight(){
@@ -116,6 +117,13 @@ public class LightManagerImpl implements LightManager {
         List<Light> lightToReturn = new ArrayList<>();
         lightToReturn.addAll(distinctLightToReturn);
         return lightToReturn;
+    }
+
+    @Override
+    public List<LightDTO> findByRoom(String id) {
+        Room room = roomDao.findById(Long.parseLong(id)).orElse(null);
+        List<Light> lights = lightDAO.findByRoom(room);
+        return orikaBeanMapper.mapAsList(lights, LightDTO.class);
     }
 
     private float calculateTimeOnLastMonth(List<LightHistoric> lightHistorics) {

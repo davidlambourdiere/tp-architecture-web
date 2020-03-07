@@ -17,4 +17,6 @@ public interface LightManager {
     LightDetailDTO findByHistoric(String id);
 
     List<Light> findAllLightMalFunctionning();
+
+    List<LightDTO> findByRoom(String id);
 }
