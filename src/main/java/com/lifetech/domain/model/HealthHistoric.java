@@ -82,12 +82,12 @@ public class HealthHistoric extends PersistableElement{
         this.stepcounter = stepcounter;
     }
 
-    public Long getStrapId() {
+    public Long getStrap() {
         return strap;
     }
 
-    public void setStrapId(Long strapId) {
-        this.strap = strapId;
+    public void setStrap(Long strap) {
+        this.strap = strap;
     }
 
     public Timestamp getStartdate() {

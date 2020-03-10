@@ -52,7 +52,7 @@ public class HealthHistoricManagerImpl implements HealthHistoricManager {
                     h.setStepcounter(values[1]);
                     break;
                 case "strapid":
-                    h.setStrapId(Long.parseLong(values[1]));
+                    h.setStrap(Long.parseLong(values[1]));
                     break;
                 case "startdate":
                     h.setStartdate(Timestamp.valueOf(values[1]));

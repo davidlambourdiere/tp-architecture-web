@@ -14,6 +14,9 @@ public class Strap extends IOT{
     @Column(name="maxsysto")
     private String maxsysto;
 
+    @Column(name="mindiasto")
+    private String mindiasto;
+
     @Column(name="maxdiasto")
     private String maxdiasto;
 
@@ -30,10 +33,11 @@ public class Strap extends IOT{
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person person;
 
-    public Strap(Double price, StatusEnum breakdownstatus, StateEnum state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration, String minsysto, String maxsysto, String maxdiasto, String minglyc, String maxglyc, String minsteps, Person person) {
+    public Strap(Double price, StatusEnum breakdownstatus, StateEnum state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration, String minsysto, String maxsysto, String mindiasto,String maxdiasto, String minglyc, String maxglyc, String minsteps, Person person) {
         super(price, breakdownstatus, state, ipadress, startdate, minvalueref, maxvalueref, suspect, activityduration);
         this.minsysto = minsysto;
         this.maxsysto = maxsysto;
+        this.mindiasto = mindiasto;
         this.maxdiasto = maxdiasto;
         this.minglyc = minglyc;
         this.maxglyc = maxglyc;
@@ -57,6 +61,14 @@ public class Strap extends IOT{
 
     public void setMaxsysto(String maxsysto) {
         this.maxsysto = maxsysto;
+    }
+
+    public String getMindiasto() {
+        return mindiasto;
+    }
+
+    public void setMindiasto(String mindiasto) {
+        this.mindiasto = mindiasto;
     }
 
     public String getMaxdiasto() {
