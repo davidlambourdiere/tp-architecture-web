@@ -2,6 +2,9 @@ package com.lifetech.application.dto;
 
 public class PersonProfileDTO extends PersistableElementDTO {
 
+
+    private String nom;
+    private String prenom;
     private int age;
     private String adress;
     private int postal_code;
@@ -10,11 +13,29 @@ public class PersonProfileDTO extends PersistableElementDTO {
     private String chronic_disease;
     private int estimated_mobility;
     private boolean smoking;
+    private float smoking_time;
     private boolean drinker;
     private boolean medical_emergencies;
     private String hobbies;
+    private String profile;
 
     public PersonProfileDTO(){}
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
 
     public int getAge() {
         return age;
@@ -80,6 +101,14 @@ public class PersonProfileDTO extends PersistableElementDTO {
         this.smoking = smoking;
     }
 
+    public float getSmoking_time() {
+        return smoking_time;
+    }
+
+    public void setSmoking_time(float smoking_time) {
+        this.smoking_time = smoking_time;
+    }
+
     public boolean isDrinker() {
         return drinker;
     }
@@ -102,5 +131,13 @@ public class PersonProfileDTO extends PersistableElementDTO {
 
     public void setHobbies(String hobbies) {
         this.hobbies = hobbies;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 }
