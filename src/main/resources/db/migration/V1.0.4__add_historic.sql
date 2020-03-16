@@ -11,6 +11,8 @@ strapid VARCHAR(255)
 
 CREATE TABLE lifetech.personprofile (
   Id SERIAL PRIMARY KEY,
+  nom varchar(300) NOT NULL,
+  prenom varchar(300) NOT NULL,
   age BIGINT NOT NULL,
   adress varchar(300) NOT NULL,
   postal_code int NOT NULL,
@@ -19,7 +21,9 @@ CREATE TABLE lifetech.personprofile (
   chronic_disease varchar(300) NOT NULL,
   estimated_mobility int NOT NULL,
   smoking boolean NOT NULL,
+  smoking_time float NOT NULL,
   drinker boolean NOT NULL,
   medical_emergencies boolean NOT NULL,
-  Hobbies varchar(300) NOT NULL
+  Hobbies varchar(300) NOT NULL,
+  profile varchar(300) NOT NULL
 );

@@ -7,6 +7,8 @@ import {
   Validators,
   FormControl
 } from "@angular/forms";
+
+
 import {Component, Input, NgModule, OnInit} from "@angular/core";
 import { BrowserModule} from "@angular/platform-browser";
 import {PersonDTO} from "../../dto/PersonDTO";
@@ -40,13 +42,15 @@ export class SurveyComponent implements OnInit {
   loginForm: FormGroup;
   trackName: any;
   isavalable : boolean = true;
+  private autonomie: any;
+  private urgence: any;
 
-  autonomie : number;
 
 
   //constructor(private personService: PersonService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) { }
   constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private personService: PersonProfileService){
   }
+
   ngOnInit() {
     this.loginForm = this.fb.group({
 
@@ -89,9 +93,12 @@ export class SurveyComponent implements OnInit {
 
 
   control(loginForm){
+
     console.log('Données.....', this.loginForm.value);
     //on transfere les valeurs des champs au DTO
 
+    this.personprofile.nom = this.loginForm.get('Nom').value;
+    this.personprofile.prenom = this.loginForm.get('Prenom').value;
     this.personprofile.adress = this.loginForm.get('adress').value;
     this.personprofile.adress_email = this.loginForm.get('email').value;
     this.personprofile.age = this.loginForm.get('Age').value;
@@ -104,7 +111,8 @@ export class SurveyComponent implements OnInit {
     this.personprofile.smoking = this.loginForm.get('fumeur_question').value;
     this.personprofile.tel_number = this.loginForm.get('Telephone').value;
 
-
+    this.personprofile.profile = this.profileDefinition(this.loginForm);
+    console.log('Données.......', this.personprofile);
     this.route.params.subscribe(params =>{
     this.personService.createPersonProfile(this.personprofile).subscribe(data => {
         this.personprofile = data;
@@ -127,6 +135,19 @@ export class SurveyComponent implements OnInit {
         Hide("bad_otonomie");
       }
     }
+
+  profileDefinition(loginForm){
+    this.autonomie = this.loginForm.get('autonomie').value;
+
+    this.urgence = this.loginForm.get('urgence').value;
+
+    switch(this.autonomie && this.urgence){
+      case this.autonomie <5: this.personprofile.profile = "Handicap"
+
+    }
+
+
+  }
 
   }
 
