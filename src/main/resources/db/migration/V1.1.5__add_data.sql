@@ -9,6 +9,8 @@ INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,user
 INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id) VALUES ('Henry', 'Dupont','1956-05-14', 'Henry', 'henry','RESIDENT', 1);
 INSERT INTO lifetech.person (firstname, lastname,birthdate,login, password,deseas,userrole,residence_id)
 VALUES('Amanda','Willson', '1946-06-14','amandaw','1234','','RESIDENT',1);
+INSERT INTO lifetech.person (firstname, lastname,birthdate,login, password,deseas,userrole,residence_id)
+VALUES('Porter','Welsby', '1943-06-14','porterw','1234','HEARTPROBLEM','RESIDENT',1);
 INSERT INTO lifetech.person (firstname, lastname, login, password,userrole, residence_id)VALUES('kadia','toure','kadia','admin','DOCTOR',1);
 INSERT INTO lifetech.person (firstname, lastname, login, password,userrole, residence_id)VALUES('william','toure','will','admin','AGENT',1);
 
@@ -45,6 +47,8 @@ INSERT INTO lifetech.shutter (ipadress, state,breakdownstatus, percentage, perso
 INSERT INTO lifetech.strap (ipadress, state,breakdownstatus, minsysto, maxsysto, minsteps, person_id,price) VALUES ('172.163.92.16','ON','NOT_BREAKDOWN', '300mg', '600mg', '300', 2,125);
 INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
 VALUES ('50','155','172.163.92.17','ON','NOT_BREAKDOWN', '90', '60','130','80', '7000','0.45','1.26', 7,125);
+INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
+VALUES ('50','153','172.163.92.18','ON','NOT_BREAKDOWN', '90', '60','130','80', '7000','0.45','1.26', 7,125);
 
 
 INSERT INTO lifetech.lighthistoric (startdate, endingdate,color,state,breakdownstatus,lightid) VALUES ("2020-02-24 9:00:00","2020-02-24 12:00:00","WHITE",'ON',"NOT_BREAKDOWN",1);
