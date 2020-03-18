@@ -6,4 +6,6 @@ public interface HealthHistoricManager {
 
     HealthHistoric save (HealthHistoric healthHistoric);
     HealthHistoric split (String message);
+
+    boolean alertDetection(HealthHistoric histSaved);
 }

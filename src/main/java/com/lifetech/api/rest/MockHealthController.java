@@ -20,7 +20,13 @@ public class MockHealthController extends RestBaseController {
     @GetMapping("mockHealth/message/{strapmessage}")
     private String strapMessage(@PathVariable("strapmessage") String strapmessage){
         System.out.println("Message: "+strapmessage.toString());
-        healthHistoricManager.save(healthHistoricManager.split(strapmessage));
+        //Historization of the message
+        HealthHistoric histSaved = healthHistoricManager.save(healthHistoricManager.split(strapmessage));
+
+        //alertDetection
+        boolean isAlert = healthHistoricManager.alertDetection(histSaved);
+
+
         return "ok";
     }
 

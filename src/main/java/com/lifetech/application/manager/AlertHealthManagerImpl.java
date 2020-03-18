@@ -47,13 +47,19 @@ public class AlertHealthManagerImpl implements AlertHealthManager {
         return alertHealthDAO.countByStrap(Long.parseLong(id));
     }
 
+    @Override
+    public AlertHealth save(AlertHealth alert) {
+        return alertHealthDAO.save(alert);
+    }
+
 
     //fill Straps and doctors by alerts
     private List<AlertHealthDTO> fillStrapAndDoctor(List<AlertHealth> alertHealths){
         List<AlertHealthDTO> alertHealthsDTO = orikaBeanMapper.mapAsList(alertHealths, AlertHealthDTO.class);
         for (int i =0; i<alertHealths.size(); i++ ) {
             alertHealthsDTO.get(i).setStrap(strapManager.findById(String.valueOf(alertHealths.get(i).getStrap())));
-            alertHealthsDTO.get(i).setDoctor(personManager.findById(String.valueOf(alertHealths.get(i).getDoctor())));
+            if(alertHealths.get(i).getDoctor()!=null)
+                alertHealthsDTO.get(i).setDoctor(personManager.findById(String.valueOf(alertHealths.get(i).getDoctor())));
         }
         return alertHealthsDTO;
     }
