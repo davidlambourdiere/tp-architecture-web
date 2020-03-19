@@ -9,15 +9,17 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class HealthHistoricManagerImpl implements HealthHistoricManager {
 
     private final HealthHistoricDAO healthHistoricDAO;
-    private  final StrapManager strapManager;
+    private final StrapManager strapManager;
     private final OrikaBeanMapper orikaBeanMapper;
-    private  final AlertHealthManagerImpl alertHealthManagerImpl;
+    private final AlertHealthManagerImpl alertHealthManagerImpl;
 
     public HealthHistoricManagerImpl(OrikaBeanMapper orikaBeanMapper, HealthHistoricDAO healthHistoricDAO, StrapManager strapManager, AlertHealthManagerImpl alertHealthManagerImpl) {
         this.orikaBeanMapper = orikaBeanMapper;
@@ -34,9 +36,9 @@ public class HealthHistoricManagerImpl implements HealthHistoricManager {
 
     @Override
     public HealthHistoric split(String message) {
-        String [] titles = message.split(",");
+        String[] titles = message.split(",");
         HealthHistoric h = new HealthHistoric();
-        for (String title: titles) {
+        for (String title : titles) {
             String[] values = title.split("=");
             switch (values[0]) {
                 case "hearthrate":
@@ -67,29 +69,42 @@ public class HealthHistoricManagerImpl implements HealthHistoricManager {
     }
 
     @Override
-    public boolean alertDetection(HealthHistoric histSaved) {
-        int cpt=0;
+    public boolean alertDetection(HealthHistoric histSaved, Map<Long, Map<String, Integer>> cache) {
+        int cpt = 0;
+        boolean isAlerte =  false;
         //find strap
         StrapDTO sdto = strapManager.findById(String.valueOf(histSaved.getStrap()));
         //find 3 last hearthRate historic
         List<HealthHistoric> hlist = healthHistoricDAO.findByStrap(histSaved.getStrap());
-        List<HealthHistoric> hsub =  hlist.subList(Math.max(hlist.size() - 3, 0), hlist.size());
+        List<HealthHistoric> hsub = hlist.subList(Math.max(hlist.size() - 3, 0), hlist.size());
 
-        for (HealthHistoric h: hsub) {
-            if(Integer.parseInt(h.getHearthrate()) > Integer.parseInt(sdto.getMaxvalueref()))
+        for (HealthHistoric h : hsub) {
+            if (Integer.parseInt(h.getHearthrate()) > Integer.parseInt(sdto.getMaxvalueref()))
                 cpt++;
         }
-        if(cpt==3) {
-            AlertHealth alertFC = new AlertHealth();
-            alertFC.setStrap(sdto.getId());
-            alertFC.setStartdate(new Timestamp(new Date().getTime()));
-            alertFC.setStatus("NEW");
-            alertFC.setCriticity("3");
-            alertFC.setMessage("HIGH HEARTHRATE "+histSaved.getHearthrate()+" bpm > "+sdto.getMaxvalueref()+" bpm. 3 TIMES");
-            System.err.println(alertHealthManagerImpl.save(alertFC));
-            return true;
+
+        if (cpt == 3) {
+            //update cache
+            Map<String, Integer> values = new HashMap<>();
+            values.put("HR", 0);
+            if (cache.containsKey(sdto.getId())) {
+                values = cache.get(sdto.getId());
+            } else {
+                cache.put(sdto.getId(), values);
+            }
+            Integer nbHRAlert =values.get("HR");
+            if (nbHRAlert == 0) {
+                AlertHealth alertFC = new AlertHealth();
+                alertFC.setStrap(sdto.getId());
+                alertFC.setStartdate(new Timestamp(new Date().getTime()));
+                alertFC.setStatus("NEW");
+                alertFC.setCriticity("3");
+                alertFC.setMessage("HIGH HEARTHRATE");
+                System.err.println(alertHealthManagerImpl.save(alertFC));
+            }
+            isAlerte = true;
+            values.replace("HR", nbHRAlert, ++nbHRAlert);
         }
-        else
-            return false;
+        return isAlerte;
     }
 }

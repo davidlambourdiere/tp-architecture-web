@@ -5,15 +5,20 @@ import com.lifetech.application.manager.PersonManager;
 import com.lifetech.domain.model.HealthHistoric;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 public class MockHealthController extends RestBaseController {
 
     private final PersonManager personManager;
     private final HealthHistoricManager healthHistoricManager;
+    private final Map<Long, Map<String, Integer>> cache;
 
     public MockHealthController(PersonManager personManager, HealthHistoricManager healthHistoricManager) {
         this.personManager = personManager;
         this.healthHistoricManager = healthHistoricManager;
+        this.cache = new HashMap<>();
     }
 
 
@@ -24,7 +29,8 @@ public class MockHealthController extends RestBaseController {
         HealthHistoric histSaved = healthHistoricManager.save(healthHistoricManager.split(strapmessage));
 
         //alertDetection
-        boolean isAlert = healthHistoricManager.alertDetection(histSaved);
+        boolean isAlert = healthHistoricManager.alertDetection(histSaved, cache);
+
 
 
         return "ok";
