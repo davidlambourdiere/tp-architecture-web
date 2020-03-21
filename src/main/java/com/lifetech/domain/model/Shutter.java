@@ -18,7 +18,7 @@ public class Shutter extends IOT{
     @ManyToOne(cascade =  CascadeType.ALL)
     private Room room;
 
-    public Shutter(Double price, StatusEnum breakdownstatus, StateEnum state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration, String percentage, Person person, Room room) {
+    public Shutter(Double price, StatusEnum breakdownstatus, StateEnum state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, SuspectEnum suspect, Timestamp activityduration, String percentage, Person person, Room room) {
         super(price, breakdownstatus, state, ipadress, startdate, minvalueref, maxvalueref, suspect, activityduration);
         this.percentage = percentage;
         this.person = person;
