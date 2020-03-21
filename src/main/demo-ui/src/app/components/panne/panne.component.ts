@@ -45,6 +45,7 @@ export class PanneComponent implements OnInit {
   heaterBreakdown: Object = new HeaterMessageDTO();
 
   breakdowns = [0, 0, 0, 0, 0];
+  suspects = [0, 0, 0, 0, 0];
 
   ngOnInit() {
     this.rooms = this.roomService.findAllRoom();
@@ -70,6 +71,7 @@ export class PanneComponent implements OnInit {
 
   async refresh() {
     this.breakdownRooms();
+    this.suspectRooms();
   }
 
   private breakdownHeaterDetection(id: string) {
@@ -96,30 +98,62 @@ export class PanneComponent implements OnInit {
     // setTimeout(() => {  this.refresh(); }, 2000);
   }
 
-  // define the number of object in breakdown and change the array breakdowns
+
+  suspectRooms() {
+    // TODO : a loop with the number of rooms (ForEach?)
+    this.suspectRoom('1');
+    this.suspectRoom('2');
+    this.suspectRoom('3');
+    this.suspectRoom('4');
+    this.suspectRoom('5');
+  }
+
+  // define the number of object in breakdown in a room and change the array breakdowns
   breakdownRoom(index: string) {
     this.heaterService.findIOTByRoom(String(index)).pipe(
       map(data => data.map(val => val.breakdownstatus).filter(x => x == 'BREAKDOWN').length)
     ).subscribe(x => {
       this.breakdowns[index] = x;
-      console.log(index, ' - ', x); });
+      console.log('panne', index, ' - ', x); });
     this.clockService.findIOTByRoom(String(index)).pipe(
       map(data => data.map(val => val.breakdownstatus).filter(x => x == 'BREAKDOWN').length)
     ).subscribe(x => {
       this.breakdowns[index] += x;
-      console.log(index, ' - ', x); });
+      console.log('panne', index, ' - ', x); });
     this.lightService.findIOTByRoom(String(index)).pipe(
       map(data => data.map(val => val.breakdownstatus).filter(x => x == 'BREAKDOWN').length)
     ).subscribe(x => {
       this.breakdowns[index] += x;
-      console.log(index, ' - ', x); });
+      console.log('panne', index, ' - ', x); });
     this.shutterService.findIOTByRoom(String(index)).pipe(
       map(data => data.map(val => val.breakdownstatus).filter(x => x == 'BREAKDOWN').length)
     ).subscribe(x => {
       this.breakdowns[index] += x;
-      console.log(index, ' - ', x); });
+      console.log('panne', index, ' - ', x); });
   }
 
-
+  // define the number of object suspect in a room and change the array suspects
+  suspectRoom(index: string) {
+    this.heaterService.findIOTByRoom(String(index)).pipe(
+      map(data => data.map(val => val.suspect).filter(x => x == 'SUSPECT').length)
+    ).subscribe(x => {
+      this.suspects[index] = x;
+      console.log('suspect', index, ' - ', x); });
+    this.clockService.findIOTByRoom(String(index)).pipe(
+      map(data => data.map(val => val.suspect).filter(x => x == 'SUSPECT').length)
+    ).subscribe(x => {
+      this.suspects[index] += x;
+      console.log('suspect', index, ' - ', x); });
+    this.lightService.findIOTByRoom(String(index)).pipe(
+      map(data => data.map(val => val.suspect).filter(x => x == 'SUSPECT').length)
+    ).subscribe(x => {
+      this.suspects[index] += x;
+      console.log('suspect', index, ' - ', x); });
+    this.shutterService.findIOTByRoom(String(index)).pipe(
+      map(data => data.map(val => val.suspect).filter(x => x == 'SUSPECT').length)
+    ).subscribe(x => {
+      this.suspects[index] += x;
+      console.log('suspect', index, ' - ', x); });
+ }
 
 }
