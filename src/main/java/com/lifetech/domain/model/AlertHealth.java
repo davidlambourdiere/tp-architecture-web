@@ -82,4 +82,16 @@ public class AlertHealth extends PersistableElement{
     public void setDoctor(Long doctor) {
         this.doctor = doctor;
     }
+
+    @Override
+    public String toString() {
+        return "AlertHealth{" +
+                "message='" + message + '\'' +
+                ", startdate=" + startdate +
+                ", criticity='" + criticity + '\'' +
+                ", status='" + status + '\'' +
+                ", strap=" + strap +
+                ", doctor=" + doctor +
+                '}';
+    }
 }

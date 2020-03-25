@@ -28,6 +28,9 @@ public class MockHealthController extends RestBaseController {
         //Historization of the message
         HealthHistoric histSaved = healthHistoricManager.save(healthHistoricManager.split(strapmessage));
 
+        //TODO drop cache evry hour
+
+
         //alertDetection
         boolean isAlert = healthHistoricManager.alertDetection(histSaved, cache);
 
