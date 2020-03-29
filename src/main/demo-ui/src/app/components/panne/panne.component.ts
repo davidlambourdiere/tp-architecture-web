@@ -47,12 +47,16 @@ export class PanneComponent implements OnInit {
   breakdowns = [0, 0, 0, 0, 0];
   suspects = [0, 0, 0, 0, 0];
 
+  numRoomCliked = '0';
+
+  String
   ngOnInit() {
     this.rooms = this.roomService.findAllRoom();
     this.refresh();
   }
 
   RoomDetail(room: RoomDTO) {
+    this.numRoomCliked = room.num;
     this.heaters = this.heaterService.findIOTByRoom(String(room.num));
     this.clocks = this.clockService.findIOTByRoom(String(room.num));
     this.shutters = this.shutterService.findIOTByRoom(String(room.num));
@@ -107,6 +111,7 @@ export class PanneComponent implements OnInit {
     this.suspectRoom('4');
     this.suspectRoom('5');
   }
+
 
   // define the number of object in breakdown in a room and change the array breakdowns
   breakdownRoom(index: string) {

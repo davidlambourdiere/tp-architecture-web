@@ -11,7 +11,7 @@
       <button type="button" class="btn btn-primary" (click)="breakdownHeatersDetection()">
         Détecter radiateur en panne
       </button>
-      <br/> Cliquez sur le logement pour avoir le détail des objets du logement
+      <br/> N'appartient pas à l'application cible
     </div>
   </div>
   <div class="row">
@@ -29,15 +29,32 @@
         </div>
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-4 m-auto">
       <div class="parent">
-        <h3 style="font-family: gubblebum-blocky">Infos des objets du logement</h3>
+        <h6 class="text-center" *ngIf=" this.numRoomCliked == '0'" >Cliquez sur un logement pour avoir le détail des objets connectés</h6>
+        <h3 style="font-family: gubblebum-blocky" *ngIf=" this.numRoomCliked != '0'" >Infos des objets du logement N°{{this.numRoomCliked}}</h3>
         <div class="info">
           <ul class="list-group">
-            <li class="list-group-item" *ngFor="let iot of heaters | async"> Radiateur -- {{iot.breakdownstatus}}</li>
-            <li class="list-group-item" *ngFor="let iot of clocks | async"> Horloge -- {{iot.breakdownstatus}}</li>
-            <li class="list-group-item" *ngFor="let iot of lights | async"> Lumière -- {{iot.breakdownstatus}}</li>
-            <li class="list-group-item" *ngFor="let iot of shutters | async"> Volets -- {{iot.breakdownstatus}}</li>
+            <li class="list-group-item" *ngFor="let iot of heaters | async"> Radiateur --
+              <i *ngIf="iot.breakdownstatus == 'BREAKDOWN'" [ngStyle]="{color: 'red'}"> EN PANNE </i>
+              <i *ngIf="iot.breakdownstatus == 'NOT_BREAKDOWN' && iot.suspect == 'NOT_SUSPECT' " [ngStyle]="{color: 'green'}"> OK </i>
+              <i *ngIf="iot.breakdownstatus == 'NOT_BREAKDOWN' && iot.suspect == 'SUSPECT'" [ngStyle]="{color: 'orange'}"> SUSPECT </i>
+            </li>
+            <li class="list-group-item" *ngFor="let iot of clocks | async"> Horloge --
+              <i *ngIf="iot.breakdownstatus == 'BREAKDOWN'" [ngStyle]="{color: 'red'}"> EN PANNE </i>
+              <i *ngIf="iot.breakdownstatus == 'NOT_BREAKDOWN' && iot.suspect == 'NOT_SUSPECT' " [ngStyle]="{color: 'green'}"> OK </i>
+              <i *ngIf="iot.breakdownstatus == 'NOT_BREAKDOWN' && iot.suspect == 'SUSPECT'" [ngStyle]="{color: 'orange'}"> SUSPECT </i>
+            </li>
+            <li class="list-group-item" *ngFor="let iot of lights | async"> Lumière --
+              <i *ngIf="iot.breakdownstatus == 'BREAKDOWN'" [ngStyle]="{color: 'red'}"> EN PANNE </i>
+              <i *ngIf="iot.breakdownstatus == 'NOT_BREAKDOWN' && iot.suspect == 'NOT_SUSPECT' " [ngStyle]="{color: 'green'}"> OK </i>
+              <i *ngIf="iot.breakdownstatus == 'NOT_BREAKDOWN' && iot.suspect == 'SUSPECT'" [ngStyle]="{color: 'orange'}"> SUSPECT </i>
+            </li>
+            <li class="list-group-item" *ngFor="let iot of shutters | async"> Volets --
+              <i *ngIf="iot.breakdownstatus == 'BREAKDOWN'" [ngStyle]="{color: 'red'}"> EN PANNE </i>
+              <i *ngIf="iot.breakdownstatus == 'NOT_BREAKDOWN' && iot.suspect == 'NOT_SUSPECT' " [ngStyle]="{color: 'green'}"> OK </i>
+              <i *ngIf="iot.breakdownstatus == 'NOT_BREAKDOWN' && iot.suspect == 'SUSPECT'" [ngStyle]="{color: 'orange'}"> SUSPECT </i>
+            </li>
           </ul>
         </div>
       </div>
