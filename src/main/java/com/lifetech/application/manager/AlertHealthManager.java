@@ -16,4 +16,6 @@ public interface AlertHealthManager {
     int findAlertNumberByPerson(String id);
 
     AlertHealth save(AlertHealth alertFC);
+
+    AlertHealth findById(String id);
 }

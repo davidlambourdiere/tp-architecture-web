@@ -7,8 +7,8 @@ INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,user
 INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id) VALUES ('Marie', 'Collin','1945-05-14', 'Coco', 'Marie145','RESIDENT', 1);
 INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id) VALUES ('Mohammed', 'Henni','1956-05-14', 'Momo', 'Momodu13','RESIDENT', 1);
 INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id) VALUES ('Henry', 'Dupont','1956-05-14', 'Henry', 'henry','RESIDENT', 1);
-INSERT INTO lifetech.person (firstname, lastname,birthdate,login, password,deseas,userrole,residence_id)
-VALUES('Amanda','Willson', '1946-06-14','amandaw','1234','','RESIDENT',1);
+INSERT INTO lifetech.person (firstname, lastname,birthdate,login, password,userrole,residence_id)
+VALUES('Amanda','Willson', '1946-06-14','amandaw','1234','RESIDENT',1);
 INSERT INTO lifetech.person (firstname, lastname,birthdate,login, password,deseas,userrole,residence_id)
 VALUES('Porter','Welsby', '1943-06-14','porterw','1234','HEARTPROBLEM','RESIDENT',1);
 INSERT INTO lifetech.person (firstname, lastname, login, password,userrole, residence_id)VALUES('kadia','toure','kadia','admin','DOCTOR',1);

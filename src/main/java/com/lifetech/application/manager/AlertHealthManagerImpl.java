@@ -52,6 +52,12 @@ public class AlertHealthManagerImpl implements AlertHealthManager {
         return alertHealthDAO.save(alert);
     }
 
+    @Override
+    public AlertHealth findById(String id) {
+        return alertHealthDAO.findById(Long.parseLong(id)).orElse(null);
+
+    }
+
 
     //fill Straps and doctors by alerts
     private List<AlertHealthDTO> fillStrapAndDoctor(List<AlertHealth> alertHealths){

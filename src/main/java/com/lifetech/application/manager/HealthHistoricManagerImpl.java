@@ -3,15 +3,14 @@ package com.lifetech.application.manager;
 import com.lifetech.application.dto.StrapDTO;
 import com.lifetech.domain.OrikaBeanMapper;
 import com.lifetech.domain.dao.HealthHistoricDAO;
+import com.lifetech.domain.model.AlertCache;
 import com.lifetech.domain.model.AlertHealth;
 import com.lifetech.domain.model.HealthHistoric;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.Clock;
+import java.util.*;
 
 @Service
 public class HealthHistoricManagerImpl implements HealthHistoricManager {
@@ -69,41 +68,60 @@ public class HealthHistoricManagerImpl implements HealthHistoricManager {
     }
 
     @Override
-    public boolean alertDetection(HealthHistoric histSaved, Map<Long, Map<String, Integer>> cache) {
+    public boolean alertDetection(HealthHistoric histSaved, Map<Long, Map<String, AlertCache>> cache) {
         int cpt = 0;
         boolean isAlerte =  false;
         //find strap
         StrapDTO sdto = strapManager.findById(String.valueOf(histSaved.getStrap()));
-        //find 3 last hearthRate historic
-        List<HealthHistoric> hlist = healthHistoricDAO.findByStrap(histSaved.getStrap());
-        List<HealthHistoric> hsub = hlist.subList(Math.max(hlist.size() - 3, 0), hlist.size());
-
-        for (HealthHistoric h : hsub) {
-            if (Integer.parseInt(h.getHearthrate()) > Integer.parseInt(sdto.getMaxvalueref()))
-                cpt++;
+        //update cache
+        Map<String, AlertCache> values = new HashMap<>();
+        values.put("HR", new AlertCache(0,new ArrayList<>()));
+        if (cache.containsKey(sdto.getId())) {
+            values = cache.get(sdto.getId());
+        } else {
+            cache.put(sdto.getId(), values);
         }
+        AlertCache nbHRAlert = values.get("HR");
+        //find if the last hearthRate is in alert
+        if (Integer.parseInt(histSaved.getHearthrate()) <= Integer.parseInt(sdto.getMaxvalueref())){
+            //set hearthrate alert on zero
+            values.replace("HR", nbHRAlert, new AlertCache(0,new ArrayList<>()));
+            //set status alert on done if it exists
+            if(nbHRAlert.getAlertId().size()>0) {
+                AlertHealth alertHealth = alertHealthManagerImpl.findById(nbHRAlert.getAlertId().get(nbHRAlert.getAlertId().size()-1));
+                alertHealth.setStatus("DONE");
+                alertHealthManagerImpl.save(alertHealth);
+            }
+        }
+        else {
+            //find 3 last hearthRate historic
+            List<HealthHistoric> hlist = healthHistoricDAO.findByStrap(histSaved.getStrap());
+            List<HealthHistoric> hsub = hlist.subList(Math.max(hlist.size() - 3, 0), hlist.size());
+            //find if hearthistoric is in alert
+            for (HealthHistoric h : hsub) {
+                if (Integer.parseInt(h.getHearthrate()) > Integer.parseInt(sdto.getMaxvalueref()))
+                    cpt++;
+            }
+            //if there is an alert (hearthistoric is higher 3 times in a row)
+            if (cpt == 3) {
 
-        if (cpt == 3) {
-            //update cache
-            Map<String, Integer> values = new HashMap<>();
-            values.put("HR", 0);
-            if (cache.containsKey(sdto.getId())) {
-                values = cache.get(sdto.getId());
-            } else {
-                cache.put(sdto.getId(), values);
+                if (nbHRAlert.getNbAlert() == 0) {
+                    AlertHealth alertFC = new AlertHealth();
+                    alertFC.setStrap(sdto.getId());
+                    alertFC.setStartdate(new Timestamp(new Date().getTime()));
+                    alertFC.setStatus("NEW");
+                    alertFC.setCriticity("3");
+                    alertFC.setMessage("HIGH HEARTHRATE");
+                    AlertHealth al = alertHealthManagerImpl.save(alertFC);
+                    System.err.println(al);
+                    nbHRAlert.getAlertId().add(String.valueOf(al.getId()));
+                }
+                isAlerte = true;
+                //increment nbAlert
+                AlertCache newNbAlert = new AlertCache(nbHRAlert.getNbAlert(), nbHRAlert.getAlertId());
+                newNbAlert.setNbAlert(nbHRAlert.getNbAlert()+1);
+                values.replace("HR", nbHRAlert,newNbAlert);
             }
-            Integer nbHRAlert =values.get("HR");
-            if (nbHRAlert == 0) {
-                AlertHealth alertFC = new AlertHealth();
-                alertFC.setStrap(sdto.getId());
-                alertFC.setStartdate(new Timestamp(new Date().getTime()));
-                alertFC.setStatus("NEW");
-                alertFC.setCriticity("3");
-                alertFC.setMessage("HIGH HEARTHRATE");
-                System.err.println(alertHealthManagerImpl.save(alertFC));
-            }
-            isAlerte = true;
-            values.replace("HR", nbHRAlert, ++nbHRAlert);
         }
         return isAlerte;
     }

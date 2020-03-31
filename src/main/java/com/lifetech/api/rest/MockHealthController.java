@@ -2,6 +2,7 @@ package com.lifetech.api.rest;
 
 import com.lifetech.application.manager.HealthHistoricManager;
 import com.lifetech.application.manager.PersonManager;
+import com.lifetech.domain.model.AlertCache;
 import com.lifetech.domain.model.HealthHistoric;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,7 @@ public class MockHealthController extends RestBaseController {
 
     private final PersonManager personManager;
     private final HealthHistoricManager healthHistoricManager;
-    private final Map<Long, Map<String, Integer>> cache;
+    private final Map<Long, Map<String, AlertCache>> cache;
 
     public MockHealthController(PersonManager personManager, HealthHistoricManager healthHistoricManager) {
         this.personManager = personManager;
