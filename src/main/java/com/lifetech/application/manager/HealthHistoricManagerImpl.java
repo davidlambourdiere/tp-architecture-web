@@ -99,10 +99,10 @@ public class HealthHistoricManagerImpl implements HealthHistoricManager {
             List<HealthHistoric> hsub = hlist.subList(Math.max(hlist.size() - 3, 0), hlist.size());
             //find if hearthistoric is in alert
             for (HealthHistoric h : hsub) {
-                if (Integer.parseInt(h.getHearthrate()) > Integer.parseInt(sdto.getMaxvalueref()))
+                if (Integer.parseInt(h.getHearthrate()) > Integer.parseInt(sdto.getMaxvalueref()) || Integer.parseInt(h.getHearthrate()) < Integer.parseInt(sdto.getMinvalueref()))
                     cpt++;
             }
-            //if there is an alert (hearthistoric is higher 3 times in a row)
+            //if there is an alert (hearthistoric is higher or lower 3 times in a row)
             if (cpt == 3) {
 
                 if (nbHRAlert.getNbAlert() == 0) {
