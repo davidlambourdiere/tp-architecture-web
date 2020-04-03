@@ -101,6 +101,11 @@ public class StrapManagerImpl implements StrapManager {
         return strapsToReturn;
     }
 
+    @Override
+    public List<StrapDTO> findAll() {
+        return orikaBeanMapper.mapAsList(strapDAO.findAll(), StrapDTO.class);
+    }
+
     private float calculateTimeOnLastMonth(List<StrapHistoric> strapHistorics) {
         LocalDate d = LocalDate.now().minusMonths(1); //Pick date one month ago
         float percentageOnLastMonth = 0;

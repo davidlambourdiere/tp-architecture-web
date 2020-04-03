@@ -13,4 +13,5 @@ public interface StrapManager {
 
     List<Strap> findAllStrapMalFunctionning();
 
+    List<StrapDTO> findAll();
 }

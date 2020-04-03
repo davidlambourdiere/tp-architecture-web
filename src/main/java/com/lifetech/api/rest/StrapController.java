@@ -27,4 +27,9 @@ public class StrapController extends RestBaseController{
     private StrapDetailDTO findByHistoric(@PathVariable("id") String id) {
         return strapManager.findByHistoric(id);
     }
+
+    @GetMapping("strap/findAll")
+    private List<StrapDTO> findAll(){
+        return strapManager.findAll();
+    }
 }
