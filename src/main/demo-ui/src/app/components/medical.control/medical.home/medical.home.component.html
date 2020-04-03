@@ -88,8 +88,9 @@
               <thead>
               <tr>
                 <th>Index</th>
-                <th>Resident</th>
                 <th>Criticity</th>
+                <th>Start Date</th>
+                <th>Resident</th>
                 <th>Message</th>
                 <th>Action</th>
               </tr>
@@ -97,11 +98,14 @@
               <tbody *ngIf="this.newAlertsNumber">
               <tr *ngFor="let alert of this.alertHealthlList; index as i">
                 <td>{{i+1}}</td>
-                <td>{{alert.strap.person.firstName}} {{alert.strap.person.lastName}}</td>
                 <td>
                   <button *ngIf="alert.criticity<=1" type="button" class="btn btn-warning">{{alert.criticity}}</button>
                   <button *ngIf="alert.criticity>1" type="button" class="btn btn-danger">{{alert.criticity}}</button>
                 </td>
+                <td>
+                  {{alert.startdate | date: 'dd/MM/yyyy h:mm:ss a'}}
+                </td>
+                <td>{{alert.strap.person.firstName}} {{alert.strap.person.lastName}}</td>
                 <td>{{alert.message}}</td>
                 <td><button  class="btn btn-info" style="margin-left: 10px">Details</button>
                 </td>
