@@ -74,6 +74,7 @@ maxdiasto VARCHAR(32),
 minglyc VARCHAR(32),
 maxglyc VARCHAR(32),
 minsteps VARCHAR(32),
+healthstate VARCHAR(32),
 person_id  BIGINT UNSIGNED NOT NULL,
 CONSTRAINT FK_strap_person_id FOREIGN KEY (person_id) REFERENCES lifetech.person(id)
 );

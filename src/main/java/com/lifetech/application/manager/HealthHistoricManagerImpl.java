@@ -92,6 +92,9 @@ public class HealthHistoricManagerImpl implements HealthHistoricManager {
                 alertHealth.setStatus("DONE");
                 alertHealthManagerImpl.save(alertHealth);
             }
+            //update healthstate of strap
+            sdto.setHealthstate("OK");
+            strapManager.save(sdto);
         }
         else {
             //find 3 last hearthRate historic
@@ -115,6 +118,10 @@ public class HealthHistoricManagerImpl implements HealthHistoricManager {
                     AlertHealth al = alertHealthManagerImpl.save(alertFC);
                     System.err.println(al);
                     nbHRAlert.getAlertId().add(String.valueOf(al.getId()));
+
+                    //update healthstate of strap
+                    sdto.setHealthstate("KO");
+                    strapManager.save(sdto);
                 }
                 isAlerte = true;
                 //increment nbAlert

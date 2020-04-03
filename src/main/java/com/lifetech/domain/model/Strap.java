@@ -29,6 +29,9 @@ public class Strap extends IOT{
     @Column(name="minsteps")
     private String minsteps;
 
+    @Column(name="healthstate")
+    private String healthstate;
+
     @OneToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person person;
@@ -111,15 +114,25 @@ public class Strap extends IOT{
         this.person = person;
     }
 
+    public String getHealthstate() {
+        return healthstate;
+    }
+
+    public void setHealthstate(String healthstate) {
+        this.healthstate = healthstate;
+    }
+
     @Override
     public String toString() {
         return "Strap{" +
                 "minsysto='" + minsysto + '\'' +
                 ", maxsysto='" + maxsysto + '\'' +
+                ", mindiasto='" + mindiasto + '\'' +
                 ", maxdiasto='" + maxdiasto + '\'' +
                 ", minglyc='" + minglyc + '\'' +
                 ", maxglyc='" + maxglyc + '\'' +
                 ", minsteps='" + minsteps + '\'' +
+                ", healthstate='" + healthstate + '\'' +
                 ", person=" + person +
                 '}';
     }
