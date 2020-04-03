@@ -61,14 +61,5 @@ export class MedicalResidentsComponent implements OnInit {
     });
   }
 
-  private findAlertNumberByPerson(person: PersonDTO) : Number{
-    let res = null;
-    this.route.params.subscribe(params =>{
-      this.alertHealthService.findAlertNumberByPerson(person).subscribe(data=>{
-        res = data;
-      });
-    });
-    return res;
-  }
 
 }

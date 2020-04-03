@@ -11,7 +11,7 @@ export class StrapService {
   }
 
   findAll(): Observable<StrapDTO[]> {
-    return this.http.get<StrapDTO[]>(`straps`);
+    return this.http.get<StrapDTO[]>(`api/strap/findAll`);
   }
 
 
