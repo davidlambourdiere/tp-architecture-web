@@ -7,6 +7,8 @@ public class AlertHealthDTO {
 
     private Timestamp startdate;
 
+    private Timestamp enddate;
+
     private String criticity;
 
     private String status;
@@ -32,6 +34,14 @@ public class AlertHealthDTO {
 
     public void setStartdate(Timestamp startdate) {
         this.startdate = startdate;
+    }
+
+    public Timestamp getEnddate() {
+        return enddate;
+    }
+
+    public void setEnddate(Timestamp enddate) {
+        this.enddate = enddate;
     }
 
     public String getCriticity() {

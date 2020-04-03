@@ -90,6 +90,7 @@ public class HealthHistoricManagerImpl implements HealthHistoricManager {
             if(nbHRAlert.getAlertId().size()>0) {
                 AlertHealth alertHealth = alertHealthManagerImpl.findById(nbHRAlert.getAlertId().get(nbHRAlert.getAlertId().size()-1));
                 alertHealth.setStatus("DONE");
+                alertHealth.setEnddate(new Timestamp(new Date().getTime()));
                 alertHealthManagerImpl.save(alertHealth);
             }
             //update healthstate of strap
