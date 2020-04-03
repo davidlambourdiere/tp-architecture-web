@@ -4,6 +4,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {PersonDTO} from "../../../dto/PersonDTO";
 import {PersonStatusDTO} from "../../../dto/PersonStatusDTO";
 import {AlertHealthService} from "../../../service/AlertHealthService";
+import {StrapService} from "../../../service/StrapService";
+import {StrapDTO} from "../../../dto/StrapDTO";
 
 @Component({
   selector: 'app-medicalresidents',
@@ -12,10 +14,11 @@ import {AlertHealthService} from "../../../service/AlertHealthService";
 })
 export class MedicalResidentsComponent implements OnInit {
   personlist: PersonDTO[];
+  straplist: StrapDTO[];
   residentNumber: Number;
   newAlertsNumber: Number;
 
-  constructor(private personService: PersonService, private router: Router, private route: ActivatedRoute, private alertHealthService: AlertHealthService,) {
+  constructor(private personService: PersonService, private strapService: StrapService,private router: Router, private route: ActivatedRoute, private alertHealthService: AlertHealthService,) {
     this.residentNumber =0;
     this.newAlertsNumber=0;
   }
@@ -28,15 +31,15 @@ export class MedicalResidentsComponent implements OnInit {
 
   reloadData() {
     // @ts-ignore
-    this.personlist = this.findAllResident();
+    this.findAllStraps();
     this.findNewAlertsNumber();
     this.findResidentNumber();
   }
 
-  private findAllResident() {
+  private findAllStraps() {
     this.route.params.subscribe(params =>{
-      this.personService.findPersonByRole(PersonStatusDTO.RESIDENT).subscribe(data=>{
-        this.personlist = data;
+      this.strapService.findAll().subscribe(data=>{
+        this.straplist = data;
       });
     });
   }
@@ -58,11 +61,14 @@ export class MedicalResidentsComponent implements OnInit {
     });
   }
 
-  private findAlertNumberByPerson(id: Number){
+  private findAlertNumberByPerson(person: PersonDTO) : Number{
+    let res = null;
     this.route.params.subscribe(params =>{
-      this.alertHealthService.findAlertNumberByPerson(id).subscribe(data=>{
-        return data;
+      this.alertHealthService.findAlertNumberByPerson(person).subscribe(data=>{
+        res = data;
       });
     });
+    return res;
   }
+
 }
