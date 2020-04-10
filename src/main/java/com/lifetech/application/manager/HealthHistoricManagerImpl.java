@@ -71,7 +71,7 @@ public class HealthHistoricManagerImpl implements HealthHistoricManager {
 
     @Override
     public boolean alertDetection(HealthHistoric histSaved, Map<Long, Map<String, AlertCache>> cache) {
-        int cpt = 0;
+        int cptHigh = 0, cptLow = 0;
         boolean isAlerte =  false;
         //find strap
         StrapDTO sdto = strapManager.findById(String.valueOf(histSaved.getStrap()));
@@ -105,19 +105,28 @@ public class HealthHistoricManagerImpl implements HealthHistoricManager {
             List<HealthHistoric> hsub = hlist.subList(Math.max(hlist.size() - 3, 0), hlist.size());
             //find if hearthistoric is in alert
             for (HealthHistoric h : hsub) {
-                if (Integer.parseInt(h.getHearthrate()) > Integer.parseInt(sdto.getMaxvalueref()) || Integer.parseInt(h.getHearthrate()) < Integer.parseInt(sdto.getMinvalueref()))
-                    cpt++;
+                if (Integer.parseInt(h.getHearthrate()) > Integer.parseInt(sdto.getMaxvalueref()))
+                    cptHigh++;
+                if (Integer.parseInt(h.getHearthrate()) < Integer.parseInt(sdto.getMinvalueref()))
+                    cptLow++;
             }
             //if there is an alert (hearthistoric is higher or lower 3 times in a row)
-            if (cpt == 3) {
+            if (cptHigh == 3 || cptLow==3 || (Integer.parseInt(histSaved.getHearthrate())==0)) {
 
-                if (nbHRAlert.getNbAlert() == 0) {
+                if (nbHRAlert.getNbAlert() == 0 || (Integer.parseInt(histSaved.getHearthrate())==0)) {
                     AlertHealth alertFC = new AlertHealth();
                     alertFC.setStrap(sdto.getId());
                     alertFC.setStartdate(new Timestamp(new Date().getTime()));
                     alertFC.setStatus("NEW");
                     alertFC.setCriticity("3");
-                    alertFC.setMessage("HIGH HEARTHRATE");
+
+                    if (cptHigh==3)
+                        alertFC.setMessage("HIGH HEARTHRATE");
+                    else if (cptLow==3)
+                        alertFC.setMessage("LOW HEARTHRATE");
+                    else if ((Integer.parseInt(histSaved.getHearthrate())==0))
+                        alertFC.setMessage("Cardiac Arrest");
+
                     AlertHealth al = alertHealthManagerImpl.save(alertFC);
                     System.err.println(al);
                     nbHRAlert.getAlertId().add(String.valueOf(al.getId()));
