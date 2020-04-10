@@ -6,6 +6,8 @@ import {PersonStatusDTO} from "../../../dto/PersonStatusDTO";
 import {AlertHealthService} from "../../../service/AlertHealthService";
 import {StrapService} from "../../../service/StrapService";
 import {StrapDTO} from "../../../dto/StrapDTO";
+import {HealthHistoricService} from "../../../service/HealthHistoricService";
+import {HealthHistoricDTO} from "../../../dto/HealthHistoricDTO";
 
 @Component({
   selector: 'app-medicalresidents',
@@ -18,9 +20,15 @@ export class MedicalResidentsComponent implements OnInit {
   residentNumber: Number;
   newAlertsNumber: Number;
 
-  constructor(private personService: PersonService, private strapService: StrapService,private router: Router, private route: ActivatedRoute, private alertHealthService: AlertHealthService,) {
+  constructor(private personService: PersonService,
+              private strapService: StrapService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private alertHealthService: AlertHealthService,
+              private healthHistoricService: HealthHistoricService) {
     this.residentNumber =0;
     this.newAlertsNumber=0;
+    this.straplist = [];
   }
 
   ngOnInit() {
@@ -32,10 +40,11 @@ export class MedicalResidentsComponent implements OnInit {
   async reloadData() {
     // @ts-ignore
     this.findAllStraps();
+    this.findTopByStrap();
     this.findNewAlertsNumber();
     this.findResidentNumber();
     //console.log('refresh-resident');
-    setTimeout(() => {  this.reloadData(); }, 3000);
+    setTimeout(() => {  this.reloadData(); }, 2000);
   }
 
   private findAllStraps() {
@@ -61,6 +70,20 @@ export class MedicalResidentsComponent implements OnInit {
         this.newAlertsNumber = data;
       });
     });
+  }
+
+  private findTopByStrap() {
+    for (let i = 0; i < this.straplist.length; i++){
+      this.route.params.subscribe(params =>{
+        this.healthHistoricService.findTopByStrap(this.straplist[i].id).subscribe(data=>{
+          if (data != null)
+            this.straplist[i].hearthrate = data.hearthrate;
+          else
+            this.straplist[i].hearthrate = 'no data';
+        });
+      });
+    }
+
   }
 
 

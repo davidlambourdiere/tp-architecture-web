@@ -7,6 +7,7 @@ import com.lifetech.domain.dao.HealthHistoricDAO;
 import com.lifetech.domain.model.AlertCache;
 import com.lifetech.domain.model.AlertHealth;
 import com.lifetech.domain.model.HealthHistoric;
+import com.lifetech.domain.model.Strap;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -137,6 +138,12 @@ public class HealthHistoricManagerImpl implements HealthHistoricManager {
 
     @Override
     public HealthHistoricDTO findTopByStrap(String id) {
-        return orikaBeanMapper.map(healthHistoricDAO.findTopByStrap(Long.parseLong(id)) , HealthHistoricDTO.class);
+        //find  last hearthRate historic
+        List<HealthHistoric> hlist = healthHistoricDAO.findByStrap(Long.parseLong(id));
+        HealthHistoric histo = new HealthHistoric();
+        if (hlist.size()>0) {
+            histo = hlist.get(hlist.size()-1);
+        }
+        return orikaBeanMapper.map(histo, HealthHistoricDTO.class);
     }
 }

@@ -5,6 +5,7 @@ import com.lifetech.domain.model.AlertCache;
 import com.lifetech.domain.model.HealthHistoric;
 
 import java.util.Map;
+import java.util.Optional;
 
 public interface HealthHistoricManager {
 

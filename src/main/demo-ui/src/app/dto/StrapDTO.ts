@@ -18,5 +18,6 @@ export class StrapDTO{
   minglyc: string;
   maxglyc: string;
   healthstate: string;
+  hearthrate : string;
 }
 

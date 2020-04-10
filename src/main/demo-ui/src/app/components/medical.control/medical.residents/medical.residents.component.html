@@ -90,8 +90,13 @@
                   <tr *ngFor="let strap of this.straplist; index as i">
                     <td>{{i+1}}</td>
                     <td>
-                      <button  *ngIf="strap.healthstate==null || strap.healthstate=='OK'" type="button" class="btn btn-success"></button>
-                      <button *ngIf="strap.healthstate=='KO'" type="button" class="btn btn-danger"></button>
+                      <h6 *ngIf="strap.healthstate==null">NO DATA</h6>
+                      <button *ngIf="strap.healthstate=='OK'" type="button" class="btn btn-success">
+                        {{strap.hearthrate}} bpm
+                      </button>
+                      <button *ngIf="strap.healthstate=='KO'" type="button" class="btn btn-danger">
+                        {{strap.hearthrate}} bpm
+                      </button>
                     </td>
                     <td>{{strap.person.firstName}}</td>
                     <td>{{strap.person.lastName}}</td>
