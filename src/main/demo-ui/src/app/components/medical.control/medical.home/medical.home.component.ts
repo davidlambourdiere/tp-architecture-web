@@ -38,7 +38,8 @@ export class MedicalHomeComponent implements OnInit {
     this.alertHealthlList = this.findNewAlerts();
     this.findResidentNumber();
     this.findDoctorNumber();
-    this.findAgentNumber();console.log('refresh-alert');
+    this.findAgentNumber();
+    //console.log('refresh-alert');
     setTimeout(() => {  this.reloadData(); }, 3000);
   }
 

@@ -34,7 +34,7 @@ export class MedicalResidentsComponent implements OnInit {
     this.findAllStraps();
     this.findNewAlertsNumber();
     this.findResidentNumber();
-    console.log('refresh-resident');
+    //console.log('refresh-resident');
     setTimeout(() => {  this.reloadData(); }, 3000);
   }
 

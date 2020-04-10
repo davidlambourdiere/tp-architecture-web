@@ -1,5 +1,6 @@
 package com.lifetech.application.manager;
 
+import com.lifetech.application.dto.HealthHistoricDTO;
 import com.lifetech.application.dto.StrapDTO;
 import com.lifetech.domain.OrikaBeanMapper;
 import com.lifetech.domain.dao.HealthHistoricDAO;
@@ -132,5 +133,10 @@ public class HealthHistoricManagerImpl implements HealthHistoricManager {
             }
         }
         return isAlerte;
+    }
+
+    @Override
+    public HealthHistoricDTO findTopByStrap(String id) {
+        return orikaBeanMapper.map(healthHistoricDAO.findTopByStrap(Long.parseLong(id)) , HealthHistoricDTO.class);
     }
 }

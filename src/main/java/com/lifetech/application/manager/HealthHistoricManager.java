@@ -1,5 +1,6 @@
 package com.lifetech.application.manager;
 
+import com.lifetech.application.dto.HealthHistoricDTO;
 import com.lifetech.domain.model.AlertCache;
 import com.lifetech.domain.model.HealthHistoric;
 
@@ -11,4 +12,6 @@ public interface HealthHistoricManager {
     HealthHistoric split (String message);
 
     boolean alertDetection(HealthHistoric histSaved, Map<Long, Map<String, AlertCache>> cache);
+
+    HealthHistoricDTO findTopByStrap(String id);
 }
