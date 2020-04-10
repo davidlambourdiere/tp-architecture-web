@@ -33,12 +33,13 @@ export class MedicalHomeComponent implements OnInit {
 
   }
 
-  reloadData() {
+  async reloadData() {
     // @ts-ignore
     this.alertHealthlList = this.findNewAlerts();
     this.findResidentNumber();
     this.findDoctorNumber();
-    this.findAgentNumber();
+    this.findAgentNumber();console.log('refresh-alert');
+    setTimeout(() => {  this.reloadData(); }, 3000);
   }
 
   private findNewAlerts() {

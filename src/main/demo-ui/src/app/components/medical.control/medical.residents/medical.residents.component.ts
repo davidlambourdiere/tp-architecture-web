@@ -29,11 +29,13 @@ export class MedicalResidentsComponent implements OnInit {
   }
 
 
-  reloadData() {
+  async reloadData() {
     // @ts-ignore
     this.findAllStraps();
     this.findNewAlertsNumber();
     this.findResidentNumber();
+    console.log('refresh-resident');
+    setTimeout(() => {  this.reloadData(); }, 3000);
   }
 
   private findAllStraps() {
