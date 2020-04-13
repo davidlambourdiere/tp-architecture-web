@@ -85,7 +85,8 @@ public class HealthHistoricManagerImpl implements HealthHistoricManager {
         }
         AlertCache nbHRAlert = values.get("HR");
         //find if the last hearthRate is in alert
-        if (Integer.parseInt(histSaved.getHearthrate()) <= Integer.parseInt(sdto.getMaxvalueref())){
+        if (Integer.parseInt(histSaved.getHearthrate()) < Integer.parseInt(sdto.getMaxvalueref())
+                && Integer.parseInt(histSaved.getHearthrate()) > Integer.parseInt(sdto.getMinvalueref())){
             //set hearthrate alert on zero
             values.replace("HR", nbHRAlert, new AlertCache(0,new ArrayList<>()));
             //set status alert on done if it exists
@@ -111,9 +112,9 @@ public class HealthHistoricManagerImpl implements HealthHistoricManager {
                     cptLow++;
             }
             //if there is an alert (hearthistoric is higher or lower 3 times in a row)
-            if (cptHigh == 3 || cptLow==3 || (Integer.parseInt(histSaved.getHearthrate())==0)) {
+            if (cptHigh == 3 || cptLow==3 ) {
 
-                if (nbHRAlert.getNbAlert() == 0 || (Integer.parseInt(histSaved.getHearthrate())==0)) {
+                if (nbHRAlert.getNbAlert() == 0) {
                     AlertHealth alertFC = new AlertHealth();
                     alertFC.setStrap(sdto.getId());
                     alertFC.setStartdate(new Timestamp(new Date().getTime()));
@@ -122,8 +123,10 @@ public class HealthHistoricManagerImpl implements HealthHistoricManager {
 
                     if (cptHigh==3)
                         alertFC.setMessage("HIGH HEARTHRATE");
+
                     else if (cptLow==3)
                         alertFC.setMessage("LOW HEARTHRATE");
+
                     else if ((Integer.parseInt(histSaved.getHearthrate())==0))
                         alertFC.setMessage("Cardiac Arrest");
 
