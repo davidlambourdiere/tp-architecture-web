@@ -22,6 +22,7 @@ import {NotificationComponent} from "./components/notification/notification.comp
 import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
 import {SurveyComponent} from "./components/survey/survey.component";
 import {MedicalResidentsComponent} from "./components/medical.control/medical.residents/medical.residents.component";
+import {DetailAlertComponent} from "./components/medical.control/detail.alert/detail.alert.component";
 
 
 const routes: Routes = [
@@ -116,6 +117,10 @@ const routes: Routes = [
   {
     path: 'medicalControl/residents',
     component: MedicalResidentsComponent,
+    canActivate: [AuthGuardService]
+  },
+  { path: 'detailalert/:id',
+    component: DetailAlertComponent,
     canActivate: [AuthGuardService]
   }
 

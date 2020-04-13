@@ -82,4 +82,9 @@ export class MedicalHomeComponent implements OnInit {
       });
     });
   }
+
+  alertDetails(id: string){
+    Number.parseInt(id);
+    this.router.navigate(['detailalert', id]);
+  }
 }
