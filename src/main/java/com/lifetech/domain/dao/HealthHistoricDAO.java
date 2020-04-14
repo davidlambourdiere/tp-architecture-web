@@ -10,5 +10,4 @@ import java.util.Optional;
 public interface HealthHistoricDAO extends JpaRepository<HealthHistoric, Long> {
     List<HealthHistoric> findByStrap(Long id);
 
-
 }

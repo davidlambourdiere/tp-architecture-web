@@ -16,4 +16,8 @@ export class HealthHistoricService {
     return this.http.get<HealthHistoricDTO>(`api/health/historic/findHistoric/${id}`);
   }
 
+
+  findAllByStrap(id:  bigint) : Observable<HealthHistoricDTO[]>{
+    return this.http.get<HealthHistoricDTO[]>(`api/health/historic/findHistoricByStrap/${id}`);
+  }
 }

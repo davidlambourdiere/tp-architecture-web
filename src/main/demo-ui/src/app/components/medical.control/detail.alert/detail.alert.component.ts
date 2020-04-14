@@ -39,10 +39,12 @@ export class DetailAlertComponent implements OnInit {
         //console.log(data);
         this.alert = data;
         this.findTopByStrap();
+        this.findAllFCHistoric();
       }, error => console.log(error));
     });
     setTimeout(() => {  this.reload(); }, 3000);
   }
+
   private findTopByStrap() {
     this.route.params.subscribe(params => {
       this.healthHistoricService.findTopByStrap(this.alert.strap.id).subscribe(data => {
@@ -54,4 +56,11 @@ export class DetailAlertComponent implements OnInit {
     });
   }
 
+  private findAllFCHistoric(){
+    this.route.params.subscribe(params =>{
+      this.healthHistoricService.findAllByStrap(this.alert.strap.id).subscribe(data=>{
+        this.historicList = data;
+      });
+    });
+  }
 }

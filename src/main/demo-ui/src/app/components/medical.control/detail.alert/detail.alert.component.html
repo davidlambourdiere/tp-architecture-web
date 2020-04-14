@@ -73,9 +73,10 @@
             <tr *ngFor="let h of this.historicList; index as i">
               <td>{{i+1}}</td>
               <td>
-                <button  type="button" class="btn btn-warning"></button>
+                <button  type="button" class="btn btn-success">{{h.hearthrate}}</button>
               </td>
               <td>
+                {{h.startdate | date: 'dd/MM/yyyy h:mm:ss a'}}
               </td>
             </tr>
             </tbody>

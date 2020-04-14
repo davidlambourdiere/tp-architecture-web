@@ -4,6 +4,7 @@ import com.lifetech.application.dto.HealthHistoricDTO;
 import com.lifetech.application.manager.HealthHistoricManager;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @RestController
@@ -21,6 +22,9 @@ public class HealthHistoricController extends RestBaseController {
         return healthHistoricManager.findTopByStrap(id);
     }
 
-
+    @GetMapping("health/historic/findHistoricByStrap/{id}")
+    private List<HealthHistoricDTO> findHistoricByStrap(@PathVariable("id") String id) {
+        return healthHistoricManager.findHistoricByStrap(id);
+    }
 
 }
