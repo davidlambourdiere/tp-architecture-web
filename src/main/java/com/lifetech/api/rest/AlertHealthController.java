@@ -37,6 +37,9 @@ public class AlertHealthController extends RestBaseController {
         return 0;
     }
 
-
+    @GetMapping("alert/health/findById/{id}")
+    private AlertHealthDTO findById(@PathVariable("id") String id){
+        return alertHealthManager.findDtoById(id);
+    }
 
 }

@@ -2,7 +2,7 @@ package com.lifetech.application.dto;
 
 import java.sql.Timestamp;
 
-public class HealthHistoricDTO {
+public class HealthHistoricDTO extends PersistableElementDTO{
 
     private String hearthrate;
 

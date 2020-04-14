@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {PersonDTO} from '../dto/PersonDTO';
 import {ALertHealthDTO} from "../dto/AlertHealthDTO";
+import {StrapDTO} from "../dto/StrapDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,9 @@ export class AlertHealthService {
 
   findAlertNumberByPerson(person: PersonDTO):Observable<Number> {
     return this.http.post<Number>(`api/alert/health/findAlertNumberByPerson`, person);
+  }
+
+  findById(id : number): Observable<ALertHealthDTO> {
+    return this.http.get<ALertHealthDTO>(`api/alert/health/findById/${id}`);
   }
 }

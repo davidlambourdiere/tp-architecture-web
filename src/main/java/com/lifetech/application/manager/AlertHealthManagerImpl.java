@@ -7,6 +7,7 @@ import com.lifetech.domain.model.AlertHealth;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -55,6 +56,14 @@ public class AlertHealthManagerImpl implements AlertHealthManager {
     @Override
     public AlertHealth findById(String id) {
         return alertHealthDAO.findById(Long.parseLong(id)).orElse(null);
+
+    }
+
+    @Override
+    public AlertHealthDTO findDtoById(String id) {
+        List<AlertHealth> alertHealths = new ArrayList<>();
+        alertHealths.add(alertHealthDAO.findById(Long.parseLong(id)).orElse(null));
+        return fillStrapAndDoctor(alertHealths).get(0);
 
     }
 

@@ -2,18 +2,88 @@
 <div class="wrapper d-flex align-items-stretch">
   <app-medicalmenu></app-medicalmenu>
   <div id="content" class="p-md-5 ">
-    <h2 align="center">Alert Details</h2>
-    <h3>About Resident : </h3>
-    <div class="row">
-      <div class="card" style="width: 20rem;">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item" ><b>Name</b> : <span>{{this.strap.person.firstName}} {{this.strap.person.lastName}}</span></li>
-          <li class="list-group-item"><b>Room</b> : null</li>
-          <li class="list-group-item"><b>Age</b> : null</li>
-          <li class="list-group-item"><b>Diseas</b> : null</li>
-          <li class="list-group-item"><b>Phone</b> : null</li>
-        </ul>
+
+    <div align="center" class="row">
+      <div col="md-4 mt-5">
+        <h3 align="center">About Alert : </h3>
+        <div class="card" style="width: 25rem;">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" ><b>Criticity</b> : <span>{{this.alert.criticity}}</span></li>
+            <li class="list-group-item"><b>Message</b> : <span>{{this.alert.message}}</span></li>
+            <li class="list-group-item"><b>Status</b> : <span>{{this.alert.status}}</span></li>
+            <li class="list-group-item"><b>Start Date</b> : <span>{{this.alert.startdate | date: 'dd/MM/yyyy h:mm:ss a'}}</span></li>
+            <li class="list-group-item"><b>End Date</b> : <span>{{this.alert.enddate | date: 'dd/MM/yyyy h:mm:ss a'}}</span></li>
+          </ul>
+        </div>
       </div>
+      <div col="md-4">
+        <h3 align="center">About Strap : </h3>
+        <div class="card" style="width: 25rem;">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" ><b>Min bpm</b> : <span>{{this.alert.strap.minvalueref}}</span></li>
+            <li class="list-group-item"><b>Max bpm</b> : <span>{{this.alert.strap.maxvalueref}}</span></li>
+            <li class="list-group-item"><b>Min Blood Pressure</b> : {{this.alert.strap.minsysto}} / {{this.alert.strap.minsysto}} mmgh</li>
+            <li class="list-group-item"><b>Max Blood Pressure</b> : {{this.alert.strap.maxsysto}} / {{this.alert.strap.maxdiasto}} mmgh</li>
+            <li class="list-group-item"><b>Min Glyycemia</b> :  {{this.alert.strap.minglyc}}</li>
+            <li class="list-group-item"><b>Max Glycemia</b> : {{this.alert.strap.maxglyc}}</li>
+          </ul>
+        </div>
+      </div>
+      <div col="md-6 mt-4">
+        <h3 align="center">About Resident : </h3>
+        <div class="card" style="width: 25rem;">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" ><b>Name</b> : <span>{{this.alert.strap.person.firstName}} {{this.alert.strap.person.lastName}}</span></li>
+            <li class="list-group-item"><b>Room</b> : null</li>
+            <li class="list-group-item"><b>Age</b> : null</li>
+            <li class="list-group-item"><b>Diseas</b> : null</li>
+            <li class="list-group-item"><b>Phone</b> : null</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+        <div class="panel panel-bd cardbox">
+          <div class="panel-body" align="center">
+            <div class="statistic-box">
+              <h2><span class="count-number">{{this.alert.strap.hearthrate}} bpm</span>
+              </h2>
+            </div>
+            <div class="items pull-center">
+              <i class="fa fa-heartbeat fa-2x"></i>
+              <h6>Heart Beat</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="panel-body">
+        <div  class="table-responsive">
+          <table id="dataTableExample2" class="table table-bordered table-striped table-hover">
+            <thead>
+            <tr>
+              <th>Index</th>
+              <th>Heart beat</th>
+              <th>Start Date</th>
+            </tr>
+            </thead>
+            <tbody >
+            <tr *ngFor="let h of this.historicList; index as i">
+              <td>{{i+1}}</td>
+              <td>
+                <button  type="button" class="btn btn-warning"></button>
+              </td>
+              <td>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

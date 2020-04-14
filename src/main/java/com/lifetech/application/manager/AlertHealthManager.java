@@ -18,4 +18,6 @@ public interface AlertHealthManager {
     AlertHealth save(AlertHealth alertFC);
 
     AlertHealth findById(String id);
+
+    AlertHealthDTO findDtoById(String id);
 }

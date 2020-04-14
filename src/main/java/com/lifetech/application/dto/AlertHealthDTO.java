@@ -2,7 +2,7 @@ package com.lifetech.application.dto;
 
 import java.sql.Timestamp;
 
-public class AlertHealthDTO {
+public class AlertHealthDTO extends PersistableElementDTO{
    private String message;
 
     private Timestamp startdate;
