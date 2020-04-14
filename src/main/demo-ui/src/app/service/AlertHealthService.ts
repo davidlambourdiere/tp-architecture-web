@@ -35,7 +35,7 @@ export class AlertHealthService {
     return this.http.post<Number>(`api/alert/health/findAlertNumberByPerson`, person);
   }
 
-  findById(id : number): Observable<ALertHealthDTO> {
+  findById(id : bigint): Observable<ALertHealthDTO> {
     return this.http.get<ALertHealthDTO>(`api/alert/health/findById/${id}`);
   }
 }

@@ -15,34 +15,34 @@ import {HealthHistoricDTO} from "../../../dto/HealthHistoricDTO";
   styleUrls: ['./detail.alert.component.scss']
 })
 export class DetailAlertComponent implements OnInit {
-  id: number;
+  id : bigint;
   alert : ALertHealthDTO;
   historicList : HealthHistoricDTO[];
 
   constructor(private route: ActivatedRoute, private router: Router,
               private alertHealthService: AlertHealthService,
               private healthHistoricService: HealthHistoricService) {
-
-  }
-
-  ngOnInit() {
     this.alert = new ALertHealthDTO();
     this.alert.strap = new StrapDTO();
     this.alert.strap.person = new PersonDTO();
     this.alert.strap.room = new RoomDTO();
     this.id = this.route.snapshot.params.id;
     this.historicList = [];
-
-    this.route.params.subscribe(params => {
-      this.alertHealthService.findById(this.id).subscribe(data => {
-        this.alert = data;
-      });
-    });console.log(this.alert.message);
-    //this.findTopByStrap();
-
-
   }
 
+  ngOnInit() {
+    this.reload();
+  }
+  async reload() {
+    this.route.params.subscribe(params => {
+      this.alertHealthService.findById(this.id).subscribe(data => {
+        //console.log(data);
+        this.alert = data;
+        this.findTopByStrap();
+      }, error => console.log(error));
+    });
+    setTimeout(() => {  this.reload(); }, 3000);
+  }
   private findTopByStrap() {
     this.route.params.subscribe(params => {
       this.healthHistoricService.findTopByStrap(this.alert.strap.id).subscribe(data => {

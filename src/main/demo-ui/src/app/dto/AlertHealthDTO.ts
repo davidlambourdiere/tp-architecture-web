@@ -2,7 +2,7 @@ import {StrapDTO} from "./StrapDTO";
 import {PersonDTO} from "./PersonDTO";
 
 export class ALertHealthDTO{
-  id : number;
+  id : bigint;
   message : string;
   startdate : string;
   enddate : string;

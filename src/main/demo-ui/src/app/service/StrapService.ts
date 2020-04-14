@@ -14,7 +14,7 @@ export class StrapService {
     return this.http.get<StrapDTO[]>(`api/strap/findAll`);
   }
 
-  findById(id : number): Observable<StrapDTO> {
+  findById(id : bigint): Observable<StrapDTO> {
     return this.http.get<StrapDTO>(`api/strap/${id}`);
   }
 
