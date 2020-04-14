@@ -34,6 +34,7 @@ export class DetailAlertComponent implements OnInit {
     this.reload();
   }
   async reload() {
+
     this.route.params.subscribe(params => {
       this.alertHealthService.findById(this.id).subscribe(data => {
         //console.log(data);

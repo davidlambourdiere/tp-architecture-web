@@ -3,8 +3,9 @@
   <app-medicalmenu></app-medicalmenu>
   <div id="content" class="p-md-5 ">
 
-    <div align="center" class="row">
-      <div col="md-4 mt-5">
+    <div class="row">
+
+      <div col="md-4">
         <h3 align="center">About Alert : </h3>
         <div class="card" style="width: 25rem;">
           <ul class="list-group list-group-flush">
@@ -16,20 +17,8 @@
           </ul>
         </div>
       </div>
-      <div col="md-4">
-        <h3 align="center">About Strap : </h3>
-        <div class="card" style="width: 25rem;">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item" ><b>Min Hearthbeat</b> : <span>{{this.alert.strap.minvalueref}} bpm</span></li>
-            <li class="list-group-item"><b>Max Hearthbeat</b> : <span>{{this.alert.strap.maxvalueref}} bpm</span></li>
-            <!--<li class="list-group-item"><b>Min Blood Pressure</b> : {{this.alert.strap.minsysto}} / {{this.alert.strap.minsysto}} mmgh</li>
-            <li class="list-group-item"><b>Max Blood Pressure</b> : {{this.alert.strap.maxsysto}} / {{this.alert.strap.maxdiasto}} mmgh</li>
-            <li class="list-group-item"><b>Min Glycemia</b> :  {{this.alert.strap.minglyc}}</li>
-            <li class="list-group-item"><b>Max Glycemia</b> : {{this.alert.strap.maxglyc}}</li>-->
-          </ul>
-        </div>
-      </div>
-      <div col="md-6 mt-4">
+
+      <div col="md-4 mt-4">
         <h3 align="center">About Resident : </h3>
         <div class="card" style="width: 25rem;">
           <ul class="list-group list-group-flush">
@@ -41,8 +30,7 @@
           </ul>
         </div>
       </div>
-    </div>
-    <div class="row mt-5">
+
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
         <div class="panel panel-bd cardbox">
           <div class="panel-body" align="center">
@@ -57,9 +45,13 @@
           </div>
         </div>
       </div>
+
     </div>
-    <div class="row">
-      <div class="panel-body">
+
+    <div align="center" class="row mt-5">
+
+      <div  col="md-8 mt-4" class="panel-body" style="width: 50rem;">
+        <h3 align="center">Heartbeat Historic of last hour : </h3>
         <div  class="table-responsive">
           <table id="dataTableExample2" class="table table-bordered table-striped table-hover">
             <thead>
@@ -70,7 +62,7 @@
             </tr>
             </thead>
             <tbody >
-            <tr *ngFor="let h of this.historicList; index as i">
+            <tr *ngFor="let h of this.historicList.slice().reverse(); index as i">
               <td>{{i+1}}</td>
               <td>
                 <button  type="button" class="btn btn-success">{{h.hearthrate}}</button>
@@ -84,6 +76,20 @@
 
         </div>
       </div>
+
+      <div col="md-4">
+       <h3 align="center">Resume : </h3>
+       <div class="card" style="width: 25rem;">
+         <ul class="list-group list-group-flush">
+           <li class="list-group-item" ><b>Min Hearthbeat</b> : <span>{{this.alert.strap.minvalueref}} bpm</span></li>
+           <li class="list-group-item"><b>Max Hearthbeat</b> : <span>{{this.alert.strap.maxvalueref}} bpm</span></li>
+           <li class="list-group-item"><b>Alert number in last hour</b> : null</li>
+           <li class="list-group-item"><b>Alert number in last day</b> : null</li>
+           <li class="list-group-item"><b>Alert number in last month</b> : null</li>
+           <li class="list-group-item"><b>Alert number in 3 last month</b> : null</li>
+         </ul>
+       </div>
+     </div>
 
     </div>
   </div>
