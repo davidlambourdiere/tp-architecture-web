@@ -31,11 +31,28 @@
         </div>
       </div>
 
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
-        <div class="panel panel-bd cardbox">
+      <div *ngIf="this.alert.strap.hearthrate>this.alert.strap.minvalueref
+        && this.alert.strap.hearthrate<this.alert.strap.maxvalueref" class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+        <div class="panel panel-bd cardbox" style="background-color:limegreen;">
           <div class="panel-body" align="center">
             <div class="statistic-box">
-              <h2><span class="count-number">{{this.alert.strap.hearthrate}} bpm</span>
+              <h2><span  class="count-number">{{this.alert.strap.hearthrate}} bpm</span>
+              </h2>
+            </div>
+            <div class="items pull-center">
+              <i class="fa fa-heartbeat fa-2x"></i>
+              <h6>Heartbeat</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="this.alert.strap.hearthrate<this.alert.strap.minvalueref
+        || this.alert.strap.hearthrate>this.alert.strap.maxvalueref" class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+        <div class="panel panel-bd cardbox" style="background-color:#F94005;">
+          <div class="panel-body" align="center">
+            <div class="statistic-box">
+              <h2><span  class="count-number">{{this.alert.strap.hearthrate}} bpm</span>
               </h2>
             </div>
             <div class="items pull-center">
@@ -50,46 +67,57 @@
 
     <div align="center" class="row mt-5">
 
-      <div  col="md-8 mt-4" class="panel-body" style="width: 50rem;">
+      <div  col="md-8 mt-4" class="panel-body" style="width: 50rem;" >
         <h3 align="center">Heartbeat Historic of last hour : </h3>
-        <div  class="table-responsive">
-          <table id="dataTableExample2" class="table table-bordered table-striped table-hover">
-            <thead>
-            <tr>
-              <th>Index</th>
-              <th>Heartbeat</th>
-              <th>Start Date</th>
-            </tr>
-            </thead>
-            <tbody >
-            <tr *ngFor="let h of this.historicList.slice().reverse(); index as i">
-              <td>{{i+1}}</td>
-              <td>
-                <button  type="button" class="btn btn-success">{{h.hearthrate}}</button>
-              </td>
-              <td>
-                {{h.startdate | date: 'dd/MM/yyyy h:mm:ss a'}}
-              </td>
-            </tr>
-            </tbody>
-          </table>
-
+        <nav class="nav nav-tabs">
+          <a class="nav-item nav-link active" href="#p1" data-toggle="tab">GRAPH DATA</a>
+          <a class="nav-item nav-link" href="#p2" data-toggle="tab">RAW DATA</a>
+        </nav>
+        <div class="tab-content" style="height: 20rem; overflow: auto;">
+          <div class="tab-pane active" id="p1">Panneau 1</div>
+          <div class="tab-pane" id="p2">
+            <div  class="table-responsive">
+              <table id="dataTableExample2" class="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                  <th>Index</th>
+                  <th>Heartbeat</th>
+                  <th>Start Date</th>
+                </tr>
+                </thead>
+                <tbody >
+                <tr *ngFor="let h of this.historicList.slice().reverse(); index as i">
+                  <td>{{i+1}}</td>
+                  <td>
+                    <button *ngIf="this.alert.strap.hearthrate>this.alert.strap.minvalueref
+                    && this.alert.strap.hearthrate<this.alert.strap.maxvalueref" type="button" class="btn btn-success">{{h.hearthrate}}</button>
+                    <button *ngIf="this.alert.strap.hearthrate<this.alert.strap.minvalueref
+                    || this.alert.strap.hearthrate>this.alert.strap.maxvalueref" type="button" class="btn btn-danger">{{h.hearthrate}}</button>
+                  </td>
+                  <td>
+                    {{h.startdate | date: 'dd/MM/yyyy h:mm:ss a'}}
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
 
       <div col="md-4">
-       <h3 align="center">Resume : </h3>
-       <div class="card" style="width: 25rem;">
-         <ul class="list-group list-group-flush">
-           <li class="list-group-item" ><b>Min Hearthbeat</b> : <span>{{this.alert.strap.minvalueref}} bpm</span></li>
-           <li class="list-group-item"><b>Max Hearthbeat</b> : <span>{{this.alert.strap.maxvalueref}} bpm</span></li>
-           <li class="list-group-item"><b>Alert number in last hour</b> : null</li>
-           <li class="list-group-item"><b>Alert number in last day</b> : null</li>
-           <li class="list-group-item"><b>Alert number in last month</b> : null</li>
-           <li class="list-group-item"><b>Alert number in 3 last month</b> : null</li>
-         </ul>
-       </div>
-     </div>
+        <h3 align="center">Resume : </h3>
+        <div class="card" style="width: 25rem;">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" ><b>Min Hearthbeat</b> : <span>{{this.alert.strap.minvalueref}} bpm</span></li>
+            <li class="list-group-item"><b>Max Hearthbeat</b> : <span>{{this.alert.strap.maxvalueref}} bpm</span></li>
+            <li class="list-group-item"><b>Alert number in last hour</b> : null</li>
+            <li class="list-group-item"><b>Alert number in last day</b> : null</li>
+            <li class="list-group-item"><b>Alert number in last month</b> : null</li>
+            <li class="list-group-item"><b>Alert number in 3 last month</b> : null</li>
+          </ul>
+        </div>
+      </div>
 
     </div>
   </div>
