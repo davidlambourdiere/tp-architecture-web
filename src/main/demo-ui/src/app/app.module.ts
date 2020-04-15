@@ -39,6 +39,8 @@ import { MedicalMenuComponent } from './components/medical.control/medical.menu/
 import { MedicalResidentsComponent } from './components/medical.control/medical.residents/medical.residents.component';
 import { DetailAlertComponent } from './components/medical.control/detail.alert/detail.alert.component';
 import {ChartsModule} from "ng2-charts";
+import { DatePipe } from '@angular/common';
+
 
 @NgModule({
   declarations: [
@@ -80,7 +82,7 @@ import {ChartsModule} from "ng2-charts";
     ReactiveFormsModule,
     ChartsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

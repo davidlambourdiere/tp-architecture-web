@@ -8,7 +8,8 @@ import {ALertHealthDTO} from "../../../dto/AlertHealthDTO";
 import {AlertHealthService} from "../../../service/AlertHealthService";
 import {HealthHistoricService} from "../../../service/HealthHistoricService";
 import {HealthHistoricDTO} from "../../../dto/HealthHistoricDTO";
-import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-detail.alert',
   templateUrl: './detail.alert.component.html',
@@ -18,45 +19,45 @@ export class DetailAlertComponent implements OnInit {
   id : bigint;
   alert : ALertHealthDTO;
   historicList : HealthHistoricDTO[];
-
+  dataXlist : Number[];
+  dataYlist : string[];
   //graph
   public chartType: string = 'line';
 
-  public chartDatasets: Array<any> = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'My First dataset' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'My Second dataset' }
-  ];
+  public chartDatasets: Array<any> ;
 
-  public chartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public chartLabels: Array<any> ;
 
-  public chartColors: Array<any> = [
-    {
-      backgroundColor: 'rgba(105, 0, 132, .2)',
-      borderColor: 'rgba(200, 99, 132, .7)',
-      borderWidth: 2,
-    },
-    {
-      backgroundColor: 'rgba(0, 137, 132, .2)',
-      borderColor: 'rgba(0, 10, 130, .7)',
-      borderWidth: 2,
-    }
-  ];
+  public chartColors: Array<any>;
 
-  public chartOptions: any = {
-    responsive: true
-  };
+  public chartOptions: any;
+
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }
 
   constructor(private route: ActivatedRoute, private router: Router,
               private alertHealthService: AlertHealthService,
-              private healthHistoricService: HealthHistoricService) {
+              private healthHistoricService: HealthHistoricService,
+              private datepipe: DatePipe) {
     this.alert = new ALertHealthDTO();
     this.alert.strap = new StrapDTO();
     this.alert.strap.person = new PersonDTO();
     this.alert.strap.room = new RoomDTO();
     this.id = this.route.snapshot.params.id;
     this.historicList = [];
+
+    this.chartType = '';
+
+    this.chartDatasets= [];
+
+    this.chartLabels= [];
+
+    this.chartColors= [];
+
+    this.chartOptions= [];
+
+    this.dataYlist= [];
+    this.dataXlist = [];
   }
 
   ngOnInit() {
@@ -72,7 +73,7 @@ export class DetailAlertComponent implements OnInit {
         this.findAllFCHistoric();
       }, error => console.log(error));
     });
-
+    this.loadDataChart();
     setTimeout(() => {  this.reload(); }, 3000);
   }
 
@@ -93,5 +94,44 @@ export class DetailAlertComponent implements OnInit {
         this.historicList = data;
       });
     });
+  }
+
+  private loadDataChart(){
+    for (let i = 0; i < this.historicList.length; i++){
+      this.dataXlist[i] = Number(this.historicList[i].hearthrate);
+      this.dataYlist[i] = ''+this.datepipe.transform(this.historicList[i].startdate, 'h:mm:ss a');
+    }
+
+
+    this.chartType = 'line';
+
+    /*this.chartDatasets = [
+      { data: [65, 59, 80, 81, 56, 55, 40], label: 'My First dataset' },
+      { data: [28, 48, 40, 19, 86, 27, 90], label: 'My Second dataset' }
+    ];*/
+
+    this.chartDatasets  = [
+      { data:  this.dataXlist, label: 'My First dataset' },
+      //{ data: [28, 48, 40, 19, 86, 27, 90], label: 'My Second dataset' }
+    ];
+
+    this.chartLabels = this.dataYlist;
+
+    this.chartColors = [
+      {
+        backgroundColor: 'rgba(105, 0, 132, .2)',
+        borderColor: 'rgba(200, 99, 132, .7)',
+        borderWidth: 2,
+      },
+      {
+        backgroundColor: 'rgba(0, 137, 132, .2)',
+        borderColor: 'rgba(0, 10, 130, .7)',
+        borderWidth: 2,
+      }
+    ];
+
+    this.chartOptions= {
+      responsive: true
+    };
   }
 }
