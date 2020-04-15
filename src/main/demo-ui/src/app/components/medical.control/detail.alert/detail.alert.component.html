@@ -73,8 +73,21 @@
           <a class="nav-item nav-link active" href="#p1" data-toggle="tab">GRAPH DATA</a>
           <a class="nav-item nav-link" href="#p2" data-toggle="tab">RAW DATA</a>
         </nav>
-        <div class="tab-content" style="height: 20rem; overflow: auto;">
-          <div class="tab-pane active" id="p1">Panneau 1</div>
+        <div class="tab-content" style="height: 30rem; overflow: auto;">
+          <div class="tab-pane active" id="p1">
+            <div style="display: block">
+              <canvas baseChart
+                      [chartType]="chartType"
+                      [datasets]="chartDatasets"
+                      [labels]="chartLabels"
+                      [colors]="chartColors"
+                      [options]="chartOptions"
+                      [legend]="true"
+                      (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)">
+              </canvas>
+            </div>
+          </div>
           <div class="tab-pane" id="p2">
             <div  class="table-responsive">
               <table id="dataTableExample2" class="table table-bordered table-striped table-hover">

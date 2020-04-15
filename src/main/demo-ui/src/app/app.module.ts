@@ -38,6 +38,7 @@ import { MedicalHomeComponent} from './components/medical.control/medical.home/m
 import { MedicalMenuComponent } from './components/medical.control/medical.menu/medical.menu.component';
 import { MedicalResidentsComponent } from './components/medical.control/medical.residents/medical.residents.component';
 import { DetailAlertComponent } from './components/medical.control/detail.alert/detail.alert.component';
+import {ChartsModule} from "ng2-charts";
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { DetailAlertComponent } from './components/medical.control/detail.alert/
     FormsModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+    ChartsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
