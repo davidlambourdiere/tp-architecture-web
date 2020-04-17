@@ -51,11 +51,9 @@ public class HeaterManagerImpl implements HeaterManager {
     }
 
     @Override
-    public HeaterDTO findAllHeater() {
-        List<HeaterDTO> heaters = orikaBeanMapper.convertListDTO(heaterDAO.findAll(), HeaterDTO.class);
-        HeaterDTO iotToReturn = new HeaterDTO();
-        iotToReturn.setHeaters(heaters);
-        return iotToReturn;
+    public List<HeaterDTO> findAllHeater() {
+        List<Heater> heaters = heaterDAO.findAll();
+        return orikaBeanMapper.mapAsList(heaters, HeaterDTO.class);
     }
 
     public int countHeaters(){

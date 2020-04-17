@@ -15,8 +15,8 @@ export class HeaterService {
     return this.http.get<IOTDTO>(`api/iots`);
   }
 
-  findAllHeater(): Observable<HeaterDTO> {
-    return this.http.get<HeaterDTO>(`api/heaters`);
+  findAllHeater(): Observable<any> {
+    return this.http.get<HeaterDTO>(`api/heater`);
   }
   findIOTByType(type: string): Observable<IOTDTO> {
     return this.http.post<IOTDTO>(`api/iots/findByType`, type);

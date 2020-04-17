@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface HeaterManager {
     HeaterDTO findById(String id);
-    HeaterDTO findAllHeater();
+    List<HeaterDTO> findAllHeater();
 
     List<HeaterDTO> findByRoom(String id);
 

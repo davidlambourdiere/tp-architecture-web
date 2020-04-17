@@ -46,17 +46,18 @@ public class HeaterMessageManagerImpl implements HeaterMessageManager {
 //    }
 
 
-
     @Override
     public boolean breakdownDetection(String id) {
         //HeaterMessageDTO heaterMessageDTO = this.findFirstByOrderByInsertDateDesc();
+        System.out.println("On s'occupe du radiateur numero " + id);
         List<HeaterMessageDTO> listHeaterMessageDTO = this.findAllByHeater(id);
         listHeaterMessageDTO.sort(Comparator.comparing(HeaterMessageDTO::getInsertDate));
-        HeaterMessageDTO heaterMessageDTO = listHeaterMessageDTO.get(listHeaterMessageDTO.size() - 1);
+        boolean breakdown = false;
+        try {
+            HeaterMessageDTO heaterMessageDTO = listHeaterMessageDTO.get(listHeaterMessageDTO.size() - 1);
         // algorith : breakdown detection for heater
         String temperature = heaterMessageDTO.getTemperatureMessage();
         System.out.println("temperature du message " + temperature);
-        boolean breakdown = false;
         int temperatureInt = Integer.parseInt(temperature);
         if (temperatureInt > 50 || temperatureInt < -10) {
             breakdown = true;
@@ -67,6 +68,9 @@ public class HeaterMessageManagerImpl implements HeaterMessageManager {
         } else {
             breakdown = false;
             updateHeaterStatusNoBreakdown(id);
+        }
+        } catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("Il n'y a pas de message pour le radiateur " + id);
         }
         return breakdown;
     }

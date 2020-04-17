@@ -21,8 +21,8 @@ public class HeaterController extends RestBaseController{
     }
 
 
-    @GetMapping("heater/{id}")
-    private HeaterDTO findAllHeater(@PathVariable("id") String id){
+    @GetMapping("heater")
+    private List<HeaterDTO> findAllHeater(){
         return heaterManager.findAllHeater();
     }
 
