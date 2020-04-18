@@ -129,7 +129,7 @@
                 </td>
                 <td>{{alert.strap.person.firstName}} {{alert.strap.person.lastName}}</td>
                 <td>{{alert.message}}</td>
-                <td><button  (click)="this.alertDetails(''+alert.id)" class="btn btn-info" style="margin-left: 10px">Details</button>
+                <td><button [routerLink]="['/detailalert', alert.id ]" class="btn btn-info" style="margin-left: 10px">Details</button>
                 </td>
               </tr>
               </tbody>
