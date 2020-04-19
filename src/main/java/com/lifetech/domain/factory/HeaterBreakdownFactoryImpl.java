@@ -2,18 +2,28 @@ package com.lifetech.domain.factory;
 
 import com.lifetech.domain.model.Heater;
 import com.lifetech.domain.model.HeaterBreakdown;
+import com.lifetech.infrastructure.generator.RandomTimestampGenerator;
 
 import java.sql.Timestamp;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 public class HeaterBreakdownFactoryImpl implements HeaterBreakdownFactory {
     @Override
-    public HeaterBreakdown createRandomHeaterBreakdown(Heater heater) {
+    public HeaterBreakdown createRandomHeatherBreakdown(Heater heater, Timestamp lowerBound, Duration maxDuration) {
+        Timestamp startDatebBreakdown = RandomTimestampGenerator.between(lowerBound.toLocalDateTime(), LocalDateTime.now());
+        Timestamp endDateBreakdown = RandomTimestampGenerator.between(startDatebBreakdown.toLocalDateTime(), startDatebBreakdown.toLocalDateTime().plus(maxDuration));
         HeaterBreakdown heaterBreakdown = new HeaterBreakdown();
-        heaterBreakdown.setStartdateheaterbreakdown((new Timestamp(System.currentTimeMillis())).toString());
-        heaterBreakdown.setEnddatebreakdown((new Timestamp(System.currentTimeMillis() + 86400)).toString());
-        heaterBreakdown.setMessageheaterbreakdown("PANNE");
+        heaterBreakdown.setStartdateheaterbreakdown(startDatebBreakdown.toString());
+        heaterBreakdown.setEnddatebreakdown(endDateBreakdown.toString());
+        heaterBreakdown.setMessageheaterbreakdown("PANNE MOCKEE POUR TESTS DAVID");
         heaterBreakdown.setIotheaterbreakdown(heater);
         return heaterBreakdown;
+    }
+
+    @Override
+    public HeaterBreakdown createRandomHeaterBreakdown(Heater heater, Timestamp lowerBound) {
+        return createRandomHeatherBreakdown(heater, lowerBound, Duration.ofDays(1));
     }
     @Override
     public HeaterBreakdown createHeaterBreakdown () {
