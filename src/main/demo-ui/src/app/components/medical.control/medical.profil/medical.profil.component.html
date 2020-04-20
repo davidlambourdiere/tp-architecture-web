@@ -35,7 +35,7 @@
         <div class="panel panel-bd cardbox" style="background-color:limegreen;">
           <div class="panel-body" align="center">
             <div class="statistic-box">
-              <h2><span  class="count-number">{{this.strap.hearthrate}} bpm</span>
+              <h2><span  class="count-number">{{this.strap.hearthrate? this.strap.hearthrate+' bpm' : 'no data'}}</span>
               </h2>
             </div>
             <div class="items pull-center">
@@ -51,7 +51,7 @@
         <div class="panel panel-bd cardbox" style="background-color:#F94005;">
           <div class="panel-body" align="center">
             <div class="statistic-box">
-              <h2><span  class="count-number">{{this.strap.hearthrate}} bpm</span>
+              <h2><span  class="count-number">{{this.strap.hearthrate ? this.strap.hearthrate+' bpm' : 'no data'}}</span>
               </h2>
             </div>
             <div class="items pull-center">
