@@ -22,6 +22,7 @@ import {NotificationComponent} from "./components/notification/notification.comp
 import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
 import {SurveyComponent} from "./components/survey/survey.component";
 import {MedicalResidentsComponent} from "./components/medical.control/medical.residents/medical.residents.component";
+import {ProfilelistComponent} from "./components/profilelist/profilelist.component";
 
 
 const routes: Routes = [
@@ -116,6 +117,11 @@ const routes: Routes = [
   {
     path: 'medicalControl/residents',
     component: MedicalResidentsComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'profileList',
+    component: ProfilelistComponent,
     canActivate: [AuthGuardService]
   }
 
