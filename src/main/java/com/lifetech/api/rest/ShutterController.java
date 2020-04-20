@@ -19,6 +19,11 @@ public class ShutterController extends RestBaseController{
         this.shutterManager = shutterManager;
     }
 
+    @GetMapping("shutter/find/{id}")
+    private ShutterDTO findShutter(@PathVariable("id") String id){
+        return shutterManager.findById(id);
+    }
+
     @GetMapping("shutter/{id}")
     private ShutterDTO findById(@PathVariable("id") String id){
         return null;

@@ -105,6 +105,13 @@ public class ShutterManagerImpl implements ShutterManager {
         return shuttersToReturn;
     }
 
+    @Override
+    public ShutterDTO findById(String id) {
+        Shutter shutter = shutterDAO.findById(Long.parseLong(id)).orElse(null);
+        ShutterDTO shutterDTO =orikaBeanMapper.map(shutter, ShutterDTO.class);
+        return shutterDTO;
+    }
+
     private float calculateTimeOnLastMonth(List<ShutterHistoric> shutterHistorics) {
         LocalDate d = LocalDate.now().minusMonths(1); //Pick date one month ago
         float percentageOnLastMonth = 0;

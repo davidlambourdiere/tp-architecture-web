@@ -127,6 +127,7 @@ public class StrapManagerImpl implements StrapManager {
     }
     public StrapDTO findById(String id) {
         Strap strap = strapDAO.findById(Long.parseLong(id)).orElse(null);
-        return orikaBeanMapper.map(strap, StrapDTO.class);
+        StrapDTO strapDTO = orikaBeanMapper.map(strap, StrapDTO.class);
+        return strapDTO;
     }
 }

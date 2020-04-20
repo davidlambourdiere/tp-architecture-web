@@ -20,6 +20,11 @@ public class LightController extends RestBaseController{
         this.lightManager = lightManager;
     }
 
+    @GetMapping("light/find/{id}")
+    private LightDTO findLight(@PathVariable("id") String id){
+        return lightManager.findById(id);
+    }
+
     @GetMapping("light")
     private List<LightDTO> findAllLight() {
         return lightManager.findAllLight();

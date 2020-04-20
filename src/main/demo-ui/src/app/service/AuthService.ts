@@ -19,5 +19,10 @@ export class AuthService {
     this.connected = true;
   }
 
+  getUser() {
+    return JSON.parse(localStorage.getItem('user'));
+  }
+
+
 
 }

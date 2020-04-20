@@ -22,6 +22,12 @@ import {NotificationComponent} from "./components/notification/notification.comp
 import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
 import {SurveyComponent} from "./components/survey/survey.component";
 import {MedicalResidentsComponent} from "./components/medical.control/medical.residents/medical.residents.component";
+import {NotificationHeaterComponent} from "./components/notification/notification.heater/notification.heater.component";
+import {NotificationShutterComponent} from "./components/notification/notification.shutter/notification.shutter.component";
+import {NotificationLightComponent} from "./components/notification/notification.light/notification.light.component";
+import {NotificationClockComponent} from "./components/notification/notification.clock/notification.clock.component";
+import {NotificationStrapComponent} from "./components/notification/notification.strap/notification.strap.component";
+import {NotificationNewComponent} from "./components/notification/notification.new/notification.new.component";
 
 
 const routes: Routes = [
@@ -116,6 +122,36 @@ const routes: Routes = [
   {
     path: 'medicalControl/residents',
     component: MedicalResidentsComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'notification/heater/:id',
+    component: NotificationHeaterComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'notification/shutter/:id',
+    component: NotificationShutterComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'notification/light/:id',
+    component: NotificationLightComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'notification/clock/:id',
+    component: NotificationClockComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'notification/strap/:id',
+    component: NotificationStrapComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'notification/new',
+    component: NotificationNewComponent,
     canActivate: [AuthGuardService]
   }
 

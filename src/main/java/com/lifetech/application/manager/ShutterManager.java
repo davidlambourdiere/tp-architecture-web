@@ -12,4 +12,6 @@ public interface ShutterManager {
     ShutterDetailDTO findByHistoric(String id);
 
     List<Shutter> findAllShutterMalFunctionning();
+
+    ShutterDTO findById(String id);
 }

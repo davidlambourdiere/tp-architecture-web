@@ -1,2 +1,21 @@
 <home></home>
-notification
+<div class="container">
+  <form>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <h4>Messages Recus({{initializeNotification.countMessagesReceived}}), non lus({{initializeNotification.countMessagesReceivedNotRead}})</h4>
+        <button class="btn btn-success">Accèder à mes messages reçus</button>
+      </div>
+    </div>
+  </form>
+  <form>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <h4>Messages Envoyés({{initializeNotification.countMessagesSent}})</h4>
+        <button class="btn btn-success">Accèder à mes messages envoyés</button>
+      </div>
+    </div>
+  </form>
+
+  <button class="btn btn-primary" [routerLink]="['/notification/new']">Envoyer un nouveau message</button>
+</div>

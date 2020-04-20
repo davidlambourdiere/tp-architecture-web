@@ -1,6 +1,8 @@
 package com.lifetech.application.dto;
 
 
+import java.util.List;
+
 public class PersonDTO extends PersistableElementDTO {
     
     private String firstName;

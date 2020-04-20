@@ -37,13 +37,24 @@ import {CustomComponent} from "./components/subscription/custom.component";
 import { MedicalHomeComponent} from './components/medical.control/medical.home/medical.home.component';
 import { MedicalMenuComponent } from './components/medical.control/medical.menu/medical.menu.component';
 import { MedicalResidentsComponent } from './components/medical.control/medical.residents/medical.residents.component';
+import {NotificationHeaterComponent} from "./components/notification/notification.heater/notification.heater.component";
+import {NotificationClockComponent} from "./components/notification/notification.clock/notification.clock.component";
+import {NotificationLightComponent} from "./components/notification/notification.light/notification.light.component";
+import {NotificationShutterComponent} from "./components/notification/notification.shutter/notification.shutter.component";
+import {NotificationStrapComponent} from "./components/notification/notification.strap/notification.strap.component";
+import {NotificationNewComponent} from "./components/notification/notification.new/notification.new.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeadComponent,
     PersonComponent,
+    NotificationClockComponent,
+    NotificationLightComponent,
+    NotificationShutterComponent,
+    NotificationStrapComponent,
     HomeComponent,
+    NotificationNewComponent,
     ConnectionComponent,
     MonitoringComponent,
     PanneComponent,
@@ -58,6 +69,7 @@ import { MedicalResidentsComponent } from './components/medical.control/medical.
     CustomComponent,
     SurveyComponent,
     ConfortComponent,
+    NotificationHeaterComponent,
     EssentialComponent,
     TotalconfortComponent,
     SerenityComponent,

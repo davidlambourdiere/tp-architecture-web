@@ -1,4 +1,5 @@
 import {StrapDTO} from "./StrapDTO";
+import {NotificationDTO} from "./NotificationDTO";
 
 export class PersonDTO{
   firstName: string;
