@@ -40,6 +40,7 @@ import { MedicalResidentsComponent } from './components/medical.control/medical.
 import { DetailAlertComponent } from './components/medical.control/detail.alert/detail.alert.component';
 import {ChartsModule} from "ng2-charts";
 import { DatePipe } from '@angular/common';
+import {MedicalProfilComponent} from "./components/medical.control/medical.profil/medical.profil.component";
 
 
 @NgModule({
@@ -70,7 +71,8 @@ import { DatePipe } from '@angular/common';
     MedicalMenuComponent,
     MedicalResidentsComponent,
     SurveyComponent,
-    DetailAlertComponent
+    DetailAlertComponent,
+    MedicalProfilComponent
   ],
   imports: [
     // NgbModule,
