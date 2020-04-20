@@ -16,7 +16,9 @@ export class PersonProfileDTO{
   drinker: boolean;
   medical_emergencies: boolean;
   hobbies: string;
+  revenue: number;
   profile: string;
+  priority_coef: number;
 
 
 }

@@ -17,7 +17,10 @@ public class PersonProfileDTO extends PersistableElementDTO {
     private boolean drinker;
     private boolean medical_emergencies;
     private String hobbies;
+    private float revenue;
     private String profile;
+    private int priority_coef;
+
 
     public PersonProfileDTO(){}
 
@@ -133,11 +136,27 @@ public class PersonProfileDTO extends PersistableElementDTO {
         this.hobbies = hobbies;
     }
 
+    public float getRevenue() {
+        return revenue;
+    }
+
+    public void setRevenue(float revenue) {
+        this.revenue = revenue;
+    }
+
     public String getProfile() {
         return profile;
     }
 
     public void setProfile(String profile) {
         this.profile = profile;
+    }
+
+    public int getPriority_coef() {
+        return priority_coef;
+    }
+
+    public void setPriority_coef(int priority_coef) {
+        this.priority_coef = priority_coef;
     }
 }
