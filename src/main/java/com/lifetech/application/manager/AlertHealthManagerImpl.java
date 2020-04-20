@@ -44,7 +44,7 @@ public class AlertHealthManagerImpl implements AlertHealthManager {
     }
 
     @Override
-    public int findAlertNumberByPerson(String id) {
+    public int findAlertNumberByStrap(String id) {
         return alertHealthDAO.countByStrap(Long.parseLong(id));
     }
 
@@ -65,6 +65,11 @@ public class AlertHealthManagerImpl implements AlertHealthManager {
         alertHealths.add(alertHealthDAO.findById(Long.parseLong(id)).orElse(null));
         return fillStrapAndDoctor(alertHealths).get(0);
 
+    }
+
+    @Override
+    public int findAlertNumberByStrapAndStatus(String id, String status) {
+        return alertHealthDAO.countByStrapAndStatus(Long.parseLong(id), status);
     }
 
 

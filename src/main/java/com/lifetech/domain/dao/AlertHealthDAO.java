@@ -10,5 +10,6 @@ public interface AlertHealthDAO extends JpaRepository<AlertHealth, Long> {
 
     int countByStatus(String status);
 
-    int countByStrap(long strap);
+    int countByStrap(Long strap);
+    int countByStrapAndStatus(Long strap, String status);
 }
