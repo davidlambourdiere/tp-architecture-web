@@ -14,8 +14,6 @@ import {LightService} from '../../service/LightService';
 import {ShutterService} from '../../service/ShutterService';
 
 
-
-
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'panne',
@@ -36,13 +34,16 @@ export class PanneComponent implements OnInit {
               private heaterMessageService: HeaterMessageService) {
 
   }
+
   heaters: Observable<any>;
   clocks: Observable<any>;
   lights: Observable<any>;
   shutters: Observable<any>;
   rooms: Observable<any>;
-  countBrekdown: number;
+  countBreakdown: number;
   countBreakdownNew: number;
+  countSuspect: number;
+  countSuspectNew: number;
 
   // tslint:disable-next-line:ban-types
   heaterBreakdown: Object = new HeaterMessageDTO();
@@ -54,25 +55,32 @@ export class PanneComponent implements OnInit {
   numRoomCliked = '0';
 
   String;
+
   ngOnInit() {
     this.rooms = this.roomService.findAllRoom();
     this.refresh();
-    this.breakdownHeatersDetection();
+    this.SuspectBreakdownDetection();
   }
 
   async refresh() {
     this.breakdownRooms();
     this.suspectRooms();
-    // count the number of breakdown at this moment before the detection
+    // count the number of breakdown/suspect at this moment before the detection
     this.CountBreakdown(true);
+    this.CountSuspect(true);
     console.log('Je suis dans le refresh');
-    setTimeout(() => {this.breakdownHeatersDetection(); }, 28000);
+    setTimeout(() => {
+      this.SuspectBreakdownDetection();
+    }, 28000);
   }
 
   revive() {
     console.log('Je suis dans le revive');
-    setTimeout(() => {this.breakdownHeatersDetection(); }, 28000);
+    setTimeout(() => {
+      this.SuspectBreakdownDetection();
+    }, 28000);
   }
+
 
   CountBreakdown(wOne: boolean) {
     // True for first, false for new count
@@ -80,9 +88,22 @@ export class PanneComponent implements OnInit {
       map(data => data.map(val => val.breakdownstatus).filter(x => x === 'BREAKDOWN').length)
     ).subscribe(x => {
       if (wOne) {
-        this.countBrekdown = x;
+        this.countBreakdown = x;
       } else {
         this.countBreakdownNew = x;
+      }
+    });
+  }
+
+  CountSuspect(wOne: boolean) {
+    // True for first, false for new count
+    this.heaterService.findAllHeater().pipe(
+      map(data => data.map(val => val.suspect).filter(x => x === 'SUSPECT').length)
+    ).subscribe(x => {
+      if (wOne) {
+        this.countSuspect = x;
+      } else {
+        this.countSuspectNew = x;
       }
     });
   }
@@ -95,31 +116,38 @@ export class PanneComponent implements OnInit {
     this.lights = this.lightService.findIOTByRoom(String(room.num));
   }
 
-  breakdownHeatersDetection() {
+  SuspectBreakdownDetection() {
     this.heaterService.findAllHeater().pipe().subscribe(x => {
       let i = 0;
       while (i < x.length) {
-        // console.log('ID : ', x[i]['id'], ' PANNE : ', x[i]['breakdownstatus']);
+        // For object in not breakdown
         if (x[i]['breakdownstatus'] === 'NOT_BREAKDOWN') {
           console.log('Ok je vais chercher les pannes pour le radiateur', x[i]['id']);
           this.breakdownHeaterDetection(x[i]['id']);
         }
+        if (x[i]['suspect'] === 'NOT_SUSPECT') {
+          console.log('Ok je vais chercher les comportements suspect pour le radiateur', x[i]['id']);
+          this.suspectHeaterDetection(x[i]['id']);
+        }
         i++;
       }
     });
-    // To count the number of IOT in breakdown after the detection
+    setTimeout(() => {this.refreshOrRevive(); }, 2000); }
+
+  refreshOrRevive() {
+    // To count the number of IOT in breakdown/suspect after the detection
     this.CountBreakdown(false);
-    setTimeout(() => {
-      console.log('Le vieux ', this.countBrekdown, 'Le nouveau', this.countBreakdownNew);
-      if (this.countBrekdown !== this.countBreakdownNew) {
-        // if the number of breakdown has changed, it have to refresh the window
-        console.log('Ok je refresh');
-        this.refresh();
-      } else {
-        // else juste revive the function breakdownHeatersDetection
-        this.revive();
-      }
-    }, 2000);
+    this.CountSuspect(false);
+    console.log('Panne - Le vieux ', this.countBreakdown, 'Le nouveau', this.countBreakdownNew);
+    console.log('Suspect - Le vieux ', this.countSuspect, 'Le nouveau', this.countSuspect);
+    if ((this.countBreakdown !== this.countBreakdownNew) || (this.countSuspect !== this.countSuspectNew)) {
+      // if the number of breakdown has changed, it have to refresh the window
+      console.log('Ok je refresh');
+      this.refresh();
+    } else {
+      // else juste revive the function breakdownHeatersDetection
+      this.revive();
+    }
 
   }
 
@@ -131,7 +159,18 @@ export class PanneComponent implements OnInit {
         const msg = 'le radiateur ' + id + ' est en panne';
         alert(msg);
       }
-    } );
+    });
+  }
+
+  private suspectHeaterDetection(id: string) {
+    // tslint:disable-next-line:max-line-length
+    this.heaterMessageService.suspectDetection(id).subscribe(data => {
+      this.heaterBreakdown = data;
+      if (data) {
+        const msg = 'le radiateur ' + id + ' a un comportement suspect';
+        alert(msg);
+      }
+    });
   }
 
 
@@ -143,7 +182,6 @@ export class PanneComponent implements OnInit {
     this.breakdownRoom('3');
     this.breakdownRoom('4');
     this.breakdownRoom('5');
-    // setTimeout(() => {  this.refresh(); }, 2000);
   }
 
 
@@ -163,22 +201,22 @@ export class PanneComponent implements OnInit {
       map(data => data.map(val => val.breakdownstatus).filter(x => x === 'BREAKDOWN').length)
     ).subscribe(x => {
       this.breakdowns[index] = x;
-      console.log('panne', index, ' - ', x); });
+    });
     this.clockService.findIOTByRoom(String(index)).pipe(
       map(data => data.map(val => val.breakdownstatus).filter(x => x === 'BREAKDOWN').length)
     ).subscribe(x => {
       this.breakdowns[index] += x;
-      console.log('panne', index, ' - ', x); });
+    });
     this.lightService.findIOTByRoom(String(index)).pipe(
       map(data => data.map(val => val.breakdownstatus).filter(x => x === 'BREAKDOWN').length)
     ).subscribe(x => {
       this.breakdowns[index] += x;
-      console.log('panne', index, ' - ', x); });
+    });
     this.shutterService.findIOTByRoom(String(index)).pipe(
       map(data => data.map(val => val.breakdownstatus).filter(x => x === 'BREAKDOWN').length)
     ).subscribe(x => {
       this.breakdowns[index] += x;
-      console.log('panne', index, ' - ', x); });
+    });
   }
 
   // define the number of object suspect in a room and change the array suspects
@@ -187,22 +225,22 @@ export class PanneComponent implements OnInit {
       map(data => data.map(val => val.suspect).filter(x => x === 'SUSPECT').length)
     ).subscribe(x => {
       this.suspects[index] = x;
-      console.log('suspect', index, ' - ', x); });
+    });
     this.clockService.findIOTByRoom(String(index)).pipe(
       map(data => data.map(val => val.suspect).filter(x => x === 'SUSPECT').length)
     ).subscribe(x => {
       this.suspects[index] += x;
-      console.log('suspect', index, ' - ', x); });
+    });
     this.lightService.findIOTByRoom(String(index)).pipe(
       map(data => data.map(val => val.suspect).filter(x => x === 'SUSPECT').length)
     ).subscribe(x => {
       this.suspects[index] += x;
-      console.log('suspect', index, ' - ', x); });
+    });
     this.shutterService.findIOTByRoom(String(index)).pipe(
       map(data => data.map(val => val.suspect).filter(x => x === 'SUSPECT').length)
     ).subscribe(x => {
       this.suspects[index] += x;
-      console.log('suspect', index, ' - ', x); });
- }
+    });
+  }
 
 }
