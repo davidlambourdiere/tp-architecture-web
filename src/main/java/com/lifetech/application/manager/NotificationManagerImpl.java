@@ -10,7 +10,6 @@ import com.lifetech.domain.model.Notification;
 import com.lifetech.domain.model.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -65,5 +64,12 @@ public class NotificationManagerImpl implements  NotificationManager{
         notificationContainerInitializeDTO.setCountMessagesSent(countMessagesSent);
         notificationContainerInitializeDTO.setCountMessagesReceivedNotRead(countMessagesReceivedNotRead);
         return notificationContainerInitializeDTO;
+    }
+
+    @Override
+    public NotificationDTO sendMessage(NotificationDTO message) {
+        Notification notification = orikaBeanMapper.map(message, Notification.class);
+        notificationDAO.save(notification);
+        return message;
     }
 }

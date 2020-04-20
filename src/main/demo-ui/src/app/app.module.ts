@@ -43,6 +43,8 @@ import {NotificationLightComponent} from "./components/notification/notification
 import {NotificationShutterComponent} from "./components/notification/notification.shutter/notification.shutter.component";
 import {NotificationStrapComponent} from "./components/notification/notification.strap/notification.strap.component";
 import {NotificationNewComponent} from "./components/notification/notification.new/notification.new.component";
+import {NotificationSentComponent} from "./components/notification/notification.sent.component/notification.sent.component";
+import {NotificationReceivedComponent} from "./components/notification/notification.received.component/notification.received.component";
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import {NotificationNewComponent} from "./components/notification/notification.n
     NotificationShutterComponent,
     NotificationStrapComponent,
     HomeComponent,
+    NotificationSentComponent,
+    NotificationReceivedComponent,
     NotificationNewComponent,
     ConnectionComponent,
     MonitoringComponent,

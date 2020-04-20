@@ -14,4 +14,6 @@ public interface NotificationManager {
     List<NotificationDTO> sentNotification(String username);
 
     NotificationContainerInitializeDTO initializedNotification(String username);
+
+    NotificationDTO sendMessage(NotificationDTO message);
 }

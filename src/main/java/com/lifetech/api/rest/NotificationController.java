@@ -6,9 +6,7 @@ import com.lifetech.application.dto.PersonDTO;
 import com.lifetech.application.manager.NotificationManager;
 import com.lifetech.domain.model.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,6 +37,11 @@ public class NotificationController extends RestBaseController{
     @GetMapping("/notification/initialized/{username}")
     private NotificationContainerInitializeDTO initializedNotification(@PathVariable("username") String username){
         return notificationManager.initializedNotification(username);
+    }
+
+    @PostMapping("/notification/send")
+    private NotificationDTO sendMessage(@RequestBody NotificationDTO message){
+        return notificationManager.sendMessage(message);
     }
 
 }

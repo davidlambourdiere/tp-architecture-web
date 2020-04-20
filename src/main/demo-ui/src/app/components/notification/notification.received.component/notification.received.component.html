@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<home></home>
+<h4>
+  <a [routerLink]="'/notification'"><span class="fa fa-undo"></span>Retour</a>
+</h4>
+Messages reçus
+<div *ngIf="messageReceived.length===0">Pas de messages reçus</div>

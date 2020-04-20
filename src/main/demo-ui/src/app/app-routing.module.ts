@@ -1,5 +1,5 @@
 // @ts-ignore
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
 import {ConnectionComponent} from './components/connection/connection.component';
 import {HomeComponent} from './components/home/home.component';
@@ -28,6 +28,9 @@ import {NotificationLightComponent} from "./components/notification/notification
 import {NotificationClockComponent} from "./components/notification/notification.clock/notification.clock.component";
 import {NotificationStrapComponent} from "./components/notification/notification.strap/notification.strap.component";
 import {NotificationNewComponent} from "./components/notification/notification.new/notification.new.component";
+import {NotificationReceivedComponent} from "./components/notification/notification.received.component/notification.received.component";
+import {NotificationSentComponent} from "./components/notification/notification.sent.component/notification.sent.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 const routes: Routes = [
@@ -46,7 +49,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
-    path: 'essential/:login' ,
+    path: 'essential/:login',
     component: EssentialComponent,
     canActivate: [AuthGuardService]
   },
@@ -153,6 +156,16 @@ const routes: Routes = [
     path: 'notification/new',
     component: NotificationNewComponent,
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'notification/received',
+    component: NotificationReceivedComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'notification/sent',
+    component: NotificationSentComponent,
+    canActivate: [AuthGuardService]
   }
 
 ];
@@ -160,7 +173,8 @@ const routes: Routes = [
 // @ts-ignore
 @NgModule({
   declarations: [],
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), ReactiveFormsModule],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
