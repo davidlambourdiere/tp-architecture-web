@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Optional} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {PersonDTO} from '../dto/PersonDTO';
@@ -35,7 +35,19 @@ export class AlertHealthService {
     return this.http.post<Number>(`api/alert/health/findAlertNumberByPerson`, person);
   }
 
-  findById(id : bigint): Observable<ALertHealthDTO> {
+  findById(id : bigint) {
     return this.http.get<ALertHealthDTO>(`api/alert/health/findById/${id}`);
+  }
+
+  findAlertNumberByStrap(id: bigint) {
+    return this.http.get<Number>(`api/alert/health/findAlertNumberByStrap/${id}`);
+  }
+
+  findNewAlertNumberByStrap(id: bigint) {
+    return this.http.get<Number>(`api/alert/health/findNewAlertNumberByStrap/${id}`);
+  }
+
+  findDoneAlertNumberByStrap(id: bigint) {
+    return this.http.get<Number>(`api/alert/health/findDoneAlertNumberByStrap/${id}`);
   }
 }

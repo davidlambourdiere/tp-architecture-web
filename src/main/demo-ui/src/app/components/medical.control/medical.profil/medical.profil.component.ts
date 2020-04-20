@@ -22,6 +22,10 @@ export class MedicalProfilComponent implements OnInit {
   historicList : HealthHistoricDTO[];
   dataXlist : Number[];
   dataYlist : string[];
+  alertNumber : Number;
+  newAlertNumber : Number;
+  doneAlertNumber : Number;
+
   //graph
   public chartType: string = 'line';
 
@@ -39,7 +43,8 @@ export class MedicalProfilComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router,
               private strapService: StrapService,
               private healthHistoricService: HealthHistoricService,
-              private datepipe: DatePipe) {
+              private datepipe: DatePipe,
+              private alertHealthService: AlertHealthService) {
     this.strap = new StrapDTO();
     this.strap.person = new PersonDTO();
     this.strap.room = new RoomDTO();
@@ -52,6 +57,7 @@ export class MedicalProfilComponent implements OnInit {
     this.chartOptions= [];
     this.dataYlist= [];
     this.dataXlist = [];
+    this.alertNumber = 0;
   }
 
   ngOnInit() {
@@ -66,6 +72,7 @@ export class MedicalProfilComponent implements OnInit {
         this.findTopByStrap();
         this.findAllFCHistoric();
         this.findAge();
+        this.findAlerts();
       }, error => console.log(error));
     });
     this.loadDataChart();
@@ -89,6 +96,28 @@ export class MedicalProfilComponent implements OnInit {
         this.historicList = data;
       });
     });
+  }
+
+  private findAlerts(){
+    this.route.params.subscribe(params =>{
+      this.alertHealthService.findAlertNumberByStrap(this.strap.id).subscribe(data=>{
+        this.alertNumber = data;
+      });
+    });
+
+    this.route.params.subscribe(params =>{
+      this.alertHealthService.findNewAlertNumberByStrap(this.strap.id).subscribe(data=>{
+        this.newAlertNumber = data;
+      });
+    });
+
+
+    this.route.params.subscribe(params =>{
+      this.alertHealthService.findDoneAlertNumberByStrap(this.strap.id).subscribe(data=>{
+        this.doneAlertNumber = data;
+      });
+    });
+
   }
 
   private findAge(){
