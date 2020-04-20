@@ -31,6 +31,7 @@ public class HeaterMessageManagerImpl implements HeaterMessageManager {
     }
 
 
+
     @Override
     public List<HeaterMessageDTO> findAllByHeater(String id) {
         Heater heater = heaterdao.findById(Long.parseLong(id)).orElse(null);
@@ -45,17 +46,18 @@ public class HeaterMessageManagerImpl implements HeaterMessageManager {
 //    }
 
 
-
     @Override
     public boolean breakdownDetection(String id) {
         //HeaterMessageDTO heaterMessageDTO = this.findFirstByOrderByInsertDateDesc();
+        System.out.println("On s'occupe du radiateur numero " + id);
         List<HeaterMessageDTO> listHeaterMessageDTO = this.findAllByHeater(id);
         listHeaterMessageDTO.sort(Comparator.comparing(HeaterMessageDTO::getInsertDate));
-        HeaterMessageDTO heaterMessageDTO = listHeaterMessageDTO.get(listHeaterMessageDTO.size() - 1);
+        boolean breakdown = false;
+        try {
+            HeaterMessageDTO heaterMessageDTO = listHeaterMessageDTO.get(listHeaterMessageDTO.size() - 1);
         // algorith : breakdown detection for heater
         String temperature = heaterMessageDTO.getTemperatureMessage();
         System.out.println("temperature du message " + temperature);
-        boolean breakdown = false;
         int temperatureInt = Integer.parseInt(temperature);
         if (temperatureInt > 50 || temperatureInt < -10) {
             breakdown = true;
@@ -63,9 +65,16 @@ public class HeaterMessageManagerImpl implements HeaterMessageManager {
             insertHeaterBreakdown(id, "YES", "NO", "Temperature suspecte !");
             // updating of heater's status --> BREAKDOWN
             updateHeaterStatus(id);
+        } else {
+            breakdown = false;
+            updateHeaterStatusNoBreakdown(id);
+        }
+        } catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("Il n'y a pas de message pour le radiateur " + id);
         }
         return breakdown;
     }
+
 
     void insertHeaterBreakdown(String id, String suspect, String breakdown, String message){
         // creation of the current date + parse in String
@@ -84,8 +93,16 @@ public class HeaterMessageManagerImpl implements HeaterMessageManager {
     void updateHeaterStatus(String id) {
         // The heater of the id
         Heater heater = heaterdao.findById(Long.parseLong(id)).orElse(null);
-        // update of the status' heater
+        // update of the status' heater --> BREAKDOWN
         heater.setBreakdownstatus(StatusEnum.BREAKDOWN);
+        heaterdao.save(heater);
+    }
+
+    void updateHeaterStatusNoBreakdown(String id) {
+        // The heater of the id
+        Heater heater = heaterdao.findById(Long.parseLong(id)).orElse(null);
+        //update of the status' heater --> NOT_BREAKDOWN
+        heater.setBreakdownstatus(StatusEnum.NOT_BREAKDOWN);
         heaterdao.save(heater);
     }
 }

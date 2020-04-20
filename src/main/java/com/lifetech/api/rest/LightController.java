@@ -39,4 +39,9 @@ public class LightController extends RestBaseController{
     private LightDetailDTO findByHistoric(@PathVariable("id") String id) {
         return lightManager.findByHistoric(id);
     }
+
+    @GetMapping("light/findByRoom/{id}")
+    private List<LightDTO> findByRoom(@PathVariable("id") String id){ return lightManager.findByRoom(id); }
+
+
 }

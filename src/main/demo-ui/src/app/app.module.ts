@@ -41,6 +41,8 @@ import { DetailAlertComponent } from './components/medical.control/detail.alert/
 import {ChartsModule} from "ng2-charts";
 import { DatePipe } from '@angular/common';
 import {MedicalProfilComponent} from "./components/medical.control/medical.profil/medical.profil.component";
+import {ProfilelistComponent} from "./components/profilelist/profilelist.component";
+
 
 
 @NgModule({
@@ -72,7 +74,9 @@ import {MedicalProfilComponent} from "./components/medical.control/medical.profi
     MedicalResidentsComponent,
     SurveyComponent,
     DetailAlertComponent,
-    MedicalProfilComponent
+    MedicalProfilComponent,
+    ProfilelistComponent
+
   ],
   imports: [
     // NgbModule,

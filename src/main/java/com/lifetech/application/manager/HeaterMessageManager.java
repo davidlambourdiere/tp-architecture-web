@@ -12,4 +12,6 @@ public interface HeaterMessageManager {
 
     boolean breakdownDetection(String id);
 
+
+
 }

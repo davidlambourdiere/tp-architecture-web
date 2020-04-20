@@ -2,8 +2,6 @@ package com.lifetech.domain.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity(name="strap")
 public class Strap extends IOT{
@@ -36,7 +34,7 @@ public class Strap extends IOT{
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person person;
 
-    public Strap(Double price, StatusEnum breakdownstatus, StateEnum state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration, String minsysto, String maxsysto, String mindiasto,String maxdiasto, String minglyc, String maxglyc, String minsteps, Person person) {
+    public Strap(Double price, StatusEnum breakdownstatus, StateEnum state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, SuspectEnum suspect, Timestamp activityduration, String minsysto, String maxsysto, String maxdiasto, String minglyc, String maxglyc, String minsteps, Person person) {
         super(price, breakdownstatus, state, ipadress, startdate, minvalueref, maxvalueref, suspect, activityduration);
         this.minsysto = minsysto;
         this.maxsysto = maxsysto;
