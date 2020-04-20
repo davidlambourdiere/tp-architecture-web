@@ -25,7 +25,7 @@
             <li class="list-group-item" ><b>Name</b> : <span>{{this.alert.strap.person?this.alert.strap.person.firstName:'no data'}} {{this.alert.strap.person?this.alert.strap.person.lastName:'no data'}}</span></li>
             <li class="list-group-item"><b>Room</b> : {{this.alert.strap.room ? this.alert.strap.room.num : 'no data' }} </li>
             <li class="list-group-item"><b>Age</b> : {{ this.alert.strap.person ?this.alert.strap.person.age : 'no data' }} ans</li>
-            <li class="list-group-item"><b>Diseas</b> :{{this.alert.strap.person? this.alert.strap.person.deseas : 'no data' }}</li>
+            <li class="list-group-item"><b>Diseas</b> : {{this.alert.strap.person? this.alert.strap.person.deseas ? this.alert.strap.person.deseas : 'no data' : 'no data' }}</li>
             <li class="list-group-item"><b>Phone</b> : {{this.alert.strap.person? this.alert.strap.person.phone ?this.alert.strap.person.phone: 'no data' : 'no data' }}</li>
           </ul>
         </div>
