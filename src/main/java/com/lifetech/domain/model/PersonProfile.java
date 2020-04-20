@@ -53,6 +53,9 @@ public class PersonProfile extends PersistableElement {
     @Column(name = "Hobbies")
     private String hobbies;
 
+    @Column(name = "revenue")
+    private float revenue;
+
     @Column(name = "profile")
     private String profile;
 
@@ -60,7 +63,7 @@ public class PersonProfile extends PersistableElement {
 
 
 
-    public PersonProfile(String nom, String prenom, int age, String adress, int postal_code, String adress_email, int tel_number, String chronic_disease, int estimated_mobility, boolean smoking, float smoking_time, boolean drinker, boolean medical_emergencies, String hobbies, String profile) {
+    public PersonProfile(String nom, String prenom, int age, String adress, int postal_code, String adress_email, int tel_number, String chronic_disease, int estimated_mobility, boolean smoking, float smoking_time, boolean drinker, boolean medical_emergencies, String hobbies,float revenue, String profile) {
         this.nom = nom;
         this.prenom = prenom;
         this.age = age;
@@ -75,6 +78,7 @@ public class PersonProfile extends PersistableElement {
         this.drinker = drinker;
         this.medical_emergencies = medical_emergencies;
         this.hobbies = hobbies;
+        this.revenue = revenue;
         this.profile = profile;
     }
 
@@ -191,6 +195,10 @@ public class PersonProfile extends PersistableElement {
         this.hobbies = hobbies;
     }
 
+    public float getRevenue() { return revenue; }
+
+    public void setRevenue(float revenue) { this.revenue = revenue; }
+
     public String getProfile() {
         return profile;
     }
@@ -216,6 +224,7 @@ public class PersonProfile extends PersistableElement {
                 ", drinker=" + drinker +
                 ", medical_emergencies=" + medical_emergencies +
                 ", hobbies='" + hobbies + '\'' +
+                ", revenue=" + revenue +
                 ", profile='" + profile + '\'' +
                 '}';
     }
