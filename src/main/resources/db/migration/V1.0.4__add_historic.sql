@@ -25,5 +25,7 @@ CREATE TABLE lifetech.personprofile (
   drinker boolean NOT NULL,
   medical_emergencies boolean NOT NULL,
   Hobbies varchar(300) NOT NULL,
+  revenue float NOT NULL,
   profile varchar(300) NOT NULL
+
 );
