@@ -1,0 +1,19 @@
+<p>position works!</p>
+<table>
+  <thead>
+  <tr>
+    <th>Firtname</th>
+    <th>Lastname</th>
+    <th>Room</th>
+    <th>Birthdate</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor = "let strap of straps">
+    <td>{{strap.person.firstName}}</td>
+    <td>{{strap.person.lastName}}</td>
+    <td>{{strap.person.l}}</td>
+    <td>{{strap.person.birthdate}}</td>
+  </tr>
+  </tbody>
+</table>

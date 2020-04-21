@@ -1,12 +1,10 @@
 package com.lifetech.domain.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity(name = "position")
+@IdClass(PositionId.class)
 public class Position extends PersistableElement {
 
     @Column(name = "date")
@@ -18,16 +16,17 @@ public class Position extends PersistableElement {
     @Column(name = "longitude")
     private float longitude;
 
+    @Id
     @ManyToOne(cascade = CascadeType.ALL)
     private Strap strap;
 
     public Position() {}
 
-    public Position(Date date, float latitude, float longitude, Strap strap) {
+    public Position(Date date, float latitude, float longitude) {
         this.date = date;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.strap = strap;
+
     }
 
     public Date getDate() {
