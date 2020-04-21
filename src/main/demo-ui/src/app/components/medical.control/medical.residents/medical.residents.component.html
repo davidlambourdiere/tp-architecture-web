@@ -1,0 +1,126 @@
+<home></home>
+<div class="wrapper d-flex align-items-stretch">
+  <app-medicalmenu></app-medicalmenu>
+  <!-- Page Content  -->
+  <div id="content" class="p-md-5 ">
+    <section>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" align="right">
+          <button (click)="this.reloadData()" type="button" class="btn btn-primary btn-lg">Refresh</button>
+        </div>
+      </div>
+      <div class="row">
+        <div *ngIf="newAlertsNumber==0" class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+          <div class="panel panel-bd cardbox" style="background-color:limegreen;">
+            <div class="panel-body" align="center">
+              <div class="statistic-box">
+                <h2><span class="count-number">{{this.newAlertsNumber}}</span>
+                </h2>
+              </div>
+              <div class="items pull-center">
+                <i class="fa fa-exclamation-triangle fa-2x"></i>
+                <h6>Alerts </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="newAlertsNumber>0" class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+          <div class="panel panel-bd cardbox" style="background-color:#F94005;">
+            <div class="panel-body" align="center">
+              <div class="statistic-box">
+                <h2><span class="count-number">{{this.newAlertsNumber}}</span>
+                </h2>
+              </div>
+              <div class="items pull-center">
+                <i class="fa fa-exclamation-triangle fa-2x"></i>
+                <h6>Alerts </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+          <div class="panel panel-bd cardbox">
+            <div class="panel-body" align="center">
+              <div class="statistic-box">
+                <h2><span class="count-number">{{this.residentNumber}}</span>
+                </h2>
+              </div>
+              <div class="items pull-center">
+                <i class="fa fa-users fa-2x"></i>
+                <h6>Total Residents</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--<div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+          <form>
+            <div class="form-group" style="display: inline-block;">
+              <h5 align="center">Search a resident</h5>
+              <input type="text" class="form-control" id="firstName"  placeholder="Enter FirstName">
+              <input type="text" class="form-control" id="lastName"  placeholder="Enter LastName">
+              <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </div>
+        </form>
+        </div>-->
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 lobipanel-parent-sortable ui-sortable" data-lobipanel-child-inner-id="nmtOhBXwS9">
+          <div class="panel panel-bd lobidrag lobipanel lobipanel-sortable" data-inner-id="nmtOhBXwS9" data-index="0">
+            <div class="panel-heading ui-sortable-handle">
+              <div class="panel-title" style="max-width: calc(100% - 180px);">
+                <h4>Residents</h4>
+              </div>
+              <div class="dropdown"><ul class="dropdown-menu dropdown-menu-right"><li><a data-func="editTitle" data-tooltip="Edit title" data-toggle="tooltip" data-title="Edit title" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-pencil"></i><span class="control-title">Edit title</span></a></li><li><a data-func="unpin" data-tooltip="Unpin" data-toggle="tooltip" data-title="Unpin" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-move"></i><span class="control-title">Unpin</span></a></li><li><a data-func="reload" data-tooltip="Reload" data-toggle="tooltip" data-title="Reload" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-reload"></i><span class="control-title">Reload</span></a></li><li><a data-func="minimize" data-tooltip="Minimize" data-toggle="tooltip" data-title="Minimize" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-minus"></i><span class="control-title">Minimize</span></a></li><li><a data-func="expand" data-tooltip="Fullscreen" data-toggle="tooltip" data-title="Fullscreen" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-fullscreen"></i><span class="control-title">Fullscreen</span></a></li><li><a data-func="close" data-tooltip="Close" data-toggle="tooltip" data-title="Close" data-placement="bottom" data-original-title="" title=""><i class="panel-control-icon ti-close"></i><span class="control-title">Close</span></a></li></ul><div class="dropdown-toggle" data-toggle="dropdown"><span class="panel-control-icon glyphicon glyphicon-cog"></span></div></div></div>
+            <div class="panel-body">
+              <div class="table-responsive">
+                <table id="dataTableExample2" class="table table-bordered table-striped table-hover">
+                  <thead>
+                  <tr>
+                    <th>Index</th>
+                    <th>State</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Birth Date</th>
+                    <th>Diseas</th>
+                    <th>Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let strap of this.straplist; index as i">
+                    <td>{{i+1}}</td>
+                    <td>
+                      <h6 *ngIf="strap.healthstate==null">NO DATA</h6>
+                      <button *ngIf="strap.healthstate=='OK'" type="button" class="btn btn-success">
+                        {{strap.hearthrate}} bpm
+                      </button>
+                      <button *ngIf="strap.healthstate=='KO'" type="button" class="btn btn-danger">
+                        {{strap.hearthrate}} bpm
+                      </button>
+                    </td>
+                    <td>{{strap.person.firstName}}</td>
+                    <td>{{strap.person.lastName}}</td>
+                    <td>{{strap.person.birthdate}}</td>
+                    <td>{{strap.person.deseas}}</td>
+                    <td><button  class="btn btn-info" style="margin-left: 10px">Details</button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /.row -->
+
+    </section>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="page-footer font-small blue">
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright Lifetech </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->
