@@ -26,6 +26,8 @@
     "chart.js": "^2.9.3",
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
+    "leaflet": "^1.6.0",
+    "leaflet-indoor-layer": "^1.0.3",
     "ng2-charts": "^2.3.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.11.0",
