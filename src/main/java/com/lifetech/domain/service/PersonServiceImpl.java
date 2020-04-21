@@ -15,6 +15,13 @@ public class PersonServiceImpl implements PersonService{
                     return personToCheck;
                 }
             }
+
+        }
+        for (Person profileToCheck: people){
+            if(profileToCheck.getProfiletype().equals(person.getProfiletype())){
+                return profileToCheck;
+            }
+
         }
         return null;
     }

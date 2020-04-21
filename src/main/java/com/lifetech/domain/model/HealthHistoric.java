@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import java.sql.Timestamp;
 
 @Entity(name="healthhistoric")
 public class HealthHistoric extends PersistableElement{
@@ -23,8 +24,11 @@ public class HealthHistoric extends PersistableElement{
     @Column(name="stepcounter")
     private String stepcounter;
 
-    @Column(name="strapId")
-    private Long strapId;
+    @Column(name="startdate")
+    private Timestamp startdate;
+
+    @Column(name="strapid")
+    private Long strap;
 
     public HealthHistoric(String hearthrate, String systolic, String diastolic, String sugarlevel, String stepcounter, Long strap) {
         this.hearthrate = hearthrate;
@@ -32,7 +36,7 @@ public class HealthHistoric extends PersistableElement{
         this.diastolic = diastolic;
         this.sugarlevel = sugarlevel;
         this.stepcounter = stepcounter;
-        this.strapId = strap;
+        this.strap = strap;
     }
 
     public HealthHistoric(){}
@@ -78,22 +82,19 @@ public class HealthHistoric extends PersistableElement{
         this.stepcounter = stepcounter;
     }
 
-    public Long getStrapId() {
-        return strapId;
+    public Long getStrap() {
+        return strap;
     }
 
-    public void setStrapId(Long strapId) {
-        this.strapId = strapId;
+    public void setStrap(Long strap) {
+        this.strap = strap;
     }
 
-    @Override
-    public String toString() {
-        return "HealthHistoric{" +
-                "hearthrate='" + hearthrate + '\'' +
-                ", systolic='" + systolic + '\'' +
-                ", diastolic='" + diastolic + '\'' +
-                ", sugarlevel='" + sugarlevel + '\'' +
-                ", stepcounter='" + stepcounter + '\'' +
-                '}';
+    public Timestamp getStartdate() {
+        return startdate;
+    }
+
+    public void setStartdate(Timestamp startdate) {
+        this.startdate = startdate;
     }
 }

@@ -162,7 +162,8 @@ public class HealthHistoricManagerImpl implements HealthHistoricManager {
     @Override
     public List<HealthHistoricDTO> findHistoricByStrap(String id) {
         List<HealthHistoric> hlist = healthHistoricDAO.findByStrap(Long.parseLong(id));
-        List<HealthHistoric> hsub = hlist.subList(Math.max(hlist.size() - 10, 0), hlist.size());
-        return orikaBeanMapper.mapAsList(hsub, HealthHistoricDTO.class);
+        //List<HealthHistoric> hsub = hlist.subList(Math.max(hlist.size() - 100, 0), hlist.size());
+        //TODO filterd historic of lasthour
+        return orikaBeanMapper.mapAsList(hlist, HealthHistoricDTO.class);
     }
 }

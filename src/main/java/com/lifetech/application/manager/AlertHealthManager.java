@@ -13,11 +13,13 @@ public interface AlertHealthManager {
 
     int findAlertNumber();
 
-    int findAlertNumberByPerson(String id);
+    int findAlertNumberByStrap(String id);
 
     AlertHealth save(AlertHealth alertFC);
 
     AlertHealth findById(String id);
 
     AlertHealthDTO findDtoById(String id);
+
+    int findAlertNumberByStrapAndStatus(String id , String status);
 }

@@ -28,4 +28,8 @@ public class ShutterController extends RestBaseController{
     private ShutterDetailDTO findByHistoric(@PathVariable("id") String id) {
         return shutterManager.findByHistoric(id);
     }
+
+    @GetMapping("shutter/findByRoom/{id}")
+    private List<ShutterDTO> findByRoom(@PathVariable("id") String id){ return shutterManager.findByRoom(id); }
+
 }

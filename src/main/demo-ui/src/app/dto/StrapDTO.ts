@@ -3,7 +3,7 @@ import {RoomDTO} from "./RoomDTO";
 
 export class StrapDTO{
   id: bigint;
-  status: string;
+  breakdownstatus: string;
   state: string;
   minvalueref: string;
   suspect: string;
@@ -17,5 +17,7 @@ export class StrapDTO{
   maxdiasto: string;
   minglyc: string;
   maxglyc: string;
+  healthstate: string;
+  hearthrate : string;
 }
 

@@ -35,6 +35,10 @@ export class DetailAlertComponent implements OnInit {
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }
 
+  alertNumber : Number;
+  newAlertNumber : Number;
+  doneAlertNumber : Number;
+
   constructor(private route: ActivatedRoute, private router: Router,
               private alertHealthService: AlertHealthService,
               private healthHistoricService: HealthHistoricService,
@@ -71,6 +75,8 @@ export class DetailAlertComponent implements OnInit {
         this.alert = data;
         this.findTopByStrap();
         this.findAllFCHistoric();
+        this.findAge();
+        this.findAlerts();
       }, error => console.log(error));
     });
     this.loadDataChart();
@@ -96,6 +102,32 @@ export class DetailAlertComponent implements OnInit {
     });
   }
 
+  private findAge(){
+    this.alert.strap.person.age  = ''+Math.floor((Math.abs(Date.now() -  new Date(this.alert.strap.person.birthdate).getTime()) / (1000 * 3600 * 24))/365.25);
+  }
+
+  private findAlerts(){
+    this.route.params.subscribe(params =>{
+      this.alertHealthService.findAlertNumberByStrap(this.alert.strap.id).subscribe(data=>{
+        this.alertNumber = data;
+      });
+    });
+
+    this.route.params.subscribe(params =>{
+      this.alertHealthService.findNewAlertNumberByStrap(this.alert.strap.id).subscribe(data=>{
+        this.newAlertNumber = data;
+      });
+    });
+
+
+    this.route.params.subscribe(params =>{
+      this.alertHealthService.findDoneAlertNumberByStrap(this.alert.strap.id).subscribe(data=>{
+        this.doneAlertNumber = data;
+      });
+    });
+
+  }
+
   private loadDataChart(){
     for (let i = 0; i < this.historicList.length; i++){
       this.dataXlist[i] = Number(this.historicList[i].hearthrate);
@@ -111,7 +143,7 @@ export class DetailAlertComponent implements OnInit {
     ];*/
 
     this.chartDatasets  = [
-      { data:  this.dataXlist, label: 'My First dataset' },
+      { data:  this.dataXlist, label: 'Hearthbeat' },
       //{ data: [28, 48, 40, 19, 86, 27, 90], label: 'My Second dataset' }
     ];
 

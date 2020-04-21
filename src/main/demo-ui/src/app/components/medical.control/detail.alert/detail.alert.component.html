@@ -22,11 +22,11 @@
         <h3 align="center">About Resident : </h3>
         <div class="card" style="width: 25rem;">
           <ul class="list-group list-group-flush">
-            <li class="list-group-item" ><b>Name</b> : <span>{{this.alert.strap.person.firstName}} {{this.alert.strap.person.lastName}}</span></li>
-            <li class="list-group-item"><b>Room</b> : null</li>
-            <li class="list-group-item"><b>Age</b> : null</li>
-            <li class="list-group-item"><b>Diseas</b> : null</li>
-            <li class="list-group-item"><b>Phone</b> : null</li>
+            <li class="list-group-item" ><b>Name</b> : <span>{{this.alert.strap.person?this.alert.strap.person.firstName:'no data'}} {{this.alert.strap.person?this.alert.strap.person.lastName:'no data'}}</span></li>
+            <li class="list-group-item"><b>Room</b> : {{this.alert.strap.room ? this.alert.strap.room.num : 'no data' }} </li>
+            <li class="list-group-item"><b>Age</b> : {{ this.alert.strap.person ?this.alert.strap.person.age : 'no data' }} ans</li>
+            <li class="list-group-item"><b>Diseas</b> : {{this.alert.strap.person? this.alert.strap.person.deseas ? this.alert.strap.person.deseas : 'no data' : 'no data' }}</li>
+            <li class="list-group-item"><b>Phone</b> : {{this.alert.strap.person? this.alert.strap.person.phone ?this.alert.strap.person.phone: 'no data' : 'no data' }}</li>
           </ul>
         </div>
       </div>
@@ -124,10 +124,9 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item" ><b>Min Hearthbeat</b> : <span>{{this.alert.strap.minvalueref}} bpm</span></li>
             <li class="list-group-item"><b>Max Hearthbeat</b> : <span>{{this.alert.strap.maxvalueref}} bpm</span></li>
-            <li class="list-group-item"><b>Alert number in last hour</b> : null</li>
-            <li class="list-group-item"><b>Alert number in last day</b> : null</li>
-            <li class="list-group-item"><b>Alert number in last month</b> : null</li>
-            <li class="list-group-item"><b>Alert number in 3 last month</b> : null</li>
+            <li class="list-group-item"><b>Total Alert number </b> : {{this.alertNumber}}</li>
+            <li class="list-group-item"><b>Total New Alert number</b> : {{this.newAlertNumber}}</li>
+            <li class="list-group-item"><b>Total Done Alert number</b> : {{this.doneAlertNumber}}</li>
           </ul>
         </div>
       </div>

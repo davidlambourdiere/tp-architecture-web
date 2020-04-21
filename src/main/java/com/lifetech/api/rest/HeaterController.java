@@ -21,8 +21,8 @@ public class HeaterController extends RestBaseController{
     }
 
 
-    @GetMapping("heater/{id}")
-    private HeaterDTO findAllHeater(@PathVariable("id") String id){
+    @GetMapping("heater")
+    private List<HeaterDTO> findAllHeater(){
         return heaterManager.findAllHeater();
     }
 
@@ -30,4 +30,11 @@ public class HeaterController extends RestBaseController{
     private HeaterDetailDTO findByHistoric(@PathVariable("id") String id) {
         return heaterManager.findByHistoric(id);
     }
+
+    @GetMapping("heater/findByRoom/{id}")
+    private List<HeaterDTO> findByRoom(@PathVariable("id") String id){ return heaterManager.findByRoom(id); }
+
+
+    @GetMapping("heater/countHeaters")
+    private int countHeaters(){return heaterManager.countHeaters();}
 }

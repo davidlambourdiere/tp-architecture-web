@@ -1,6 +1,8 @@
 package com.lifetech.application.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class PersonDTO extends PersistableElementDTO {
     
     private String firstName;
@@ -14,6 +16,12 @@ public class PersonDTO extends PersistableElementDTO {
     private String phone;
     private String handicap;
     private String averageincome;
+    private String profiletype;
+    private String deseas;
+    private ResidenceDTO residence;
+    @JsonIgnore
+    private StrapDTO strap;
+
 
     public PersonDTO() {
     }
@@ -104,5 +112,52 @@ public class PersonDTO extends PersistableElementDTO {
 
     public void setAverageincome(String averageincome) {
         this.averageincome = averageincome;
+    }
+
+    public String getDeseas() {
+        return deseas;
+    }
+
+    public void setDeseas(String deseas) {
+        this.deseas = deseas;
+    }
+
+    public ResidenceDTO getResidence() {
+        return residence;
+    }
+
+    public void setResidence(ResidenceDTO residence) {
+        this.residence = residence;
+    }
+
+    @Override
+    public String toString() {
+        return "PersonDTO{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", userevaluation='" + userevaluation + '\'' +
+                ", userrole='" + userrole + '\'' +
+                ", birthdate='" + birthdate + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", handicap='" + handicap + '\'' +
+                ", averageincome='" + averageincome + '\'' +
+                ", deseas='" + deseas + '\'' +
+                ", residence=" + residence +
+                '}';
+    }
+
+    public String getProfiletype() { return profiletype; }
+
+    public void setProfiletype(String profiletype) { this.profiletype = profiletype; }
+
+    public StrapDTO getStrap() {
+        return strap;
+    }
+
+    public void setStrap(StrapDTO strap) {
+        this.strap = strap;
     }
 }

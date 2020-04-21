@@ -30,16 +30,24 @@ public class AlertHealthController extends RestBaseController {
         return alertHealthManager.findAlertNumber();
     }
 
-    @PostMapping("alert/health/findAlertNumberByPerson")
-    private int findAlertNumberByPerson(@RequestBody PersonDTO person){
-        //return alertHealthManager.findAlertNumberByPerson(person);
-        System.err.println(person);
-        return 0;
+    @GetMapping("alert/health/findAlertNumberByStrap/{id}")
+    private int findAlertNumberByStrap(@PathVariable("id") String id){
+        return alertHealthManager.findAlertNumberByStrap(id);
     }
 
     @GetMapping("alert/health/findById/{id}")
     private AlertHealthDTO findById(@PathVariable("id") String id){
         return alertHealthManager.findDtoById(id);
+    }
+
+    @GetMapping("alert/health/findNewAlertNumberByStrap/{id}")
+    private int findNewAlertNumberByStrap(@PathVariable("id") String id){
+        return alertHealthManager.findAlertNumberByStrapAndStatus(id, "NEW");
+    }
+
+    @GetMapping("alert/health/findDoneAlertNumberByStrap/{id}")
+    private int findDoneAlertNumberByStrap(@PathVariable("id") String id){
+        return alertHealthManager.findAlertNumberByStrapAndStatus(id, "DONE");
     }
 
 }

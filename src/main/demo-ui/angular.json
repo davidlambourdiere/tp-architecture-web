@@ -33,7 +33,9 @@
               "../demo-ui/node_modules/font-awesome/css/font-awesome.css"
             ],
             "scripts": [
-              "../demo-ui/node_modules/bootstrap/dist/js/bootstrap.js"
+              "../demo-ui/node_modules/jquery/dist/jquery.min.js",
+              "../demo-ui/node_modules/bootstrap/dist/js/bootstrap.js",
+              "../demo-ui/node_modules/chart.js/dist/chart.js"
             ]
           },
           "configurations": {

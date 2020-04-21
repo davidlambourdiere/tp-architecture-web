@@ -12,9 +12,9 @@ public class Heater  extends IOT{
     private String minvalueref;
     @Column(name = "maxvalueref")
     private String maxvalueref;
-    @Column(name = "state")
-    private String state;
 
+    @Column(name = "temperature")
+    private String temperature;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Person person;
@@ -22,13 +22,14 @@ public class Heater  extends IOT{
     @ManyToOne(cascade = CascadeType.ALL)
     private Room room;
 
-    public Heater(Double price, String status, String state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration, Person person, Room room) {
-        super(price, status, state, ipadress, startdate, minvalueref, maxvalueref, suspect, activityduration);
+
+    public Heater(Double price, StatusEnum breakdownstatus, StateEnum state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, SuspectEnum suspect, Timestamp activityduration, Person person, Room room, String temperature) {
+        super(price, breakdownstatus, state, ipadress, startdate, minvalueref, maxvalueref, suspect, activityduration);
         this.person = person;
         this.room = room;
-        this.state = state;
         this.minvalueref = minvalueref;
         this.maxvalueref = maxvalueref;
+        this.temperature = temperature;
     }
 
     public Heater() {
@@ -44,10 +45,6 @@ public class Heater  extends IOT{
         this.maxvalueref = maxvalueref;
     }
 
-    @Override
-    public void setState(String state) {
-        this.state = state;
-    }
 
     @Override
     public String getMinvalueref() {
@@ -57,11 +54,6 @@ public class Heater  extends IOT{
     @Override
     public String getMaxvalueref() {
         return maxvalueref;
-    }
-
-    @Override
-    public String getState() {
-        return state;
     }
 
     public Person getPerson() {
@@ -75,4 +67,12 @@ public class Heater  extends IOT{
     public Room getRoom() { return room; }
 
     public void setRoom(Room room) { this.room = room; }
+
+    public String getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(String temperature) {
+        this.temperature = temperature;
+    }
 }
