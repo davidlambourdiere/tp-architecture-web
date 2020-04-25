@@ -1,4 +1,5 @@
 <p>position works!</p>
+<div id="map"></div>
 <table>
   <thead>
   <tr>
@@ -6,14 +7,17 @@
     <th>Lastname</th>
     <th>Room</th>
     <th>Birthdate</th>
+    <th></th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor = "let strap of straps">
     <td>{{strap.person.firstName}}</td>
     <td>{{strap.person.lastName}}</td>
-    <td>{{strap.person.l}}</td>
+    <td>{{strap.room?.num}}</td>
     <td>{{strap.person.birthdate}}</td>
+    <td><button (click)="findPosition(strap.id)">voir position</button></td>
   </tr>
   </tbody>
 </table>
+
