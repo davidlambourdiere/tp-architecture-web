@@ -704,7 +704,7 @@
         "stroke-opacity": 1,
         "fill": "#555555",
         "fill-opacity": 0.5,
-        "type": "chambre",
+        "type": "chmabre",
         "num": 7
       },
       "geometry": {
