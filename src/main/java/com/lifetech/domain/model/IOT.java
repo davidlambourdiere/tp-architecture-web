@@ -37,6 +37,9 @@ public class IOT implements Serializable {
     @Column(name="suspect")
     private String suspect;
 
+    @Column(name="activationdate")
+    private String activationDate;
+
     public IOT(Double price, StatusEnum breakdownstatus, StateEnum state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration) {
         this.breakdownstatus = breakdownstatus;
         this.state = state;
@@ -120,5 +123,13 @@ public class IOT implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public String getActivationDate() {
+        return activationDate;
+    }
+
+    public void setActivationDate(String activationDate) {
+        this.activationDate = activationDate;
     }
 }
