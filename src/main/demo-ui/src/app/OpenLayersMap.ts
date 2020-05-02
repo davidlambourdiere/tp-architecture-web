@@ -105,10 +105,6 @@ export interface ILineOptions {
  * Options de la carte
  */
 export interface IMapOptions {
-  /**
-   * Chemin vers le fichier image du marqueur
-   */
-  markerImagePath?: string;
 
   /**
    * S'il faut faire comme dans les traceurs GPS, où l'on suit un seul point mouvant sur une carte
@@ -143,7 +139,7 @@ export class OpenLayersMap {
    * Retourne vrai si le tableau est un tableau de coordonnées
    * @param coords Coordonnées
    */
-  private static isCoordinate(coords: number[]) {
+  private static isCoordinate(coords: number[]): boolean {
     return coords.length === 2 && typeof coords[0] === 'number' && typeof coords[1] === 'number';
   }
 
@@ -154,7 +150,7 @@ export class OpenLayersMap {
    * @param [zoom=2] Zoom
    * @param [options] Options de la carte
    */
-  initializeMap(selector: string, centerTo: Coordinate = [0, 0], zoom: number = 2, options: IMapOptions = { markerImagePath: '', asGPSTracker: false }): void {
+  initializeMap(selector: string, centerTo: Coordinate = [0, 0], zoom: number = 2, options: IMapOptions = { asGPSTracker: false }): void {
     this.map = new Map({
       target: selector,
       layers: [
@@ -168,8 +164,7 @@ export class OpenLayersMap {
       })
     });
 
-    this.mapOptions = { markerImagePath: '', asGPSTracker: false };
-    this.mapOptions.markerImagePath = options.markerImagePath;
+    this.mapOptions = options;
     this.mapOptions.asGPSTracker = options.asGPSTracker;
 
     // Redéfinit le zoom si celui est supérieur au zoom maximum
@@ -194,7 +189,7 @@ export class OpenLayersMap {
    * Définit les options de la carte
    * @param options Options de la carte
    */
-  setOptions(options: IMapOptions) {
+  setOptions(options: IMapOptions): void {
     this.mapOptions = options;
   }
 
@@ -235,7 +230,7 @@ export class OpenLayersMap {
    * Supprime la couche avec l'identifiant
    * @param id Identifiant
    */
-  deleteLayer(id: string | number) {
+  deleteLayer(id: string | number): void {
     const layers = this.map.getLayers();
     const layer = layers.getArray().find(l => l.get('id') === id);
     if (layer) {
@@ -278,20 +273,14 @@ export class OpenLayersMap {
         new Point(fromLonLat(at))
       );
 
-      if (options.color && !(this.mapOptions.markerImagePath.length > 0)) {
-        throw new Error('Définir une couleur de marqueur nécessite un fichier image pour le marqueur. Utilisez l\'option de la carte markerImagePath pour définir un fichier.');
-      }
-
       marker.set('type', 'marker');
 
       const styles = [
         new Style({
           image: new Icon({
-            color: options.color ? options.color : '#000000',
+            src: ' data:image/png; charset=utf-8;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABpUlEQVQ4y7WVPXLbMBBGn+2G6cAOJdypo8qUuEF0A/EGPoKPwMkJPOyois4NWLoUSlXEDbjsoAopBCQaWbSdif3NYIbNvtmfb5c3vC+VHoCkt6ibNyBroALMBdADDthfg18DroEfgAXW6qQTTQQRkQQbgF/pexG4Bh6AjTFGWWupqopzoHOOYRjw3gvwDPy8hJ7DnsqyFGttbJomjuMYLzWOY2yaJlprY1mWAjyl2Fc9ewQma23s+z5O0xSXNE1T7Ps+WmsjMKVYBXCXgN+B2hiz2m63bDabP2VeU1EUaK0JIXA4HIpTWzmkgUHq21TX9dUylzSOY6zrOmf5AHCbUjVKKVVVFcYYPipjTB6ayvbKQKWUerPMRdf/jVMZ+Km6zeuUTPvPgLM4ASQDvYiIcw7v/Ydh3nucc3l7PCDZNt+AlYgYpRSr1YqiKN7NrOs6drsdIvIC7AB/d7b0WkTWx+Ox0FqjtV6EigjDMNC2Lfv9XoAu7XXIwADMgJrn+d57X4QQ0Fq/mrz3nq7raNsW59wcQngG2mzqTz8OX36+vuTA/tcv4DcQ5j3msmvKlAAAAABJRU5ErkJggg==',
             crossOrigin: 'anonymous',
-            src: this.mapOptions.markerImagePath ?
-              this.mapOptions.markerImagePath :
-              'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABO0lEQVQ4jb2UTWoCQRCFv4nHyA+R3MAsvEPQHCMLBd2MbuINRBADuZPZKDImt1CTlTuz6BrmpZ1uRxd5UDDUz6uuftUD/4gEaAIpMDVLzZecS/YMfAKHgK2BVhWiGvBeQvBj5vtnVhOEkm2AAXAt8RtgCGwl7y02Zp60suIQboFM8tt+QkJxZ5sTZDnugJ3VZHhCNaXbwGvUB5bAAuh6ha9S96iEqQT0zvocC9GReF38PSWcUqipWJYQfngT7M0/rkK4KCGcVyHUkVWQbgnhi8QfQiOrKEPvBB0bc25kKspI6hp4hWsLbHF7dgr3wDfF3h6975Z0y3B7FiP7kvynUOJMkna4Patb9wR3ZyM52QGYxMao4d6mL8SeQk21CXAVI8zR5u9b9W0VGzOEBPecergdG9t3gwt+sBfjFw1ojMu6OMFXAAAAAElFTkSuQmCC'
+            color: options.color ? options.color : [0, 0, 0]
           })
         })
       ];
@@ -360,7 +349,12 @@ export class OpenLayersMap {
   getFeature(value: Coordinate | string | number): Feature<Geometry> {
     let feature;
     if (Array.isArray(value)) {
-      feature = this.vectorSource.getFeaturesAtCoordinate(value)[0];
+      if (OpenLayersMap.isCoordinate(value)) {
+        feature = this.vectorSource.getFeaturesAtCoordinate(fromLonLat(value))[0];
+      } else {
+        throw new Error('Les coordonnées spécifiées ne sont pas valides');
+      }
+
     } else {
       feature = this.vectorSource.getFeatureById(value);
     }
@@ -384,15 +378,16 @@ export class OpenLayersMap {
   /**
    * Supprime tous les marqueurs et lignes sur la carte
    */
-  removeAllFeatures() {
+  removeAllFeatures(): void {
     this.vectorSource.clear();
   }
 
   /**
    * Supprime tous les marqueurs de la carte
    */
-  removeAllMarkers() {
-    for (const feature of this.getMarkers()) {
+  removeAllMarkers(): void {
+    const markers = this.getMarkers();
+    for (const feature of markers) {
       this.vectorSource.removeFeature(feature);
     }
   }
@@ -446,7 +441,7 @@ export class OpenLayersMap {
    * @param coords Coordonnées des points
    * @param [options] Options de la ligne
    */
-  drawLine(coords: Coordinate[], options?: ILineOptions) {
+  drawLine(coords: Coordinate[], options?: ILineOptions): void {
     options = Object.assign({}, { id: '', color: '#242424', withArrows: false, withDistance: false } as ILineOptions, options);
 
     if (coords.length > 1) {
@@ -473,9 +468,10 @@ export class OpenLayersMap {
             geometry: new Point(end),
             image: new Icon({
               src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAjklEQVRIie3UrQ3CABRF4a8hQaBQSBJ0NQ5RAZIFYCIYgQ2YgAHAoxGVxaEwCEIwdIRLIOkxz72TvJ9Lx69TYPGpEWZ4YZuUrPDEDr2UZIkH9uinJBXuOGCQkkxxwwnDlKREgzNGKckENS4Y/52gxFVoRO2SjwJLrgTPNPpoa8GoaMNuIxR2BeaJxh3f4w1HOhuNYfjIaAAAAABJRU5ErkJggg==',
-              anchor: [0.75, 0.5],
+              anchor: [1, 0.5],
               rotateWithView: true,
-              rotation: -rotation
+              rotation: -rotation,
+              color: [0, 0, 0]
             })
           }));
         });
@@ -515,7 +511,7 @@ export class OpenLayersMap {
                 }),
                 stroke: new Stroke({
                   color: '#ffffff',
-                  width: 1
+                  width: 2
                 })
               })
             })

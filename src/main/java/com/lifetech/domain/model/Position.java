@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity(name = "position")
-@IdClass(PositionId.class)
 public class Position extends PersistableElement {
 
     @Column(name = "date")
@@ -16,7 +15,6 @@ public class Position extends PersistableElement {
     @Column(name = "longitude")
     private float longitude;
 
-    @Id
     @ManyToOne(cascade = CascadeType.ALL)
     private Strap strap;
 
@@ -68,7 +66,6 @@ public class Position extends PersistableElement {
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 ", strap=" + strap +
-                ", optlock=" + optlock +
                 '}';
     }
 }

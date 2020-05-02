@@ -6,22 +6,33 @@ package TrackerResident;
 
 //import org.json.JSONArray;
 
+import com.lifetech.domain.dao.PositionDAO;
+import com.lifetech.domain.dao.StrapDAO;
+import com.lifetech.domain.model.Position;
+import com.lifetech.domain.model.Strap;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
+@Service
 public class Tracking {
     Map<String, List<Coordinate>> map = new HashMap<>();
 
 
-    public Tracking() {
-    }
 
-    public void parseJson() throws Exception {
+
+    public Map<String, List<Coordinate>> parseMapJson() throws Exception {
         File currentDirectory = new File(new File(".").getAbsolutePath());
         File filePath = new File(currentDirectory.getCanonicalPath() + "/src/main/java/TrackerResident/json/map.json");
 
@@ -55,18 +66,43 @@ public class Tracking {
                     coords.add(coor);
                 }
                 map.put(cle, coords);
-
             }
         }
+        return map;
     }
 
-    public void simulatePosition (int idRoom) throws Exception {
+    public Map<String, List<Coordinate>> parseWallsJson() throws Exception {
+        Map<String, List<Coordinate>> allWalls = new HashMap<>();;
+        File currentDirectory = new File(new File(".").getAbsolutePath());
+        File filePath = new File(currentDirectory.getCanonicalPath() + "/src/main/java/TrackerResident/json/walls.json");
+
+        Object parse = new JSONParser().parse(new FileReader(filePath));
+        JSONObject obj = (JSONObject) parse;
+        JSONArray arr = (JSONArray) obj.get("walls");
+        for (int i = 0; i < arr.size(); i++) {
+            List<Coordinate> roomCoordsList = new ArrayList<>();
+            JSONObject wall = (JSONObject) arr.get(i);
+            String room = wall.get("room").toString();
+            JSONArray roomCoords = (JSONArray) wall.get("coordinates");
+            for (int j = 0; j < roomCoords.size(); j++) {
+                JSONArray aCoordinate = (JSONArray) roomCoords.get(j);
+                Coordinate coor = new Coordinate((Double) aCoordinate.get(0), (Double) aCoordinate.get(1));
+                roomCoordsList.add(coor);
+            }
+
+            allWalls.put(room, roomCoordsList);
+        }
+
+        return allWalls;
+    }
+
+   /* public void simulatePosition (long idRoom) throws Exception {
         /**
          * etape 1  definir limite chambre
          * etape 2 place le vieux sur poin random dans la chambre
          * etape 3 definir salle a manger
          * etape 4 sortir de la chambre def mur couloir
-         */
+
         parseJson();
         map.get("chambre3");
         List<Coordinate> coords = map.get("chambre3");
@@ -95,24 +131,24 @@ public class Tracking {
                 mooveY++;
             }
             coor.setLatitude(coor.getLatitude() - moove);
+            System.out.println(strapDAO);
+            Optional<Strap> strap2 = strapDAO.findById(1L);
+            Position p = new Position(new Date(), Float.parseFloat(coor.getLatitude().toString()), Float.parseFloat(coor.getLongitude().toString()));
+            p.setStrap(strap2.get());
+            this.positionDAO.save(p);
             System.out.println(coor.toString());
         }
         Date d2 = new Date();
         System.out.println(d2);
+    } */
 
-
-
-    }
-
-    private boolean isInTheLivingRoom(Coordinate coor) {
+    public boolean isInTheLivingRoom(Coordinate coor) {
         List<Coordinate> coordsam = map.get("salle à manger1");
         List<Coordinate> murSortieSam = new ArrayList<>();
         murSortieSam.add(new Coordinate(coordsam.get(2).getLatitude(),coordsam.get(2).getLongitude()));
         murSortieSam.add(new Coordinate(coordsam.get(3).getLatitude(),coordsam.get(3).getLongitude()));
         return (coor.getLatitude() > coordsam.get(2).getLatitude() && coor.getLatitude() < coordsam.get(0).getLatitude());
     }
-
-
 }
 
 

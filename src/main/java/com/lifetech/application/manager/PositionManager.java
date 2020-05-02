@@ -1,8 +1,14 @@
 package com.lifetech.application.manager;
 
+import TrackerResident.Coordinate;
 import com.lifetech.application.dto.PositionDTO;
-import java.util.List;
+import com.lifetech.domain.model.Position;
+import com.lifetech.domain.model.Strap;
+
+import java.util.*;
 
 public interface PositionManager {
     PositionDTO findPositionByStrap(long strapId);
+
+    public void simulatePosition (long idRoom) throws Exception;
 }
