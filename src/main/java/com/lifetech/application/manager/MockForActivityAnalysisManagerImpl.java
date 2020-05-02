@@ -3,7 +3,6 @@ package com.lifetech.application.manager;
 import com.lifetech.domain.dao.*;
 import com.lifetech.domain.factory.*;
 import com.lifetech.domain.model.*;
-import com.lifetech.infrastructure.generator.RandomTimestampGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -35,9 +34,11 @@ public class MockForActivityAnalysisManagerImpl implements MockForActivityAnalys
 
     /**
      * This method fill the database with a random data sets
-     * */
+     *
+     * @param nBreakdowns*/
     @Override
-    public String mock() {
+    public String mock(long nBreakdowns) {
+        long startTime = System.currentTimeMillis();
         LOG.info("Start");
         //Create 2 residences
         Residence residence1 = new Residence();
@@ -84,18 +85,21 @@ public class MockForActivityAnalysisManagerImpl implements MockForActivityAnalys
             }
             LOG.info("100 heaters created");
 
-            for (int i = 0; i < 1000; i++) {//Create 1000 heater breakdowns
+            for (int i = 0; i < nBreakdowns; i++) {//Create nBreakdowns heater breakdowns
                 Heater randomHeater = heaterList.get(ThreadLocalRandom.current().nextInt(heaterList.size()));
-                HeaterBreakdown heaterBreakdown = heaterBreakdownFactory.createRandomHeaterBreakdown(randomHeater,residence.getCreationdate());
-                heaterBreakdownDAO.save(heaterBreakdown);
+                if (randomHeater.getBreakdownstatus() == StatusEnum.BREAKDOWN) {
+                    HeaterBreakdown heaterBreakdown = heaterBreakdownFactory.createRandomHeaterBreakdown(randomHeater, residence.getCreationdate());
+                    heaterBreakdownDAO.save(heaterBreakdown);
+                }
             }
-            LOG.info("1000 heater breakdowns created");
+            LOG.info(nBreakdowns + "heaters breakdowns created");
 
             personDAO.saveAll(personList);
             roomDAO.saveAll(roomList);
             heaterDAO.saveAll(heaterList);
         }
-        LOG.info("End");
+        LOG.info("Ended in " + (System.currentTimeMillis() - startTime)/1000 + " seconds");
         return "MockForActivityAnalysisManager";
     }
+
 }
