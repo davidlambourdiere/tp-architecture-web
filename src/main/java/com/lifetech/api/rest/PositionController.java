@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.PostConstruct;
+
 @RestController
 public class PositionController extends RestBaseController{
     private final PositionManager positionManager;
@@ -22,8 +24,8 @@ public class PositionController extends RestBaseController{
     }
 
     @GetMapping("position/insertPositionByStrap/{id}")
-    private void  insertPositionByStrapId(@PathVariable("id") long strapId) throws Exception {
-        positionManager.simulatePosition(strapId);
+    private void  insertPositionByStrapId() throws Exception {
+        positionManager.simulatePosition();
     }
 
 

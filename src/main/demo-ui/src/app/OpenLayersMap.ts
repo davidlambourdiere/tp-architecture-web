@@ -23,7 +23,6 @@ export function randomHexaColor(): string {
   return '#'.concat(Math.floor(Math.random() * 16777215).toString(16));
 }
 
-
 /**
  * Retourne les coordonnées géographiques d'une adresse
  * @param address Adresse
@@ -58,11 +57,6 @@ export interface IMarkerOptions {
   id?: string | number;
 
   /**
-   * Couleur
-   */
-  color?: string;
-
-  /**
    * Visibilité
    */
   visible?: boolean;
@@ -71,6 +65,11 @@ export interface IMarkerOptions {
    * Affiche du texte sous le marqueur
    */
   textUnderMarker?: string;
+
+  /**
+   * Couleur du marqueur
+   */
+  color?: number[] | string;
 }
 
 
@@ -110,6 +109,12 @@ export interface IMapOptions {
    * S'il faut faire comme dans les traceurs GPS, où l'on suit un seul point mouvant sur une carte
    */
   asGPSTracker?: boolean;
+
+  /**
+   * S'il faut centrer la carte sur le marqueur lorsqu'il bouge
+   * (Uniquement possible si asGPSTracker est activé)
+   */
+  centerOnMarker?: boolean;
 }
 
 
@@ -122,6 +127,11 @@ export class OpenLayersMap {
    * Carte
    */
   private map: Map;
+
+  /**
+   * Vue
+   */
+  private view: View;
 
   /**
    * Vecteur source
@@ -151,6 +161,11 @@ export class OpenLayersMap {
    * @param [options] Options de la carte
    */
   initializeMap(selector: string, centerTo: Coordinate = [0, 0], zoom: number = 2, options: IMapOptions = { asGPSTracker: false }): void {
+    this.view = new View({
+      center: fromLonLat(centerTo),
+      zoom
+    });
+
     this.map = new Map({
       target: selector,
       layers: [
@@ -158,10 +173,7 @@ export class OpenLayersMap {
           source: new OSM()
         }),
       ],
-      view: new View({
-        center: fromLonLat(centerTo),
-        zoom,
-      })
+      view: this.view
     });
 
     this.mapOptions = options;
@@ -208,7 +220,7 @@ export class OpenLayersMap {
 
     const vectorSource = new VectorSource({
       url: geoJSONFilePath,
-      format: new GeoJSON({featureProjection: 'EPSG:4326'}),
+      format: new GeoJSON({ featureProjection: 'EPSG:3857' }),
     });
 
     const vectorLayer = new VectorLayer({
@@ -266,7 +278,7 @@ export class OpenLayersMap {
    * @param [options] Options du marqueur
    */
   addMarker(at: Coordinate, options?: IMarkerOptions): void {
-    options = Object.assign({}, { color: '', visible: true, textUnderMarker: '', id: '' } as IMarkerOptions, options);
+    options = Object.assign({}, { id: '', color: '#000000', visible: true, textUnderMarker: '' } as IMarkerOptions, options);
 
     if (OpenLayersMap.isCoordinate(at)) {
       const marker = new Feature(
@@ -278,9 +290,9 @@ export class OpenLayersMap {
       const styles = [
         new Style({
           image: new Icon({
-            src: ' data:image/png; charset=utf-8;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABpUlEQVQ4y7WVPXLbMBBGn+2G6cAOJdypo8qUuEF0A/EGPoKPwMkJPOyois4NWLoUSlXEDbjsoAopBCQaWbSdif3NYIbNvtmfb5c3vC+VHoCkt6ibNyBroALMBdADDthfg18DroEfgAXW6qQTTQQRkQQbgF/pexG4Bh6AjTFGWWupqopzoHOOYRjw3gvwDPy8hJ7DnsqyFGttbJomjuMYLzWOY2yaJlprY1mWAjyl2Fc9ewQma23s+z5O0xSXNE1T7Ps+WmsjMKVYBXCXgN+B2hiz2m63bDabP2VeU1EUaK0JIXA4HIpTWzmkgUHq21TX9dUylzSOY6zrOmf5AHCbUjVKKVVVFcYYPipjTB6ayvbKQKWUerPMRdf/jVMZ+Km6zeuUTPvPgLM4ASQDvYiIcw7v/Ydh3nucc3l7PCDZNt+AlYgYpRSr1YqiKN7NrOs6drsdIvIC7AB/d7b0WkTWx+Ox0FqjtV6EigjDMNC2Lfv9XoAu7XXIwADMgJrn+d57X4QQ0Fq/mrz3nq7raNsW59wcQngG2mzqTz8OX36+vuTA/tcv4DcQ5j3msmvKlAAAAABJRU5ErkJggg==',
+            src: 'data:image/png; charset=utf-8;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABpUlEQVQ4y7WVPXLbMBBGn+2G6cAOJdypo8qUuEF0A/EGPoKPwMkJPOyois4NWLoUSlXEDbjsoAopBCQaWbSdif3NYIbNvtmfb5c3vC+VHoCkt6ibNyBroALMBdADDthfg18DroEfgAXW6qQTTQQRkQQbgF/pexG4Bh6AjTFGWWupqopzoHOOYRjw3gvwDPy8hJ7DnsqyFGttbJomjuMYLzWOY2yaJlprY1mWAjyl2Fc9ewQma23s+z5O0xSXNE1T7Ps+WmsjMKVYBXCXgN+B2hiz2m63bDabP2VeU1EUaK0JIXA4HIpTWzmkgUHq21TX9dUylzSOY6zrOmf5AHCbUjVKKVVVFcYYPipjTB6ayvbKQKWUerPMRdf/jVMZ+Km6zeuUTPvPgLM4ASQDvYiIcw7v/Ydh3nucc3l7PCDZNt+AlYgYpRSr1YqiKN7NrOs6drsdIvIC7AB/d7b0WkTWx+Ox0FqjtV6EigjDMNC2Lfv9XoAu7XXIwADMgJrn+d57X4QQ0Fq/mrz3nq7raNsW59wcQngG2mzqTz8OX36+vuTA/tcv4DcQ5j3msmvKlAAAAABJRU5ErkJggg==',
             crossOrigin: 'anonymous',
-            color: options.color ? options.color : [0, 0, 0]
+            color: options.color ? options.color : [0, 0, 0],
           })
         })
       ];
@@ -323,6 +335,10 @@ export class OpenLayersMap {
       });
 
       this.map.addLayer(vectorLayer);
+
+      if (this.mapOptions.asGPSTracker && this.mapOptions.centerOnMarker) {
+        this.view.animate({ center: fromLonLat(at), zoom: 19 });
+      }
     } else {
       throw new Error('Ajouter un marqueur nécessite des coordonnées valides');
     }

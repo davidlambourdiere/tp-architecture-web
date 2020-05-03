@@ -12,10 +12,13 @@ export class PositionService {
   constructor(private http: HttpClient) { }
 
   findPositionByStrap(strapId: bigint): Observable<PositionDTO>{
-    return interval(5000).pipe(
+    return interval(3000).pipe(
       startWith(0),
       switchMap(() => this.http.get<PositionDTO>  (`api/position/findByStrap/${strapId}`))
     );
-    //return ;
+  }
+
+  simulatePosition(): void {
+    this.http.get(`http://localhost:8080/api/position/insertPositionByStrap/1`).subscribe();
   }
 }

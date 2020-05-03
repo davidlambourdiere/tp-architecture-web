@@ -10,5 +10,5 @@ import java.util.*;
 public interface PositionManager {
     PositionDTO findPositionByStrap(long strapId);
 
-    public void simulatePosition (long idRoom) throws Exception;
+    public void simulatePosition () throws Exception;
 }
