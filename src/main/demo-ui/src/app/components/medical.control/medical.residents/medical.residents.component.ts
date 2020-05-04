@@ -8,6 +8,7 @@ import {StrapService} from "../../../service/StrapService";
 import {StrapDTO} from "../../../dto/StrapDTO";
 import {HealthHistoricService} from "../../../service/HealthHistoricService";
 import {HealthHistoricDTO} from "../../../dto/HealthHistoricDTO";
+import { FormControl } from "@angular/forms";
 
 @Component({
   selector: 'app-medicalresidents',
@@ -19,6 +20,9 @@ export class MedicalResidentsComponent implements OnInit {
   straplist: StrapDTO[];
   residentNumber: Number;
   newAlertsNumber: Number;
+  results: any[] = [];
+  queryField: FormControl = new FormControl();
+
 
   constructor(private personService: PersonService,
               private strapService: StrapService,
@@ -33,7 +37,7 @@ export class MedicalResidentsComponent implements OnInit {
 
   ngOnInit() {
     this.reloadData();
-
+    this.queryField.valueChanges.subscribe( result => console.log(result));
   }
 
 
