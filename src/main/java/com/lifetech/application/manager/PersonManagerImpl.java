@@ -49,4 +49,9 @@ public class PersonManagerImpl implements PersonManager {
     public List<PersonDTO> findPersonByRole(PersonStatus personStatus) {
         return orikaBeanMapper.mapAsList(personDAO.findByUserrole(personStatus), PersonDTO.class);
     }
+
+    @Override
+    public List<PersonDTO> findResidentsByName(String query) {
+        return  orikaBeanMapper.mapAsList(personDAO.findByUserroleAndFirstName(PersonStatus.RESIDENT, query), PersonDTO.class);
+    }
 }
