@@ -149,10 +149,25 @@ public class StrapManagerImpl implements StrapManager {
     }
     public StrapDTO findById(String id) {
         Strap strap = strapDAO.findById(Long.parseLong(id)).orElse(null);
-        Light l = lightDAO.findAllByPersonId(strap.getPerson().getId()).get(0);
+
         StrapDTO strapDTO = orikaBeanMapper.map(strap, StrapDTO.class);
-        RoomDTO room = orikaBeanMapper.map(l.getRoom(), RoomDTO.class);
-        strapDTO.setRoom(room);
+
+        if(lightDAO.findAllByPersonId(strap.getPerson().getId()).size()>0) {
+            Light l = lightDAO.findAllByPersonId(strap.getPerson().getId()).get(0);
+            RoomDTO room = orikaBeanMapper.map(l.getRoom(), RoomDTO.class);
+            strapDTO.setRoom(room);
+        }
+
        return strapDTO;
+    }
+
+    public Strap findModelById(String id) {
+        Strap strap = strapDAO.findById(Long.parseLong(id)).orElse(null);
+        return strap;
+    }
+
+    @Override
+    public Strap save(Strap strap) {
+        return strapDAO.save(strap);
     }
 }

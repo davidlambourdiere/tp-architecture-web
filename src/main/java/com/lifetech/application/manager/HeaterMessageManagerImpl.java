@@ -69,7 +69,7 @@ public class HeaterMessageManagerImpl implements HeaterMessageManager {
                 breakdown = false;
                 updateHeaterStatusNoBreakdown(heater);
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Panne - Il n'y a pas de message pour le radiateur " + id);
         }
         return breakdown;

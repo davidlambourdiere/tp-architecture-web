@@ -74,19 +74,19 @@ public class HealthHistoricManagerImpl implements HealthHistoricManager {
         int cptHigh = 0, cptLow = 0;
         boolean isAlerte =  false;
         //find strap
-        StrapDTO sdto = strapManager.findById(String.valueOf(histSaved.getStrap()));
+        Strap strap = strapManager.findModelById(String.valueOf(histSaved.getStrap()));
         //update cache
         Map<String, AlertCache> values = new HashMap<>();
         values.put("HR", new AlertCache(0,new ArrayList<>()));
-        if (cache.containsKey(sdto.getId())) {
-            values = cache.get(sdto.getId());
+        if (cache.containsKey(strap.getId())) {
+            values = cache.get(strap.getId());
         } else {
-            cache.put(sdto.getId(), values);
+            cache.put(strap.getId(), values);
         }
         AlertCache nbHRAlert = values.get("HR");
         //find if the last hearthRate is in alert
-        if (Integer.parseInt(histSaved.getHearthrate()) < Integer.parseInt(sdto.getMaxvalueref())
-                && Integer.parseInt(histSaved.getHearthrate()) > Integer.parseInt(sdto.getMinvalueref())){
+        if (Integer.parseInt(histSaved.getHearthrate()) < Integer.parseInt(strap.getMaxvalueref())
+                && Integer.parseInt(histSaved.getHearthrate()) > Integer.parseInt(strap.getMinvalueref())){
             //set hearthrate alert on zero
             values.replace("HR", nbHRAlert, new AlertCache(0,new ArrayList<>()));
             //set status alert on done if it exists
@@ -97,8 +97,8 @@ public class HealthHistoricManagerImpl implements HealthHistoricManager {
                 alertHealthManagerImpl.save(alertHealth);
             }
             //update healthstate of strap
-            sdto.setHealthstate("OK");
-            strapManager.save(sdto);
+            strap.setHealthstate("OK");
+            strapManager.save(strap);
         }
         else {
             //find 3 last hearthRate historic
@@ -106,9 +106,9 @@ public class HealthHistoricManagerImpl implements HealthHistoricManager {
             List<HealthHistoric> hsub = hlist.subList(Math.max(hlist.size() - 3, 0), hlist.size());
             //find if hearthistoric is in alert
             for (HealthHistoric h : hsub) {
-                if (Integer.parseInt(h.getHearthrate()) > Integer.parseInt(sdto.getMaxvalueref()))
+                if (Integer.parseInt(h.getHearthrate()) > Integer.parseInt(strap.getMaxvalueref()))
                     cptHigh++;
-                if (Integer.parseInt(h.getHearthrate()) < Integer.parseInt(sdto.getMinvalueref()))
+                if (Integer.parseInt(h.getHearthrate()) < Integer.parseInt(strap.getMinvalueref()))
                     cptLow++;
             }
             //if there is an alert (hearthistoric is higher or lower 3 times in a row)
@@ -116,7 +116,7 @@ public class HealthHistoricManagerImpl implements HealthHistoricManager {
 
                 if (nbHRAlert.getNbAlert() == 0) {
                     AlertHealth alertFC = new AlertHealth();
-                    alertFC.setStrap(sdto.getId());
+                    alertFC.setStrap(strap.getId());
                     alertFC.setStartdate(new Timestamp(new Date().getTime()));
                     alertFC.setStatus("NEW");
                     alertFC.setCriticity("3");
@@ -135,8 +135,8 @@ public class HealthHistoricManagerImpl implements HealthHistoricManager {
                     nbHRAlert.getAlertId().add(String.valueOf(al.getId()));
 
                     //update healthstate of strap
-                    sdto.setHealthstate("KO");
-                    strapManager.save(sdto);
+                    strap.setHealthstate("KO");
+                    strapManager.save(strap);
                 }
                 isAlerte = true;
                 //increment nbAlert
