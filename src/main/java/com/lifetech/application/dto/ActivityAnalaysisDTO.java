@@ -8,7 +8,7 @@ public class ActivityAnalaysisDTO {
     private Long nLight;
     private Long nAlert;
     private Long nBreakdown;
-    private Float breakdownRate;
+    private Double heaterBreakdownRate;
 
     public ActivityAnalaysisDTO() {
     }
@@ -68,11 +68,11 @@ public class ActivityAnalaysisDTO {
         this.residenceName = residenceName;
     }
 
-    public Float getBreakdownRate() {
-        return breakdownRate;
+    public Double getHeaterBreakdownRate() {
+        return heaterBreakdownRate;
     }
 
-    public void setBreakdownRate(Float breakdownRate) {
-        this.breakdownRate = breakdownRate;
+    public void setHeaterBreakdownRate(Double heaterBreakdownRate) {
+        this.heaterBreakdownRate = heaterBreakdownRate;
     }
 }
