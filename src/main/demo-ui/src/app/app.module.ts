@@ -45,6 +45,9 @@ import {NotificationStrapComponent} from "./components/notification/notification
 import {NotificationNewComponent} from "./components/notification/notification.new/notification.new.component";
 import {NotificationSentComponent} from "./components/notification/notification.sent.component/notification.sent.component";
 import {NotificationReceivedComponent} from "./components/notification/notification.received.component/notification.received.component";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatFormFieldModule} from "@angular/material/form-field";
 
 @NgModule({
   declarations: [
@@ -91,6 +94,9 @@ import {NotificationReceivedComponent} from "./components/notification/notificat
     FormsModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

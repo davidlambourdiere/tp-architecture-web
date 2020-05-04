@@ -13,8 +13,8 @@ import {NotificationContainerInitializeDTO} from "../../dto/NotificationContaine
 })
 export class NotificationComponent implements OnInit {
 
-  userConnected: PersonDTO;
-  initializeNotification: NotificationContainerInitializeDTO;
+  userConnected: PersonDTO = null;
+  initializeNotification: NotificationContainerInitializeDTO = null;
 
   ngOnInit(): void {
     this.getUserConnected();
