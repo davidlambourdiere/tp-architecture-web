@@ -4,6 +4,8 @@ import com.lifetech.application.dto.ActivityAnalaysisDTO;
 import com.lifetech.domain.OrikaBeanMapper;
 import com.lifetech.domain.dao.*;
 import com.lifetech.domain.model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +20,7 @@ public class ActivityAnalysisManagerImpl implements ActivityAnalysisManager {
     private final PersonDAO personDAO;
     private final ResidenceDAO residenceDAO;
     private final HeaterBreakdownDAO heaterBreakdownDAO;
-
+    private static final Logger LOG = LoggerFactory.getLogger(ActivityAnalysisManager.class);
     public ActivityAnalysisManagerImpl(ClockDAO clockDAO, HeaterDAO heaterDAO, LightDAO lightDAO, OrikaBeanMapper orikaBeanMapper, PersonDAO personDAO, ResidenceDAO residenceDAO, HeaterBreakdownDAO heaterBreakdownDAO) {
         this.clockDAO = clockDAO;
         this.heaterDAO = heaterDAO;
@@ -72,13 +74,8 @@ public class ActivityAnalysisManagerImpl implements ActivityAnalysisManager {
     @Override
     public ActivityAnalaysisDTO getBreakdownRate() {
         ActivityAnalaysisDTO activityAnalaysisDTO = new ActivityAnalaysisDTO();
-        Long nHeater = heaterDAO.count();
-        List<HeaterBreakdown> heaterBreakdowns = heaterBreakdownDAO.findAllHeaterGroupByIOTId();
-        float nBreakdown = heaterBreakdowns.size();
-        System.out.println(nBreakdown);
-        System.out.println(nHeater);
-        System.out.println(nBreakdown/nHeater);
-        activityAnalaysisDTO.setBreakdownRate(nBreakdown/nHeater);
+        activityAnalaysisDTO.setHeaterBreakdownRate(heaterBreakdownDAO.getMeanBreakdownRate());
+        LOG.info("Average heater breakdowns rate on all residences" + activityAnalaysisDTO.getHeaterBreakdownRate());
         return activityAnalaysisDTO;
     }
 }
