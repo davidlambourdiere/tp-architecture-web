@@ -42,6 +42,7 @@ import {ChartsModule} from "ng2-charts";
 import { DatePipe } from '@angular/common';
 import {MedicalProfilComponent} from "./components/medical.control/medical.profil/medical.profil.component";
 import {ProfilelistComponent} from "./components/profilelist/profilelist.component";
+import { PositionComponent } from './components/position/position.component';
 
 
 
@@ -75,7 +76,8 @@ import {ProfilelistComponent} from "./components/profilelist/profilelist.compone
     SurveyComponent,
     DetailAlertComponent,
     MedicalProfilComponent,
-    ProfilelistComponent
+    ProfilelistComponent,
+    PositionComponent
 
   ],
   imports: [

@@ -23,6 +23,7 @@ public class StrapDTO extends PersistableElementDTO{
     private Double price ;
     private String healthstate;
 
+
     public StrapDTO() {
     }
 

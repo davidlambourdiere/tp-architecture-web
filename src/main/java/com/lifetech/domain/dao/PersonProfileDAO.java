@@ -9,5 +9,4 @@ public interface PersonProfileDAO extends JpaRepository<PersonProfile, Long> {
 
 
 
-
 }
