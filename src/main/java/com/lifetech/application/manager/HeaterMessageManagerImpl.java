@@ -99,7 +99,7 @@ public class HeaterMessageManagerImpl implements HeaterMessageManager {
                 suspect = false;
                 updateHeaterNoSuspect(heater);
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             System.out.println("Suspect - Il n'y a pas de message pour le radiateur " + id);
         }
         return suspect;
