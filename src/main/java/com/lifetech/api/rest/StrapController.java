@@ -2,6 +2,7 @@ package com.lifetech.api.rest;
 
 import com.lifetech.application.dto.StrapDTO;
 import com.lifetech.application.dto.StrapDetailDTO;
+import com.lifetech.application.manager.PositionManager;
 import com.lifetech.application.manager.StrapManager;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,9 +14,11 @@ import java.util.List;
 public class StrapController extends RestBaseController{
 
     private final StrapManager strapManager;
+    private final PositionManager positionManager;
 
-    public StrapController(StrapManager strapManager) {
+    public StrapController(StrapManager strapManager, PositionManager positionManager) {
         this.strapManager = strapManager;
+        this.positionManager = positionManager;
     }
 
     @GetMapping("strap/{id}")
@@ -29,7 +32,7 @@ public class StrapController extends RestBaseController{
     }
 
     @GetMapping("strap/findAll")
-    private List<StrapDTO> findAll(){
+    private List<StrapDTO> findAll() throws Exception {
         return strapManager.findAll();
     }
 }

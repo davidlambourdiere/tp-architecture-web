@@ -25,6 +25,7 @@ import {MedicalResidentsComponent} from "./components/medical.control/medical.re
 import {DetailAlertComponent} from "./components/medical.control/detail.alert/detail.alert.component";
 import {MedicalProfilComponent} from "./components/medical.control/medical.profil/medical.profil.component";
 import {ProfilelistComponent} from "./components/profilelist/profilelist.component";
+import {PositionComponent} from "./components/position/position.component";
 
 
 
@@ -135,6 +136,10 @@ const routes: Routes = [
     path: 'profileList',
     component: ProfilelistComponent,
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'position',
+    component: PositionComponent
   }
 
 ];

@@ -1,0 +1,25 @@
+<div id="map"></div>
+
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Prénom</th>
+    <th>Nom</th>
+    <th>Chambre</th>
+    <th>Date de naissance</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let strap of straps">
+    <td>{{strap.person.firstName}}</td>
+    <td>{{strap.person.lastName}}</td>
+    <td>{{strap.room?.num}}</td>
+    <td>{{strap.person.birthdate}}</td>
+    <td>
+      <button class="btn btn-primary" (click)="findPosition(strap.id)">Voir la position</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
