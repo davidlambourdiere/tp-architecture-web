@@ -37,7 +37,8 @@ export class MedicalResidentsComponent implements OnInit {
 
   ngOnInit() {
     this.reloadData();
-    this.queryField.valueChanges.subscribe( result => console.log(result));
+    /*this.queryField.valueChanges.subscribe(queryField =>this.personService.findResidentsByName(queryField)
+      .subscribe(data => this.results = data));*/
   }
 
 
