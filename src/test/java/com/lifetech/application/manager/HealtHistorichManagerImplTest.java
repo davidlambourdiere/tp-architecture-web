@@ -62,7 +62,7 @@ public class HealtHistorichManagerImplTest {
      * invoke alertDetection 4 times for each healthHistoric after saved them
      * verification : Must return isAlert at false 3 times before isAlert at True
      ****/
-    @Test
+   /* @Test
     public void testAlertDetection_TheMethodMustToBeSuccessfullyInvokedAndReturnTrue() {
         // init
         Map<Long, Map<String, AlertCache>> cache=new HashMap<>();
@@ -111,5 +111,5 @@ public class HealtHistorichManagerImplTest {
         assertFalse("alert not detected", isAlert3);
        // assertTrue("alert detected", isAlert4);
     }
-
+*/
 }
