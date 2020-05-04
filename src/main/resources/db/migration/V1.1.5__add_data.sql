@@ -25,41 +25,41 @@ INSERT INTO lifetech.room (num) VALUES (3);
 INSERT INTO lifetech.room (num) VALUES (4);
 INSERT INTO lifetech.room (num) VALUES (5);
 
-INSERT INTO lifetech.light (ipadress, state, breakdownstatus, percentage, color, person_id, room_id,price) VALUES ('172.163.92.0','ON','NOT_BREAKDOWN', '92%', 'blue', 1, 1,130);
-INSERT INTO lifetech.light (ipadress, state, breakdownstatus, percentage, color, person_id, room_id) VALUES ('172.163.92.2','ON','NOT_BREAKDOWN', '28%', 'red', 2, 2);
+INSERT INTO lifetech.light (ipadress, state, breakdownstatus, suspect, percentage, color, person_id, room_id,price) VALUES ('172.163.92.0','ON','NOT_BREAKDOWN', 'NOT_SUSPECT', '92%', 'blue', 1, 1,130);
+INSERT INTO lifetech.light (ipadress, state, breakdownstatus, suspect, percentage, color, person_id, room_id) VALUES ('172.163.92.2','ON','NOT_BREAKDOWN', 'NOT_SUSPECT', '28%', 'red', 2, 2);
 
 
-INSERT INTO lifetech.heater (ipadress, state,breakdownstatus, person_id, room_id,price) VALUES ('172.163.92.4','ON','NOT_BREAKDOWN', 3, 3,150);
-INSERT INTO lifetech.heater (ipadress, state,breakdownstatus, person_id, room_id) VALUES ('172.163.92.5','OFF','NOT_BREAKDOWN', 4, 4);
-INSERT INTO lifetech.heater (ipadress, state,breakdownstatus, person_id, room_id) VALUES ('172.163.92.6','ON','NOT_BREAKDOWN', 5, 5);
-INSERT INTO lifetech.heater (ipadress, state,breakdownstatus, person_id, room_id) VALUES ('172.163.92.6','ON','NOT_BREAKDOWN', 5, 3);
+INSERT INTO lifetech.heater (ipadress, state,breakdownstatus, suspect, person_id, room_id,price) VALUES ('172.163.92.4','ON','NOT_BREAKDOWN', 'NOT_SUSPECT', 3, 3,150);
+INSERT INTO lifetech.heater (ipadress, state,breakdownstatus, suspect, person_id, room_id) VALUES ('172.163.92.5','OFF','NOT_BREAKDOWN', 'NOT_SUSPECT', 4, 4);
+INSERT INTO lifetech.heater (ipadress, state,breakdownstatus, suspect, person_id, room_id) VALUES ('172.163.92.6','ON','NOT_BREAKDOWN', 'NOT_SUSPECT',  5, 5);
+INSERT INTO lifetech.heater (ipadress, state,breakdownstatus, suspect, person_id, room_id) VALUES ('172.163.92.6','ON','NOT_BREAKDOWN', 'NOT_SUSPECT', 5, 3);
+INSERT INTO lifetech.heater (ipadress, state,breakdownstatus, suspect, person_id, room_id) VALUES ('172.163.92.6','ON','NOT_BREAKDOWN', 'NOT_SUSPECT', 2, 1);
+INSERT INTO lifetech.heater (ipadress, state,breakdownstatus, suspect, person_id, room_id) VALUES ('172.163.92.6','ON','NOT_BREAKDOWN', 'NOT_SUSPECT', 2, 2);
+
+INSERT INTO lifetech.clock (ipadress, state,breakdownstatus, suspect, person_id, room_id,price) VALUES ('172.163.92.8','ON','NOT_BREAKDOWN', 'NOT_SUSPECT', 1, 1,150);
+INSERT INTO lifetech.clock (ipadress, state,breakdownstatus, suspect, person_id, room_id) VALUES ('172.163.92.9','OFF','NOT_BREAKDOWN', 'NOT_SUSPECT', 1, 1);
 
 
-
-INSERT INTO lifetech.clock (ipadress, state,breakdownstatus, person_id, room_id,price) VALUES ('172.163.92.8','ON','NOT_BREAKDOWN', 1, 1,150);
-INSERT INTO lifetech.clock (ipadress, state,breakdownstatus, person_id, room_id) VALUES ('172.163.92.9','OFF','NOT_BREAKDOWN', 1, 1);
-
-
-INSERT INTO lifetech.shutter (ipadress, state,breakdownstatus, percentage, person_id, room_id,price) VALUES ('172.163.92.12','ON','NOT_BREAKDOWN', '50%', 3, 3,70);
-INSERT INTO lifetech.shutter (ipadress, state,breakdownstatus, percentage, person_id, room_id) VALUES ('172.163.92.13','ON','NOT_BREAKDOWN', '50%', 5, 5);
+INSERT INTO lifetech.shutter (ipadress, state,breakdownstatus, suspect, percentage, person_id, room_id,price) VALUES ('172.163.92.12','ON','NOT_BREAKDOWN', 'NOT_SUSPECT', '50%', 3, 3,70);
+INSERT INTO lifetech.shutter (ipadress, state,breakdownstatus, suspect, percentage, person_id, room_id) VALUES ('172.163.92.13','ON','NOT_BREAKDOWN', 'NOT_SUSPECT', '50%', 5, 5);
 
 
-INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
-VALUES ('50','155','172.163.92.17','ON','NOT_BREAKDOWN', '90', '60','130','80', '7000','0.45','1.26', 1,125);
-INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
-VALUES ('50','155','172.163.92.18','ON','NOT_BREAKDOWN', '90', '60','130','80', '7000','0.45','1.26', 2,125);
-INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
-VALUES ('50','155','172.163.92.19','ON','NOT_BREAKDOWN', '90', '60','130','80', '7000','0.45','1.26', 3,125);
-INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
-VALUES ('50','155','172.163.92.20','ON','NOT_BREAKDOWN', '90', '60','130','80', '7000','0.45','1.26', 4,125);
-INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
-VALUES ('50','155','172.163.92.21','ON','NOT_BREAKDOWN', '90', '60','130','80', '7000','0.45','1.26', 5,125);
-INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
-VALUES ('50','155','172.163.92.22','ON','NOT_BREAKDOWN', '90', '60','130','80', '7000','0.45','1.26', 6,125);
-INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
-VALUES ('50','155','172.163.92.23','ON','NOT_BREAKDOWN', '90', '60','130','80', '7000','0.45','1.26', 7,125);
-INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
-VALUES ('50','153','172.163.92.24','ON','NOT_BREAKDOWN', '90', '60','130','80', '7000','0.45','1.26', 8,125);
+INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, suspect, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
+VALUES ('50','155','172.163.92.17','ON','NOT_BREAKDOWN', 'NOT_SUSPECT', '90', '60','130','80', '7000','0.45','1.26', 1,125);
+INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, suspect, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
+VALUES ('50','155','172.163.92.18','ON','NOT_BREAKDOWN', 'NOT_SUSPECT', '90', '60','130','80', '7000','0.45','1.26', 2,125);
+INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, suspect, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
+VALUES ('50','155','172.163.92.19','ON','NOT_BREAKDOWN', 'NOT_SUSPECT', '90', '60','130','80', '7000','0.45','1.26', 3,125);
+INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, suspect, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
+VALUES ('50','155','172.163.92.20','ON','NOT_BREAKDOWN', 'NOT_SUSPECT', '90', '60','130','80', '7000','0.45','1.26', 4,125);
+INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, suspect, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
+VALUES ('50','155','172.163.92.21','ON','NOT_BREAKDOWN', 'NOT_SUSPECT', '90', '60','130','80', '7000','0.45','1.26', 5,125);
+INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, suspect, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
+VALUES ('50','155','172.163.92.22','ON','NOT_BREAKDOWN', 'NOT_SUSPECT', '90', '60','130','80', '7000','0.45','1.26', 6,125);
+INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, suspect, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
+VALUES ('50','155','172.163.92.23','ON','NOT_BREAKDOWN', 'NOT_SUSPECT', '90', '60','130','80', '7000','0.45','1.26', 7,125);
+INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, suspect, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
+VALUES ('50','153','172.163.92.24','ON','NOT_BREAKDOWN', 'NOT_SUSPECT', '90', '60','130','80', '7000','0.45','1.26', 8,125);
 
 
 INSERT INTO lifetech.lighthistoric (startdate, endingdate,color,state,breakdownstatus,lightid) VALUES ("2020-02-24 9:00:00","2020-02-24 12:00:00","WHITE",'ON',"NOT_BREAKDOWN",1);
