@@ -10,8 +10,8 @@ export class PersonProfileService {
   constructor(private http: HttpClient) {
   }
 
-  findAllPerson(): Observable<PersonProfileDTO> {
-    return this.http.get<PersonProfileDTO>(`api/personProfile`);
+  findAllPerson(): Observable<PersonProfileDTO[]> {
+    return this.http.get<PersonProfileDTO[]>('api/personProfile/findAll');
   }
 
   createPersonProfile(personProfile: PersonProfileDTO):Observable<PersonProfileDTO>{
