@@ -12,6 +12,9 @@ public class Strap extends IOT{
     @Column(name="maxsysto")
     private String maxsysto;
 
+    @Column(name="mindiasto")
+    private String mindiasto;
+
     @Column(name="maxdiasto")
     private String maxdiasto;
 
@@ -24,6 +27,9 @@ public class Strap extends IOT{
     @Column(name="minsteps")
     private String minsteps;
 
+    @Column(name="healthstate")
+    private String healthstate;
+
     @OneToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person person;
@@ -32,6 +38,7 @@ public class Strap extends IOT{
         super(price, breakdownstatus, state, ipadress, startdate, minvalueref, maxvalueref, suspect, activityduration);
         this.minsysto = minsysto;
         this.maxsysto = maxsysto;
+        this.mindiasto = mindiasto;
         this.maxdiasto = maxdiasto;
         this.minglyc = minglyc;
         this.maxglyc = maxglyc;
@@ -55,6 +62,14 @@ public class Strap extends IOT{
 
     public void setMaxsysto(String maxsysto) {
         this.maxsysto = maxsysto;
+    }
+
+    public String getMindiasto() {
+        return mindiasto;
+    }
+
+    public void setMindiasto(String mindiasto) {
+        this.mindiasto = mindiasto;
     }
 
     public String getMaxdiasto() {
@@ -97,15 +112,25 @@ public class Strap extends IOT{
         this.person = person;
     }
 
+    public String getHealthstate() {
+        return healthstate;
+    }
+
+    public void setHealthstate(String healthstate) {
+        this.healthstate = healthstate;
+    }
+
     @Override
     public String toString() {
         return "Strap{" +
                 "minsysto='" + minsysto + '\'' +
                 ", maxsysto='" + maxsysto + '\'' +
+                ", mindiasto='" + mindiasto + '\'' +
                 ", maxdiasto='" + maxdiasto + '\'' +
                 ", minglyc='" + minglyc + '\'' +
                 ", maxglyc='" + maxglyc + '\'' +
                 ", minsteps='" + minsteps + '\'' +
+                ", healthstate='" + healthstate + '\'' +
                 ", person=" + person +
                 '}';
     }

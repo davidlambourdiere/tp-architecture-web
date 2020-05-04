@@ -14,14 +14,14 @@ import index from "@angular/cli/lib/cli";
 })
 export class MedicalHomeComponent implements OnInit {
 
-  alertHealthlList: ALertHealthDTO[]= [];
+  alertHealthlList: ALertHealthDTO[];
   residentNumber: Number;
   doctorNumber: Number;
   agentNumber: Number;
   newAlertsNumber: Number;
 
   constructor(private alertHealthService: AlertHealthService, private router: Router, private route: ActivatedRoute, private personService: PersonService) {
-  this.alertHealthlList = [];
+  this.alertHealthlList =[];
   this.residentNumber =0;
   this.doctorNumber=0;
   this.agentNumber=0;
@@ -33,12 +33,14 @@ export class MedicalHomeComponent implements OnInit {
 
   }
 
-  reloadData() {
+  async reloadData() {
     // @ts-ignore
     this.alertHealthlList = this.findNewAlerts();
     this.findResidentNumber();
     this.findDoctorNumber();
     this.findAgentNumber();
+    //console.log('refresh-alert');
+    setTimeout(() => {  this.reloadData(); }, 4000);
   }
 
   private findNewAlerts() {
@@ -79,5 +81,10 @@ export class MedicalHomeComponent implements OnInit {
         this.agentNumber = data;
       });
     });
+  }
+
+  alertDetails(id: string){
+    Number.parseInt(id);
+    this.router.navigate(['detailalert', id]);
   }
 }

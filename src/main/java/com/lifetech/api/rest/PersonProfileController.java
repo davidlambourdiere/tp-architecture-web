@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,6 +27,9 @@ public class PersonProfileController extends RestBaseController {
     private List<PersonProfileDTO> findAllPerson(){
         return personprofilemanager.findAll();
     }
+
+    @GetMapping("personProfile/findRank")
+    private List<PersonProfileDTO> findPersonRank(){return personprofilemanager.findRank();}
 
     @PostMapping("personProfile/createpersonProfile")
     private PersonProfileDTO createPersonProfile(@Valid @RequestBody PersonProfileDTO p) {

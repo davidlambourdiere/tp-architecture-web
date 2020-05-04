@@ -1,12 +1,18 @@
 INSERT INTO lifetech.residence (adress) VALUES ("10 avenue de paris");
 
 
-INSERT INTO lifetech.person (firstname, lastname, login, password, residence_id) VALUES ('Jean-Paul', 'Gauthier', 'admin', 'admin', 1);
-INSERT INTO lifetech.person (firstname, lastname, login, password, residence_id) VALUES ('Justin', 'Aguesse', 'Justindu94', 'jujulebg', 1);
-INSERT INTO lifetech.person (firstname, lastname, login, password, residence_id) VALUES ('Louis', 'Beaudin', 'Loulou', 'Louis123', 1);
-INSERT INTO lifetech.person (firstname, lastname, login, password, residence_id) VALUES ('Marie', 'Collin', 'Coco', 'Marie145', 1);
-INSERT INTO lifetech.person (firstname, lastname, login, password, residence_id) VALUES ('Mohammed', 'Henni', 'Momo', 'Momodu13', 1);
-INSERT INTO lifetech.person (firstname, lastname, login, password,userrole, residence_id) VALUES ('Henry', 'Dupont', 'Henry', 'henry','RESIDENT', 1);
+INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id) VALUES ('Jean-Paul', 'Gauthier','1946-05-14', 'admin', 'admin','RESIDENT', 1);
+INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id) VALUES ('Justin', 'Aguesse','1956-05-14', 'Justindu94', 'jujulebg','RESIDENT', 1);
+INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id) VALUES ('Louis', 'Beaudin','1966-05-14', 'Loulou', 'Louis123','RESIDENT', 1);
+INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id) VALUES ('Marie', 'Collin','1945-05-14', 'Coco', 'Marie145','RESIDENT', 1);
+INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id) VALUES ('Mohammed', 'Henni','1956-05-14', 'Momo', 'Momodu13','RESIDENT', 1);
+INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id) VALUES ('Henry', 'Dupont','1956-05-14', 'Henry', 'henry','RESIDENT', 1);
+INSERT INTO lifetech.person (firstname, lastname,birthdate,login, password,userrole,residence_id)
+VALUES('Amanda','Willson', '1946-06-14','amandaw','1234','RESIDENT',1);
+INSERT INTO lifetech.person (firstname, lastname,birthdate,login, password,deseas,userrole,residence_id)
+VALUES('Porter','Welsby', '1943-06-14','porterw','1234','HEARTPROBLEM','RESIDENT',1);
+INSERT INTO lifetech.person (firstname, lastname, login, password,userrole, residence_id)VALUES('kadia','toure','kadia','admin','DOCTOR',1);
+INSERT INTO lifetech.person (firstname, lastname, login, password,userrole, residence_id)VALUES('william','toure','will','admin','AGENT',1);
 
 INSERT INTO lifetech.person(firstname,lastname,login,password,profileType,residence_id) VALUES ('Mohamed','Emam','mohamed','mohamed','essential',1);
 INSERT INTO lifetech.person(firstname,lastname,login,password,profileType,residence_id) VALUES ('Lucas','Meunier','lucas','lucas','serenity',1);
@@ -38,7 +44,22 @@ INSERT INTO lifetech.shutter (ipadress, state,breakdownstatus, percentage, perso
 INSERT INTO lifetech.shutter (ipadress, state,breakdownstatus, percentage, person_id, room_id) VALUES ('172.163.92.13','ON','NOT_BREAKDOWN', '50%', 5, 5);
 
 
-INSERT INTO lifetech.strap (ipadress, state,breakdownstatus, minsysto, maxsysto, minsteps, person_id,price) VALUES ('172.163.92.16','ON','NOT_BREAKDOWN', '300mg', '600mg', '300', 2,125);
+INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
+VALUES ('50','155','172.163.92.17','ON','NOT_BREAKDOWN', '90', '60','130','80', '7000','0.45','1.26', 1,125);
+INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
+VALUES ('50','155','172.163.92.18','ON','NOT_BREAKDOWN', '90', '60','130','80', '7000','0.45','1.26', 2,125);
+INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
+VALUES ('50','155','172.163.92.19','ON','NOT_BREAKDOWN', '90', '60','130','80', '7000','0.45','1.26', 3,125);
+INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
+VALUES ('50','155','172.163.92.20','ON','NOT_BREAKDOWN', '90', '60','130','80', '7000','0.45','1.26', 4,125);
+INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
+VALUES ('50','155','172.163.92.21','ON','NOT_BREAKDOWN', '90', '60','130','80', '7000','0.45','1.26', 5,125);
+INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
+VALUES ('50','155','172.163.92.22','ON','NOT_BREAKDOWN', '90', '60','130','80', '7000','0.45','1.26', 6,125);
+INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
+VALUES ('50','155','172.163.92.23','ON','NOT_BREAKDOWN', '90', '60','130','80', '7000','0.45','1.26', 7,125);
+INSERT INTO lifetech.strap (minvalueref, maxvalueref, ipadress, state,breakdownstatus, minsysto,mindiasto, maxsysto,maxdiasto, minsteps,minglyc,maxglyc, person_id,price)
+VALUES ('50','153','172.163.92.24','ON','NOT_BREAKDOWN', '90', '60','130','80', '7000','0.45','1.26', 8,125);
 
 
 INSERT INTO lifetech.lighthistoric (startdate, endingdate,color,state,breakdownstatus,lightid) VALUES ("2020-02-24 9:00:00","2020-02-24 12:00:00","WHITE",'ON',"NOT_BREAKDOWN",1);
@@ -156,5 +177,3 @@ INSERT INTO lifetech.heatermessage (minvaluerefmessage,maxvaluerefmessage,statem
 INSERT INTO lifetech.heatermessage (minvaluerefmessage,maxvaluerefmessage,statemessage,temperaturemessage,insertdate,heater_id)  VALUES ('5','4','ON','68','2020-01-22 15:05:29',3);
 INSERT INTO lifetech.heatermessage (minvaluerefmessage,maxvaluerefmessage,statemessage,temperaturemessage,insertdate,heater_id)  VALUES ('5','4','ON','107','2020-01-23 15:05:29',4);
 INSERT INTO lifetech.heatermessage (minvaluerefmessage,maxvaluerefmessage,statemessage,temperaturemessage,insertdate,heater_id)  VALUES ('5','4','ON','68','2020-01-22 15:05:29',1);
-
-
