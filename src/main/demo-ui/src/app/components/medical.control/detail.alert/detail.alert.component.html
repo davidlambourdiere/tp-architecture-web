@@ -2,11 +2,11 @@
 <div class="wrapper d-flex align-items-stretch">
   <app-medicalmenu></app-medicalmenu>
   <div id="content" class="p-md-5 ">
-
+    <h2 align="center"style="background-color: #2f89fc;color:white;"><b>ALERT DETAILS</b></h2>
     <div class="row">
 
       <div col="md-4">
-        <h3 align="center">About Alert : </h3>
+        <h3 align="center">About Alert</h3>
         <div class="card" style="width: 25rem;">
           <ul class="list-group list-group-flush">
             <li class="list-group-item" ><b>Criticity</b> : <span>{{this.alert.criticity}}</span></li>
@@ -19,10 +19,12 @@
       </div>
 
       <div col="md-4 mt-4">
-        <h3 align="center">About Resident : </h3>
+        <h3 align="center">About Resident</h3>
         <div class="card" style="width: 25rem;">
           <ul class="list-group list-group-flush">
-            <li class="list-group-item" ><b>Name</b> : <span>{{this.alert.strap.person?this.alert.strap.person.firstName:'no data'}} {{this.alert.strap.person?this.alert.strap.person.lastName:'no data'}}</span></li>
+            <li class="list-group-item" ><b>Name</b> : {{this.alert.strap.person?this.alert.strap.person.firstName+' '+this.alert.strap.person.lastName:'no data'}}
+             <button *ngIf="this.alert.strap" [routerLink]="['/medicalprofil', this.alert.strap.id ]" class="btn btn-primary" style="margin-left: 10px">See Profil</button>
+              </li>
             <li class="list-group-item"><b>Room</b> : {{this.alert.strap.room ? this.alert.strap.room.num : 'no data' }} </li>
             <li class="list-group-item"><b>Age</b> : {{ this.alert.strap.person ?this.alert.strap.person.age : 'no data' }} ans</li>
             <li class="list-group-item"><b>Diseas</b> : {{this.alert.strap.person? this.alert.strap.person.deseas ? this.alert.strap.person.deseas : 'no data' : 'no data' }}</li>
@@ -68,7 +70,7 @@
     <div align="center" class="row mt-5">
 
       <div  col="md-8 mt-4" class="panel-body" style="width: 50rem;" >
-        <h3 align="center">Heartbeat Historic of last hour : </h3>
+        <h3 align="center">Heartbeat Historic of last hour</h3>
         <nav class="nav nav-tabs">
           <a class="nav-item nav-link active" href="#p1" data-toggle="tab">GRAPH DATA</a>
           <a class="nav-item nav-link" href="#p2" data-toggle="tab">RAW DATA</a>
