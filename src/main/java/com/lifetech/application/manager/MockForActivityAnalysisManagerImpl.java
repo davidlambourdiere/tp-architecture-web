@@ -80,7 +80,7 @@ public class MockForActivityAnalysisManagerImpl implements MockForActivityAnalys
             }
             LOG.info("100 persons and 100 rooms created");
             for (int i = 0; i < 100; i++) {//Create 100 heaters
-                Heater heater = heaterFactory.createRandomHeater(personList.get(i), roomList.get(i), 0.8);
+                Heater heater = heaterFactory.createRandomHeater(personList.get(i), roomList.get(i), 0.8, residence.getCreationdate());
                 heaterList.add(heater);
             }
             LOG.info("100 heaters created");
@@ -88,7 +88,7 @@ public class MockForActivityAnalysisManagerImpl implements MockForActivityAnalys
             for (int i = 0; i < nBreakdowns; i++) {//Create nBreakdowns heater breakdowns
                 Heater randomHeater = heaterList.get(ThreadLocalRandom.current().nextInt(heaterList.size()));
                 if (randomHeater.getBreakdownstatus() == StatusEnum.BREAKDOWN) {
-                    HeaterBreakdown heaterBreakdown = heaterBreakdownFactory.createRandomHeaterBreakdown(randomHeater, residence.getCreationdate());
+                    HeaterBreakdown heaterBreakdown = heaterBreakdownFactory.createRandomHeaterBreakdown(randomHeater, Timestamp.valueOf(randomHeater.getActivationDate()));
                     heaterBreakdownDAO.save(heaterBreakdown);
                 }
             }

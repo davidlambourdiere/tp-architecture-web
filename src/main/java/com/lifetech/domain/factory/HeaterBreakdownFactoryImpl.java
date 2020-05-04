@@ -11,10 +11,10 @@ import java.time.LocalDateTime;
 public class HeaterBreakdownFactoryImpl implements HeaterBreakdownFactory {
     @Override
     public HeaterBreakdown createRandomHeatherBreakdown(Heater heater, Timestamp lowerBound, Duration maxDuration) {
-        Timestamp startDatebBreakdown = RandomTimestampGenerator.between(lowerBound.toLocalDateTime(), LocalDateTime.now());
-        Timestamp endDateBreakdown = RandomTimestampGenerator.between(startDatebBreakdown.toLocalDateTime(), startDatebBreakdown.toLocalDateTime().plus(maxDuration));
+        Timestamp startDateBreakdown = RandomTimestampGenerator.between(lowerBound.toLocalDateTime(), LocalDateTime.now());
+        Timestamp endDateBreakdown = RandomTimestampGenerator.between(startDateBreakdown.toLocalDateTime(), startDateBreakdown.toLocalDateTime().plus(maxDuration));
         HeaterBreakdown heaterBreakdown = new HeaterBreakdown();
-        heaterBreakdown.setStartdateheaterbreakdown(startDatebBreakdown.toString());
+        heaterBreakdown.setStartdateheaterbreakdown(startDateBreakdown.toString());
         heaterBreakdown.setEnddatebreakdown(endDateBreakdown.toString());
         heaterBreakdown.setMessageheaterbreakdown("PANNE MOCKEE POUR TESTS DAVID");
         heaterBreakdown.setIotheaterbreakdown(heater);
