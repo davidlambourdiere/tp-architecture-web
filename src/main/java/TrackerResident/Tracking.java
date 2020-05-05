@@ -5,7 +5,6 @@ package TrackerResident;
 //import com.google.gson.stream.JsonReader;
 
 //import org.json.JSONArray;
-
 import com.lifetech.domain.dao.PositionDAO;
 import com.lifetech.domain.dao.StrapDAO;
 import com.lifetech.domain.model.Position;
@@ -19,10 +18,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 @Service
@@ -35,14 +31,31 @@ public class Tracking {
      * @throws Exception Ex
      */
     public Map<String, List<Coordinate>> parseMapJson() throws Exception {
-        File currentDirectory = new File(new File(".").getAbsolutePath());
+        /*File currentDirectory = new File(new File(".").getAbsolutePath());
         File filePath = new File(currentDirectory.getCanonicalPath() + "/src/main/java/TrackerResident/json/map_correcte.json");
 
         Object parse = new JSONParser().parse(new FileReader(filePath));
         JSONObject obj = (JSONObject) parse;
 
-        JSONArray arr = (JSONArray) obj.get("features");
+        JSONArray arr = (JSONArray) obj.get("features");*/
+        JSONParser parser = new JSONParser();
+        JSONObject obj = null;
+        InputStream inputStream = null;
+        inputStream = getClass().getClassLoader()
+                .getResourceAsStream("json/map_correcte.json");
+        if (inputStream != null) {
+            BufferedReader streamReader = new BufferedReader(
+                    new InputStreamReader(inputStream, "UTF-8"));
+            StringBuilder responseStrBuilder = new StringBuilder();
 
+            String inputStr;
+            while ((inputStr = streamReader.readLine()) != null)
+                responseStrBuilder.append(inputStr);
+
+            obj = (JSONObject) parser.parse(responseStrBuilder.toString());
+        }
+
+        JSONArray arr = (JSONArray) obj.get("features");
 
         for (int i = 0; i < arr.size(); i++) {
             JSONObject o = (JSONObject) arr.get(i);
@@ -71,12 +84,32 @@ public class Tracking {
 
     public Map<String, List<Coordinate>> parseWallsJson() throws Exception {
         Map<String, List<Coordinate>> allWalls = new HashMap<>();;
-        File currentDirectory = new File(new File(".").getAbsolutePath());
+       /* File currentDirectory = new File(new File(".").getAbsolutePath());
         File filePath = new File(currentDirectory.getCanonicalPath() + "/src/main/java/TrackerResident/json/walls.json");
 
         Object parse = new JSONParser().parse(new FileReader(filePath));
         JSONObject obj = (JSONObject) parse;
+        JSONArray arr = (JSONArray) obj.get("walls");*/
+
+        JSONParser parser = new JSONParser();
+        JSONObject obj = null;
+        InputStream inputStream = null;
+        inputStream = getClass().getClassLoader()
+                .getResourceAsStream("json/walls.json");
+        if (inputStream != null) {
+            BufferedReader streamReader = new BufferedReader(
+                    new InputStreamReader(inputStream, "UTF-8"));
+            StringBuilder responseStrBuilder = new StringBuilder();
+
+            String inputStr;
+            while ((inputStr = streamReader.readLine()) != null)
+                responseStrBuilder.append(inputStr);
+
+            obj = (JSONObject) parser.parse(responseStrBuilder.toString());
+        }
+
         JSONArray arr = (JSONArray) obj.get("walls");
+
         for (int i = 0; i < arr.size(); i++) {
             List<Coordinate> roomCoordsList = new ArrayList<>();
             JSONObject wall = (JSONObject) arr.get(i);
