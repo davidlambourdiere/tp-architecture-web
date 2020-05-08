@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 @RestController
 public class PositionController extends RestBaseController{
@@ -26,6 +27,11 @@ public class PositionController extends RestBaseController{
     @GetMapping("position/insertPositionByStrap/{id}")
     private void  insertPositionByStrapId() throws Exception {
         positionManager.simulatePosition();
+    }
+
+    @GetMapping("position/positionHistory/{id}")
+    private List<PositionDTO> positionHistory(@PathVariable("id") long strapId){
+        return positionManager.positionHistory(strapId);
     }
 
 

@@ -3,10 +3,10 @@ import {PositionDTO} from "../../dto/PositionDTO";
 import {StrapDTO} from "../../dto/StrapDTO";
 import {StrapService} from "../../service/StrapService";
 import {PositionService} from "../../service/PositionService";
-import {interval, Observable, observable} from "rxjs";
+import {interval, Observable, observable, Subscription} from "rxjs";
 import {startWith, subscribeOn} from "rxjs/operators";
 import {OpenLayersMap, randomHexaColor} from "../../OpenLayersMap";
-
+import {fromLonLat, toLonLat} from 'ol/proj';
 /**
  * Affiche une carte sur laquelle l'on afficher la position d'un résident
  */
@@ -32,6 +32,8 @@ export class PositionComponent implements OnInit, AfterViewInit {
    */
   map: OpenLayersMap = new OpenLayersMap();
 
+  private findPositionByStrap$: Subscription;
+
   constructor(private strapService: StrapService, private positionService: PositionService) {}
 
   ngOnInit() {
@@ -56,12 +58,31 @@ export class PositionComponent implements OnInit, AfterViewInit {
     this.map.addGeoJSONLayer('assets/map_correcte.json', {color: 'red'});
   }
 
+  positionHistory(strapId: bigint): void {
+    this.map.removeAllMarkers();
+    if(!this.findPositionByStrap$){
+      this.findPositionByStrap$.unsubscribe();
+    }
+    this.map.setOptions({asGPSTracker: false, centerOnMarker: false});
+    this.positionService.positionHistory(strapId).subscribe(history=> {
+      console.log(history);
+      const positions = history.map(position => [position.longitude, position.latitude]);
+      console.log(positions)
+      history.forEach(position=>{
+        console.log(`pos : ${position.latitude}, ${position.longitude}`)
+        this.map.addMarker([position.longitude, position.latitude])
+      });
+      this.map.drawLine(positions, {withArrows: true} );
+    });
+  }
+
   /**
    * Ajoute un marqueur à la position du bracelet
    * @param id Identifiant du bracelet
    */
   findPosition(id: bigint): void {
-    this.positionService.findPositionByStrap(id).subscribe(position => {
+    this.map.setOptions({asGPSTracker: true, centerOnMarker: true});
+    this.findPositionByStrap$ = this.positionService.findPositionByStrap(id).subscribe(position => {
       this.map.addMarker([position.longitude, position.latitude], {textUnderMarker: `${position.strap.person.firstName}  ${position.strap.person.lastName}`});
       console.log(position);
     });

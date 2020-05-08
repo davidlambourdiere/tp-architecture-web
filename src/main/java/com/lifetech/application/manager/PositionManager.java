@@ -11,4 +11,6 @@ public interface PositionManager {
     PositionDTO findPositionByStrap(long strapId);
 
     public void simulatePosition () throws Exception;
+
+    public List<PositionDTO> positionHistory(long strpId);
 }

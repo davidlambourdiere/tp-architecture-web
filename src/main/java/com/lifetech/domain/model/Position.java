@@ -10,17 +10,17 @@ public class Position extends PersistableElement {
     private Date date;
 
     @Column(name = "latitude")
-    private float latitude;
+    private Double latitude;
 
     @Column(name = "longitude")
-    private float longitude;
+    private Double longitude;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Strap strap;
 
     public Position() {}
 
-    public Position(Date date, float latitude, float longitude) {
+    public Position(Date date, Double latitude, Double longitude) {
         this.date = date;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -35,19 +35,19 @@ public class Position extends PersistableElement {
         this.date = date;
     }
 
-    public float getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public float getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(float longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 

@@ -337,7 +337,7 @@ export class OpenLayersMap {
       this.map.addLayer(vectorLayer);
 
       if (this.mapOptions.asGPSTracker && this.mapOptions.centerOnMarker) {
-        this.view.animate({ center: fromLonLat(at), zoom: 19 });
+        this.view.animate({ center: fromLonLat(at) });
       }
     } else {
       throw new Error('Ajouter un marqueur nécessite des coordonnées valides');
@@ -461,6 +461,11 @@ export class OpenLayersMap {
     options = Object.assign({}, { id: '', color: '#242424', withArrows: false, withDistance: false } as ILineOptions, options);
 
     if (coords.length > 1) {
+
+      for (let p = 0; p < coords.length; p++){
+        coords[p]= fromLonLat(coords[p]);
+      }
+
       const line = new Feature(new LineString(coords));
 
       const styles = [
@@ -536,6 +541,8 @@ export class OpenLayersMap {
       }
 
       line.set('type', 'line');
+
+      console.log(line)
 
       this.vectorSource.addFeature(line);
 
