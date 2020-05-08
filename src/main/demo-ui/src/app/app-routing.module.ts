@@ -128,7 +128,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
-    path: 'medical/profil/:id',
+    path: 'medicalprofil/:id',
     component: MedicalProfilComponent,
     canActivate: [AuthGuardService]
   },
