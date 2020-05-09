@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {PositionDTO} from "../../dto/PositionDTO";
 import {StrapDTO} from "../../dto/StrapDTO";
 import {StrapService} from "../../service/StrapService";
@@ -7,6 +7,8 @@ import {interval, Observable, observable, Subscription} from "rxjs";
 import {startWith, subscribeOn} from "rxjs/operators";
 import {OpenLayersMap, randomHexaColor} from "../../OpenLayersMap";
 import {fromLonLat, toLonLat} from 'ol/proj';
+import {SubSink} from "subsink";
+
 /**
  * Affiche une carte sur laquelle l'on afficher la position d'un résident
  */
@@ -15,7 +17,7 @@ import {fromLonLat, toLonLat} from 'ol/proj';
   templateUrl: './position.component.html',
   styleUrls: ['./position.component.scss']
 })
-export class PositionComponent implements OnInit, AfterViewInit {
+export class PositionComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /**
    * Position
@@ -32,9 +34,10 @@ export class PositionComponent implements OnInit, AfterViewInit {
    */
   map: OpenLayersMap = new OpenLayersMap();
 
-  private findPositionByStrap$: Subscription;
+  private subs = new SubSink();
 
-  constructor(private strapService: StrapService, private positionService: PositionService) {}
+  constructor(private strapService: StrapService, private positionService: PositionService) {
+  }
 
   ngOnInit() {
     this.findAllStrap();
@@ -46,7 +49,6 @@ export class PositionComponent implements OnInit, AfterViewInit {
   findAllStrap(): void {
     this.strapService.findAll().subscribe(straps => {
       this.straps = straps;
-      console.log(straps)
     });
   }
 
@@ -60,20 +62,19 @@ export class PositionComponent implements OnInit, AfterViewInit {
 
   positionHistory(strapId: bigint): void {
     this.map.removeAllMarkers();
-    if(!this.findPositionByStrap$){
-      this.findPositionByStrap$.unsubscribe();
-    }
+
+    this.subs.unsubscribe();
     this.map.setOptions({asGPSTracker: false, centerOnMarker: false});
-    this.positionService.positionHistory(strapId).subscribe(history=> {
-      console.log(history);
-      const positions = history.map(position => [position.longitude, position.latitude]);
-      console.log(positions)
-      history.forEach(position=>{
-        console.log(`pos : ${position.latitude}, ${position.longitude}`)
-        this.map.addMarker([position.longitude, position.latitude])
-      });
-      this.map.drawLine(positions, {withArrows: true} );
-    });
+
+    this.subs.add(this.positionService.positionHistory(strapId).subscribe(history => {
+        const positions = history.map(position => [position.longitude, position.latitude]);
+        console.log(positions)
+        history.forEach(position => {
+          this.map.addMarker([position.longitude, position.latitude])
+        });
+        this.map.drawLine(positions, {withArrows: true});
+      })
+    );
   }
 
   /**
@@ -81,11 +82,13 @@ export class PositionComponent implements OnInit, AfterViewInit {
    * @param id Identifiant du bracelet
    */
   findPosition(id: bigint): void {
+    this.map.removeAllFeatures();
     this.map.setOptions({asGPSTracker: true, centerOnMarker: true});
-    this.findPositionByStrap$ = this.positionService.findPositionByStrap(id).subscribe(position => {
-      this.map.addMarker([position.longitude, position.latitude], {textUnderMarker: `${position.strap.person.firstName}  ${position.strap.person.lastName}`});
-      console.log(position);
-    });
+    this.subs.add(
+      this.positionService.findPositionByStrap(id).subscribe(position => {
+        this.map.addMarker([position.longitude, position.latitude], {textUnderMarker: `${position.strap.person.firstName}  ${position.strap.person.lastName}`});
+      })
+    );
   }
 
   private async parseJson() {
@@ -119,6 +122,9 @@ export class PositionComponent implements OnInit, AfterViewInit {
     console.log(JSON.stringify(r));
   }
 
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
+  }
 }
 
 

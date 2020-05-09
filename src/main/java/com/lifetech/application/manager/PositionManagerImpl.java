@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class PositionManagerImpl implements PositionManager {
@@ -54,20 +55,17 @@ public class PositionManagerImpl implements PositionManager {
         Tracking tracking = new Tracking();
         Map<String, List<Coordinate>> map = tracking.parseMapJson();
         List<Coordinate> chemin = map.get("chemin-1");
-        System.out.println(chemin);
         Strap strap2 = strapDAO.findById(Long.parseLong("1")).orElse(null);
         Geodesic geod = Geodesic.WGS84;
         double lat1 = 0, lon1 = 0, lat2 = 0, lon2 = 0;
-        for (int j = 0; j < chemin.size(); j++) {
+        for (int j = 0; j < chemin.size() - 1; j++) {
             lat1 = chemin.get(j).getLatitude();
             lon1 = chemin.get(j).getLongitude(); // JFK
-            if (j == chemin.size()-1){
-                lat2 = lat1;
-                lon2 = lon1;
-            }else {
-                lat2 = chemin.get(j+1).getLatitude();
-                lon2 = chemin.get(j+1).getLongitude(); // SIN
-            }
+
+
+            lat2 = chemin.get(j + 1).getLatitude();
+            lon2 = chemin.get(j + 1).getLongitude(); // SIN
+
             GeodesicLine line = geod.InverseLine(lat1, lon1, lat2, lon2,
                     GeodesicMask.DISTANCE_IN |
                             GeodesicMask.LATITUDE |
@@ -82,16 +80,17 @@ public class PositionManagerImpl implements PositionManager {
                     GeodesicData g = line.Position(i * ds,
                             GeodesicMask.LATITUDE |
                                     GeodesicMask.LONGITUDE);
-                    System.out.println(i + " " + g.lat2 + " " + g.lon2);
-                    Position p = new Position();
-                    p.setDate(new Date());
-                    p.setLongitude(g.lon2);
-                    p.setLatitude(g.lat2);
-                    System.out.println(p.getLongitude());
-                    p.setStrap(strap2);
-                    System.out.println(p);
-                    this.positionDAO.save(p);
-                    Thread.sleep(1000);
+                    try {
+                        Position p = new Position();
+                        p.setDate(new Date());
+                        p.setLongitude(g.lon2);
+                        p.setLatitude(g.lat2);
+                        p.setStrap(strap2);
+                        this.positionDAO.save(p);
+                    } catch (Exception n) {
+                        System.out.println(n.getMessage());
+                    }
+                    Thread.sleep(3000);
                 }
             }
         }
@@ -178,7 +177,9 @@ public class PositionManagerImpl implements PositionManager {
 
     @Override
     public List<PositionDTO> positionHistory(long strapId) {
-        return orikaBeanMapper.mapAsList(positionDAO.positionHistory(strapId), PositionDTO.class);
+        List<PositionDTO> positions = orikaBeanMapper.mapAsList(positionDAO.positionHistory(strapId), PositionDTO.class);
+        return positions.stream().sorted((p1, p2) -> p1.getDate().compareTo(p2.getDate())).collect(Collectors.toList());
+        ///return positions;
     }
 
 
@@ -191,11 +192,8 @@ public class PositionManagerImpl implements PositionManager {
      */
     public boolean isNextFootStepPossible(Coordinate coordinate, Map<String, List<Coordinate>> walls) {
         Coordinate forbiddenWall2 = new Coordinate(walls.get("couloir").get(1).getLongitude(), walls.get("couloir").get(1).getLatitude());
-        System.out.println(coordinate.getLongitude() + "--------------------------------------");
-        System.out.println(forbiddenWall2.getLongitude() + "--------------------------------------");
         return (coordinate.getLongitude() > forbiddenWall2.getLongitude());
     }
-
 
 
 }
