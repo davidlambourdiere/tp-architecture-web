@@ -27,4 +27,7 @@ public class HeaterMessageController extends RestBaseController {
     @GetMapping("heaterMessages/breakdownDetection/{id}")
     private boolean breakdownDetection(@PathVariable("id") String id){ return heaterMessageManager.breakdownDetection(id); }
 
+    @GetMapping("heaterMessages/suspectDetection/{id}")
+    private boolean suspectDetection(@PathVariable("id") String id){ return heaterMessageManager.suspectDetection(id); }
+
 }

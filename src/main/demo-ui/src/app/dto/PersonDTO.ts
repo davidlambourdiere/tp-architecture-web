@@ -16,4 +16,5 @@ export class PersonDTO{
   userrole: string;
   profiletype: string ;
   strap : StrapDTO;
+  age  : string;
 }

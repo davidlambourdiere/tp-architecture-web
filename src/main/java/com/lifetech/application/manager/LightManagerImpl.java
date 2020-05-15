@@ -41,6 +41,21 @@ public class LightManagerImpl implements LightManager {
         this.roomDao = roomDao;
     }
 
+    @Override
+    public LightDTO updateLight(String id, LightDTO lightDtoReceived) {
+        // light trouvé par l'id reçu  p r front
+        Light light = lightDAO.findById(Long.parseLong(id)).orElse(null);
+        // converti en DTO pour modifier
+        LightDTO updatedLightDTO = orikaBeanMapper.map(light, LightDTO.class);
+
+        updatedLightDTO.setColor(lightDtoReceived.getColor());
+        updatedLightDTO.setState(lightDtoReceived.getState());
+        updatedLightDTO.setPercentage(lightDtoReceived.getPercentage());
+        Light lightsaved = orikaBeanMapper.map(updatedLightDTO, Light.class);
+        System.out.println(lightsaved);
+        return orikaBeanMapper.map(lightDAO.save(lightsaved), LightDTO.class);
+    }
+
     public List<LightDTO> findAllLight(){
         List<Light> lights = lightDAO.findAll();
         return orikaBeanMapper.mapAsList(lights, LightDTO.class);

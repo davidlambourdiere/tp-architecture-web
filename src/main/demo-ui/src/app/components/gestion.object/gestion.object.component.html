@@ -11,186 +11,281 @@
 </head>
 
 <body onload="refreshTime()">
+<br>
+<div class="noteAlt">
 
-<div id="premierdiv">
-  <div class="float1">
+  <br>
+  You'll find the list of your iots bellow
+  <br>
+</div>
+  <br><br><br>
 
 
-    <a class="b-link-fade b-animate-go" href="#"><img width="150" src="icone-accueil2.png"  alt="" />
-      <div class="b-wrapper">
-        <h4 class="b-from-left b-animate b-delay03">Configuration </h4>
 
+  <div *ngIf="show===true">
+    <div *ngIf="iots!==null && iots.lights!==null" [ngClass]="{'display-none': type!=='Light' && type!=='all',
+    'display-visibility': type==='all' || type==='Light'}">
+      <h6>Lights</h6>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Id </th>
+          <th scope="col">State</th>
+          <th scope="col">Ip adress</th>
+          <th scope="col">Percentage of Brightness </th>
+          <th scope="col">Color</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let iot of iots.lights">
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.id}}
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.state}}
+            <span  *ngIf="iot.state==='on'"></span>
+            <span  *ngIf="iot.state==='off'"></span>
+          </td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.ipadress}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.percentage}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.color}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="iots!==null && iots.heaters!==null" [ngClass]="{'display-none': type!=='Heater' && type!=='all',
+    'display-visibility': type==='all' || type==='Heater'}">
+      <h6>Heaters</h6>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Id </th>
+          <th scope="col">State</th>
+          <th scope="col">Ip adress</th>
+          <th scope="col"> Actual heat </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let iot of iots.heaters">
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.id}}
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.state}}
+            <span *ngIf="iot.state==='on'"></span>
+            <span *ngIf="iot.state==='off'"></span>
+          </td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.ipadress}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.actualval}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="iots!==null && iots.shutters!==null" [ngClass]="{'display-none': type!=='Shutter' && type!=='all',
+    'display-visibility': type==='all' || type==='Shutter'}">
+      <h6>Shutters</h6>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Id </th>
+          <th scope="col">State</th>
+          <th scope="col">Ip adress</th>
+          <th scope="col">Opening percentage </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let iot of iots.shutters">
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.id}}
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.state}}
+            <span *ngIf="iot.state==='on'"></span>
+            <span  *ngIf="iot.state==='off'"></span>
+          </td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.ipadress}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.percentage}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+      <div *ngIf="iots!==null && iots.clocks!==null" [ngClass]="{'display-none': type!=='Clock' && type!=='all',
+    'display-visibility': type==='all' || type==='Clock'}">
+      <h6>Clocks</h6>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">State</th>
+          <th scope="col">Ip adress</th>
+          <th scope="col">Hour scheduled</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let iot of iots.clocks">
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.id}}
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.state}}
+            <span *ngIf="iot.state==='on'"></span>
+            <span  *ngIf="iot.state==='off'"></span>
+          </td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.ipadress}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''"> Not available yet </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+
+
+
+
+<br><br>
+
+<br><br><br><br><br><br>
+
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+<h1> LIGHT </h1>
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+      <div class="form-group">
+        <label for="lighti">Id of the Light you want to update</label>
+        <input type="text" class="form-control" id="lighti" name="id" required [(ngModel)]="lights.id">
       </div>
-    </a>
 
-    <p class="lead">Shutter</p>
+      <div class="form-group">
+        <label for="couleur">
+          Light's color
+        </label>
+        <select id="couleur" class="form-control" name="couleur"  required [(ngModel)]="lights.color">
+          <option value="red" >Red</option>
+          <option value="blue">Blue</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="statee">
+         State of your Light
+        </label>
+        <select id="statee" class="form-control" name="state" required [(ngModel)]="lights.state">
+          <option value="on">On</option>
+          <option value="off">Off</option>
+        </select>
+      </div>
 
 
-
-    <h5> Turn OFF / Turn ON </h5>
-    <label class="switch">
-      <input type="checkbox">
-      <span class="slider round"></span>
-    </label>
-
-    <h5> Remote </h5>
-    <div class="btn-group">
-      <button class="button">Up</button>
-      <button class="button">Pause</button>
-      <button class="button">Down</button>
-    </div><br/><br/>
+      <div class="form-group">
+        <label for="intensite">
+          Intensity of the Light
+        </label>
+        <select id="intensite" class="form-control" name="intensite"  required [(ngModel)]="lights.percentage">
+          <option value="1">1</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+        </select>
+      </div>
 
 
-    <button class="w3-btn w3-blue-grey">Apply</button>
-    <br/><br/><br/><br/>
-    <div class="config">
-      <p class="lead" >Admin Part </p>
-      <form class="w3-container w3-light-grey">
-        <label> <h5>Max allowed to open the shutters</h5></label><br/>
-        <input class="w3-input w3-border-0" type="text">
+      <button class="btn btn-primary" type="submit">Submit</button>
 
-        <label><h5>Max allowed to lower the shutters  </h5></label>
-        <input class="w3-input w3-border-0" type="text"><br/><br/>
-        <button class="w3-btn w3-blue-grey">Apply</button>
-      </form>
+    </form>
+  </div>
+</div>
+
+
+<br><br><br><br><br><br>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h1> HEATER </h1>
+    <form (ngSubmit)="onSubmitHeater(h)" #h="ngForm">
+
+      <div class="form-group">
+        <label for="exampleInputEmail1">Id of the Heater you want to update</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" name="id" required [(ngModel)]="heaters.id">
+      </div>
+
+      <div class="form-group">
+        <label for="actualval">
+          Heat
+        </label>
+        <select id="actualval" class="form-control" name="actualval"  required [(ngModel)]="heaters.actualval">
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="23">23</option>
+        </select>
+      </div>
+
+      <button (click)="SwitchDownHeat()" class="btn btn-primary" type="sub">Baisser </button>
+      <button class="btn btn-primary" type="sub">Augmenter </button>
       <br><br>
-    </div>
 
-  </div>
-  <div class="float">            <a class="b-link-fade b-animate-go" href="#"><img width="150" src="light-bulb.png" alt="" />
-    <div class="b-wrapper">
-      <h4 class="b-from-left b-animate b-delay03">Configuration </h4>
+      <div class="form-group">
+        <label for="state">
+          State
+        </label>
+        <select id="state" class="form-control" name="state" required [(ngModel)]="heaters.state">
+          <option value="on">On</option>
+          <option value="off">Off</option>
+        </select>
+      </div>
 
-    </div>
-  </a>
 
-    <p class="lead">Light</p>
+      <button class="btn btn-primary" type="submit">Submit </button>
 
-
-    <h5>Choose a light color</h5>
-
-    <form role="form">
-      <label class="radio-inline">
-        <input type="radio" name="optradio">Blanc
-      </label>
-      <label class="radio-inline">
-        <input type="radio" name="optradio">Rouge
-      </label>
-      <label class="radio-inline">
-        <input type="radio" name="optradio">Bleu
-      </label>
     </form>
-
-
-
-    <h5>Choose the brightness level </h5>
-    <p> Faible (0,4) / Moyen (5) / Fort (6,10)</p>
-
-    <div class="slidecontainer">
-      <input type="range" min="1" max="10" value="5" class="slider2" id="myRange">
-      <p>Value: <span id="demo"></span></p>
-    </div>
-
-
-    <h5> Turn OFF / Turn ON </h5>
-    <label class="switch">
-      <input type="checkbox">
-      <span class="slider round"></span>
-    </label><br/>
-    <button class="w3-btn w3-blue-grey">Apply</button>
-    <br/><br/>
-    <br/><br/><br/>
-    <div class="admin">
-      <p class="lead" >Admin part : </p>
-      <form class="w3-container w3-light-grey">
-        <label> <h5>Minimum brightness allowed</h5></label>
-        <input class="w3-input w3-border-0" type="text">
-
-        <label><h5>Maximum brightness allowed </h5></label>
-        <input class="w3-input w3-border-0" type="text"><br/>
-        <button class="w3-btn w3-blue-grey">Apply</button>
-      </form>
-
-
-
-    </div>
-
-
-
-
   </div>
+</div>
+<br>
 
-  <div class="float1">
-    <a class="b-link-fade b-animate-go" href="#"><img width="150" src="floor-heating-icon-31400.png" alt="" />
-      <div class="b-wrapper">
-        <h4 class="b-from-left b-animate b-delay03">Configuration</h4>
+
+<br><br><br><br><br><br>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h1> SHUTTER </h1>
+    <form (ngSubmit)="onSubmitShutter(g)" #g="ngForm">
+
+
+      <div class="form-group">
+        <label for="idshut">Id of the Shutter you want to update</label>
+        <input type="text" class="form-control" id="idshut" name="id" required [(ngModel)]="shutters.id">
+      </div>
+
+      <div class="form-group">
+        <label for="percentage">
+          Percentage of opening
+        </label>
+        <select id="percentage" class="form-control" name="percentage"  required [(ngModel)]="shutters.percentage">
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="70">70</option>
+        </select>
+      </div>
+
+      <button class="btn btn-primary" type="submit">Submit</button>
+
+    </form>
+  </div>
+</div>
+<br>
+<br>
+<br>
+<button (click)="runScenario()" class="btn btn-primary" type="submit">Scenario : Go to Bed ! </button>
+<br><br><br>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <h1> CLOCK </h1>
+    <form >
+
+      <div >
+
+        <label >
+          Please choose an hour to wake up for
+        </label>
 
       </div>
-    </a>
 
-    <p class="lead">Heater</p>
-    <h5> Turn OFF / Turn ON</h5>
-    <label class="switch">
-      <input type="checkbox">
-      <span class="slider round"></span>
-    </label>
-    <h5> The current temperature is</h5>
-    <p> RECUPERER X°C DEPUIS LA TABLE</p>
+      <button class="btn btn-primary" type="submit">Submit </button>
 
-    <h5> The desired temperature is</h5>
-    <form>
-      <input type="text" id="celsius" name="celsius" value="°C">
-
-    </form><br/>
-    <button class="w3-btn w3-blue-grey">Apply</button>
-    <br/><br/><br/><br/><br/>
-    <div class="admin">
-      <p class="lead" >Admin part : </p>
-      <form class="w3-container w3-light-grey">
-        <label> <h5>Minimum temperature allowed </h5></label>
-        <input class="w3-input w3-border-0" type="text">
-
-        <label><h5>Maximum temperature allowed  </h5></label>
-        <input class="w3-input w3-border-0" type="text"><br/>
-        <button class="w3-btn w3-blue-grey">Apply</button>
-      </form>
-
-
-    </div>
-
-  </div>
-  <h4 class="b-from-left b-animate b-delay03">Configuration </h4>
-
-  <div class="float">   <img width="150" src="iconfinder_Clock_383991.png" />
-
-
-    <p class="lead">Clock</p>
-    <h5> Turn OFF / Turn ON </h5>
-    <label class="switch">
-      <input type="checkbox">
-      <span class="slider round"></span>
-    </label>
-
-
-
-
-
-
-    <h5> Actual hour </h5>
-    <div id="horloge"></div>
-
-    <form>
-      <label for="scheduledTime"><h5> Scheduled time </h5></label>
-      <input type="time" id="scheduledTime">
-      <button>OK</button>
     </form>
-    <button class="w3-btn w3-blue-grey">Apply</button>
   </div>
 </div>
-
-<div *ngFor="let heater of heaters ">
-  <div>{{heater.state}}</div>
-</div>
-
 </body>
 

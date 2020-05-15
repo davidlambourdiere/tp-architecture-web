@@ -13,4 +13,11 @@ public interface StrapManager {
 
     List<Strap> findAllStrapMalFunctionning();
 
+    List<StrapDTO> findAll();
+
+    StrapDTO save(StrapDTO sdto);
+
+    Strap findModelById(String strap);
+
+    Strap save(Strap strap);
 }

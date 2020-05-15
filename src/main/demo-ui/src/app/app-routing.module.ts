@@ -22,7 +22,11 @@ import {NotificationComponent} from "./components/notification/notification.comp
 import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
 import {SurveyComponent} from "./components/survey/survey.component";
 import {MedicalResidentsComponent} from "./components/medical.control/medical.residents/medical.residents.component";
+import {DetailAlertComponent} from "./components/medical.control/detail.alert/detail.alert.component";
+import {MedicalProfilComponent} from "./components/medical.control/medical.profil/medical.profil.component";
 import {ProfilelistComponent} from "./components/profilelist/profilelist.component";
+import {PositionComponent} from "./components/position/position.component";
+
 
 
 const routes: Routes = [
@@ -119,10 +123,23 @@ const routes: Routes = [
     component: MedicalResidentsComponent,
     canActivate: [AuthGuardService]
   },
+  { path: 'detailalert/:id',
+    component: DetailAlertComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'medicalprofil/:id',
+    component: MedicalProfilComponent,
+    canActivate: [AuthGuardService]
+  },
   {
     path: 'profileList',
     component: ProfilelistComponent,
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'position',
+    component: PositionComponent
   }
 
 ];

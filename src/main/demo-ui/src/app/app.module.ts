@@ -37,7 +37,13 @@ import {CustomComponent} from "./components/subscription/custom.component";
 import { MedicalHomeComponent} from './components/medical.control/medical.home/medical.home.component';
 import { MedicalMenuComponent } from './components/medical.control/medical.menu/medical.menu.component';
 import { MedicalResidentsComponent } from './components/medical.control/medical.residents/medical.residents.component';
+import { DetailAlertComponent } from './components/medical.control/detail.alert/detail.alert.component';
+import {ChartsModule} from "ng2-charts";
+import { DatePipe } from '@angular/common';
+import {MedicalProfilComponent} from "./components/medical.control/medical.profil/medical.profil.component";
 import {ProfilelistComponent} from "./components/profilelist/profilelist.component";
+import { PositionComponent } from './components/position/position.component';
+
 
 
 @NgModule({
@@ -68,7 +74,11 @@ import {ProfilelistComponent} from "./components/profilelist/profilelist.compone
     MedicalMenuComponent,
     MedicalResidentsComponent,
     SurveyComponent,
-    ProfilelistComponent
+    DetailAlertComponent,
+    MedicalProfilComponent,
+    ProfilelistComponent,
+    PositionComponent
+
   ],
   imports: [
     // NgbModule,
@@ -78,8 +88,9 @@ import {ProfilelistComponent} from "./components/profilelist/profilelist.compone
     FormsModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+    ChartsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

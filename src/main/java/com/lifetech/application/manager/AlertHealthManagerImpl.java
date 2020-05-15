@@ -7,6 +7,7 @@ import com.lifetech.domain.model.AlertHealth;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -43,8 +44,32 @@ public class AlertHealthManagerImpl implements AlertHealthManager {
     }
 
     @Override
-    public int findAlertNumberByPerson(String id) {
+    public int findAlertNumberByStrap(String id) {
         return alertHealthDAO.countByStrap(Long.parseLong(id));
+    }
+
+    @Override
+    public AlertHealth save(AlertHealth alert) {
+        return alertHealthDAO.save(alert);
+    }
+
+    @Override
+    public AlertHealth findById(String id) {
+        return alertHealthDAO.findById(Long.parseLong(id)).orElse(null);
+
+    }
+
+    @Override
+    public AlertHealthDTO findDtoById(String id) {
+        List<AlertHealth> alertHealths = new ArrayList<>();
+        alertHealths.add(alertHealthDAO.findById(Long.parseLong(id)).orElse(null));
+        return fillStrapAndDoctor(alertHealths).get(0);
+
+    }
+
+    @Override
+    public int findAlertNumberByStrapAndStatus(String id, String status) {
+        return alertHealthDAO.countByStrapAndStatus(Long.parseLong(id), status);
     }
 
 
@@ -53,7 +78,8 @@ public class AlertHealthManagerImpl implements AlertHealthManager {
         List<AlertHealthDTO> alertHealthsDTO = orikaBeanMapper.mapAsList(alertHealths, AlertHealthDTO.class);
         for (int i =0; i<alertHealths.size(); i++ ) {
             alertHealthsDTO.get(i).setStrap(strapManager.findById(String.valueOf(alertHealths.get(i).getStrap())));
-            alertHealthsDTO.get(i).setDoctor(personManager.findById(String.valueOf(alertHealths.get(i).getDoctor())));
+            if(alertHealths.get(i).getDoctor()!=null)
+                alertHealthsDTO.get(i).setDoctor(personManager.findById(String.valueOf(alertHealths.get(i).getDoctor())));
         }
         return alertHealthsDTO;
     }

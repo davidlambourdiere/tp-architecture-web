@@ -36,11 +36,29 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-test</artifactId>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1</version>
+        </dependency>
+
 <!--        <dependency>-->
 <!--            <groupId>com.h2database</groupId>-->
 <!--            <artifactId>h2</artifactId>-->
@@ -134,6 +152,27 @@
                                 <resource>
                                     <directory>src/main/demo-ui/dist/demo-ui</directory>
                                     <filtering>true</filtering>
+                                    <excludes>
+                                        <exclude>fontawesome-webfont.eot</exclude>
+                                        <exclude>fontawesome-webfont.svg</exclude>
+                                        <exclude>fontawesome-webfont.ttf</exclude>
+                                        <exclude>fontawesome-webfont.woff</exclude>
+                                        <exclude>fontawesome-webfont.woff2</exclude>
+                                    </excludes>
+                                </resource>
+                                <resource>
+                                    <directory>src/main/demo-ui/dist/demo-ui</directory>
+                                    <filtering>false</filtering>
+                                    <includes>
+                                        <include>fontawesome-webfont.eot</include>
+                                        <include>fontawesome-webfont.svg</include>
+                                        <include>fontawesome-webfont.ttf</include>
+                                        <include>fontawesome-webfont.woff</include>
+                                        <include>fontawesome-webfont.woff2</include>
+                                    </includes>
+                                </resource>
+                                <resource>
+                                    <directory>src/main/resources/fonts</directory>
                                 </resource>
                             </resources>
                             <outputDirectory>${basedir}/target/classes/static</outputDirectory>

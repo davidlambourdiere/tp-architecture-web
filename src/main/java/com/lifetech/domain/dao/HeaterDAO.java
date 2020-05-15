@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface HeaterDAO extends JpaRepository<Heater, Long> {
@@ -20,5 +21,11 @@ public interface HeaterDAO extends JpaRepository<Heater, Long> {
 
     List<Heater> findByRoom(Room room);
 
+
+    List<Heater> findAllByPersonId(Long id);
+
+    Heater findByIpadress(String ipadress);
+
     Heater findById(String id);
+
 }

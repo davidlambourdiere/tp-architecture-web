@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface LightManager {
 
+
+    LightDTO updateLight( String id, LightDTO lightDtoReceived);
+
     List<LightDTO> findAllLight();
 
     List<LightDTO> findLightByPerson(String id);
@@ -17,6 +20,12 @@ public interface LightManager {
     LightDetailDTO findByHistoric(String id);
 
     List<Light> findAllLightMalFunctionning();
+<<<<<<< HEAD
+
+
+||||||| merged common ancestors
+=======
 
     List<LightDTO> findByRoom(String id);
+>>>>>>> master
 }
