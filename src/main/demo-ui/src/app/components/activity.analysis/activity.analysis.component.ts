@@ -4,6 +4,8 @@ import {ActivityAnalysisService} from "../../service/ActivityAnalysisService";
 import {ActivityAnalysisDTO} from "../../dto/ActivityAnalysisDTO";
 import {PersonService} from "../../service/PersonService";
 import {PersonDTO} from "../../dto/PersonDTO";
+import {ResidenceService} from "../../service/ResidenceService";
+import {ResidenceDTO} from "../../dto/ResidenceDTO";
 
 @Component({
   selector: 'activity-analysis',
@@ -16,14 +18,15 @@ export class  ActivityAnalysisComponent {
   activityanalysisresidence : Object = new ActivityAnalysisDTO();
   activityanalysistotal : Object = new ActivityAnalysisDTO();
   personlist: PersonDTO[];
+  residencelist: ResidenceDTO[];
 
-  constructor(private router: Router, private route: ActivatedRoute, private activityanlysisservice: ActivityAnalysisService, private personservice : PersonService){
+  constructor(private router: Router, private route: ActivatedRoute, private activityanlysisservice: ActivityAnalysisService, private personservice : PersonService, private residenceservice: ResidenceService){
 
   }
 
   ngOnInit(){
-    this.findAllPeron();
-    this.countIOTByResidence();
+    this.findAllPerson();
+    this.findAllResidence();
     this.countIOT();
   }
 
@@ -35,9 +38,9 @@ export class  ActivityAnalysisComponent {
     });
   }
 
-  countIOTByResidence() {
+  countIOTByResidence(idresidence : string) {
     this.route.params.subscribe(params =>{
-      this.activityanlysisservice.countIOTByResidence('1').subscribe(data=>{
+      this.activityanlysisservice.countIOTByResidence(idresidence).subscribe(data=>{
         this.activityanalysisresidence = data;
       });
     });
@@ -51,10 +54,18 @@ export class  ActivityAnalysisComponent {
     });
   }
 
-  private findAllPeron() {
+  private findAllPerson() {
     this.route.params.subscribe(params =>{
       this.personservice.findAllPerson().subscribe(data=>{
         this.personlist = data;
+      });
+    });
+  }
+
+  private findAllResidence() {
+    this.route.params.subscribe(params =>{
+      this.residenceservice.findAllResidence().subscribe(data=>{
+        this.residencelist = data;
       });
     });
   }

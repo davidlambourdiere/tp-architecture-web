@@ -1,0 +1,51 @@
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <br>
+    <h2>Custom Subscription</h2>
+    <br>
+  </div>
+  <div class="panel-body">
+    <table class="table table-bordered ">
+      <tbody>
+      <br>
+      <tr>
+        <td>
+        <select class="custom-select mr-sm-2">
+          <option>Service</option>
+          <option>Clock</option>
+          <option>Strap</option>
+          <option>Light</option>
+          <option>Shutter</option>
+        </select>
+        </td>
+        <td>
+          <select class="custom-select mr-sm-2">
+            <option>Object</option>
+            <option>Heater</option>
+            <option>Clock</option>
+            <option>Strap</option>
+            <option>Light</option>
+            <option>Shutter</option>
+          </select>
+        </td>
+        <td>
+          quantity <input type="number">
+        </td>
+        <td>
+          <button type="button" class="btn btn-success">Calculate price</button>
+        </td>
+      </tr>
+
+      <br>
+      <tr>
+        <td> Price : </td>
+      </tr>
+      </tbody>
+    </table>
+    <br>
+    <div fxLayout="row" fxLayoutAlign="space-evenly center">
+      <button type="button" class="btn btn-success" (click)="redirectToHomePage()">Validate</button>
+    </div>
+  </div>
+</div>

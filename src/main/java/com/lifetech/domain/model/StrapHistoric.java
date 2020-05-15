@@ -2,6 +2,8 @@ package com.lifetech.domain.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.util.Date;
 
 @Entity(name = "straphistoric")
@@ -12,11 +14,14 @@ public class StrapHistoric extends PersistableElement {
     @Column(name="endingdate")
     private Date endingDate;
 
-    @Column(name="state")
-    private String state;
+    @Enumerated(EnumType.STRING)
+    private StateEnum state;
 
-    @Column(name="strapId")
-    private Long strapId;
+    @Enumerated(EnumType.STRING)
+    private StatusEnum breakdownstatus;
+
+    @Column(name="strapid")
+    private Long strapid;
 
     public StrapHistoric() {
     }
@@ -37,19 +42,27 @@ public class StrapHistoric extends PersistableElement {
         this.endingDate = endingDate;
     }
 
-    public String getState() {
+    public StateEnum getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(StateEnum state) {
         this.state = state;
     }
 
-    public Long getStrapId() {
-        return strapId;
+    public Long getStrapid() {
+        return strapid;
     }
 
-    public void setStrapId(Long strapId) {
-        this.strapId = strapId;
+    public void setStrapid(Long strapid) {
+        this.strapid = strapid;
+    }
+
+    public StatusEnum getBreakdownstatus() {
+        return breakdownstatus;
+    }
+
+    public void setBreakdownstatus(StatusEnum breakdownstatus) {
+        this.breakdownstatus = breakdownstatus;
     }
 }

@@ -21,7 +21,11 @@ public interface HeaterDAO extends JpaRepository<Heater, Long> {
 
     List<Heater> findByRoom(Room room);
 
+
     List<Heater> findAllByPersonId(Long id);
 
     Heater findByIpadress(String ipadress);
+
+    Heater findById(String id);
+
 }

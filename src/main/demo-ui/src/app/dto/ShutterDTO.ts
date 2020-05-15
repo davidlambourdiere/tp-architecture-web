@@ -3,7 +3,7 @@ import {RoomDTO} from "./RoomDTO";
 
 export class ShutterDTO{
   id: bigint;
-  status: string;
+  breakdownstatus: string;
   state: string;
   minvalueref: string;
   suspect: string;

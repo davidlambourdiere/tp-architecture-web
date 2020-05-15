@@ -3,7 +3,7 @@ package com.lifetech.application.dto;
 import java.sql.Timestamp;
 
 public class LightDTO extends PersistableElementDTO {
-    private String status;
+    private String breakdownstatus;
     private String state;
     private Timestamp startdate;
     private String minvalueref;
@@ -20,12 +20,12 @@ public class LightDTO extends PersistableElementDTO {
     public LightDTO() {
     }
 
-    public String getStatus() {
-        return status;
+    public String getBreakdownstatus() {
+        return breakdownstatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setBreakdownstatus(String breakdownstatus) {
+        this.breakdownstatus = breakdownstatus;
     }
 
     public String getState() {
@@ -117,7 +117,7 @@ public class LightDTO extends PersistableElementDTO {
     @Override
     public String toString() {
         return "LightDTO{" +
-                "status='" + status + '\'' +
+                "breakdownstatus='" + breakdownstatus + '\'' +
                 ", state='" + state + '\'' +
                 ", startdate=" + startdate +
                 ", minvalueref='" + minvalueref + '\'' +

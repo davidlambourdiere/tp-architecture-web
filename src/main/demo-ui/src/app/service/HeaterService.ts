@@ -25,4 +25,13 @@ export class HeaterService {
   findbyIpAdress(ipadress: string) :Observable<HeaterDTO>{
       return this.http.get<HeaterDTO>(`api/heater/${ipadress}`);
   }
+
+  findIOTByRoom(idroom: string): Observable<any> {
+    return this.http.get(`api/heater/findByRoom/${idroom}`);
+  }
+
+  countHeaters() {
+    return this.http.get(`api/heater/countHeaters`);
+  }
+
 }

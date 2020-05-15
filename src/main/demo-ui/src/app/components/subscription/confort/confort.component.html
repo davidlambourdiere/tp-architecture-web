@@ -1,0 +1,40 @@
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <br>
+    <h2>Subscription Confort</h2>
+    <br>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>List of IOT</th>
+        <th>List of Services</th>
+        <th>Price</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{{subscriptions.name}}</td>
+        <td>{{subscriptions.description}}</td>
+        <td>{{subscriptions.listofiot}}</td>
+        <td>{{subscriptions.listofservice}}</td>
+        <td>{{subscriptions.price}}€</td>
+      </tr>
+      </tbody>
+    </table>
+    <br>
+    <div fxLayout="row" fxLayoutAlign="space-evenly center" >
+
+        <td><button type="button" class="btn btn-success" (click)="insertSubscriptionResident()">Validate</button></td>
+        <td><button type="button" class="btn btn-warning" (click)="redirectToCustomPage()">Custom</button></td>
+
+    </div>
+
+
+  </div>
+</div>
+
