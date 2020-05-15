@@ -43,9 +43,9 @@
             <span  *ngIf="iot.state==='on'"></span>
             <span  *ngIf="iot.state==='off'"></span>
           </td>
-          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{lights.ipadress}}</td>
-          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{lights.percentage}}</td>
-          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{lights.color}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.ipadress}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.percentage}}</td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.color}}</td>
         </tr>
         </tbody>
       </table>
@@ -162,10 +162,10 @@
       </div>
 
       <div class="form-group">
-        <label for="state">
+        <label for="statee">
          State of your Light
         </label>
-        <select id="state" class="form-control" name="state" required [(ngModel)]="lights.state">
+        <select id="statee" class="form-control" name="state" required [(ngModel)]="lights.state">
           <option value="on">On</option>
           <option value="off">Off</option>
         </select>

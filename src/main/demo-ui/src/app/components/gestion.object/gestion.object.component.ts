@@ -36,6 +36,7 @@ export class GestionObjectComponent implements OnInit {
   show: boolean = false;
   id: string= '';
   temperatureactuelle : number ;
+  heurePrevue: Date;
 
   defaultOnOff = 'éteint';
   defaultIntensite ='50';
@@ -57,37 +58,22 @@ export class GestionObjectComponent implements OnInit {
     console.log(this.lights);
     console.log(this.heaters);
 
-    this.route.params.subscribe(params => {
-      this.lightservice.findbyId(1).subscribe(data => {
-        this.lights = data, error => console.log(error);
-      })
-      console.log(this.lights.ipadress);
-    })
 
 
-    this.route.params.subscribe(params => {
-      this.heaterservice.findbyId(Number(this.heaters.id)).subscribe(data => {
-        this.heaters = data, error => console.log(error);
-      })
-    })
+    this.setHourScenario();
+    this.verrifyHour();
+
 
     this.temperatureactuelle = Number(this.heaters.actualval);
 
 
 
-    this.route.params.subscribe(params => {
-      this.shutterservice.findbyId(1).subscribe(data => {
-        this.shutters = data, error => console.log(error);
-      })
 
-
-      console.log(this.shutters.state);
-    })
   }
   onSubmit(form: NgForm) {
     console.log(form.value);
     this.route.params.subscribe(params => {
-      this.lightservice.updateLight(Number(this.lights.id), this.lights).subscribe(data => console.log(data), error => console.log(error));
+      this.lightservice.updateLight(this.lights.id, this.lights).subscribe(data => console.log(data), error => console.log(error));
     })
     console.log("update"+this.lights);
     alert(" Done ! ");
@@ -98,7 +84,7 @@ export class GestionObjectComponent implements OnInit {
   onSubmitShutter(g: NgForm) {
     console.log(g.value);
     this.route.params.subscribe(params => {
-      this.shutterservice.updateShutter(Number(this.shutters.id), this.shutters).subscribe(data => console.log(data), error => console.log(error));
+      this.shutterservice.updateShutter(this.shutters.id, this.shutters).subscribe(data => console.log(data), error => console.log(error));
     })
     console.log("update"+this.shutters);
    alert(" Done ! ");
@@ -108,7 +94,7 @@ export class GestionObjectComponent implements OnInit {
   onSubmitHeater(h: NgForm) {
     console.log(h.value);
     this.route.params.subscribe(params => {
-      this.heaterservice.updateHeater(Number(this.heaters.id), this.heaters).subscribe(data => console.log(data), error => console.log(error));
+      this.heaterservice.updateHeater(this.heaters.id, this.heaters).subscribe(data => console.log(data), error => console.log(error));
     })
     console.log("update"+this.heaters);
     alert(" Done ! ");
@@ -139,58 +125,147 @@ SwitchDownHeat(){
     })
   }
 
+  setHourScenario(){
+    this.heurePrevue = new Date();
+    this.heurePrevue.setHours(10);
+    this.heurePrevue.setMinutes(48);
+    this.heurePrevue.setSeconds(0);
+    this.heurePrevue.setMilliseconds(0);
+  }
 
-  runScenario(){
+  async verrifyHour() {
 
-    var resultat= Number(this.lights.percentage) ;
-    var resultatShutter= Number(this.shutters.percentage) ;
-    console.time ("truc");
+    setTimeout(() => {
+      var heurePC = new Date();
+      if (this.heurePrevue.getHours() == heurePC.getHours() && this.heurePrevue.getMinutes() == heurePC.getMinutes()){
+        console.log("TEEEEEEEEEEEEEEEEEST"+ new Date());
+        this.runScenario();
+    }
+      }, 1000);
+  }
 
-    resultat = resultat - (resultat/2);
-    resultatShutter = resultatShutter - (resultatShutter/2);
-    this.lights.percentage = resultat.toString();
+runScenario(){
+  for (let i = 0; i < this.iots.shutters.length; i++) {
+    this.runScenarioShutter(this.iots.shutters[i]);
+  }
+  for (let i = 0; i < this.iots.lights.length; i++) {
+    this.runScenarioLight(this.iots.lights[i]);
+  }
+  for (let i = 0; i < this.iots.heaters.length; i++) {
+    this.runScenarioHeater(this.iots.heaters[i]);
+  }
+}
+
+  async runScenarioShutter(shutters : ShutterDTO){
+
+
+    var resultatShutter= Number(shutters.percentage) ;
+
+    setTimeout(() => {
+      // Do something before delay
+      if ( resultatShutter >0){
+        this.runScenarioShutter(shutters);
+      }
+
+    }, 5000);
+    resultatShutter = resultatShutter - 1;
+
     this.shutters.percentage = resultatShutter.toString();
 
-     (async () => {
+    console.log('Le store se baisse ');
+    console.log(resultatShutter);
 
-        // Do something before delay
-       console.log('La luminosité baisse ')
-       console.log(resultat)
-       console.log('Le store se baisse ')
-       console.log(resultatShutter)
-        await this.delay(20000);
-      })();
 
-resultat =0;
-resultatShutter =0;
+
+
+    shutters.percentage = resultatShutter.toString();
+
+
+      this.route.params.subscribe(params => {
+        this.shutterservice.updateShutter(shutters.id, shutters).subscribe(data => console.log(data), error => console.log(error));
+        console.log("update"+shutters);
+      });
+
+
+
+
+  }
+
+  async runScenarioLight(lights : LightDTO){
+
+    var resultat= Number(lights.percentage) ;
+
+    setTimeout(() => {
+      // Do something before delay
+      if (resultat >0){
+        this.runScenarioLight(lights);
+      }
+
+    }, 5000);
+
+    resultat = resultat - 1;
+
+    lights.percentage = resultat.toString();
+
+    console.log('La luminosité baisse ');
+    console.log(resultat);
+
+
+
+
+
+
     this.lights.percentage = resultat.toString();
-    this.shutters.percentage = resultatShutter.toString();
-
-    (async () => {
       this.route.params.subscribe(params => {
-        this.lightservice.updateLight(1, this.lights).subscribe(data => console.log(data), error => console.log(error));
-        console.log("update"+this.lights);
-      })
-      this.route.params.subscribe(params => {
-        this.shutterservice.updateShutter(1, this.shutters).subscribe(data => console.log(data), error => console.log(error));
-        console.log("update"+this.shutters);
-      })
-      await this.delay(20000);
+        this.lightservice.updateLight(lights.id, lights).subscribe(data => console.log(data), error => console.log(error));
+        console.log("update"+lights);
+      });
 
-      // Do something after
-      console.log('Fin, luminosité à 0')
-      console.log('Fin, shutter à 0')
-    })();
 
-    console.timeEnd("truc");
+    // Do something after
+    //console.log('Fin, luminosité à 0')
 
 
 
   }
 
 
+  async runScenarioHeater(heaters : HeaterDTO){
+
+    var resultatHeater= Number(heaters.actualval) ;
+
+    setTimeout(() => {
+      // Do something before delay
+      if (resultatHeater >22){
+        this.runScenarioHeater(heaters);
+      }
+
+    }, 5000);
+
+    resultatHeater = resultatHeater - 1;
+
+    heaters.actualval = resultatHeater.toString();
+
+    console.log('La température du chauffage se stabilise à une valeur correcte ');
+    console.log(resultatHeater);
 
 
 
+
+
+
+    this.heaters.actualval = resultatHeater.toString();
+    this.route.params.subscribe(params => {
+      this.heaterservice.updateHeater(heaters.id, heaters).subscribe(data => console.log(data), error => console.log(error));
+      console.log("update"+heaters);
+    });
+
+
+    // Do something after
+    //console.log('Fin, luminosité à 0')
+
+
+
+  }
 }
 

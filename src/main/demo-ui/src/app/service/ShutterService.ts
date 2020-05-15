@@ -15,11 +15,11 @@ export class ShutterService {
 
 
 
-  findbyId(id: number) :Observable<ShutterDTO>{
+  findbyId(id: bigint) :Observable<ShutterDTO>{
     return this.http.get<ShutterDTO>(`api/shutter/${id}`);
   }
 
-  updateShutter(id: number , shutter: ShutterDTO): Observable<ShutterDTO> {
+  updateShutter(id: bigint , shutter: ShutterDTO): Observable<ShutterDTO> {
     return this.http.put<ShutterDTO>(`api/shutter/updateShutter/${id}`, shutter);
   }
 

@@ -14,11 +14,11 @@ export class HeaterService {
 
 
 
-  findbyId(id: number) :Observable<HeaterDTO>{
+  findbyId(id: bigint) :Observable<HeaterDTO>{
     return this.http.get<HeaterDTO>(`api/heater/${id}`);
   }
 
-  updateHeater(id: number , heater: HeaterDTO): Observable<HeaterDTO> {
+  updateHeater(id: bigint , heater: HeaterDTO): Observable<HeaterDTO> {
     return this.http.put<HeaterDTO>(`api/heater/updateHeater/${id}`, heater);
   }
 
