@@ -155,10 +155,7 @@ public class PersonDTO extends PersistableElementDTO {
     public String getProfiletype() { return profiletype; }
 
     public void setProfiletype(String profiletype) { this.profiletype = profiletype; }
-<<<<<<< HEAD
 
-||||||| merged common ancestors
-=======
 
     public StrapDTO getStrap() {
         return strap;
@@ -167,6 +164,5 @@ public class PersonDTO extends PersistableElementDTO {
     public void setStrap(StrapDTO strap) {
         this.strap = strap;
     }
->>>>>>> master
 }
 

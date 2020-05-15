@@ -12,18 +12,12 @@ export class HeaterService {
   constructor(private http: HttpClient) {
   }
 
-
-<<<<<<< HEAD
-
-  findbyId(id: bigint) :Observable<HeaterDTO>{
+  findbyId(id: bigint) :Observable<HeaterDTO> {
     return this.http.get<HeaterDTO>(`api/heater/${id}`);
-||||||| merged common ancestors
-  findAllHeater(): Observable<HeaterDTO> {
-    return this.http.get<HeaterDTO>(`api/heaters`);
-=======
+  }
+
   findAllHeater(): Observable<any> {
     return this.http.get<HeaterDTO>(`api/heater`);
->>>>>>> master
   }
 
   updateHeater(id: bigint , heater: HeaterDTO): Observable<HeaterDTO> {
