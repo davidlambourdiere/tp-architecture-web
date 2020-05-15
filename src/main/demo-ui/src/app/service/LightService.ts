@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {PersonDTO} from '../dto/PersonDTO';
 import {LightDTO} from "../dto/LightDTO";
 
 @Injectable({
@@ -10,6 +9,9 @@ import {LightDTO} from "../dto/LightDTO";
 export class LightService {
 
   constructor(private http: HttpClient) {
+  }
+  findIOTByRoom(idroom: string): Observable<any> {
+    return this.http.get(`api/light/findByRoom/${idroom}`);
   }
 
 

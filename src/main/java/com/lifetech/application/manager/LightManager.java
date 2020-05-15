@@ -21,5 +21,5 @@ public interface LightManager {
 
     List<Light> findAllLightMalFunctionning();
 
-
+    List<LightDTO> findByRoom(String id);
 }

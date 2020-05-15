@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {PersonDTO} from '../dto/PersonDTO';
-import {LightDTO} from "../dto/LightDTO";
 import {ShutterDTO} from "../dto/ShutterDTO";
 
 @Injectable({
@@ -13,7 +11,9 @@ export class ShutterService {
   constructor(private http: HttpClient) {
   }
 
-
+  findIOTByRoom(idroom: string): Observable<any> {
+    return this.http.get(`api/shutter/findByRoom/${idroom}`);
+  }
 
   findbyId(id: bigint) :Observable<ShutterDTO>{
     return this.http.get<ShutterDTO>(`api/shutter/${id}`);

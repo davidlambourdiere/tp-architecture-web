@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {IOTDTO} from "../dto/IOTDTO";
 import {HeaterDTO} from "../dto/HeaterDTO";
-import {LightDTO} from "../dto/LightDTO";
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,6 @@ import {LightDTO} from "../dto/LightDTO";
 export class HeaterService {
   constructor(private http: HttpClient) {
   }
-
 
 
   findbyId(id: bigint) :Observable<HeaterDTO>{
@@ -33,5 +32,21 @@ export class HeaterService {
   countHeaters() {
     return this.http.get(`api/heater/countHeaters`);
   }
+  findAllIOT(): Observable<IOTDTO> {
+    return this.http.get<IOTDTO>(`api/iots`);
+  }
+
+  findAllHeater(): Observable<any> {
+    return this.http.get<HeaterDTO>(`api/heater`);
+  }
+  findIOTByType(type: string): Observable<IOTDTO> {
+    return this.http.post<IOTDTO>(`api/iots/findByType`, type);
+  }
+
+  findIOTByPerson(idperson: string): Observable<any> {
+    return this.http.get(`api/iots/findByPerson/${idperson}`);
+  }
+
+
 
 }
