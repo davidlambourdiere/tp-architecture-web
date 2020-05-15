@@ -2,7 +2,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PersonService} from "../../service/PersonService";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AuthService} from "../../service/AuthService";
+
 // @ts-ignore
 import {HeaterService} from "../../service/HeaterService";
 import {HeaterDTO} from "../../dto/HeaterDTO";
@@ -144,6 +144,8 @@ SwitchDownHeat(){
       }, 1000);
   }
 
+
+  // TODO Verification si NaN ou Pas de valeurs ? Plusieurs objets lequel est modifié ? Messages d'erreur
 runScenario(){
   for (let i = 0; i < this.iots.shutters.length; i++) {
     this.runScenarioShutter(this.iots.shutters[i]);
