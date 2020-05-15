@@ -4,12 +4,10 @@ import com.lifetech.application.dto.ShutterDTO;
 import com.lifetech.application.dto.ShutterDetailDTO;
 import com.lifetech.application.dto.ShutterHistoricDTO;
 import com.lifetech.domain.OrikaBeanMapper;
+import com.lifetech.domain.dao.RoomDAO;
 import com.lifetech.domain.dao.ShutterDAO;
 import com.lifetech.domain.dao.ShutterHistoricDAO;
-import com.lifetech.domain.model.Shutter;
-import com.lifetech.domain.model.ShutterHistoric;
-import com.lifetech.domain.model.StateEnum;
-import com.lifetech.domain.model.StatusEnum;
+import com.lifetech.domain.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -31,12 +29,21 @@ public class ShutterManagerImpl implements ShutterManager {
 
     private final ShutterHistoricDAO shutterHistoricDAO;
 
+    private final RoomDAO roomDao;
+
     private final OrikaBeanMapper orikaBeanMapper;
 
-    public ShutterManagerImpl(ShutterHistoricDAO shutterHistoricDAO, ShutterDAO shutterDAO, OrikaBeanMapper orikaBeanMapper) {
+    public ShutterManagerImpl(ShutterHistoricDAO shutterHistoricDAO, ShutterDAO shutterDAO, RoomDAO roomDao, OrikaBeanMapper orikaBeanMapper) {
         this.shutterHistoricDAO = shutterHistoricDAO;
         this.shutterDAO = shutterDAO;
+        this.roomDao = roomDao;
         this.orikaBeanMapper = orikaBeanMapper;
+    }
+    @Override
+    public List<ShutterDTO> findByRoom(String id) {
+        Room room = roomDao.findById(Long.parseLong(id)).orElse(null);
+        List<Shutter> shutters = shutterDAO.findByRoom(room);
+        return orikaBeanMapper.mapAsList(shutters, ShutterDTO.class);
     }
 
     @Override
@@ -58,7 +65,6 @@ public class ShutterManagerImpl implements ShutterManager {
         return orikaBeanMapper.map(shutter, ShutterDTO.class);
     }
 
-
     @Override
     public ShutterDTO updateShutter(String id, ShutterDTO shutterDtoReceived) {
 
@@ -70,12 +76,6 @@ public class ShutterManagerImpl implements ShutterManager {
         Shutter shuttersaved = orikaBeanMapper.map(updatedShutterDTO, Shutter.class);
         System.out.println(shuttersaved);
         return orikaBeanMapper.map(shutterDAO.save(shuttersaved), ShutterDTO.class);
-    }
-
-
-    @Override
-    public ShutterDTO findByRoom(String id) {
-        return null;
     }
 
     @Override
