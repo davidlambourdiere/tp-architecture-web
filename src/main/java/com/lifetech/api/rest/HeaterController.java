@@ -20,8 +20,16 @@ public class HeaterController extends RestBaseController{
     }
 
 
+<<<<<<< HEAD
    @GetMapping("heater")
     private List<HeaterDTO> findAllHeater(){
+||||||| merged common ancestors
+    @GetMapping("heater/{id}")
+    private HeaterDTO findAllHeater(@PathVariable("id") String id){
+=======
+    @GetMapping("heater")
+    private List<HeaterDTO> findAllHeater(){
+>>>>>>> master
         return heaterManager.findAllHeater();
     }
 

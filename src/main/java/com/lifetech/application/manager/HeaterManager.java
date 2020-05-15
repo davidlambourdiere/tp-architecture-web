@@ -8,6 +8,12 @@ import java.util.List;
 
 public interface HeaterManager {
     HeaterDTO findById(String id);
+<<<<<<< HEAD
+||||||| merged common ancestors
+    HeaterDTO findAllHeater();
+=======
+    List<HeaterDTO> findAllHeater();
+>>>>>>> master
 
     List<HeaterDTO> findByRoom(String id);
 

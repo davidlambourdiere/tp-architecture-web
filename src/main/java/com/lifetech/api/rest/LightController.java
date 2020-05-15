@@ -38,6 +38,7 @@ public class LightController extends RestBaseController{
     private LightDetailDTO findByHistoric(@PathVariable("id") String id) {
         return lightManager.findByHistoric(id);
     }
+<<<<<<< HEAD
 
     @PutMapping("light/updateLight/{id}")
     public LightDTO updateLight (@PathVariable(value = "id") String id,
@@ -45,4 +46,12 @@ public class LightController extends RestBaseController{
         return lightManager.updateLight(id, lightDtoReceived);
 
     }
+||||||| merged common ancestors
+=======
+
+    @GetMapping("light/findByRoom/{id}")
+    private List<LightDTO> findByRoom(@PathVariable("id") String id){ return lightManager.findByRoom(id); }
+
+
+>>>>>>> master
 }

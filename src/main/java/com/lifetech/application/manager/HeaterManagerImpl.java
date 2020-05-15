@@ -51,6 +51,7 @@ public class HeaterManagerImpl implements HeaterManager {
     }
 
     @Override
+<<<<<<< HEAD
     public List<HeaterDTO> findAllHeater() {
         List<Heater> heaters = heaterDAO.findAll();
         return orikaBeanMapper.mapAsList(heaters, HeaterDTO.class);
@@ -86,6 +87,17 @@ public class HeaterManagerImpl implements HeaterManager {
         Heater heatersaved = orikaBeanMapper.map(updatedHeaterDTO, Heater.class);
         System.out.println(heatersaved);
         return orikaBeanMapper.map(heaterDAO.save(heatersaved), HeaterDTO.class);
+||||||| merged common ancestors
+    public HeaterDTO findAllHeater() {
+        List<HeaterDTO> heaters = orikaBeanMapper.convertListDTO(heaterDAO.findAll(), HeaterDTO.class);
+        HeaterDTO iotToReturn = new HeaterDTO();
+        iotToReturn.setHeaters(heaters);
+        return iotToReturn;
+=======
+    public List<HeaterDTO> findAllHeater() {
+        List<Heater> heaters = heaterDAO.findAll();
+        return orikaBeanMapper.mapAsList(heaters, HeaterDTO.class);
+>>>>>>> master
     }
 
 

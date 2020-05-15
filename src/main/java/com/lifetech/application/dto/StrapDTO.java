@@ -21,6 +21,8 @@ public class StrapDTO extends PersistableElementDTO{
     private PersonDTO person;
     private RoomDTO room;
     private Double price ;
+    private String healthstate;
+
 
     public StrapDTO() {
     }
@@ -161,4 +163,11 @@ public class StrapDTO extends PersistableElementDTO{
         this.price = price;
     }
 
+    public String getHealthstate() {
+        return healthstate;
+    }
+
+    public void setHealthstate(String healthstate) {
+        this.healthstate = healthstate;
+    }
 }

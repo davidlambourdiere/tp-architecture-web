@@ -38,6 +38,7 @@ public class ShutterController extends RestBaseController{
     private ShutterDetailDTO findByHistoric(@PathVariable("id") String id) {
         return shutterManager.findByHistoric(id);
     }
+<<<<<<< HEAD
 
     @PutMapping("shutter/updateShutter/{id}")
     public ShutterDTO updateShutter (@PathVariable(value = "id") String id,
@@ -45,3 +46,12 @@ public class ShutterController extends RestBaseController{
         return shutterManager.updateShutter(id, shutterDtoReceived);
 
     }}
+||||||| merged common ancestors
+}
+=======
+
+    @GetMapping("shutter/findByRoom/{id}")
+    private List<ShutterDTO> findByRoom(@PathVariable("id") String id){ return shutterManager.findByRoom(id); }
+
+}
+>>>>>>> master

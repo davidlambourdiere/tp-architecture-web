@@ -20,6 +20,12 @@ public interface LightManager {
     LightDetailDTO findByHistoric(String id);
 
     List<Light> findAllLightMalFunctionning();
+<<<<<<< HEAD
 
 
+||||||| merged common ancestors
+=======
+
+    List<LightDTO> findByRoom(String id);
+>>>>>>> master
 }
