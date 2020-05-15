@@ -1,5 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <title>Residents</title>
+</head>
 <home></home>
 nawfal component
 <body>
 <pre>{{persons.concat() | json}}</pre>
+<table border=4 cellspacing=4 cellpadding=4 width=50%>
+  <tr>
+    <th scope="col"><h3>ID</h3></th>
+    <th scope="col"><h3>Nom</h3></th>
+    <th scope="col"><h3>Prénom</h3></th>
+    <th scope="col"><h3>Rang</h3></th>
+  </tr>
+  <tr *ngFor="let person of persons">
+    <th scope="col">{{person.id}}</th>
+    <td><input type="text">{{person.nom}}</td>
+    <td>{{person.prenom}}</td>
+    <td>{{person.priority_coef}}</td>
+  </tr>
+</table>
+<div class="form-group">
+  <label>Update the list</label>
+  <input
+    class="form-control"
+    type="text"
+    formControlName="List"
+  >
+</div>
+<datalist id={{persons}}>persons</datalist>
+
+<table></table>
 </body>
