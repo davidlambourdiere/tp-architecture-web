@@ -14,6 +14,10 @@ export class PersonProfileService {
     return this.http.get<PersonProfileDTO[]>('api/personProfile/findAll');
   }
 
+  findRankPerson(): Observable<PersonProfileDTO[]>{
+    return this.http.get<PersonProfileDTO[]>('api/personProfile/findRank');
+  }
+
   createPersonProfile(personProfile: PersonProfileDTO):Observable<PersonProfileDTO>{
    return this.http.post<PersonProfileDTO>('api/personProfile/createpersonProfile', personProfile);
   }

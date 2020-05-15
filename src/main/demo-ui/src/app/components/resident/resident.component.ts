@@ -10,8 +10,9 @@ import {PersonProfileService} from "../../service/PersonProfileService";
 import {SubscriptionDTO} from "../../dto/SubscriptionDTO";
 import {PersonProfileDTO} from "../../dto/PersonProfileDTO";
 import set = Reflect.set;
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {Observable} from "rxjs";
+import {concatMap} from "rxjs/operators";
 
 @Component({
   selector: 'resident',
@@ -21,20 +22,34 @@ import {Observable} from "rxjs";
 
 export class ResidentComponent {
 
-  tab: any[] = [];
+  tab = this.personService.findRankPerson().pipe();
   public persons: PersonProfileDTO[] = [];
+  tableau : any = [];
+  form: FormGroup;
+  public str: String;
 
   constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private personService: PersonProfileService){
   }
   ngOnInit() {
 
     this.route.params.subscribe(params=> {
-     this.personService.findAllPerson().subscribe(data=>{
+     this.personService.findRankPerson().subscribe(data=>{
        this.persons = data;
        console.log(data);
+       console.log(this.tab);
+
+
+
+       for (var j = 0; j < this.persons.length; j++){
+          console.log(this.persons[j].adress);
+         }
+
       })
     })
 
+    this.form = this.fb.group({
+      List: this.persons
+    })
 
   }
 
