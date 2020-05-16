@@ -15,13 +15,9 @@ import net.sf.geographiclib.GeodesicMask;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,31 +26,28 @@ public class PositionManagerImpl implements PositionManager {
     private final OrikaBeanMapper orikaBeanMapper;
     private final StrapDAO strapDAO;
 
-    private EntityManager entityManager;
-
 
     public PositionManagerImpl(PositionDAO positionDAO, OrikaBeanMapper orikaBeanMapper, StrapDAO strapDAO, EntityManager em) {
         this.positionDAO = positionDAO;
         this.orikaBeanMapper = orikaBeanMapper;
         this.strapDAO = strapDAO;
-        this.entityManager = em.getEntityManagerFactory().createEntityManager();
     }
 
-    public PositionDAO getPositionDAO() {
-        return positionDAO;
-    }
-
-    public StrapDAO getStrapDAO() {
-        return strapDAO;
-    }
-
+    /**
+     * Find position by strap.
+     * @param strapId id of strap
+     * @return PositionDTO
+     */
     @Override
     public PositionDTO findPositionByStrap(long strapId) {
         Position p = positionDAO.findPositionByStrap(strapId);
         return orikaBeanMapper.map(p, PositionDTO.class);
     }
 
-    public void test() {
+    /**
+     * récupère tous les bracelets, crée pour chaque bracelet et simule sa position.
+     */
+    public void insertPositionRunnerStrap() {
         List<Strap> straps = strapDAO.findAll();
         for (Strap strap : straps) {
             new Thread(() -> {
@@ -68,8 +61,8 @@ public class PositionManagerImpl implements PositionManager {
     }
 
     /**
-     * Génère une nouvelle position
-     *
+     * Génère une nouvelle position.
+     * @param strap
      * @throws Exception Exception
      */
     public void simulatePosition(Strap strap) throws Exception {
@@ -104,87 +97,14 @@ public class PositionManagerImpl implements PositionManager {
                 }
             }
         }
-
-
-        /**
-         * etape 1  definir limite chambre
-         * etape 2 place le vieux sur poin random dans la chambre
-         * etape 3 definir salle a manger
-         * etape 4 sortir de la chambre def mur couloir
-
-
-         Tracking tracking = new Tracking();
-         Map<String, List<Coordinate>> map = tracking.parseMapJson();
-         Map<String, List<Coordinate>> walls = tracking.parseWallsJson();
-
-         map.get("chambre3");
-         List<Coordinate> coords = map.get("chambre3");
-         Random x = new Random();
-         Random y = new Random();
-         Double longi = x.doubles((Double) coords.get(0).getLongitude() + 0.00001, ((Double) coords.get(2).getLongitude())).findFirst().getAsDouble();
-         Double lat = y.doubles((Double) coords.get(2).getLatitude(), ((Double) coords.get(0).getLatitude())).findFirst().getAsDouble();
-
-
-         Coordinate coor = new Coordinate(lat, longi);
-         Double move = 0.00001;
-         Coordinate exitMinDoor = new Coordinate(walls.get("chambre3").get(0).getLongitude(), walls.get("chambre3").get(1).getLatitude());
-         Coordinate exitMaxDoor = new Coordinate(walls.get("chambre3").get(1).getLongitude(), walls.get("chambre3").get(0).getLatitude());
-         Strap strap2 = strapDAO.findById(Long.parseLong("1")).orElse(null);
-         while (tracking.isInTheRoom(coor)) {
-         Position p = new Position();
-         p.setDate(new Date());
-         p.setLongitude(Float.parseFloat(coor.getLongitude().toString()));
-         p.setLatitude(Float.parseFloat(coor.getLatitude().toString()));
-         p.setStrap(strap2);
-         this.positionDAO.save(p);
-         if (coor.getLongitude() < exitMinDoor.getLongitude()) {
-         coor.setLongitude(coor.getLongitude() + move);
-         }
-         coor.setLatitude(coor.getLatitude() - move);
-         Thread.sleep(3000);
-         }
-         ;
-         int i = 0;
-
-         while (!tracking.isInTheLivingRoom(coor)) {
-         Thread.sleep(1600);
-         if (isNextFootStepPossible(coor, walls)) {
-         if (i < 2) {
-         coor.setLongitude(coor.getLongitude() - move);
-         i++;
-         Position p = new Position();
-         p.setDate(new Date());
-         p.setLongitude(Float.parseFloat(coor.getLongitude().toString()));
-         p.setLatitude(Float.parseFloat(coor.getLatitude().toString()));
-         p.setStrap(strap2);
-         this.positionDAO.save(p);
-         } else {
-         coor.setLatitude(coor.getLatitude() - move);
-         Position p = new Position();
-         p.setDate(new Date());
-         p.setLongitude(Float.parseFloat(coor.getLongitude().toString()));
-         p.setLatitude(Float.parseFloat(coor.getLatitude().toString()));
-         p.setStrap(strap2);
-         this.positionDAO.save(p);
-
-         i = 0;
-         }
-         } else {
-         coor.setLatitude(coor.getLatitude() + move);
-         coor.setLongitude(coor.getLongitude() - move);
-         Position p = new Position();
-         p.setDate(new Date());
-         p.setLongitude(Float.parseFloat(coor.getLongitude().toString()));
-         p.setLatitude(Float.parseFloat(coor.getLatitude().toString()));
-         p.setStrap(strap2);
-         this.positionDAO.save(p);
-
-         }
-         }
-         this.simulatePosition();*/
-
     }
 
+    /**
+     * Enregistre les positions d'un bracelet.
+     * @param lat latitude of strap
+     * @param lon longitude of strap
+     * @param strap
+     */
     public void saveData(Double lat, Double lon, Strap strap) {
         try {
             Position p = new Position();
@@ -199,25 +119,15 @@ public class PositionManagerImpl implements PositionManager {
         }
     }
 
+    /**
+     * Retourne les 30 dernières d'un bracelet.
+     * @param strapId id of strap
+     * @return List<PositionDTO>
+     */
     @Override
     public List<PositionDTO> positionHistory(long strapId) {
         List<PositionDTO> positions = orikaBeanMapper.mapAsList(positionDAO.positionHistory(strapId), PositionDTO.class);
         return positions.stream().sorted((p1, p2) -> p1.getDate().compareTo(p2.getDate())).collect(Collectors.toList());
-        ///return positions;
     }
-
-
-    /**
-     * Retourne vrai si le prochain pas est possible
-     *
-     * @param coordinate Coordonnée
-     * @param walls      Murs de la maison de retraite
-     * @return boolean
-     */
-    public boolean isNextFootStepPossible(Coordinate coordinate, Map<String, List<Coordinate>> walls) {
-        Coordinate forbiddenWall2 = new Coordinate(walls.get("couloir").get(1).getLongitude(), walls.get("couloir").get(1).getLatitude());
-        return (coordinate.getLongitude() > forbiddenWall2.getLongitude());
-    }
-
 
 }

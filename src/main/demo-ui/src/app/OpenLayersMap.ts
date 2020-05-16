@@ -149,10 +149,19 @@ export class OpenLayersMap {
    */
   private mapOptions: IMapOptions;
 
+  /**
+   * Couche des marqueurs
+   */
   private markersLayer: VectorLayer;
-  // [{ strapId: 12, markers: [] ..
+
+  /**
+   * Marqueurs de la carte
+   */
   private markers: { strapId: bigint, marker: Feature<Point> }[] = [];
 
+  /**
+   * Historique des positions
+   */
   private history: Feature<Point>[] = [];
 
   constructor() {
@@ -346,6 +355,11 @@ export class OpenLayersMap {
     }
   }
 
+  /**
+   * Ajoute une position dans le tableau des marqueurs
+   * @param strapId Identifiant numérique du bracelet
+   * @param marker Marqueur
+   */
   addPosition(strapId: bigint, marker: Feature<Point>): void {
     const markerByStrapId = this.markers.find(marker => marker.strapId === strapId);
     if (markerByStrapId) {
@@ -355,8 +369,14 @@ export class OpenLayersMap {
     }
   }
 
-  positionsHistory(positions: number[][], options?: IMarkerOptions) {
+  /**
+   * Affiche l'historique des positions
+   * @param positions Positions
+   * @param options Options
+   */
+  positionsHistory(positions: number[][], options?: IMarkerOptions): void {
     this.removeHistoryLayers();
+
     options = Object.assign({}, {
       id: '',
       color: '#000000',
@@ -407,6 +427,9 @@ export class OpenLayersMap {
     this.markers = [];
   }
 
+  /**
+   * Supprime les marqueurs
+   */
   removeMarkers(): void {
     const markersLayer = this.markersLayer.getSource();
     for (let marker of this.markers) {
@@ -414,6 +437,9 @@ export class OpenLayersMap {
     }
   }
 
+  /**
+   * Supprime les marqueurs de l'historique
+   */
   removeHistoryLayers(): void {
     this.history = [];
     for(let f of this.vectorSource.getFeatures()) {
@@ -426,7 +452,10 @@ export class OpenLayersMap {
     }
   }
 
-  showOnlyLastMarkers() {
+  /**
+   * N'affiche que les derniers marqueurs sur la carte
+   */
+  showOnlyLastMarkers(): void {
     const index = this.map.getLayers().getArray().findIndex(layer => layer.get('type') == 'markersLayer');
     if (index) {
       const markersLayer = this.map.getLayers().item(index) as VectorLayer;
@@ -435,22 +464,12 @@ export class OpenLayersMap {
     }
   }
 
-  getMarkers(): Feature<Point>[] {
-    /* const markers = [];
-     const layers = this.map.getLayers().getArray();
-     for(let layer of layers) {
-       try {
-         if (layer.get('type') === 'historyLayer') {
-           const features = (layer as VectorLayer).getSource().getFeatures();
-           for (let feature of features) {
-             if (feature.get('type') === 'marker'){
-               markers.push(feature);
-             }
-           }
-         }
-       } catch (e) {}*/
 
-    return this.history;
+  /**
+   * Retourne les marqueurs
+   */
+  getHistoryMarkers(): Feature<Point>[] {
+        return this.history;
   }
 
   /**
@@ -458,10 +477,8 @@ export class OpenLayersMap {
    * @param [options] Options de la ligne
    */
   drawLineBetweenEachMarker(options?: ILineOptions): void {
-    const markers = this.getMarkers();
-    console.log(markers)
+    const markers = this.getHistoryMarkers();
     const coords: Coordinate[] = markers.map(m => m.getGeometry().getCoordinates());
-    console.log(coords)
     if (markers.length > 1) {
       this.drawLine(coords, options);
     } else {
@@ -474,7 +491,7 @@ export class OpenLayersMap {
    * @param [options] Options de la ligne
    */
   drawLineBetweenFirstMarkerAndLastMarker(options?: ILineOptions): void {
-    const markers = this.getMarkers();
+    const markers = this.getHistoryMarkers();
     const allCoordinates: Coordinate[] = markers.map(m => m.getGeometry().getCoordinates());
     const coords = [allCoordinates[0], allCoordinates[allCoordinates.length - 1]];
     if (markers.length > 1) {

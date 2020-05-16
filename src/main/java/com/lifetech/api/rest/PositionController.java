@@ -26,7 +26,7 @@ public class PositionController extends RestBaseController{
 
     @GetMapping("position/insertPositionByStrap")
     private void  insertPositionByStrapId() throws Exception {
-        positionManager.test();
+        positionManager.insertPositionRunnerStrap();
     }
 
     @GetMapping("position/positionHistory/{id}")
