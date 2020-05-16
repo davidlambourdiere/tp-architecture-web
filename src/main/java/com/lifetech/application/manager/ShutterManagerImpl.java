@@ -54,13 +54,6 @@ public class ShutterManagerImpl implements ShutterManager {
 
 
     @Override
-    public ShutterDTO findById(String id) {
-        Shutter shutter = shutterDAO.findById(Long.parseLong(id)).orElse(null);
-        return orikaBeanMapper.map(shutter, ShutterDTO.class);
-    }
-
-
-    @Override
     public ShutterDTO updateShutter(String id, ShutterDTO shutterDtoReceived) {
 
         Shutter shutter = shutterDAO.findById(Long.parseLong(id)).orElse(null);

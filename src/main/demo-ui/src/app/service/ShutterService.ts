@@ -14,6 +14,9 @@ export class ShutterService {
   }
 
 
+  findShutter(id: string) : Observable<any> {
+    return this.http.get(`api/shutter/find/${id}`);
+  }
 
   findbyId(id: bigint) :Observable<ShutterDTO>{
     return this.http.get<ShutterDTO>(`api/shutter/${id}`);
