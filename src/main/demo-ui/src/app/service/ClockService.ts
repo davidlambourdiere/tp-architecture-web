@@ -13,4 +13,8 @@ export class ClockService {
   findIOTByRoom(idroom: string): Observable<any>{
     return this.http.get(`api/clock/findByRoom/${idroom}`);
   }
+
+  findClock(id: string) : Observable<any> {
+    return this.http.get(`api/clock/find/${id}`);
+  }
 }
