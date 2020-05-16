@@ -14,6 +14,8 @@ import {ShutterService} from "../../service/ShutterService";
 import {$} from "protractor";
 import {IOTDTO} from "../../dto/IOTDTO";
 import {IOTService} from "../../service/IOTService";
+import {ClockDTO} from "../../dto/ClockDTO";
+import {ClockService} from "../../service/ClockService";
 
 
 
@@ -29,6 +31,7 @@ import {IOTService} from "../../service/IOTService";
 export class GestionObjectComponent implements OnInit {
   heaters: HeaterDTO ;
   lights: LightDTO ;
+  clocks: ClockDTO ;
   shutters: ShutterDTO ;
   owner: string= '';
   type: string = 'all';
@@ -42,7 +45,7 @@ export class GestionObjectComponent implements OnInit {
   defaultIntensite ='50';
   defaultCouleur ='bleu';
 
-  constructor(private personService: PersonService, private router: Router, private route: ActivatedRoute, private heaterservice: HeaterService, private lightservice: LightService, private shutterservice : ShutterService, private iotservice: IOTService) {
+  constructor(private personService: PersonService, private router: Router, private route: ActivatedRoute, private heaterservice: HeaterService, private lightservice: LightService, private shutterservice : ShutterService, private clockservice: ClockService, private iotservice: IOTService) {
   }
 
   ngOnInit(): void {
@@ -51,12 +54,14 @@ export class GestionObjectComponent implements OnInit {
     this.lights = new LightDTO();
     this.shutters = new ShutterDTO();
     this.heaters = new HeaterDTO();
+    this.clocks = new ClockDTO();
     this.iots = new IOTDTO();
 
     console.log(this.heaters.actualval);
     console.log(this.shutters);
     console.log(this.lights);
     console.log(this.heaters);
+    console.log(this.clocks);
 
 
 
@@ -76,7 +81,7 @@ export class GestionObjectComponent implements OnInit {
       this.lightservice.updateLight(this.lights.id, this.lights).subscribe(data => console.log(data), error => console.log(error));
     })
     console.log("update"+this.lights);
-    alert(" Done ! ");
+
   }
 
 
@@ -86,18 +91,27 @@ export class GestionObjectComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.shutterservice.updateShutter(this.shutters.id, this.shutters).subscribe(data => console.log(data), error => console.log(error));
     })
-    console.log("update"+this.shutters);
-   alert(" Done ! ");
+    console.log("update of "+this.shutters);
+
 
   }
 
+  onSubmitClock(w: NgForm) {
+    console.log(w.value);
+    this.route.params.subscribe(params => {
+      this.clockservice.updateClock(this.clocks.id, this.clocks).subscribe(data => console.log(data), error => console.log(error));
+    })
+    console.log("update"+this.clocks);
+
+
+  }
   onSubmitHeater(h: NgForm) {
     console.log(h.value);
     this.route.params.subscribe(params => {
       this.heaterservice.updateHeater(this.heaters.id, this.heaters).subscribe(data => console.log(data), error => console.log(error));
     })
     console.log("update"+this.heaters);
-    alert(" Done ! ");
+
 
   }
 

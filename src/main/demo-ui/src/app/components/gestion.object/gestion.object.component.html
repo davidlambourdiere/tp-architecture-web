@@ -2,7 +2,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Gerer</title>
+  <title>Manage and Configure</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
@@ -125,7 +125,7 @@
             <span  *ngIf="iot.state==='off'"></span>
           </td>
           <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.ipadress}}</td>
-          <td [hidden]="owner!==iot.person.lastName && owner!==''"> Not available yet </td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''"> {{iot.minvalueref}} </td>
         </tr>
         </tbody>
       </table>
@@ -153,8 +153,23 @@
 
       <div class="form-group">
         <label for="couleur">
-          Light's color
+          Light's color you want
         </label>
+         <!--  AJOUTER AUJOURDHUI A REGLER : -->
+        <br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="yellow" value="yellow">
+          <label class="form-check-label" for="yellow">Yellow</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="red" value="red">
+          <label class="form-check-label" for="red">Red</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="blue" value="blue">
+          <label class="form-check-label" for="blue">Blue</label>
+        </div>
+        <br>
         <select id="couleur" class="form-control" name="couleur"  required [(ngModel)]="lights.color">
           <option value="red" >Red</option>
           <option value="blue">Blue</option>
@@ -184,7 +199,7 @@
       </div>
 
 
-      <button class="btn btn-primary" type="submit">Submit</button>
+      <button class="btn btn-primary" type="submit">Set those parameters</button>
 
     </form>
   </div>
@@ -228,7 +243,7 @@
       </div>
 
 
-      <button class="btn btn-primary" type="submit">Submit </button>
+      <button class="btn btn-primary" type="submit">Set those parameters </button>
 
     </form>
   </div>
@@ -259,7 +274,7 @@
         </select>
       </div>
 
-      <button class="btn btn-primary" type="submit">Submit</button>
+      <button class="btn btn-primary" type="submit">Set those parameters</button>
 
     </form>
   </div>
@@ -272,17 +287,26 @@
 <div class="row">
   <div class="col-sm-8 col-sm-offset-2">
     <h1> CLOCK </h1>
-    <form >
+    <form (ngSubmit)="onSubmitClock(w)" #w="ngForm">
+
+
+      <div class="form-group">
+        <label for="idclock">Id of the Clock you want to update</label>
+        <input type="text" class="form-control" id="idclock" name="id" required [(ngModel)]="clocks.id">
+      </div>
 
       <div >
+        <label for="appt">Please choose an hour to wake up for</label>
 
-        <label >
-          Please choose an hour to wake up for
-        </label>
+        <input type="time" id="appt" name="appt"
+               min="00:00" max="23:59" required [(ngModel)]="clocks.minvalueref">
+<br>
+        <small>For the next day</small>
+
 
       </div>
 
-      <button class="btn btn-primary" type="submit">Submit </button>
+      <button class="btn btn-primary" type="submit">Set the alarm clock </button>
 
     </form>
   </div>

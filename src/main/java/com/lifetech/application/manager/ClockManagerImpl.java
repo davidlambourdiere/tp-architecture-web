@@ -44,6 +44,20 @@ public class ClockManagerImpl implements ClockManager {
         return orikaBeanMapper.map(clock, ClockDTO.class);
     }
 
+
+    @Override
+    public ClockDTO updateClock(String id, ClockDTO clockDtoReceived) {
+
+        Clock clock = clockDAO.findById(Long.parseLong(id)).orElse(null);
+        // converti en DTO pour modifier
+        ClockDTO updatedClockDTO = orikaBeanMapper.map(clock, ClockDTO.class);
+
+        updatedClockDTO.setMinvalueref(clockDtoReceived.getMinvalueref());
+        Clock clocksaved = orikaBeanMapper.map(updatedClockDTO, Clock.class);
+        System.out.println(clocksaved);
+        return orikaBeanMapper.map(clockDAO.save(clocksaved), ClockDTO.class);
+    }
+
     @Override
     public List<ClockDTO> findByRoom(String id) {
         Room room = roomDao.findById(Long.parseLong(id)).orElse(null);
