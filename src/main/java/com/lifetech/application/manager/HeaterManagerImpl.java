@@ -56,6 +56,22 @@ public class HeaterManagerImpl implements HeaterManager {
         return orikaBeanMapper.mapAsList(heaters, HeaterDTO.class);
     }
 
+    @Override
+    public List<HeaterDTO> findHeaterByPerson(String id) {
+        return null;
+    }
+
+    @Override
+    public HeaterDTO updateHeater(String id, HeaterDTO heaterDtoReceived) {
+        return null;
+    }
+
+    @Override
+    public HeaterDTO switchDownHeater(String id, HeaterDTO heaterDtoReceived) {
+        return null;
+    }
+
+
     public int countHeaters(){
         List<Heater> heaters = heaterDAO.findAll();
         return heaters.size();

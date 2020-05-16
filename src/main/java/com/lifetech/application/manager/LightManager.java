@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface LightManager {
 
+
+    LightDTO updateLight( String id, LightDTO lightDtoReceived);
+
     List<LightDTO> findAllLight();
 
     List<LightDTO> findLightByPerson(String id);

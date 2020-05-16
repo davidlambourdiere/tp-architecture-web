@@ -9,6 +9,7 @@ public class HeaterDTO extends PersistableElementDTO{
     private Double price;
     private Timestamp startdate;
     private String minvalueref;
+    private String actualval;
     private String ipadress;
     private String suspect;
     private String maxvalueref;
@@ -107,11 +108,47 @@ public class HeaterDTO extends PersistableElementDTO{
     public void setHeaters(List<HeaterDTO> heaters) {
     }
 
+    public String getStatus() {
+        return breakdownstatus;
+    }
+
+    public void setStatus(String status) {
+        this.breakdownstatus = breakdownstatus;
+    }
+
+    public String getActualval() {
+        return actualval;
+    }
+
+    public void setActualval(String actualval) {
+        this.actualval = actualval;
+    }
+
     public String getTemperature() {
         return temperature;
     }
 
     public void setTemperature(String temperature) {
         this.temperature = temperature;
+
     }
-}
+    @Override
+    public String toString() {
+        return "HeaterDTO{" +
+                "breakdownstatus='" + breakdownstatus + '\'' +
+                ", state='" + state + '\'' +
+                ", price=" + price +
+                ", startdate=" + startdate +
+                ", minvalueref='" + minvalueref + '\'' +
+                ", actualval='" + actualval + '\'' +
+                ", ipadress='" + ipadress + '\'' +
+                ", suspect='" + suspect + '\'' +
+                ", maxvalueref='" + maxvalueref + '\'' +
+                ", activityduration=" + activityduration +
+                ", person=" + person +
+                ", room=" + room +
+                '}';
+
+
+}}
+

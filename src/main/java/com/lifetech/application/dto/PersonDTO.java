@@ -18,6 +18,7 @@ public class PersonDTO extends PersistableElementDTO {
     private String averageincome;
     private String profiletype;
     private String deseas;
+
     private ResidenceDTO residence;
     @JsonIgnore
     private StrapDTO strap;
@@ -114,6 +115,7 @@ public class PersonDTO extends PersistableElementDTO {
         this.averageincome = averageincome;
     }
 
+
     public String getDeseas() {
         return deseas;
     }
@@ -129,6 +131,7 @@ public class PersonDTO extends PersistableElementDTO {
     public void setResidence(ResidenceDTO residence) {
         this.residence = residence;
     }
+
 
     @Override
     public String toString() {
@@ -153,6 +156,7 @@ public class PersonDTO extends PersistableElementDTO {
 
     public void setProfiletype(String profiletype) { this.profiletype = profiletype; }
 
+
     public StrapDTO getStrap() {
         return strap;
     }
@@ -161,3 +165,4 @@ public class PersonDTO extends PersistableElementDTO {
         this.strap = strap;
     }
 }
+

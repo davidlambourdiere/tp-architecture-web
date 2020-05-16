@@ -106,4 +106,22 @@ public class ShutterDTO extends  PersistableElementDTO{
     public RoomDTO getRoom() { return room; }
 
     public void setRoom(RoomDTO room) { this.room = room; }
+
+    @Override
+    public String toString() {
+        return "ShutterDTO{" +
+                "breakdownstatus='" + breakdownstatus + '\'' +
+                ", state='" + state + '\'' +
+                ", startdate=" + startdate +
+                ", minvalueref='" + minvalueref + '\'' +
+                ", suspect='" + suspect + '\'' +
+                ", ipadress='" + ipadress + '\'' +
+                ", maxvalueref='" + maxvalueref + '\'' +
+                ", activityduration=" + activityduration +
+                ", percentage='" + percentage + '\'' +
+                ", person=" + person +
+                ", price=" + price +
+                ", room=" + room +
+                '}';
+    }
 }

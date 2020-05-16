@@ -39,6 +39,41 @@ public class ShutterManagerImpl implements ShutterManager {
         this.roomDao = roomDao;
         this.orikaBeanMapper = orikaBeanMapper;
     }
+
+    @Override
+    public List<ShutterDTO> findAllShutter(){
+        List<Shutter> shutters = shutterDAO.findAll();
+        return orikaBeanMapper.mapAsList(shutters, ShutterDTO.class);
+    }
+
+    @Override
+    public List<ShutterDTO> findShutterByPerson(String id) {
+        List<Shutter> shutters = shutterDAO.findAllByPersonId(Long. parseLong(id));
+        return orikaBeanMapper.mapAsList(shutters, ShutterDTO.class);
+    }
+
+
+    @Override
+    public ShutterDTO findById(String id) {
+        Shutter shutter = shutterDAO.findById(Long.parseLong(id)).orElse(null);
+        return orikaBeanMapper.map(shutter, ShutterDTO.class);
+    }
+
+
+    @Override
+    public ShutterDTO updateShutter(String id, ShutterDTO shutterDtoReceived) {
+
+        Shutter shutter = shutterDAO.findById(Long.parseLong(id)).orElse(null);
+        // converti en DTO pour modifier
+        ShutterDTO updatedShutterDTO = orikaBeanMapper.map(shutter, ShutterDTO.class);
+
+        updatedShutterDTO.setPercentage(shutterDtoReceived.getPercentage());
+        Shutter shuttersaved = orikaBeanMapper.map(updatedShutterDTO, Shutter.class);
+        System.out.println(shuttersaved);
+        return orikaBeanMapper.map(shutterDAO.save(shuttersaved), ShutterDTO.class);
+    }
+
+
     @Override
     public List<ShutterDTO> findByRoom(String id) {
         Room room = roomDao.findById(Long.parseLong(id)).orElse(null);
