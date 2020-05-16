@@ -9,8 +9,6 @@ import javax.persistence.Id;
 @Entity(name = "personprofile")
 public class PersonProfile extends PersistableElement {
 
-
-
     @Column(name = "nom")
     private String nom;
 

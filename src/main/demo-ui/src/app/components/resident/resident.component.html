@@ -13,12 +13,22 @@ nawfal component
     <th scope="col"><h3>ID</h3></th>
     <th scope="col"><h3>Nom</h3></th>
     <th scope="col"><h3>Prénom</h3></th>
-    <th scope="col"><h3>Rang</h3></th>
+    <th scope="col"><h3>Age</h3></th>
+    <th scope="col"><h3>Mobilité Estimé</h3></th>
+    <th scope="col"><h3>Maladie Chronique</h3></th>
+    <th scope="col"><h3>Urgence Medical</h3></th>
+    <th scope="col"><h3>Profile</h3></th>
+    <th scope="col"><h3>Coefficients Priorité</h3></th>
   </tr>
   <tr *ngFor="let person of persons">
     <th scope="col">{{person.id}}</th>
     <td><input type="text">{{person.nom}}</td>
     <td>{{person.prenom}}</td>
+    <td>{{person.age}}</td>
+    <td>{{person.estimated_mobility}}</td>
+    <td>{{person.chronic_disease}}</td>
+    <td>{{person.medical_emergencies}}</td>
+    <td>{{person.profile}}</td>
     <td>{{person.priority_coef}}</td>
   </tr>
 </table>
