@@ -61,8 +61,6 @@ export class PositionComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   positionHistory(strapId: bigint): void {
-    this.map.removeAllMarkers();
-
     this.subs.unsubscribe();
     this.map.setOptions({asGPSTracker: false, centerOnMarker: false});
 
@@ -82,7 +80,6 @@ export class PositionComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param id Identifiant du bracelet
    */
   findPosition(id: bigint): void {
-    this.map.removeAllFeatures();
     this.map.setOptions({asGPSTracker: true, centerOnMarker: true});
     this.subs.add(
       this.positionService.findPositionByStrap(id).subscribe(position => {

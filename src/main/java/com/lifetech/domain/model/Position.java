@@ -15,7 +15,7 @@ public class Position extends PersistableElement {
     @Column(name = "longitude")
     private Double longitude;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.DETACH)
     private Strap strap;
 
     public Position() {}

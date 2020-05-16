@@ -325,13 +325,17 @@ export class OpenLayersMap {
 
       // Supprime tous les autres marqueurs si l'option asGPSTracker est activée
       if (this.mapOptions.asGPSTracker) {
-        this.removeAllMarkers();
+        //this.removeAllMarkers();
       }
 
-      this.vectorSource.addFeature(marker);
+      //this.vectorSource.addFeature(marker);
+
+      const vectorSource = new VectorSource({
+        features: [marker]
+      });
 
       const vectorLayer = new VectorLayer({
-        source: this.vectorSource
+        source: vectorSource
       });
 
       this.map.addLayer(vectorLayer);
@@ -406,6 +410,10 @@ export class OpenLayersMap {
     for (const feature of markers) {
       this.vectorSource.removeFeature(feature);
     }
+  }
+
+  removeAllLayers() {
+    //this.map.
   }
 
   /**

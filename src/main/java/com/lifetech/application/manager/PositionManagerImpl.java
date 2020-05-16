@@ -14,9 +14,14 @@ import net.sf.geographiclib.GeodesicLine;
 import net.sf.geographiclib.GeodesicMask;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,11 +30,14 @@ public class PositionManagerImpl implements PositionManager {
     private final OrikaBeanMapper orikaBeanMapper;
     private final StrapDAO strapDAO;
 
+    private EntityManager entityManager;
 
-    public PositionManagerImpl(PositionDAO positionDAO, OrikaBeanMapper orikaBeanMapper, StrapDAO strapDAO) {
+
+    public PositionManagerImpl(PositionDAO positionDAO, OrikaBeanMapper orikaBeanMapper, StrapDAO strapDAO, EntityManager em) {
         this.positionDAO = positionDAO;
         this.orikaBeanMapper = orikaBeanMapper;
         this.strapDAO = strapDAO;
+        this.entityManager = em.getEntityManagerFactory().createEntityManager();
     }
 
     public PositionDAO getPositionDAO() {
@@ -46,51 +54,53 @@ public class PositionManagerImpl implements PositionManager {
         return orikaBeanMapper.map(p, PositionDTO.class);
     }
 
+    public void test() {
+        List<Strap> straps = strapDAO.findAll();
+        for (Strap strap : straps) {
+            new Thread(() -> {
+                try {
+                    this.simulatePosition(strap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        }
+    }
+
     /**
      * Génère une nouvelle position
      *
      * @throws Exception Exception
      */
-    public void simulatePosition() throws Exception {
+    public void simulatePosition(Strap strap) throws Exception {
         Tracking tracking = new Tracking();
         Map<String, List<Coordinate>> map = tracking.parseMapJson();
-        List<Coordinate> chemin = map.get("chemin-1");
-        Strap strap2 = strapDAO.findById(Long.parseLong("1")).orElse(null);
-        Geodesic geod = Geodesic.WGS84;
-        double lat1 = 0, lon1 = 0, lat2 = 0, lon2 = 0;
-        for (int j = 0; j < chemin.size() - 1; j++) {
-            lat1 = chemin.get(j).getLatitude();
-            lon1 = chemin.get(j).getLongitude(); // JFK
-
-
-            lat2 = chemin.get(j + 1).getLatitude();
-            lon2 = chemin.get(j + 1).getLongitude(); // SIN
-
-            GeodesicLine line = geod.InverseLine(lat1, lon1, lat2, lon2,
-                    GeodesicMask.DISTANCE_IN |
-                            GeodesicMask.LATITUDE |
-                            GeodesicMask.LONGITUDE);
-            double ds0 = 1;     // Nominal distance between points = 500 km
-            // The number of intervals
-            int num = (int) (Math.ceil(line.Distance() / ds0));
-            {
-                // Use intervals of equal length
-                double ds = line.Distance() / num;
-                for (int i = 0; i <= num; ++i) {
-                    GeodesicData g = line.Position(i * ds,
-                            GeodesicMask.LATITUDE |
-                                    GeodesicMask.LONGITUDE);
-                    try {
-                        Position p = new Position();
-                        p.setDate(new Date());
-                        p.setLongitude(g.lon2);
-                        p.setLatitude(g.lat2);
-                        p.setStrap(strap2);
-                        this.positionDAO.save(p);
-                    } catch (Exception n) {
-                        System.out.println(n.getMessage());
+        List<Coordinate> chemin = map.get("chemin-" + strap.getId());
+        if (chemin != null) {
+            Geodesic geod = Geodesic.WGS84;
+            double lat1 = 0, lon1 = 0, lat2 = 0, lon2 = 0;
+            for (int j = 0; j < chemin.size() - 1; j++) {
+                lat1 = chemin.get(j).getLatitude();
+                lon1 = chemin.get(j).getLongitude(); // JFK
+                lat2 = chemin.get(j + 1).getLatitude();
+                lon2 = chemin.get(j + 1).getLongitude(); // SIN
+                GeodesicLine line = geod.InverseLine(lat1, lon1, lat2, lon2,
+                        GeodesicMask.DISTANCE_IN |
+                                GeodesicMask.LATITUDE |
+                                GeodesicMask.LONGITUDE);
+                double ds0 = 1;     // Nominal distance between points = 500 km
+                // The number of intervals
+                int num = (int) (Math.ceil(line.Distance() / ds0));
+                {
+                    // Use intervals of equal length
+                    double ds = line.Distance() / num;
+                    for (int i = 0; i <= num; ++i) {
+                        GeodesicData g = line.Position(i * ds,
+                                GeodesicMask.LATITUDE |
+                                        GeodesicMask.LONGITUDE);
+                        this.saveData(g.lat2, g.lon2, strap);
+                        Thread.sleep(750);
                     }
-                    Thread.sleep(3000);
                 }
             }
         }
@@ -173,6 +183,20 @@ public class PositionManagerImpl implements PositionManager {
          }
          this.simulatePosition();*/
 
+    }
+
+    public void saveData(Double lat, Double lon, Strap strap) {
+        try {
+            Position p = new Position();
+            p.setDate(new Date());
+            p.setLongitude(lon);
+            p.setLatitude(lat);
+            p.setStrap(strap);
+            this.positionDAO.save(p);
+
+        } catch (Exception n) {
+            System.out.println(n.getMessage());
+        }
     }
 
     @Override

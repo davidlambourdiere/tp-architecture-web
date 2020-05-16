@@ -13,7 +13,7 @@ export class PositionService {
   }
 
   findPositionByStrap(strapId: bigint): Observable<PositionDTO> {
-    return interval(3000).pipe(
+    return interval(750).pipe(
       startWith(0),
       switchMap(() => this.http.get<PositionDTO>(`api/position/findByStrap/${strapId}`))
     );
