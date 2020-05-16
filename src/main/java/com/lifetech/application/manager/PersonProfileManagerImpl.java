@@ -24,7 +24,6 @@ public class PersonProfileManagerImpl implements PersonProfileManager{
         this.orikaBeanMapper = orikaBeanMapper;
     }
 
-
     public List<PersonProfileDTO> findAll() {
 
         return orikaBeanMapper.mapAsList(personProfileDAO.findAll(), PersonProfileDTO.class);
