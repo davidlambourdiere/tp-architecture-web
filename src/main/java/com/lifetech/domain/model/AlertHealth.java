@@ -12,6 +12,9 @@ public class AlertHealth extends PersistableElement{
     @Column(name="startdate")
     private Timestamp startdate;
 
+    @Column(name="enddate")
+    private Timestamp enddate;
+
     @Column(name="criticity")
     private String criticity;
 
@@ -51,6 +54,14 @@ public class AlertHealth extends PersistableElement{
         this.startdate = startdate;
     }
 
+    public Timestamp getEnddate() {
+        return enddate;
+    }
+
+    public void setEnddate(Timestamp enddate) {
+        this.enddate = enddate;
+    }
+
     public String getCriticity() {
         return criticity;
     }
@@ -81,5 +92,19 @@ public class AlertHealth extends PersistableElement{
 
     public void setDoctor(Long doctor) {
         this.doctor = doctor;
+    }
+
+
+    @Override
+    public String toString() {
+        return "AlertHealth{" +
+                "message='" + message + '\'' +
+                ", startdate=" + startdate +
+                ", enddate=" + enddate +
+                ", criticity='" + criticity + '\'' +
+                ", status='" + status + '\'' +
+                ", strap=" + strap +
+                ", doctor=" + doctor +
+                '}';
     }
 }

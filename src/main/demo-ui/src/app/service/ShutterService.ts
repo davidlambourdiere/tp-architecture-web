@@ -13,16 +13,17 @@ export class ShutterService {
   constructor(private http: HttpClient) {
   }
 
-  findbyId(id: number) :Observable<ShutterDTO>{
+
+
+  findbyId(id: bigint) :Observable<ShutterDTO>{
     return this.http.get<ShutterDTO>(`api/shutter/${id}`);
   }
 
-  updateShutter(id: number , shutter: ShutterDTO): Observable<ShutterDTO> {
+  updateShutter(id: bigint , shutter: ShutterDTO): Observable<ShutterDTO> {
     return this.http.put<ShutterDTO>(`api/shutter/updateShutter/${id}`, shutter);
   }
 
-
-  findShutter(id: string) : Observable<any> {
-    return this.http.get(`api/shutter/find/${id}`);
+  findIOTByRoom(idroom: string): Observable<any> {
+    return this.http.get(`api/shutter/findByRoom/${idroom}`);
   }
 }

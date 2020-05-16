@@ -12,4 +12,8 @@ export class HeaterMessageService {
   breakdownDetection(idHeater: string) {
     return this.http.get(`api/heaterMessages/breakdownDetection/${idHeater}`);
   }
+
+  suspectDetection(idHeater: string) {
+    return this.http.get(`api/heaterMessages/suspectDetection/${idHeater}`);
+  }
 }

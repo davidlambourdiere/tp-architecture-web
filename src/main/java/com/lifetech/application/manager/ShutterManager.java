@@ -6,12 +6,23 @@ import com.lifetech.domain.model.Shutter;
 
 import java.util.List;
 
+import java.util.List;
+
 public interface ShutterManager {
-    ShutterDTO findByRoom(String id);
+
+    List<ShutterDTO> findAllShutter();
+
+    List<ShutterDTO> findShutterByPerson(String id);
+
+    ShutterDTO findById(String id);
+
+    ShutterDTO updateShutter( String id, ShutterDTO shutterDtoReceived);
+
+    List<ShutterDTO> findByRoom(String id);
 
     ShutterDetailDTO findByHistoric(String id);
 
     List<Shutter> findAllShutterMalFunctionning();
 
-    ShutterDTO findById(String id);
 }
+

@@ -7,6 +7,7 @@ import java.util.List;
 public interface PersonProfileManager {
 
     List<PersonProfileDTO> findAll();
+    List<PersonProfileDTO> findRank();
 
     PersonProfileDTO save(PersonProfileDTO updatedProfile);
 }

@@ -2,10 +2,12 @@ package com.lifetech.application.dto;
 
 import java.sql.Timestamp;
 
-public class AlertHealthDTO {
+public class AlertHealthDTO extends PersistableElementDTO{
    private String message;
 
     private Timestamp startdate;
+
+    private Timestamp enddate;
 
     private String criticity;
 
@@ -32,6 +34,14 @@ public class AlertHealthDTO {
 
     public void setStartdate(Timestamp startdate) {
         this.startdate = startdate;
+    }
+
+    public Timestamp getEnddate() {
+        return enddate;
+    }
+
+    public void setEnddate(Timestamp enddate) {
+        this.enddate = enddate;
     }
 
     public String getCriticity() {

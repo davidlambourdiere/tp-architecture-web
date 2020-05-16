@@ -9,6 +9,14 @@ import javax.persistence.Id;
 @Entity(name = "personprofile")
 public class PersonProfile extends PersistableElement {
 
+
+
+    @Column(name = "nom")
+    private String nom;
+
+    @Column(name = "prenom")
+    private String prenom;
+
     @Column(name="age")
     private int age;
 
@@ -29,6 +37,67 @@ public class PersonProfile extends PersistableElement {
 
     @Column(name= "estimated_mobility")
     private int estimated_mobility;
+
+    @Column(name= "smoking")
+    private boolean smoking;
+
+    @Column(name = "smoking_time")
+    private float smoking_time;
+
+    @Column(name = "drinker")
+    private boolean drinker;
+
+    @Column(name= "medical_emergencies")
+    private boolean medical_emergencies;
+
+    @Column(name = "Hobbies")
+    private String hobbies;
+
+    @Column(name = "revenue")
+    private float revenue;
+
+    @Column(name = "profile")
+    private String profile;
+
+    public PersonProfile(){}
+
+
+
+    public PersonProfile(String nom, String prenom, int age, String adress, int postal_code, String adress_email, int tel_number, String chronic_disease, int estimated_mobility, boolean smoking, float smoking_time, boolean drinker, boolean medical_emergencies, String hobbies,float revenue, String profile) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.age = age;
+        this.adress = adress;
+        this.postal_code = postal_code;
+        this.adress_email = adress_email;
+        this.tel_number = tel_number;
+        this.chronic_disease = chronic_disease;
+        this.estimated_mobility = estimated_mobility;
+        this.smoking = smoking;
+        this.smoking_time = smoking_time;
+        this.drinker = drinker;
+        this.medical_emergencies = medical_emergencies;
+        this.hobbies = hobbies;
+        this.revenue = revenue;
+        this.profile = profile;
+    }
+
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
 
     public int getAge() {
         return age;
@@ -94,6 +163,14 @@ public class PersonProfile extends PersistableElement {
         this.smoking = smoking;
     }
 
+    public float getSmoking_time() {
+        return smoking_time;
+    }
+
+    public void setSmoking_time(float smoking_time) {
+        this.smoking_time = smoking_time;
+    }
+
     public boolean isDrinker() {
         return drinker;
     }
@@ -118,38 +195,24 @@ public class PersonProfile extends PersistableElement {
         this.hobbies = hobbies;
     }
 
-    @Column(name= "smoking")
-    private boolean smoking;
+    public float getRevenue() { return revenue; }
 
-    @Column(name = "drinker")
-    private boolean drinker;
+    public void setRevenue(float revenue) { this.revenue = revenue; }
 
-    @Column(name= "medical_emergencies")
-    private boolean medical_emergencies;
+    public String getProfile() {
+        return profile;
+    }
 
-    @Column(name = "Hobbies")
-    private String hobbies;
-
-    public PersonProfile(){}
-
-    public PersonProfile(int age, String adress, int postal_code, String adress_email, int tel_number, String chronic_disease, int estimated_mobility, boolean smoking, boolean drinker, boolean medical_emergencies, String hobbies) {
-        this.age = age;
-        this.adress = adress;
-        this.postal_code = postal_code;
-        this.adress_email = adress_email;
-        this.tel_number = tel_number;
-        this.chronic_disease = chronic_disease;
-        this.estimated_mobility = estimated_mobility;
-        this.smoking = smoking;
-        this.drinker = drinker;
-        this.medical_emergencies = medical_emergencies;
-        this.hobbies = hobbies;
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 
     @Override
     public String toString() {
         return "PersonProfile{" +
-                "age=" + age +
+                "nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", age=" + age +
                 ", adress='" + adress + '\'' +
                 ", postal_code=" + postal_code +
                 ", adress_email='" + adress_email + '\'' +
@@ -157,9 +220,12 @@ public class PersonProfile extends PersistableElement {
                 ", chronic_disease='" + chronic_disease + '\'' +
                 ", estimated_mobility=" + estimated_mobility +
                 ", smoking=" + smoking +
+                ", smoking_time=" + smoking_time +
                 ", drinker=" + drinker +
                 ", medical_emergencies=" + medical_emergencies +
-                ", Hobbies='" + hobbies + '\'' +
+                ", hobbies='" + hobbies + '\'' +
+                ", revenue=" + revenue +
+                ", profile='" + profile + '\'' +
                 '}';
     }
 }

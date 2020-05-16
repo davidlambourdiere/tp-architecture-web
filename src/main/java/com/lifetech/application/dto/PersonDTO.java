@@ -3,6 +3,8 @@ package com.lifetech.application.dto;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class PersonDTO extends PersistableElementDTO {
     
     private String firstName;
@@ -18,7 +20,11 @@ public class PersonDTO extends PersistableElementDTO {
     private String averageincome;
     private String profiletype;
     private String deseas;
+
     private ResidenceDTO residence;
+    @JsonIgnore
+    private StrapDTO strap;
+
 
     public PersonDTO() {
     }
@@ -111,6 +117,7 @@ public class PersonDTO extends PersistableElementDTO {
         this.averageincome = averageincome;
     }
 
+
     public String getDeseas() {
         return deseas;
     }
@@ -126,6 +133,7 @@ public class PersonDTO extends PersistableElementDTO {
     public void setResidence(ResidenceDTO residence) {
         this.residence = residence;
     }
+
 
     @Override
     public String toString() {
@@ -149,4 +157,14 @@ public class PersonDTO extends PersistableElementDTO {
     public String getProfiletype() { return profiletype; }
 
     public void setProfiletype(String profiletype) { this.profiletype = profiletype; }
+
+
+    public StrapDTO getStrap() {
+        return strap;
+    }
+
+    public void setStrap(StrapDTO strap) {
+        this.strap = strap;
+    }
 }
+

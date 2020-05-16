@@ -6,6 +6,7 @@ export class HeaterDTO{
   breakdownstatus: string;
   state: string;
   minvalueref: string;
+  actualval :string;
   price: number;
   suspect: string;
   ipadress: string;

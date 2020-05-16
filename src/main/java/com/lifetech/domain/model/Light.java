@@ -21,7 +21,7 @@ public class Light extends IOT{
     @ManyToOne(cascade = CascadeType.ALL)
     private Room room;
 
-    public Light(Double price, StatusEnum breakdownstatus, StateEnum state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, String suspect, Timestamp activityduration, String color, String percentage, Person person, Room room) {
+    public Light(Double price, StatusEnum breakdownstatus, StateEnum state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, SuspectEnum suspect, Timestamp activityduration, String color, String percentage, Person person, Room room) {
         super(price, breakdownstatus, state, ipadress, startdate, minvalueref, maxvalueref, suspect, activityduration);
         this.color = color;
         this.percentage = percentage;
@@ -59,4 +59,14 @@ public class Light extends IOT{
     public Room getRoom() { return room; }
 
     public void setRoom(Room room) { this.room = room; }
+
+    @Override
+    public String toString() {
+        return "Light{" +
+                "color='" + color + '\'' +
+                ", percentage='" + percentage + '\'' +
+                ", person=" + person +
+                ", room=" + room +
+                '}';
+    }
 }

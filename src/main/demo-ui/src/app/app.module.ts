@@ -48,6 +48,14 @@ import {NotificationReceivedComponent} from "./components/notification/notificat
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatFormFieldModule} from "@angular/material/form-field";
+import { DetailAlertComponent } from './components/medical.control/detail.alert/detail.alert.component';
+import {ChartsModule} from "ng2-charts";
+import { DatePipe } from '@angular/common';
+import {MedicalProfilComponent} from "./components/medical.control/medical.profil/medical.profil.component";
+import {ProfilelistComponent} from "./components/profilelist/profilelist.component";
+import { PositionComponent } from './components/position/position.component';
+
+
 
 @NgModule({
   declarations: [
@@ -84,7 +92,12 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     MedicalHomeComponent,
     MedicalMenuComponent,
     MedicalResidentsComponent,
-    SurveyComponent
+    SurveyComponent,
+    DetailAlertComponent,
+    MedicalProfilComponent,
+    ProfilelistComponent,
+    PositionComponent
+
   ],
   imports: [
     // NgbModule,
@@ -97,8 +110,9 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     BrowserAnimationsModule,
     MatAutocompleteModule,
     MatFormFieldModule,
+    ChartsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

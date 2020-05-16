@@ -12,17 +12,23 @@ export class LightService {
   constructor(private http: HttpClient) {
   }
 
-  findLight(id: string) : Observable<any> {
-    return this.http.get(`api/light/find/${id}`);
-  }
 
-  findbyId(id: number) :Observable<LightDTO>{
+
+  findbyId(id: bigint) :Observable<LightDTO>{
     return this.http.get<LightDTO>(`api/light/${id}`);
   }
+
+  // updateLight(id: bigint , light: LightDTO): Observable<LightDTO> {
+   // return this.http.put<LightDTO>(`api/light/updateLight/${id}`, light);
+  // }
+
 
   updateLight(id: number , light: LightDTO): Observable<LightDTO> {
     return this.http.put<LightDTO>(`api/light/updateLight/${id}`, light);
   }
 
 
+  findIOTByRoom(idroom: string): Observable<any> {
+    return this.http.get(`api/light/findByRoom/${idroom}`);
+  }
 }

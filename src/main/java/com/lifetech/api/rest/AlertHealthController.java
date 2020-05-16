@@ -1,10 +1,9 @@
 package com.lifetech.api.rest;
 
 import com.lifetech.application.dto.AlertHealthDTO;
+import com.lifetech.application.dto.PersonDTO;
 import com.lifetech.application.manager.AlertHealthManager;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,11 +30,24 @@ public class AlertHealthController extends RestBaseController {
         return alertHealthManager.findAlertNumber();
     }
 
-    @GetMapping("alert/health/findAlertNumberByPerson/{id}")
-    private int findAlertNumberByPerson(@PathVariable("id") String id){
-        return alertHealthManager.findAlertNumberByPerson(id);
+    @GetMapping("alert/health/findAlertNumberByStrap/{id}")
+    private int findAlertNumberByStrap(@PathVariable("id") String id){
+        return alertHealthManager.findAlertNumberByStrap(id);
     }
 
+    @GetMapping("alert/health/findById/{id}")
+    private AlertHealthDTO findById(@PathVariable("id") String id){
+        return alertHealthManager.findDtoById(id);
+    }
 
+    @GetMapping("alert/health/findNewAlertNumberByStrap/{id}")
+    private int findNewAlertNumberByStrap(@PathVariable("id") String id){
+        return alertHealthManager.findAlertNumberByStrapAndStatus(id, "NEW");
+    }
+
+    @GetMapping("alert/health/findDoneAlertNumberByStrap/{id}")
+    private int findDoneAlertNumberByStrap(@PathVariable("id") String id){
+        return alertHealthManager.findAlertNumberByStrapAndStatus(id, "DONE");
+    }
 
 }

@@ -16,4 +16,8 @@ public interface PersonDAO extends JpaRepository<Person, Long> {
     int countByUserrole(PersonStatus userrole);
 
     List<Person> findByUserrole(PersonStatus personStatus);
+
+
+    List<Person> findByUserroleAndFirstName(PersonStatus resident, String query);
+
 }

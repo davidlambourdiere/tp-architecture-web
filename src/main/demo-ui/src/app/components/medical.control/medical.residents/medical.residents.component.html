@@ -62,6 +62,14 @@
             </div>
         </form>
         </div>-->
+       <!--<section class="filter-wrapper">
+          <div class="keyword-wrapper">
+            <input [formControl]="queryField" type="text" id="keyword" placeholder="Search for residents..." autofocus/>
+          </div>
+          <ul *ngFor="let result of results"  class="filter-select">
+            <li class="filter-select-list"><p class="artist-name">{{result.firstName}}</p>
+          </ul>
+        </section>-->
       </div>
 
       <div class="row">
@@ -87,17 +95,22 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr *ngFor="let person of this.personlist; index as i">
+                  <tr *ngFor="let strap of this.straplist; index as i">
                     <td>{{i+1}}</td>
                     <td>
-                      <!--<button type="button" class="btn btn-success"></button>
-                      <button type="button" class="btn btn-danger"></button>-->
+                      <h6 *ngIf="strap.healthstate==null">NO DATA</h6>
+                      <button *ngIf="strap.healthstate=='OK'" type="button" class="btn btn-success">
+                        {{strap.hearthrate}} bpm
+                      </button>
+                      <button *ngIf="strap.healthstate=='KO'" type="button" class="btn btn-danger">
+                        {{strap.hearthrate}} bpm
+                      </button>
                     </td>
-                    <td>{{person.firstName}}</td>
-                    <td>{{person.lastName}}</td>
-                    <td>{{person.birthdate}}</td>
-                    <td>{{person.deseas}}</td>
-                    <td><button  class="btn btn-info" style="margin-left: 10px">Details</button>
+                    <td>{{strap.person.firstName}}</td>
+                    <td>{{strap.person.lastName}}</td>
+                    <td>{{strap.person.birthdate}}</td>
+                    <td>{{strap.person.deseas}}</td>
+                    <td><button [routerLink]="['/medicalprofil', strap.id ]" class="btn btn-info" style="margin-left: 10px">Details</button>
                     </td>
                   </tr>
                   </tbody>
