@@ -26,4 +26,5 @@ export class PositionService {
   positionHistory(strapId: bigint): Observable<Array<PositionDTO>> {
     return this.http.get<Array<PositionDTO>>(`api/position/positionHistory/${strapId}`);
   }
+
 }

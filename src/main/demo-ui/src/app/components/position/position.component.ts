@@ -62,15 +62,16 @@ export class PositionComponent implements OnInit, AfterViewInit, OnDestroy {
 
   positionHistory(strapId: bigint): void {
     this.subs.unsubscribe();
-    this.map.setOptions({asGPSTracker: false, centerOnMarker: false});
-
+    this.map.removeMarkers();
+    this.map.removeHistoryLayers();
     this.subs.add(this.positionService.positionHistory(strapId).subscribe(history => {
         const positions = history.map(position => [position.longitude, position.latitude]);
-        console.log(positions)
+        this.map.positionsHistory(positions);
+        /*console.log(positions)
         history.forEach(position => {
-          this.map.addMarker([position.longitude, position.latitude])
+          this.map.addMarker(strapId, [position.longitude, position.latitude], { isHistoryMarker: true })
         });
-        this.map.drawLine(positions, {withArrows: true});
+        this.map.drawLine(positions, {withArrows: true});*/
       })
     );
   }
@@ -80,10 +81,10 @@ export class PositionComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param id Identifiant du bracelet
    */
   findPosition(id: bigint): void {
-    this.map.setOptions({asGPSTracker: true, centerOnMarker: true});
+    this.map.removeHistoryLayers();
     this.subs.add(
       this.positionService.findPositionByStrap(id).subscribe(position => {
-        this.map.addMarker([position.longitude, position.latitude], {textUnderMarker: `${position.strap.person.firstName}  ${position.strap.person.lastName}`});
+        this.map.addMarker(position.strap.id, [position.longitude, position.latitude], {textUnderMarker: `${position.strap.person.firstName}  ${position.strap.person.lastName}`});
       })
     );
   }
