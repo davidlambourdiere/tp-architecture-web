@@ -24,7 +24,7 @@
         <a class="nav-link" [routerLink]="'/medicalControl'"><i class="fa fa-medkit"></i>Contrôle médical</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="'/billing'"><i class="fa fa-bank"></i>Billing</a>
+        <a class="nav-link" [routerLink]="['/billing',person.login]"><i class="fa fa-bank"></i>Billing</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" [routerLink]="'/resident'"> <i class="fa fa-address-book"></i>Resident</a>
