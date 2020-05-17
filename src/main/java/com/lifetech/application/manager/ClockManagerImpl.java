@@ -41,7 +41,8 @@ public class ClockManagerImpl implements ClockManager {
     @Override
     public ClockDTO findById(String id) {
         Clock clock = clockDAO.findById(Long.parseLong(id)).orElse(null);
-        return orikaBeanMapper.map(clock, ClockDTO.class);
+        ClockDTO clockDTO = orikaBeanMapper.map(clock, ClockDTO.class);
+        return clockDTO;
     }
 
 

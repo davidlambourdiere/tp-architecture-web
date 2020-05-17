@@ -32,4 +32,8 @@ export class PersonService {
   findPersonByRole( personStatus : PersonStatusDTO){
     return this.http.post<PersonDTO[]>(`api/person/findPersonByRole`, personStatus);
   }
+
+  findResidentsByName( query : String){
+    return this.http.get<PersonDTO[]>(`api/person/findResidentsByName/${query}`);
+  }
 }

@@ -7,6 +7,8 @@ import {
   Validators,
   FormControl
 } from "@angular/forms";
+
+
 import {Component, Input, NgModule, OnInit} from "@angular/core";
 import { BrowserModule} from "@angular/platform-browser";
 import {PersonDTO} from "../../dto/PersonDTO";
@@ -18,6 +20,7 @@ import {SubscriptionService} from "../../service/SubscriptionService";
 import {PersonProfileService} from "../../service/PersonProfileService";
 import {SubscriptionDTO} from "../../dto/SubscriptionDTO";
 import {PersonProfileDTO} from "../../dto/PersonProfileDTO";
+import set = Reflect.set;
 
 function Show(addr) { document.getElementById(addr).style.visibility = "visible";
 
@@ -40,13 +43,17 @@ export class SurveyComponent implements OnInit {
   loginForm: FormGroup;
   trackName: any;
   isavalable : boolean = true;
+  private autonomie: bigint;
+  private urgence: boolean;
 
-  autonomie : number;
 
 
   //constructor(private personService: PersonService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) { }
+  private chronic_disease: any;
+  private revenue: any;
   constructor(private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private personService: PersonProfileService){
   }
+
   ngOnInit() {
     this.loginForm = this.fb.group({
 
@@ -65,7 +72,7 @@ export class SurveyComponent implements OnInit {
       maladie: ['', Validators.required],
       urgence: [false, Validators.required],
       loisirsmodeVie: ['', Validators.required],
-      revenu: [0, Validators.required]
+      revenue: [0, Validators.required]
 
 
 
@@ -89,9 +96,12 @@ export class SurveyComponent implements OnInit {
 
 
   control(loginForm){
+
     console.log('Données.....', this.loginForm.value);
     //on transfere les valeurs des champs au DTO
 
+    this.personprofile.nom = this.loginForm.get('Nom').value;
+    this.personprofile.prenom = this.loginForm.get('Prenom').value;
     this.personprofile.adress = this.loginForm.get('adress').value;
     this.personprofile.adress_email = this.loginForm.get('email').value;
     this.personprofile.age = this.loginForm.get('Age').value;
@@ -103,8 +113,11 @@ export class SurveyComponent implements OnInit {
     this.personprofile.postal_code = this.loginForm.get('Code_Postal').value;
     this.personprofile.smoking = this.loginForm.get('fumeur_question').value;
     this.personprofile.tel_number = this.loginForm.get('Telephone').value;
+    this.personprofile.revenue = this.loginForm.get('revenue').value;
 
+    this.personprofile.profile = this.profileDefinition();
 
+    console.log('Données.......', this.personprofile);
     this.route.params.subscribe(params =>{
     this.personService.createPersonProfile(this.personprofile).subscribe(data => {
         this.personprofile = data;
@@ -112,6 +125,7 @@ export class SurveyComponent implements OnInit {
     })
       })
   }
+
 
 
   toggle(andId){
@@ -127,6 +141,83 @@ export class SurveyComponent implements OnInit {
         Hide("bad_otonomie");
       }
     }
+
+  profileDefinition(){
+
+    console.log("On est dans la methode");
+    console.log(this.loginForm.get('autonomie').value);
+    console.log(this.loginForm.get('urgence').value);
+
+
+    this.autonomie = this.loginForm.get('autonomie').value;
+    this.urgence = this.loginForm.get('urgence').value;
+    this.chronic_disease = this.loginForm.get('maladie').value;
+    this.revenue = this.loginForm.get('revenue').value;
+
+    /* J'ai essayé de mettre en place l'algorithme de calcul des profiles avec un Switch Case mais je me suis retrouvé bloqué
+    * à cause du nombre de paramétres elevé de plus le switch case return des boolean*/
+    if(this.autonomie >=5){
+        console.log("SALUT");
+        if (this.urgence == false)
+        {
+          if(this.personprofile.chronic_disease == ""){
+
+          console.log("On est en Bonne Santé");
+            if(this.revenue<1000){
+              return "Essential_Secure";
+            }
+            else {
+              return  "Confort"
+            }
+          }
+          else {
+            if(this.personprofile.chronic_disease != ""){
+              if (this.revenue<1000){
+                return "Medical_Secure"
+              }
+              else {
+                return "Medical_Confort"
+              }
+            }
+          }
+
+        }
+        else {
+
+          return "Mobile_Urgent";
+        }
+
+    } else
+      {
+        if (this.urgence == true){
+          return "Handicap_Urgent"
+        }
+        else {
+          if(this.chronic_disease == ""){
+            if (this.revenue < 1000){
+              return "Handicap_Essentiel"
+            }
+            else {
+              return "Handicap_Confort"
+            }
+          }
+          else if (this.chronic_disease != ""){
+            if (this.revenue < 1000){
+              return "Handicap_Medical_Secure"
+            }
+            else {
+              return "Handicap_Medical_Confort"
+            }
+          }
+
+        }
+    }
+        console.log("Default case");
+
+
+
+    }
+
 
   }
 

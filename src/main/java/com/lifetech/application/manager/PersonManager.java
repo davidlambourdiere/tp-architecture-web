@@ -16,4 +16,6 @@ public interface PersonManager {
     int findNumberOfPersonByRole(PersonStatus personStatus);
 
     List<PersonDTO> findPersonByRole(PersonStatus personStatus);
+
+    List<PersonDTO> findResidentsByName(String query);
 }

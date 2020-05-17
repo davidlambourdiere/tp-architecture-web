@@ -18,6 +18,11 @@ public class ClockController extends RestBaseController {
         this.clockManager = clockManager;
     }
 
+    @GetMapping("clock/find/{id}")
+    private ClockDTO findClock(@PathVariable("id") String id){
+        return clockManager.findById(id);
+    }
+
     @GetMapping("clock/{id}")
     private ClockDTO findById(@PathVariable("id") String id){
         return clockManager.findById(id);

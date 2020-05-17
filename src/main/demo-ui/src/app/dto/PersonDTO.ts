@@ -1,4 +1,5 @@
 import {StrapDTO} from "./StrapDTO";
+import {NotificationDTO} from "./NotificationDTO";
 
 export class PersonDTO{
   firstName: string;
@@ -16,4 +17,5 @@ export class PersonDTO{
   userrole: string;
   profiletype: string ;
   strap : StrapDTO;
+  age  : string;
 }

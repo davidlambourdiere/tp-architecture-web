@@ -30,10 +30,11 @@ public class LightManagerImpl implements LightManager {
 
     private final LightHistoricDAO lightHistoricDAO;
 
-    private final OrikaBeanMapper orikaBeanMapper;
     private final RoomDAO roomDao;
 
-    public LightManagerImpl(LightHistoricDAO lightHistoricDAO, LightDAO lightDAO, RoomDAO roomDao, OrikaBeanMapper orikaBeanMapper) {
+    private final OrikaBeanMapper orikaBeanMapper;
+
+    public LightManagerImpl(LightHistoricDAO lightHistoricDAO, LightDAO lightDAO, OrikaBeanMapper orikaBeanMapper, RoomDAO roomDao) {
         this.lightHistoricDAO = lightHistoricDAO;
         this.lightDAO = lightDAO;
         this.orikaBeanMapper = orikaBeanMapper;
@@ -68,17 +69,9 @@ public class LightManagerImpl implements LightManager {
     @Override
     public LightDTO findById(String id) {
         Light light = lightDAO.findById(Long.parseLong(id)).orElse(null);
-        return orikaBeanMapper.map(light, LightDTO.class);
+        LightDTO lightDTO =orikaBeanMapper.map(light, LightDTO.class);
+        return lightDTO;
     }
-
-    @Override
-    public List<LightDTO> findByRoom(String id) {
-        Room room = roomDao.findById(Long.parseLong(id)).orElse(null);
-        List<Light> lights = lightDAO.findByRoom(room);
-        return orikaBeanMapper.mapAsList(lights, LightDTO.class);
-    }
-
-
 
 
     @Override
@@ -140,6 +133,13 @@ public class LightManagerImpl implements LightManager {
         List<Light> lightToReturn = new ArrayList<>();
         lightToReturn.addAll(distinctLightToReturn);
         return lightToReturn;
+    }
+
+    @Override
+    public List<LightDTO> findByRoom(String id) {
+        Room room = roomDao.findById(Long.parseLong(id)).orElse(null);
+        List<Light> lights = lightDAO.findByRoom(room);
+        return orikaBeanMapper.mapAsList(lights, LightDTO.class);
     }
 
     private float calculateTimeOnLastMonth(List<LightHistoric> lightHistorics) {
