@@ -1,5 +1,6 @@
 // @ts-ignore
 import { BrowserModule } from '@angular/platform-browser';
+
 // @ts-ignore
 import { NgModule } from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -43,6 +44,7 @@ import { DatePipe } from '@angular/common';
 import {MedicalProfilComponent} from "./components/medical.control/medical.profil/medical.profil.component";
 import {ProfilelistComponent} from "./components/profilelist/profilelist.component";
 import { PositionComponent } from './components/position/position.component';
+import {MockBillingComponent} from './components/mock.billing/mock.billing.component';
 
 
 
@@ -77,7 +79,8 @@ import { PositionComponent } from './components/position/position.component';
     DetailAlertComponent,
     MedicalProfilComponent,
     ProfilelistComponent,
-    PositionComponent
+    PositionComponent,
+    MockBillingComponent
 
   ],
   imports: [

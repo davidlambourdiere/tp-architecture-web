@@ -15,9 +15,6 @@ export class LightService {
   }
 
 
-  findLight(id: string) : Observable<any> {
-    return this.http.get(`api/light/find/${id}`);
-  }
 
   findbyId(id: bigint) :Observable<LightDTO>{
     return this.http.get<LightDTO>(`api/light/${id}`);

@@ -11,9 +11,11 @@ import {LightDTO} from "../dto/LightDTO";
 export class HeaterService {
   constructor(private http: HttpClient) {
   }
+
   findAllIOT(): Observable<IOTDTO> {
     return this.http.get<IOTDTO>(`api/iots`);
   }
+
 
   findbyId(id: bigint) :Observable<HeaterDTO> {
     return this.http.get<HeaterDTO>(`api/heater/${id}`);

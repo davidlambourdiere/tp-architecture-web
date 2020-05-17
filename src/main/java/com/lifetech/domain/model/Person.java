@@ -66,9 +66,18 @@ public class Person extends PersistableElement{
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "person")
     private Strap strap;
 
+
+    @ManyToOne
+    @JoinColumn(name = "id_subscription")
+    private Subscription subscription ;
+
+
+
+
     public Person(){}
 
-    public Person(String firstName, String lastName, String birthdate, String email, String phone, String handicap, String averageincome, String login, String password, String deseas, String ismobile, Long userevaluation, PersonStatus userrole,String usertype,String profiletype) {
+
+    public Person(String firstName, String lastName, String birthdate, String email, String phone, String handicap, String averageincome, String login, String password, String deseas, String ismobile, Long userevaluation, String profiletype, PersonStatus userrole, List<Light> lights, List<Shutter> shutters, List<Heater> heaters, List<Clock> clocks, Residence residence, Strap strap, Subscription subscription) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthdate = birthdate;
@@ -81,8 +90,15 @@ public class Person extends PersistableElement{
         this.deseas = deseas;
         this.ismobile = ismobile;
         this.userevaluation = userevaluation;
-        this.userrole = userrole;
         this.profiletype = profiletype;
+        this.userrole = userrole;
+        this.lights = lights;
+        this.shutters = shutters;
+        this.heaters = heaters;
+        this.clocks = clocks;
+        this.residence = residence;
+        this.strap = strap;
+        this.subscription = subscription;
     }
 
     public String getDeseas() {
@@ -203,5 +219,6 @@ public class Person extends PersistableElement{
     public void setProfiletype(String profiletype) {
         this.profiletype = profiletype;
     }
-
+    public Subscription getSubscription() { return subscription; }
+    public void setSubscription(Subscription subscription) { this.subscription = subscription; }
 }

@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {ShutterDTO} from "../dto/ShutterDTO";
 import {StrapDTO} from "../dto/StrapDTO";
 
 @Injectable({

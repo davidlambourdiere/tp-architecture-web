@@ -1,8 +1,6 @@
 package com.lifetech.application.dto;
 
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class PersonDTO extends PersistableElementDTO {

@@ -47,8 +47,10 @@ public class HeaterManagerImpl implements HeaterManager {
 
     @Override
     public HeaterDTO findById(String id) {
+
         Heater heater = heaterDAO.findById(Long.parseLong(id)).orElse(null);
         return orikaBeanMapper.map(heater, HeaterDTO.class);
+
     }
 
     @Override

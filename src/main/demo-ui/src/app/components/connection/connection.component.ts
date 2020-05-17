@@ -42,7 +42,7 @@ export class ConnectionComponent implements OnInit {
             this.router.navigate(['/total-confort', this.person.login]);
           }
           if (this.person.profiletype == null) {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/home', this.person.login]);
           }
         } else {
           this.isConnectionGood = false;
