@@ -1,21 +1,25 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {PositionDTO} from "../../dto/PositionDTO";
 import {StrapDTO} from "../../dto/StrapDTO";
 import {StrapService} from "../../service/StrapService";
 import {PositionService} from "../../service/PositionService";
-import {interval, Observable, observable} from "rxjs";
+import {interval, Observable, observable, Subscription} from "rxjs";
 import {startWith, subscribeOn} from "rxjs/operators";
 import {OpenLayersMap, randomHexaColor} from "../../OpenLayersMap";
+import {fromLonLat, toLonLat} from 'ol/proj';
+import {SubSink} from "subsink";
 
 /**
  * Affiche une carte sur laquelle l'on afficher la position d'un résident
+ * @author Bakary Diakite
+ * @version 1.0
  */
 @Component({
   selector: 'app-position',
   templateUrl: './position.component.html',
   styleUrls: ['./position.component.scss']
 })
-export class PositionComponent implements OnInit, AfterViewInit {
+export class PositionComponent implements OnInit, AfterViewInit, OnDestroy {
 
   /**
    * Position
@@ -32,6 +36,16 @@ export class PositionComponent implements OnInit, AfterViewInit {
    */
   map: OpenLayersMap = new OpenLayersMap();
 
+  /**
+   * Souscriptions
+   */
+  private subs = new SubSink();
+
+  /**
+   *
+   * @param strapService  Service de gestion des bracelets
+   * @param positionService  Service des positions
+   */
   constructor(private strapService: StrapService, private positionService: PositionService) {}
 
   ngOnInit() {
@@ -44,7 +58,6 @@ export class PositionComponent implements OnInit, AfterViewInit {
   findAllStrap(): void {
     this.strapService.findAll().subscribe(straps => {
       this.straps = straps;
-      console.log(straps)
     });
   }
 
@@ -57,47 +70,36 @@ export class PositionComponent implements OnInit, AfterViewInit {
   }
 
   /**
+   * Affiche les 30 dernières positions du résident sélectionné
+   * @param strapId Identifiant numérique du bracelet
+   */
+  positionHistory(strapId: bigint): void {
+    this.subs.unsubscribe();
+    this.map.removeMarkers();
+    this.map.removeHistoryLayers();
+    this.subs.add(this.positionService.positionHistory(strapId).subscribe(history => {
+        const positions = history.map(position => [position.longitude, position.latitude]);
+        this.map.positionsHistory(positions);
+      })
+    );
+  }
+
+  /**
    * Ajoute un marqueur à la position du bracelet
    * @param id Identifiant du bracelet
    */
   findPosition(id: bigint): void {
-    this.positionService.findPositionByStrap(id).subscribe(position => {
-      this.map.addMarker([position.longitude, position.latitude], {textUnderMarker: `${position.strap.person.firstName}  ${position.strap.person.lastName}`});
-      console.log(position);
-    });
+    this.map.removeHistoryLayers();
+    this.subs.add(
+      this.positionService.findPositionByStrap(id).subscribe(position => {
+        this.map.addMarker(position.strap.id, [position.longitude, position.latitude], {textUnderMarker: `${position.strap.person.firstName}  ${position.strap.person.lastName}`});
+      })
+    );
   }
 
-  private async parseJson() {
-    const f = await fetch('assets/map_correcte.json');
-    const r = await f.json();
-    const features = r.features;
-    for (let i = 0; i < features.length; i++) {
-
-      if (features[i].geometry.type === 'LineString') {
-        const coords = features[i].geometry.coordinates;
-
-        for (let j = 0; j < coords.length; j++) {
-          coords[j][0] = parseFloat(coords[j][0]).toFixed(6);
-          coords[j][1] = parseFloat(coords[j][1]).toFixed(6);
-        }
-      } else {
-        if (features[i].geometry.type === 'Polygon') {
-          const coords = features[i].geometry.coordinates[0];
-
-          for (let g = 0; g < coords.length; g++) {
-            coords[g][0] = parseFloat(coords[g][0]).toFixed(6);
-            coords[g][1] = parseFloat(coords[g][1]).toFixed(6);
-          }
-        }
-      }
-    }
-
-    r.features = features;
-
-    console.log(r);
-    console.log(JSON.stringify(r));
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
-
 }
 
 

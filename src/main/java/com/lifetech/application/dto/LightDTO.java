@@ -114,5 +114,24 @@ public class LightDTO extends PersistableElementDTO {
 
     public RoomDTO getRoom() { return room; }
 
+    @Override
+    public String toString() {
+        return "LightDTO{" +
+                "breakdownstatus='" + breakdownstatus + '\'' +
+                ", state='" + state + '\'' +
+                ", startdate=" + startdate +
+                ", minvalueref='" + minvalueref + '\'' +
+                ", ipadress='" + ipadress + '\'' +
+                ", suspect='" + suspect + '\'' +
+                ", maxvalueref='" + maxvalueref + '\'' +
+                ", activityduration=" + activityduration +
+                ", color='" + color + '\'' +
+                ", percentage='" + percentage + '\'' +
+                ", person=" + person +
+                ", price=" + price +
+                ", room=" + room +
+                '}';
+    }
+
     public void setRoom(RoomDTO room) { this.room = room; }
 }

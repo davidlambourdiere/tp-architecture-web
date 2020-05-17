@@ -68,7 +68,7 @@ const routes: Routes = [
   {
     path: 'panne',
     component: PanneComponent,
-    canActivate: [AuthGuardService]
+
   },
   {
     path: 'gestionObject',

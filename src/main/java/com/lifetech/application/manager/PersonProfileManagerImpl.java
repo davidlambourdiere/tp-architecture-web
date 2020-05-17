@@ -14,15 +14,16 @@ import java.util.List;
 @Service
 public class PersonProfileManagerImpl implements PersonProfileManager{
 
-    private final PersonProfileDAO personProfileDAO;
-    private final OrikaBeanMapper orikaBeanMapper;
-    private List<PersonProfileDTO> PersonList;
+    public final PersonProfileDAO personProfileDAO;
+    public final OrikaBeanMapper orikaBeanMapper;
+    public List<PersonProfileDTO> PersonList;
 
 
     public PersonProfileManagerImpl(PersonProfileDAO personProfileDAO, OrikaBeanMapper orikaBeanMapper) {
         this.personProfileDAO = personProfileDAO;
         this.orikaBeanMapper = orikaBeanMapper;
     }
+
 
     public List<PersonProfileDTO> findAll() {
 
