@@ -14,9 +14,7 @@ import {ResidenceDTO} from "../../dto/ResidenceDTO";
 })
 export class  ActivityAnalysisComponent {
 
-  activityanalysisperson : ActivityAnalysisDTO = new ActivityAnalysisDTO();
-  activityanalysisresidence : Object = new ActivityAnalysisDTO();
-  activityanalysistotal : Object = new ActivityAnalysisDTO();
+  activityanalysis : Object = new ActivityAnalysisDTO();
   personlist: PersonDTO[];
   residencelist: ResidenceDTO[];
 
@@ -25,31 +23,14 @@ export class  ActivityAnalysisComponent {
   }
 
   ngOnInit(){
-    this.findAllPerson();
     this.findAllResidence();
-    this.countIOT();
-  }
-
-  countIOTByPerson(personlogin: string) {
-    this.route.params.subscribe(params =>{
-      this.activityanlysisservice.countIOTByPerson(personlogin).subscribe(data=>{
-        this.activityanalysisperson = data;
-        });
-    });
-  }
-
-  countIOTByResidence(idresidence : string) {
-    this.route.params.subscribe(params =>{
-      this.activityanlysisservice.countIOTByResidence(idresidence).subscribe(data=>{
-        this.activityanalysisresidence = data;
-      });
-    });
+    this.findAllPerson();
   }
 
   countIOT() {
     this.route.params.subscribe(params =>{
       this.activityanlysisservice.countIOT().subscribe(data=>{
-        this.activityanalysistotal = data;
+        this.activityanalysis = data;
       });
     });
   }
@@ -68,5 +49,17 @@ export class  ActivityAnalysisComponent {
         this.residencelist = data;
       });
     });
+  }
+
+  getAllPersonsByResidenceId(residenceid: string) {
+    if (residenceid == '0'){
+      this.findAllPerson();
+    }else {
+      this.route.params.subscribe(params => {
+        this.residenceservice.findAllPersonByResidenceId(residenceid).subscribe(data => {
+          this.personlist = data;
+        });
+      });
+    }
   }
 }
