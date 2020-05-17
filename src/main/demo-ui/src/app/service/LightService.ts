@@ -23,15 +23,12 @@ export class LightService {
     return this.http.get<LightDTO>(`api/light/${id}`);
   }
 
-   updateLight(id: bigint , light: LightDTO): Observable<LightDTO> {
+  updateLight(id: bigint , light: LightDTO): Observable<LightDTO> {
     return this.http.put<LightDTO>(`api/light/updateLight/${id}`, light);
-   }
+  }
 
 
   updateLightNotification(id: number , light: LightDTO): Observable<LightDTO> {
     return this.http.put<LightDTO>(`api/light/updateLight/${id}`, light);
   }
-
-
-
 }

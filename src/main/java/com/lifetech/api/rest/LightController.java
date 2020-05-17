@@ -19,11 +19,6 @@ public class LightController extends RestBaseController{
         this.lightManager = lightManager;
     }
 
-    @GetMapping("light/find/{id}")
-    private LightDTO findLight(@PathVariable("id") String id){
-        return lightManager.findById(id);
-    }
-
     @GetMapping("light")
     private List<LightDTO> findAllLight() {
         return lightManager.findAllLight();
@@ -46,7 +41,7 @@ public class LightController extends RestBaseController{
 
     @PutMapping("light/updateLight/{id}")
     public LightDTO updateLight (@PathVariable(value = "id") String id,
-                                 @Valid @RequestBody LightDTO lightDtoReceived) {
+                                                   @Valid @RequestBody LightDTO lightDtoReceived) {
         return lightManager.updateLight(id, lightDtoReceived);
 
     }
