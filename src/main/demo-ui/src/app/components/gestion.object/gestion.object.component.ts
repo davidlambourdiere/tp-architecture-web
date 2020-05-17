@@ -41,9 +41,7 @@ export class GestionObjectComponent implements OnInit {
   temperatureactuelle : number ;
   heurePrevue: Date;
 
-  defaultOnOff = 'éteint';
-  defaultIntensite ='50';
-  defaultCouleur ='bleu';
+
 
   constructor(private personService: PersonService, private router: Router, private route: ActivatedRoute, private heaterservice: HeaterService, private lightservice: LightService, private shutterservice : ShutterService, private clockservice: ClockService, private iotservice: IOTService) {
   }
@@ -64,7 +62,8 @@ export class GestionObjectComponent implements OnInit {
     console.log(this.clocks);
 
 
-
+   // this.setHourScenarioShutter();
+   // this.verrifyHourShutter();
     this.setHourScenario();
     this.verrifyHour();
 
@@ -80,7 +79,7 @@ export class GestionObjectComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.lightservice.updateLight(this.lights.id, this.lights).subscribe(data => console.log(data), error => console.log(error));
     })
-    console.log("update"+this.lights);
+    console.log("Update of the Light"+this.lights);
 
   }
 
@@ -91,7 +90,7 @@ export class GestionObjectComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.shutterservice.updateShutter(this.shutters.id, this.shutters).subscribe(data => console.log(data), error => console.log(error));
     })
-    console.log("update of "+this.shutters);
+    console.log("Update of the Shutter "+this.shutters);
 
 
   }
@@ -101,7 +100,7 @@ export class GestionObjectComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.clockservice.updateClock(this.clocks.id, this.clocks).subscribe(data => console.log(data), error => console.log(error));
     })
-    console.log("update"+this.clocks);
+    console.log("Update of the Clock "+this.clocks);
 
 
   }
@@ -110,7 +109,7 @@ export class GestionObjectComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.heaterservice.updateHeater(this.heaters.id, this.heaters).subscribe(data => console.log(data), error => console.log(error));
     })
-    console.log("update"+this.heaters);
+    console.log("Update of the Heater "+this.heaters);
 
 
   }
@@ -119,8 +118,8 @@ SwitchDownHeat(){
 
      this.temperatureactuelle = Number("400");
       this.temperatureactuelle = this.temperatureactuelle -1;
-      console.log('La température baisse')
-      console.log('La température est maintenant de '  + this.temperatureactuelle)
+      console.log('The temperature is going down')
+      console.log('The temperature is now '  + this.temperatureactuelle + "degrees")
 
 
 }
@@ -139,10 +138,12 @@ SwitchDownHeat(){
     })
   }
 
+
+  // Automatic Launching of the Scenario Multi IOT
   setHourScenario(){
     this.heurePrevue = new Date();
-    this.heurePrevue.setHours(10);
-    this.heurePrevue.setMinutes(48);
+    this.heurePrevue.setHours(16);
+    this.heurePrevue.setMinutes(8);
     this.heurePrevue.setSeconds(0);
     this.heurePrevue.setMilliseconds(0);
   }
@@ -152,12 +153,43 @@ SwitchDownHeat(){
     setTimeout(() => {
       var heurePC = new Date();
       if (this.heurePrevue.getHours() == heurePC.getHours() && this.heurePrevue.getMinutes() == heurePC.getMinutes()){
-        console.log("TEEEEEEEEEEEEEEEEEST"+ new Date());
+        console.log("It's time, the scenario starts"+ new Date());
         this.runScenario();
     }
       }, 1000);
   }
 
+
+  // Automatic Launching of the Scenario Mono Object :
+
+  // POUR SHUTTER:
+
+/*
+  setHourScenarioShutter(){
+    this.heurePrevue = new Date();
+    this.heurePrevue.setHours(16);
+    this.heurePrevue.setMinutes(6);
+    this.heurePrevue.setSeconds(0);
+    this.heurePrevue.setMilliseconds(0);
+  }
+
+  async verrifyHourShutter() {
+
+    setTimeout(() => {
+      var heurePC = new Date();
+      if (this.heurePrevue.getHours() == heurePC.getHours() && this.heurePrevue.getMinutes() == heurePC.getMinutes()){
+        console.log("Il est l'heure, le scénario Shutter se lance"+ new Date());
+        for (let i = 0; i < this.iots.shutters.length; i++) {
+          this.runScenarioShutter(this.iots.shutters[i]);
+        }
+      }
+    }, 1000);
+  }
+*/
+
+
+
+  // Methods RunScenario Multi and Mono Object :
 
   // TODO Verification si NaN ou Pas de valeurs ? Plusieurs objets lequel est modifié ? Messages d'erreur
 runScenario(){
@@ -174,7 +206,6 @@ runScenario(){
 
   async runScenarioShutter(shutters : ShutterDTO){
 
-
     var resultatShutter= Number(shutters.percentage) ;
 
     setTimeout(() => {
@@ -188,7 +219,7 @@ runScenario(){
 
     this.shutters.percentage = resultatShutter.toString();
 
-    console.log('Le store se baisse ');
+    console.log('The Shutter is going down ');
     console.log(resultatShutter);
 
 
@@ -199,7 +230,7 @@ runScenario(){
 
       this.route.params.subscribe(params => {
         this.shutterservice.updateShutter(shutters.id, shutters).subscribe(data => console.log(data), error => console.log(error));
-        console.log("update"+shutters);
+        console.log("Update of the shutter number "+ shutters.ipadress + " in the database" +shutters);
       });
 
 
@@ -223,7 +254,7 @@ runScenario(){
 
     lights.percentage = resultat.toString();
 
-    console.log('La luminosité baisse ');
+    console.log('Brightness decreases');
     console.log(resultat);
 
 
@@ -234,12 +265,10 @@ runScenario(){
     this.lights.percentage = resultat.toString();
       this.route.params.subscribe(params => {
         this.lightservice.updateLight(lights.id, lights).subscribe(data => console.log(data), error => console.log(error));
-        console.log("update"+lights);
+        console.log("Update of the light number " + lights.ipadress + " in the database "+ lights);
       });
 
 
-    // Do something after
-    //console.log('Fin, luminosité à 0')
 
 
 
@@ -252,7 +281,7 @@ runScenario(){
 
     setTimeout(() => {
       // Do something before delay
-      if (resultatHeater >22){
+      if (resultatHeater >16){
         this.runScenarioHeater(heaters);
       }
 
@@ -262,26 +291,24 @@ runScenario(){
 
     heaters.actualval = resultatHeater.toString();
 
-    console.log('La température du chauffage se stabilise à une valeur correcte ');
+    console.log('The heating temperature stabilizes at a correct value ');
     console.log(resultatHeater);
-
-
-
 
 
 
     this.heaters.actualval = resultatHeater.toString();
     this.route.params.subscribe(params => {
       this.heaterservice.updateHeater(heaters.id, heaters).subscribe(data => console.log(data), error => console.log(error));
-      console.log("update"+heaters);
+      console.log("Update of the Heater number " + heaters.ipadress + " in the database"+heaters);
     });
-
-
-    // Do something after
-    //console.log('Fin, luminosité à 0')
 
 
 
   }
+
+
+
+
+
 }
 
