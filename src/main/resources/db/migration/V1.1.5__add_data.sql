@@ -1,23 +1,23 @@
 INSERT INTO lifetech.residence (adress) VALUES ("10 avenue de paris");
 
 
-INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id) VALUES ('Jean-Paul', 'Gauthier','1946-05-14', 'admin', 'admin','RESIDENT', 1);
-INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id) VALUES ('Justin', 'Aguesse','1956-05-14', 'Justindu94', 'jujulebg','RESIDENT', 1);
-INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id) VALUES ('Louis', 'Beaudin','1966-05-14', 'Loulou', 'Louis123','RESIDENT', 1);
-INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id) VALUES ('Marie', 'Collin','1945-05-14', 'Coco', 'Marie145','RESIDENT', 1);
-INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id) VALUES ('Mohammed', 'Henni','1956-05-14', 'Momo', 'Momodu13','RESIDENT', 1);
-INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id) VALUES ('Henry', 'Dupont','1956-05-14', 'Henry', 'henry','RESIDENT', 1);
-INSERT INTO lifetech.person (firstname, lastname,birthdate,login, password,userrole,residence_id)
-VALUES('Amanda','Willson', '1946-06-14','amandaw','1234','RESIDENT',1);
-INSERT INTO lifetech.person (firstname, lastname,birthdate,login, password,deseas,userrole,residence_id)
-VALUES('Porter','Welsby', '1943-06-14','porterw','1234','HEARTPROBLEM','RESIDENT',1);
-INSERT INTO lifetech.person (firstname, lastname, login, password,userrole, residence_id)VALUES('kadia','toure','kadia','admin','DOCTOR',1);
-INSERT INTO lifetech.person (firstname, lastname, login, password,userrole, residence_id)VALUES('william','toure','will','admin','AGENT',1);
+INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id,id_subscription) VALUES ('Jean-Paul', 'Gauthier','1946-05-14', 'admin', 'admin','RESIDENT', 1,1);
+INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id,id_subscription) VALUES ('Justin', 'Aguesse','1956-05-14', 'Justindu94', 'jujulebg','RESIDENT', 1,2);
+INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id,id_subscription) VALUES ('Louis', 'Beaudin','1966-05-14', 'Loulou', 'Louis123','RESIDENT', 1,3);
+INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id,id_subscription) VALUES ('Marie', 'Collin','1945-05-14', 'Coco', 'Marie145','RESIDENT', 1,4);
+INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id,id_subscription) VALUES ('Mohammed', 'Henni','1956-05-14', 'Momo', 'Momodu13','RESIDENT', 1,1);
+INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id,id_subscription) VALUES ('Henry', 'Dupont','1956-05-14', 'Henry', 'henry','RESIDENT', 1,2);
+INSERT INTO lifetech.person (firstname, lastname,birthdate,login, password,userrole,residence_id,id_subscription)
+VALUES('Amanda','Willson', '1946-06-14','amandaw','1234','RESIDENT',1,3);
+INSERT INTO lifetech.person (firstname, lastname,birthdate,login, password,deseas,userrole,residence_id,id_subscription)
+VALUES('Porter','Welsby', '1943-06-14','porterw','1234','HEARTPROBLEM','RESIDENT',1,3);
+INSERT INTO lifetech.person (firstname, lastname, login, password,userrole, residence_id,id_subscription)VALUES('kadia','toure','kadia','admin','DOCTOR',1,4);
+INSERT INTO lifetech.person (firstname, lastname, login, password,userrole, residence_id,id_subscription)VALUES('william','toure','will','admin','AGENT',1,1);
 
-INSERT INTO lifetech.person(firstname,lastname,login,password,profileType,residence_id) VALUES ('Mohamed','Emam','mohamed','mohamed','essential',1);
-INSERT INTO lifetech.person(firstname,lastname,login,password,profileType,residence_id) VALUES ('Lucas','Meunier','lucas','lucas','serenity',1);
-INSERT INTO lifetech.person(firstname,lastname,login,password,profileType,residence_id) VALUES ('Tristan','Da Silva','tristan','tristan','confort',1);
-INSERT INTO lifetech.person(firstname,lastname,login,password,profileType,residence_id) VALUES ('Alexis','Boisseau','alexis','alexis','total-confort',1);
+INSERT INTO lifetech.person(firstname,lastname,login,password,profileType,residence_id,id_subscription) VALUES ('Mohamed','Emam','mohamed','mohamed','essential',1,2);
+INSERT INTO lifetech.person(firstname,lastname,login,password,profileType,residence_id,id_subscription) VALUES ('Tristan','Da Silva','tristan','tristan','confort',1,3);
+INSERT INTO lifetech.person(firstname,lastname,login,password,profileType,residence_id,id_subscription) VALUES ('Alexis','Boisseau','alexis','alexis','total-confort',1,4);
+INSERT INTO lifetech.person(firstname,lastname,login,password,profileType,residence_id,id_subscription) VALUES ('Lucas','Meunier','lucas','lucas','serenity',1,1);
 
 INSERT INTO lifetech.room (num) VALUES (1);
 INSERT INTO lifetech.room (num) VALUES (2);
@@ -156,10 +156,10 @@ INSERT INTO lifetech.straphistoric (startdate, endingdate,state, breakdownstatus
 INSERT INTO lifetech.straphistoric (startdate, endingdate,state, breakdownstatus,strapid) VALUES ("2020-01-25 00:00:00","2020-02-22 00:00:00",'ON',"NOT_BREAKDOWN",1);
 INSERT INTO lifetech.straphistoric (startdate, endingdate,state, breakdownstatus,strapid) VALUES ("2020-01-24 00:00:00","2020-01-25 00:00:00",'OFF',"NOT_BREAKDOWN",1);
 
-INSERT INTO lifetech.subscription (name,description, listofiot,listofservice) VALUES ('essential','This subscription is for our residents who enjoy tranquility and security.', 'Strap,Heater', 'Sport');
-INSERT INTO lifetech.subscription (name,description,listofiot,listofservice) VALUES ('serenity', 'This subscription is intended for our resident who like pratice and love connected objects','Strap,Light,Heater', 'Bingo,Yoga');
-INSERT INTO lifetech.subscription (name,description,listofiot,listofservice) VALUES ('confort','This subscription is intended for our residents who can not stay in place and want to associate activites ans connected objects', 'Strap,Light,Heater,Shutter', 'Cultural Visite,Sport,Cinema');
-INSERT INTO lifetech.subscription (name,description, listofiot,listofservice) VALUES ('total-confort','This subscription is for our residents who need connected objects to help them in everyday life', 'Strap,Light,Shutter,Heater,Clock', 'Bingo');
+INSERT INTO lifetech.subscription (name,description, listofiot,listofservice,price) VALUES ('essential','This subscription is for our residents who enjoy tranquility and security.', 'Strap,Heater', 'Sport',320);
+INSERT INTO lifetech.subscription (name,description,listofiot,listofservice,price) VALUES ('serenity', 'This subscription is intended for our resident who like pratice and love connected objects','Strap,Light,Heater', 'Bingo,Yoga',305);
+INSERT INTO lifetech.subscription (name,description,listofiot,listofservice,price) VALUES ('confort','This subscription is intended for our residents who can not stay in place and want to associate activites ans connected objects', 'Strap,Light,Heater,Shutter', 'Cultural Visite,Sport,Cinema',670);
+INSERT INTO lifetech.subscription (name,description, listofiot,listofservice,price) VALUES ('total-confort','This subscription is for our residents who need connected objects to help them in everyday life', 'Strap,Light,Shutter,Heater,Clock', 'Bingo',650);
 
 INSERT INTO lifetech.referencesprices (descriptionService, nameService, numSerie, price) VALUES ('blabla', 'bingo','S01', '25');
 INSERT INTO lifetech.referencesprices (descriptionService, nameService, numSerie, price) VALUES ('blabla', 'cinéma','A01', '100');
