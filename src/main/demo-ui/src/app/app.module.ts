@@ -37,11 +37,23 @@ import {CustomComponent} from "./components/subscription/custom.component";
 import { MedicalHomeComponent} from './components/medical.control/medical.home/medical.home.component';
 import { MedicalMenuComponent } from './components/medical.control/medical.menu/medical.menu.component';
 import { MedicalResidentsComponent } from './components/medical.control/medical.residents/medical.residents.component';
+import {NotificationHeaterComponent} from "./components/notification/notification.heater/notification.heater.component";
+import {NotificationClockComponent} from "./components/notification/notification.clock/notification.clock.component";
+import {NotificationLightComponent} from "./components/notification/notification.light/notification.light.component";
+import {NotificationShutterComponent} from "./components/notification/notification.shutter/notification.shutter.component";
+import {NotificationStrapComponent} from "./components/notification/notification.strap/notification.strap.component";
+import {NotificationNewComponent} from "./components/notification/notification.new/notification.new.component";
+import {NotificationSentComponent} from "./components/notification/notification.sent.component/notification.sent.component";
+import {NotificationReceivedComponent} from "./components/notification/notification.received.component/notification.received.component";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatFormFieldModule} from "@angular/material/form-field";
 import { DetailAlertComponent } from './components/medical.control/detail.alert/detail.alert.component';
 import {ChartsModule} from "ng2-charts";
 import { DatePipe } from '@angular/common';
 import {MedicalProfilComponent} from "./components/medical.control/medical.profil/medical.profil.component";
 import {ProfilelistComponent} from "./components/profilelist/profilelist.component";
+import { PositionComponent } from './components/position/position.component';
 
 
 
@@ -50,7 +62,14 @@ import {ProfilelistComponent} from "./components/profilelist/profilelist.compone
     AppComponent,
     HeadComponent,
     PersonComponent,
+    NotificationClockComponent,
+    NotificationLightComponent,
+    NotificationShutterComponent,
+    NotificationStrapComponent,
     HomeComponent,
+    NotificationSentComponent,
+    NotificationReceivedComponent,
+    NotificationNewComponent,
     ConnectionComponent,
     MonitoringComponent,
     PanneComponent,
@@ -65,6 +84,7 @@ import {ProfilelistComponent} from "./components/profilelist/profilelist.compone
     CustomComponent,
     SurveyComponent,
     ConfortComponent,
+    NotificationHeaterComponent,
     EssentialComponent,
     TotalconfortComponent,
     SerenityComponent,
@@ -75,7 +95,8 @@ import {ProfilelistComponent} from "./components/profilelist/profilelist.compone
     SurveyComponent,
     DetailAlertComponent,
     MedicalProfilComponent,
-    ProfilelistComponent
+    ProfilelistComponent,
+    PositionComponent
 
   ],
   imports: [
@@ -86,6 +107,9 @@ import {ProfilelistComponent} from "./components/profilelist/profilelist.compone
     FormsModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
     ChartsModule
   ],
   providers: [AuthService, DatePipe],

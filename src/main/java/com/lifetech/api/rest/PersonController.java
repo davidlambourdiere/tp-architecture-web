@@ -4,10 +4,7 @@ import com.lifetech.application.dto.PersonDTO;
 import com.lifetech.application.manager.PersonManager;
 import com.lifetech.domain.model.Person;
 import com.lifetech.domain.model.PersonStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,5 +35,10 @@ public class PersonController extends RestBaseController{
     @PostMapping("person/findPersonByRole")
     private List<PersonDTO> findPersonByRole(@RequestBody PersonStatus personStatus){
         return personManager.findPersonByRole(personStatus);
+    }
+
+    @GetMapping("person/findResidentsByName/{query}")
+    private List<PersonDTO> findResidentsByName(@PathVariable("query") String query){
+        return personManager.findResidentsByName(query);
     }
 }

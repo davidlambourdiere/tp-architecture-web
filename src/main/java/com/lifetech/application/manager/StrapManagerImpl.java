@@ -1,15 +1,14 @@
 package com.lifetech.application.manager;
 
+import com.lifetech.application.dto.RoomDTO;
 import com.lifetech.application.dto.StrapDTO;
 import com.lifetech.application.dto.StrapDetailDTO;
 import com.lifetech.application.dto.StrapHistoricDTO;
 import com.lifetech.domain.OrikaBeanMapper;
+import com.lifetech.domain.dao.LightDAO;
 import com.lifetech.domain.dao.StrapDAO;
 import com.lifetech.domain.dao.StrapHistoricDAO;
-import com.lifetech.domain.model.StateEnum;
-import com.lifetech.domain.model.StatusEnum;
-import com.lifetech.domain.model.Strap;
-import com.lifetech.domain.model.StrapHistoric;
+import com.lifetech.domain.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -29,13 +28,16 @@ public class StrapManagerImpl implements StrapManager {
 
     private final StrapDAO strapDAO;
 
+    private final LightDAO lightDAO;
+
     private final StrapHistoricDAO strapHistoricDAO;
 
     private final OrikaBeanMapper orikaBeanMapper;
 
-    public StrapManagerImpl(StrapHistoricDAO strapHistoricDAO, StrapDAO strapDAO, OrikaBeanMapper orikaBeanMapper) {
+    public StrapManagerImpl(StrapHistoricDAO strapHistoricDAO, StrapDAO strapDAO, OrikaBeanMapper orikaBeanMapper, LightDAO lightDAO) {
         this.strapHistoricDAO = strapHistoricDAO;
         this.strapDAO = strapDAO;
+        this.lightDAO = lightDAO;
         this.orikaBeanMapper = orikaBeanMapper;
     }
 
@@ -103,7 +105,16 @@ public class StrapManagerImpl implements StrapManager {
 
     @Override
     public List<StrapDTO> findAll() {
-        return orikaBeanMapper.mapAsList(strapDAO.findAll(), StrapDTO.class);
+        List<StrapDTO> straps = orikaBeanMapper.mapAsList(strapDAO.findAll(), StrapDTO.class);
+        for(int i=0; i < straps.size(); i++ ){
+            List<Light> lights = lightDAO.findAllByPersonId(straps.get(i).getPerson().getId());
+            if(!lights.isEmpty()) {
+                RoomDTO room = orikaBeanMapper.map(lights.get(0).getRoom(), RoomDTO.class);
+                System.out.println(room.getNum());
+                straps.get(i).setRoom(room);
+            }
+        }
+        return straps;
     }
 
     @Override
@@ -138,6 +149,25 @@ public class StrapManagerImpl implements StrapManager {
     }
     public StrapDTO findById(String id) {
         Strap strap = strapDAO.findById(Long.parseLong(id)).orElse(null);
-        return orikaBeanMapper.map(strap, StrapDTO.class);
+
+        StrapDTO strapDTO = orikaBeanMapper.map(strap, StrapDTO.class);
+
+        if(lightDAO.findAllByPersonId(strap.getPerson().getId()).size()>0) {
+            Light l = lightDAO.findAllByPersonId(strap.getPerson().getId()).get(0);
+            RoomDTO room = orikaBeanMapper.map(l.getRoom(), RoomDTO.class);
+            strapDTO.setRoom(room);
+        }
+
+       return strapDTO;
+    }
+
+    public Strap findModelById(String id) {
+        Strap strap = strapDAO.findById(Long.parseLong(id)).orElse(null);
+        return strap;
+    }
+
+    @Override
+    public Strap save(Strap strap) {
+        return strapDAO.save(strap);
     }
 }
