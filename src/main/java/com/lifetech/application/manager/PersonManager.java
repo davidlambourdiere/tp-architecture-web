@@ -18,4 +18,6 @@ public interface PersonManager {
     List<PersonDTO> findPersonByRole(PersonStatus personStatus);
 
     List<PersonDTO> findResidentsByName(String query);
+
+    List<PersonDTO> findAllByResidence(Long residenceId);
 }
