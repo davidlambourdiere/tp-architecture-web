@@ -47,57 +47,30 @@ public class HeaterManagerImpl implements HeaterManager {
 
     @Override
     public HeaterDTO findById(String id) {
+        Heater heater = heaterDAO.findById(Long.parseLong(id)).orElse(null);
+        HeaterDTO heaterDTO = orikaBeanMapper.map(heater, HeaterDTO.class);
+        return heaterDTO;
+    }
+
+    @Override
+    public List<HeaterDTO> findAllHeater() {
+        List<Heater> heaters = heaterDAO.findAll();
+        return orikaBeanMapper.mapAsList(heaters, HeaterDTO.class);
+    }
+
+    @Override
+    public List<HeaterDTO> findHeaterByPerson(String id) {
         return null;
     }
 
     @Override
-<<<<<<< HEAD
-    public List<HeaterDTO> findAllHeater() {
-        List<Heater> heaters = heaterDAO.findAll();
-        return orikaBeanMapper.mapAsList(heaters, HeaterDTO.class);
+    public HeaterDTO updateHeater(String id, HeaterDTO heaterDtoReceived) {
+        return null;
     }
-
-
-    public List<HeaterDTO> findHeaterByPerson(String id) {
-        List<Heater> heaters = heaterDAO.findAllByPersonId(Long. parseLong(id));
-        return orikaBeanMapper.mapAsList(heaters, HeaterDTO.class);
-    }
-
 
     @Override
     public HeaterDTO switchDownHeater(String id, HeaterDTO heaterDtoReceived) {
-        // light trouvé par l'id reçu  p r front
-        Heater heater = heaterDAO.findById(Long.parseLong(id)).orElse(null);
-        // converti en DTO pour modifier
-        HeaterDTO updatedHeaterDTO = orikaBeanMapper.map(heater, HeaterDTO.class);
-        updatedHeaterDTO.setActualval(heaterDtoReceived.getActualval());
-        Heater heatersaved = orikaBeanMapper.map(updatedHeaterDTO, Heater.class);
-        System.out.println(heatersaved);
-        return orikaBeanMapper.map(heaterDAO.save(heatersaved), HeaterDTO.class);
-    }
-
-    @Override
-    public HeaterDTO updateHeater(String id, HeaterDTO heaterDtoReceived) {
-        // light trouvé par l'id reçu  p r front
-        Heater heater = heaterDAO.findById(Long.parseLong(id)).orElse(null);
-        // converti en DTO pour modifier
-        HeaterDTO updatedHeaterDTO = orikaBeanMapper.map(heater, HeaterDTO.class);
-        updatedHeaterDTO.setState(heaterDtoReceived.getState());
-        updatedHeaterDTO.setActualval(heaterDtoReceived.getActualval());
-        Heater heatersaved = orikaBeanMapper.map(updatedHeaterDTO, Heater.class);
-        System.out.println(heatersaved);
-        return orikaBeanMapper.map(heaterDAO.save(heatersaved), HeaterDTO.class);
-||||||| merged common ancestors
-    public HeaterDTO findAllHeater() {
-        List<HeaterDTO> heaters = orikaBeanMapper.convertListDTO(heaterDAO.findAll(), HeaterDTO.class);
-        HeaterDTO iotToReturn = new HeaterDTO();
-        iotToReturn.setHeaters(heaters);
-        return iotToReturn;
-=======
-    public List<HeaterDTO> findAllHeater() {
-        List<Heater> heaters = heaterDAO.findAll();
-        return orikaBeanMapper.mapAsList(heaters, HeaterDTO.class);
->>>>>>> master
+        return null;
     }
 
 

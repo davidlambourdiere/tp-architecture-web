@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
@@ -14,32 +13,25 @@ export class LightService {
   }
 
 
+  findLight(id: string) : Observable<any> {
+    return this.http.get(`api/light/find/${id}`);
+  }
 
   findbyId(id: bigint) :Observable<LightDTO>{
     return this.http.get<LightDTO>(`api/light/${id}`);
   }
 
-  updateLight(id: bigint , light: LightDTO): Observable<LightDTO> {
+   updateLight(id: bigint , light: LightDTO): Observable<LightDTO> {
+    return this.http.put<LightDTO>(`api/light/updateLight/${id}`, light);
+   }
+
+
+  updateLightNotification(id: number , light: LightDTO): Observable<LightDTO> {
     return this.http.put<LightDTO>(`api/light/updateLight/${id}`, light);
   }
 
-
-}
-||||||| merged common ancestors
-=======
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-
-@Injectable({
-  providedIn: 'root'
-})
-export class LightService {
-  constructor(private http: HttpClient) {
-  }
 
   findIOTByRoom(idroom: string): Observable<any> {
     return this.http.get(`api/light/findByRoom/${idroom}`);
   }
 }
->>>>>>> master

@@ -1,6 +1,8 @@
 package com.lifetech.application.dto;
 
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class PersonDTO extends PersistableElementDTO {
@@ -155,10 +157,7 @@ public class PersonDTO extends PersistableElementDTO {
     public String getProfiletype() { return profiletype; }
 
     public void setProfiletype(String profiletype) { this.profiletype = profiletype; }
-<<<<<<< HEAD
 
-||||||| merged common ancestors
-=======
 
     public StrapDTO getStrap() {
         return strap;
@@ -167,6 +166,5 @@ public class PersonDTO extends PersistableElementDTO {
     public void setStrap(StrapDTO strap) {
         this.strap = strap;
     }
->>>>>>> master
 }
 
