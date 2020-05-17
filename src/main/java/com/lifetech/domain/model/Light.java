@@ -59,4 +59,14 @@ public class Light extends IOT{
     public Room getRoom() { return room; }
 
     public void setRoom(Room room) { this.room = room; }
+
+    @Override
+    public String toString() {
+        return "Light{" +
+                "color='" + color + '\'' +
+                ", percentage='" + percentage + '\'' +
+                ", person=" + person +
+                ", room=" + room +
+                '}';
+    }
 }

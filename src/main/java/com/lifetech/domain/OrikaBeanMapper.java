@@ -39,8 +39,7 @@ public class OrikaBeanMapper extends ConfigurableMapper {
         registerClassMap(HeaterBreakdown.class, HeaterBreakdownDTO.class);
         registerClassMap(StrapBreakdown.class, StrapBreakdownDTO.class);
         registerClassMap(HeaterMessage.class, HeaterMessageDTO.class);
-
-
+        registerClassMap(Notification.class, NotificationDTO.class);
     }
 
     private void registerClassMap(Class a, Class b) {

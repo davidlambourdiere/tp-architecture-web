@@ -10,6 +10,10 @@ import java.sql.Timestamp;
 public class Heater  extends IOT{
     @Column(name = "minvalueref")
     private String minvalueref;
+
+    @Column(name = "actualval")
+    private String actualval;
+
     @Column(name = "maxvalueref")
     private String maxvalueref;
 
@@ -74,5 +78,13 @@ public class Heater  extends IOT{
 
     public void setTemperature(String temperature) {
         this.temperature = temperature;
+    }
+
+    public String getActualval() {
+        return actualval;
+    }
+
+    public void setActualval(String actualval) {
+        this.actualval = actualval;
     }
 }
