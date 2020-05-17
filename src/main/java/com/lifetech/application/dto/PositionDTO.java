@@ -4,9 +4,17 @@ import java.util.Date;
 
 public class PositionDTO extends PersistableElementDTO {
     private Date date;
-    private float latitude;
-    private float longitude;
+    private Double latitude;
+    private Double longitude;
     private StrapDTO strap;
+
+
+    public PositionDTO(Date date, Double latitude, Double longitude, StrapDTO strap) {
+        this.date = date;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.strap = strap;
+    }
 
     public PositionDTO() {
     }
@@ -19,19 +27,19 @@ public class PositionDTO extends PersistableElementDTO {
         this.date = date;
     }
 
-    public float getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public float getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(float longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
