@@ -34,8 +34,8 @@ public class PositionManagerImpl implements PositionManager {
     }
 
     /**
-     * Find position by strap.
-     * @param strapId id of strap
+     * trouve la position d'un bracelet.
+     * @param strapId id du bracelet
      * @return PositionDTO
      */
     @Override
@@ -101,8 +101,8 @@ public class PositionManagerImpl implements PositionManager {
 
     /**
      * Enregistre les positions d'un bracelet.
-     * @param lat latitude of strap
-     * @param lon longitude of strap
+     * @param lat latitude du bracelet
+     * @param lon longitude du bracelet
      * @param strap
      */
     public void saveData(Double lat, Double lon, Strap strap) {
@@ -121,7 +121,7 @@ public class PositionManagerImpl implements PositionManager {
 
     /**
      * Retourne les 30 dernières d'un bracelet.
-     * @param strapId id of strap
+     * @param strapId id du bracelet
      * @return List<PositionDTO>
      */
     @Override

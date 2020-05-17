@@ -8,6 +8,14 @@ public class PositionDTO extends PersistableElementDTO {
     private Double longitude;
     private StrapDTO strap;
 
+
+    public PositionDTO(Date date, Double latitude, Double longitude, StrapDTO strap) {
+        this.date = date;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.strap = strap;
+    }
+
     public PositionDTO() {
     }
 
