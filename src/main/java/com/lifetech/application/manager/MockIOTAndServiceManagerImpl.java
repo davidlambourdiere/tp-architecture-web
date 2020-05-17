@@ -30,52 +30,56 @@ public class MockIOTAndServiceManagerImpl implements MockIOTAndServiceManager {
 
         List<Person> listPerson = personDAO.findAll();
         int i=1;
-        long offset = Timestamp.valueOf("2020-01-01 00:00:00").getTime();
+            long offset = Timestamp.valueOf("2020-01-01 00:00:00").getTime();
         long end = Timestamp.valueOf("2020-01-31 00:00:00").getTime();
         long diff = end - offset + 1;
         for (Person person: listPerson ) {
             Random rd = new Random();
 
-          //  Timestamp rand = new Timestamp(offset + (long)(Math.random() * diff));
-           // Timestamp rand2 = new Timestamp(offset + (long)(Math.random() * diff));
+            //  Timestamp rand = new Timestamp(offset + (long)(Math.random() * diff));
+            // Timestamp rand2 = new Timestamp(offset + (long)(Math.random() * diff));
             i++;
-            if(i%2 == 1){
-                Timestamp rand = new Timestamp(offset + (long)(Math.random() * diff));
-                Timestamp rand2 = new Timestamp(offset + (long)(Math.random() * diff));
-                ExtraCost extra = new ExtraCost(person, "BAIN GREC",29.99, rand);
-                extraCostDAO.save(extra);
-                ExtraCost extra2 = new ExtraCost(person,"COFFEE MAKER",99.00,rand2);
-                extraCostDAO.save(extra2);
+            if (i == 1 || i == 3)
+                continue;
+            else {
+                if (i % 2 == 1) {
+                    Timestamp rand = new Timestamp(offset + (long) (Math.random() * diff));
+                    Timestamp rand2 = new Timestamp(offset + (long) (Math.random() * diff));
+                    ExtraCost extra = new ExtraCost(person, "BAIN GREC", 29.99, rand);
+                    extraCostDAO.save(extra);
+                    ExtraCost extra2 = new ExtraCost(person, "COFFEE MAKER", 99.00, rand2);
+                    extraCostDAO.save(extra2);
 
-            }else{
-                Timestamp rand = new Timestamp(offset + (long)(Math.random() * diff));
-                Timestamp rand2 = new Timestamp(offset + (long)(Math.random() * diff));
-                ExtraCost extra = new ExtraCost(person, "CAFE MOULU",2.99, rand);
+                } else {
+                    Timestamp rand = new Timestamp(offset + (long) (Math.random() * diff));
+                    Timestamp rand2 = new Timestamp(offset + (long) (Math.random() * diff));
+                    ExtraCost extra = new ExtraCost(person, "CAFE MOULU", 2.99, rand);
+                    extraCostDAO.save(extra);
+                    ExtraCost extra2 = new ExtraCost(person, "OVEN", 600.00, rand2);
+                    extraCostDAO.save(extra2);
+                }
+                if (i % 3 == 2) {
+                    Timestamp rand = new Timestamp(offset + (long) (Math.random() * diff));
+                    Timestamp rand2 = new Timestamp(offset + (long) (Math.random() * diff));
+                    ExtraCost extra = new ExtraCost(person, "GAMING", 50.00, rand);
+                    extraCostDAO.save(extra);
+                    ExtraCost extra2 = new ExtraCost(person, "BATHTUB", 700.00, rand2);
+                    extraCostDAO.save(extra2);
+                } else {
+                    Timestamp rand = new Timestamp(offset + (long) (Math.random() * diff));
+                    Timestamp rand2 = new Timestamp(offset + (long) (Math.random() * diff));
+                    ExtraCost extra = new ExtraCost(person, "PISCINE", 4.00, rand);
+                    extraCostDAO.save(extra);
+                    ExtraCost extra2 = new ExtraCost(person, "BED", 300.00, rand2);
+                    extraCostDAO.save(extra2);
+                }
+                Timestamp rand = new Timestamp(offset + (long) (Math.random() * diff));
+                Timestamp rand2 = new Timestamp(offset + (long) (Math.random() * diff));
+                ExtraCost extra = new ExtraCost(person, "BOUTEILLE DE EAU", 4.00, rand);
                 extraCostDAO.save(extra);
-                ExtraCost extra2 = new ExtraCost(person,"OVEN",600.00,rand2);
+                ExtraCost extra2 = new ExtraCost(person, "TOILET", 99.00, rand2);
                 extraCostDAO.save(extra2);
             }
-            if(i%3 == 2){
-                Timestamp rand = new Timestamp(offset + (long)(Math.random() * diff));
-                Timestamp rand2 = new Timestamp(offset + (long)(Math.random() * diff));
-                ExtraCost extra = new ExtraCost(person, "GAMING",50.00, rand);
-                extraCostDAO.save(extra);
-                ExtraCost extra2 = new ExtraCost(person,"BATHTUB",700.00,rand2);
-                extraCostDAO.save(extra2);
-            }else{
-                Timestamp rand = new Timestamp(offset + (long)(Math.random() * diff));
-                Timestamp rand2 = new Timestamp(offset + (long)(Math.random() * diff));
-                ExtraCost extra = new ExtraCost(person, "PISCINE",4.00, rand);
-                extraCostDAO.save(extra);
-                ExtraCost extra2 = new ExtraCost(person,"BED",300.00,rand2);
-                extraCostDAO.save(extra2);
-            }
-            Timestamp rand = new Timestamp(offset + (long)(Math.random() * diff));
-            Timestamp rand2 = new Timestamp(offset + (long)(Math.random() * diff));
-            ExtraCost extra = new ExtraCost(person, "BOUTEILLE DE EAU",4.00, rand);
-            extraCostDAO.save(extra);
-            ExtraCost extra2 = new ExtraCost(person,"TOILET",99.00,rand2);
-            extraCostDAO.save(extra2);
         }
 
         List<ExtraCostDTO> extraCostList = orikaBeanMapper.mapAsList(extraCostDAO.findAll(), ExtraCostDTO.class);
