@@ -48,6 +48,7 @@ export class SurveyComponent implements OnInit {
 
 
 
+
   //constructor(private personService: PersonService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) { }
   private chronic_disease: any;
   private revenue: any;
@@ -124,6 +125,7 @@ export class SurveyComponent implements OnInit {
 
     })
       })
+    window.alert("Vous étes enregistré");
   }
 
 

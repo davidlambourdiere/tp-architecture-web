@@ -1,10 +1,10 @@
 
 export class PersonProfileDTO{
 
-
+  //private _id: number;
   private _nom: string;
   private _prenom: string;
-  private _age: bigint;
+  private _age: bigint;s
   private _adress: string;
   private _postal_code: bigint;
   private _adress_email: string;
@@ -20,7 +20,13 @@ export class PersonProfileDTO{
   private _profile: string;
   private _priority_coef: number;
 
+  /*get id(): number {
+    return this._id;
+  }
 
+  set id(value: number) {
+    this._id= value;
+  }*/
 
   get nom(): string {
     return this._nom;
@@ -157,4 +163,5 @@ export class PersonProfileDTO{
   set priority_coef(value: number) {
     this._priority_coef = value;
   }
+
 }

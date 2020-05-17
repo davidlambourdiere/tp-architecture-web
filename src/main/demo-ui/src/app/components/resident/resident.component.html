@@ -10,26 +10,26 @@ nawfal component
 <pre>{{persons.concat() | json}}</pre>
 <table border=4 cellspacing=4 cellpadding=4 width=50%>
   <tr>
-    <th scope="col"><h3>ID</h3></th>
-    <th scope="col"><h3>Nom</h3></th>
-    <th scope="col"><h3>Prénom</h3></th>
-    <th scope="col"><h3>Age</h3></th>
-    <th scope="col"><h3>Mobilité Estimé</h3></th>
-    <th scope="col"><h3>Maladie Chronique</h3></th>
-    <th scope="col"><h3>Urgence Medical</h3></th>
-    <th scope="col"><h3>Profile</h3></th>
-    <th scope="col"><h3>Coefficients Priorité</h3></th>
+    <th scope="col"><h4>ID</h4></th>
+    <th scope="col"><h4>Nom</h4></th>
+    <th scope="col"><h4>Prénom</h4></th>
+    <th scope="col"><h4>Age</h4></th>
+    <th scope="col"><h4>Mobilité Estimé</h4></th>
+    <th scope="col"><h4>Maladie Chronique</h4></th>
+    <th scope="col"><h4>Urgence Medical</h4></th>
+    <th scope="col"><h4>Profile</h4></th>
+    <th scope="col"><h4>Coefficients Priorité</h4></th>
   </tr>
   <tr *ngFor="let person of persons">
     <th scope="col">{{person.id}}</th>
-    <td><input type="text">{{person.nom}}</td>
-    <td>{{person.prenom}}</td>
-    <td>{{person.age}}</td>
-    <td>{{person.estimated_mobility}}</td>
-    <td>{{person.chronic_disease}}</td>
-    <td>{{person.medical_emergencies}}</td>
-    <td>{{person.profile}}</td>
-    <td>{{person.priority_coef}}</td>
+    <td><h5><input type="text">{{person.nom}}</h5></td>
+    <td><h5>{{person.prenom}}</h5></td>
+    <td><h5>{{person.age}}</h5></td>
+    <td><h5>{{person.estimated_mobility}}</h5></td>
+    <td><h5>{{person.chronic_disease}}</h5></td>
+    <td><h5>{{person.medical_emergencies}}</h5></td>
+    <td><h5>{{person.profile}}</h5></td>
+    <td><h5>{{person.priority_coef}}</h5></td>
   </tr>
 </table>
 <div class="form-group">
@@ -40,7 +40,6 @@ nawfal component
     formControlName="List"
   >
 </div>
-<datalist id={{persons}}>persons</datalist>
-
+<button type="button" class="btn-secondary">Update</button>
 <table></table>
 </body>

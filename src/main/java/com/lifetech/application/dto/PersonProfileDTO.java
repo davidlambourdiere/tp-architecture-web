@@ -2,7 +2,7 @@ package com.lifetech.application.dto;
 
 public class PersonProfileDTO extends PersistableElementDTO {
 
-
+    //private Long id;
     private String nom;
     private String prenom;
     private int age;
@@ -21,8 +21,37 @@ public class PersonProfileDTO extends PersistableElementDTO {
     private String profile;
     private int priority_coef;
 
+     /*@Override
+   public Long getId() {
+        return id;
+    }
 
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+*/
     public PersonProfileDTO(){}
+
+    public PersonProfileDTO(String nom, String prenom, int age, String adress, int postal_code, String adress_email, int tel_number, String chronic_disease, int estimated_mobility, boolean smoking, float smoking_time, boolean drinker, boolean medical_emergencies, String hobbies, float revenue, String profile, int priority_coef) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.age = age;
+        this.adress = adress;
+        this.postal_code = postal_code;
+        this.adress_email = adress_email;
+        this.tel_number = tel_number;
+        this.chronic_disease = chronic_disease;
+        this.estimated_mobility = estimated_mobility;
+        this.smoking = smoking;
+        this.smoking_time = smoking_time;
+        this.drinker = drinker;
+        this.medical_emergencies = medical_emergencies;
+        this.hobbies = hobbies;
+        this.revenue = revenue;
+        this.profile = profile;
+        this.priority_coef = priority_coef;
+    }
 
     public String getNom() {
         return nom;
