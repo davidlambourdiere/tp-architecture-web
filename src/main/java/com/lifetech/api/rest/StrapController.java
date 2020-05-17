@@ -21,6 +21,11 @@ public class StrapController extends RestBaseController{
         this.positionManager = positionManager;
     }
 
+    @GetMapping("strap/find/{id}")
+    private StrapDTO findStrap(@PathVariable("id") String id){
+        return strapManager.findById(id);
+    }
+
     @GetMapping("strap/{id}")
     private StrapDTO findById(@PathVariable("id") String id){
         return strapManager.findById(id);
