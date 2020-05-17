@@ -1,5 +1,5 @@
 // @ts-ignore
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import {ConnectionComponent} from './components/connection/connection.component';
 import {HomeComponent} from './components/home/home.component';
@@ -22,26 +22,6 @@ import {NotificationComponent} from "./components/notification/notification.comp
 import {DetailIotComponent} from "./components/monitoring/detail.iot/detail.iot.component";
 import {SurveyComponent} from "./components/survey/survey.component";
 import {MedicalResidentsComponent} from "./components/medical.control/medical.residents/medical.residents.component";
-import {NotificationHeaterComponent} from "./components/notification/notification.heater/notification.heater.component";
-import {NotificationShutterComponent} from "./components/notification/notification.shutter/notification.shutter.component";
-import {NotificationLightComponent} from "./components/notification/notification.light/notification.light.component";
-import {NotificationClockComponent} from "./components/notification/notification.clock/notification.clock.component";
-import {NotificationStrapComponent} from "./components/notification/notification.strap/notification.strap.component";
-import {NotificationNewComponent} from "./components/notification/notification.new/notification.new.component";
-import {NotificationReceivedComponent} from "./components/notification/notification.received.component/notification.received.component";
-import {NotificationSentComponent} from "./components/notification/notification.sent.component/notification.sent.component";
-import {ReactiveFormsModule} from "@angular/forms";
-import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import {MatSliderModule} from "@angular/material/slider";
-import {MatSelectModule} from "@angular/material/select";
-import {MatRadioModule} from "@angular/material/radio";
-import {MatInputModule} from "@angular/material/input";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatCheckboxModule} from "@angular/material/checkbox";
-import {MatButtonModule} from "@angular/material/button";
-import {MatAutocompleteModule} from "@angular/material/autocomplete";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {DetailAlertComponent} from "./components/medical.control/detail.alert/detail.alert.component";
 import {MedicalProfilComponent} from "./components/medical.control/medical.profil/medical.profil.component";
 import {ProfilelistComponent} from "./components/profilelist/profilelist.component";
@@ -65,7 +45,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
-    path: 'essential/:login',
+    path: 'essential/:login' ,
     component: EssentialComponent,
     canActivate: [AuthGuardService]
   },
@@ -143,46 +123,6 @@ const routes: Routes = [
     component: MedicalResidentsComponent,
     canActivate: [AuthGuardService]
   },
-  {
-    path: 'notification/heater/:id',
-    component: NotificationHeaterComponent,
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: 'notification/shutter/:id',
-    component: NotificationShutterComponent,
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: 'notification/light/:id',
-    component: NotificationLightComponent,
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: 'notification/clock/:id',
-    component: NotificationClockComponent,
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: 'notification/strap/:id',
-    component: NotificationStrapComponent,
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: 'notification/new',
-    component: NotificationNewComponent,
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: 'notification/received',
-    component: NotificationReceivedComponent,
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: 'notification/sent',
-    component: NotificationSentComponent,
-    canActivate: [AuthGuardService]
-  },
   { path: 'detailalert/:id',
     component: DetailAlertComponent,
     canActivate: [AuthGuardService]
@@ -207,19 +147,7 @@ const routes: Routes = [
 // @ts-ignore
 @NgModule({
   declarations: [],
-  imports: [RouterModule.forRoot(routes), ReactiveFormsModule,
-    MatAutocompleteModule,
-    MatButtonModule,
-    BrowserAnimationsModule,
-    MatCheckboxModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatSliderModule,
-    MatSlideToggleModule],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule { }

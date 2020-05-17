@@ -203,5 +203,4 @@ public class Person extends PersistableElement{
     public void setProfiletype(String profiletype) {
         this.profiletype = profiletype;
     }
-
 }

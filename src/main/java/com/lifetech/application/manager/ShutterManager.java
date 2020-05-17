@@ -24,5 +24,6 @@ public interface ShutterManager {
 
     List<Shutter> findAllShutterMalFunctionning();
 
+
 }
 
