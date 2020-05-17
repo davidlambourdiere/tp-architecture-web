@@ -92,7 +92,7 @@ public class PositionManagerImpl implements PositionManager {
                                 GeodesicMask.LATITUDE |
                                         GeodesicMask.LONGITUDE);
                         this.saveData(g.lat2, g.lon2, strap);
-                        Thread.sleep(750);
+                        Thread.sleep(3000);
                     }
                 }
             }

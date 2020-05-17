@@ -13,7 +13,6 @@ package com.lifetech.domain.dao;
 @Repository
 @Transactional
 public interface PositionDAO extends JpaRepository<Position, Long> {
-    //@Query(value = "select p from Position p where p.date = (select max(p.date) from Position p where p.strap.id = ?1)", nativeQuery = true)
     @Query(value = "select * from Position p where p.strap_id=?1  ORDER BY p.date DESC LIMIT 1;\n", nativeQuery = true)
     Position findPositionByStrap(long strapId);
 
