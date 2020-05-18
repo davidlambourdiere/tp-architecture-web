@@ -125,7 +125,7 @@ export class SurveyComponent implements OnInit {
 
     })
       })
-    window.alert("Vous étes enregistré votre profil est " + this.personprofile.profile);
+    window.alert("Vous étes enregistré");
   }
 
 
