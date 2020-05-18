@@ -4,5 +4,5 @@ export class ActivityAnalysisDTO{
   period:string;
   startdate:string;
   enddate:string;
-  breakdownrate:string;
+  heaterbreakdownrate:string;
 }
