@@ -11,15 +11,7 @@ export class ActivityAnalysisService{
   constructor(private http: HttpClient) {
   }
 
-  countIOTByPerson(personlogin : string) : Observable<any>{
-    return this.http.get(`api/analysis/countIOTByPerson/${personlogin}`);
-  }
-
-  countIOTByResidence(idresidence: string) {
-    return this.http.get(`api/analysis/countIOTByResidence/${idresidence}`);
-  }
-
-  countIOT() {
-    return this.http.get(`api/analysis/countIOT`);
+  findActivityAnalysis(activityanalysis: ActivityAnalysisDTO) {
+    return this.http.post<ActivityAnalysisDTO>(`api/analysis/`,activityanalysis);
   }
 }

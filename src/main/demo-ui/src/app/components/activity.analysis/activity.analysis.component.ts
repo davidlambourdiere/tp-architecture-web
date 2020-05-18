@@ -14,7 +14,7 @@ import {ResidenceDTO} from "../../dto/ResidenceDTO";
 })
 export class  ActivityAnalysisComponent {
 
-  activityanalysis : Object = new ActivityAnalysisDTO();
+  activityanalysis : ActivityAnalysisDTO = new ActivityAnalysisDTO();
   personlist: PersonDTO[];
   residencelist: ResidenceDTO[];
 
@@ -25,14 +25,6 @@ export class  ActivityAnalysisComponent {
   ngOnInit(){
     this.findAllResidence();
     this.findAllPerson();
-  }
-
-  countIOT() {
-    this.route.params.subscribe(params =>{
-      this.activityanlysisservice.countIOT().subscribe(data=>{
-        this.activityanalysis = data;
-      });
-    });
   }
 
   private findAllPerson() {
@@ -61,5 +53,18 @@ export class  ActivityAnalysisComponent {
         });
       });
     }
+  }
+
+  analysis(residenceid: string, personid: string, period: string, startdate: string, enddate: string) {
+    this.activityanalysis.residenceid=residenceid;
+    this.activityanalysis.personid=personid;
+    this.activityanalysis.period=period;
+    this.activityanalysis.startdate=startdate;
+    this.activityanalysis.enddate=enddate;
+    this.route.params.subscribe(params => {
+      this.activityanlysisservice.findActivityAnalysis(this.activityanalysis).subscribe(data => {
+        this.activityanalysis = data;
+      });
+    });
   }
 }

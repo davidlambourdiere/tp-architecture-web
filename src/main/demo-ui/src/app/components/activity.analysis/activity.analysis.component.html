@@ -33,13 +33,13 @@
         </div>
         <div class="form-group">
           <label for="startdate">Start date</label>
-          <input type="date" class="form-control" id="startdate">
+          <input type="date" class="form-control" id="startdate" #startdate>
         </div>
         <div class="form-group">
           <label for="enddate">End date</label>
-          <input type="date" class="form-control" id="enddate">
+          <input type="date" class="form-control" id="enddate" #enddate>
         </div>
-        <button type="submit" class="btn btn-primary pull-right" >Submit</button>
+        <button type="submit" class="btn btn-primary pull-right" (click)="analysis(selectresidence.value,selectperson.value,selectperiod.value,startdate.value,enddate.value)">Submit</button>
       </form>
     </div>
     <div class="col">
@@ -54,7 +54,7 @@
         <tbody>
         <tr>
           <td>Heather breakdown rate</td>
-          <td></td>
+          <td>{{activityanalysis.breakdownrate}}</td>
         </tr>
         </tbody>
       </table>

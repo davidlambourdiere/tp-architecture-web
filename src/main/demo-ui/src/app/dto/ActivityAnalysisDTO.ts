@@ -1,9 +1,8 @@
 export class ActivityAnalysisDTO{
-  personName : string;
-  residenceName : string;
-  nClock : bigint;
-  nHeather : bigint;
-  nLight : bigint;
-  nAlert : bigint;
-  nBreakDown : bigint;
+  residenceid:string;
+  personid:string;
+  period:string;
+  startdate:string;
+  enddate:string;
+  breakdownrate:string;
 }
