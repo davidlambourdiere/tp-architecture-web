@@ -41,6 +41,6 @@ id_person BIGINT UNSIGNED NOT NULL,
 CONSTRAINT FK_person_subscription_id FOREIGN KEY (id_person) REFERENCES lifetech.person(id)
 );
 
-ALTER TABLE lifetech.person ADD id_subscription BIGINT UNSIGNED NOT NULL ;
+ALTER TABLE lifetech.person ADD id_subscription BIGINT UNSIGNED ;
 ALTER TABLE lifetech.person ADD CONSTRAINT fk_subscription_person FOREIGN KEY (id_subscription) REFERENCES lifetech.subscription(id);
 
