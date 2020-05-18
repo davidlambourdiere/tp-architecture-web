@@ -6,8 +6,9 @@ import com.lifetech.domain.model.Subscription;
 import java.util.List;
 
 public interface SubscriptionManager {
+    List<SubscriptionDTO> findAllSubscription();
 
-    SubscriptionDTO findSubscriptionById(Long subscriptionId);
+    Subscription findSubscriptionById(String subscriptionId);
 
     SubscriptionDTO findSubscriptionByProfile(String subscriptionName);
 

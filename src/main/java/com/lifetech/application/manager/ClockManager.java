@@ -14,5 +14,7 @@ public interface ClockManager {
 
     ClockDetailDTO findByHistoric(String id);
 
+    ClockDTO updateClock( String id, ClockDTO clockDtoReceived);
+
     List<Clock> findAllClockMalFunctionning();
 }

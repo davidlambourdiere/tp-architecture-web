@@ -12,13 +12,10 @@ export class HeaterService {
   constructor(private http: HttpClient) {
   }
 
-  findHeater(id: string): Observable<any>{
-    return this.http.get(`api/heater/find/${id}`);
-  }
-
   findAllIOT(): Observable<IOTDTO> {
     return this.http.get<IOTDTO>(`api/iots`);
   }
+
 
   findbyId(id: bigint) :Observable<HeaterDTO> {
     return this.http.get<HeaterDTO>(`api/heater/${id}`);
@@ -42,6 +39,10 @@ export class HeaterService {
 
   countHeaters() {
     return this.http.get(`api/heater/countHeaters`);
+  }
+
+  findHeater(id: string): Observable<any>{
+    return this.http.get(`api/heater/find/${id}`);
   }
 
 }
