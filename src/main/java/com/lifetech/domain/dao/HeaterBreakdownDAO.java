@@ -46,7 +46,7 @@ public interface HeaterBreakdownDAO extends JpaRepository<HeaterBreakdown, Long>
             "JOIN person ON heater.person_id = person.id\n" +
             "WHERE person.residence_id = ?1 AND heaterbreakdown.startdateheaterbreakdown BETWEEN ?2 AND ?3\n" +
             "GROUP BY iotheaterbreakdown_id) as T;", nativeQuery=true)
-    String getHeaterBreakdownByResidenceBetween(String residenceId,String startDate, String endDate);
+    String getHeaterBreakdownRateByResidenceBetween(String residenceId,String startDate, String endDate);
 
     @Query(value="SELECT AVG((duration/heater_activity_duration)*100) as mean_breakdown_rate\n" +
             "FROM (SELECT iotheaterbreakdown_id, SUM(ROUND(UNIX_TIMESTAMP(enddateheaterbreakdown) - UNIX_TIMESTAMP(startdateheaterbreakdown))) as duration, ROUND(UNIX_TIMESTAMP(NOW()) - UNIX_TIMESTAMP(heater.activationdate)) as heater_activity_duration\n" +
@@ -62,6 +62,6 @@ public interface HeaterBreakdownDAO extends JpaRepository<HeaterBreakdown, Long>
             "JOIN heater ON heater.id = heaterbreakdown.iotheaterbreakdown_id\n" +
             "WHERE heater.person_id = ?1 AND heaterbreakdown.startdateheaterbreakdown BETWEEN ?2 AND ?3\n" +
             "GROUP BY iotheaterbreakdown_id) as T;", nativeQuery=true)
-    String getHeaterBreakdownByPersonBetween(String personId,String startDate, String endDate);
+    String getHeaterBreakdownRateByPersonBetween(String personId,String startDate, String endDate);
 
 }
