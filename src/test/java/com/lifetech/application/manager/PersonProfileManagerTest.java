@@ -6,7 +6,7 @@ import com.lifetech.application.manager.PersonProfileManagerImpl;
 import com.lifetech.domain.model.PersonProfile;
 import org.junit.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 

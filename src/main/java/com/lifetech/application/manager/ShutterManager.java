@@ -6,8 +6,6 @@ import com.lifetech.domain.model.Shutter;
 
 import java.util.List;
 
-import java.util.List;
-
 public interface ShutterManager {
 
     List<ShutterDTO> findAllShutter();

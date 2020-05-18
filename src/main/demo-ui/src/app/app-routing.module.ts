@@ -26,6 +26,7 @@ import {DetailAlertComponent} from "./components/medical.control/detail.alert/de
 import {MedicalProfilComponent} from "./components/medical.control/medical.profil/medical.profil.component";
 import {ProfilelistComponent} from "./components/profilelist/profilelist.component";
 import {PositionComponent} from "./components/position/position.component";
+import {MockBillingComponent} from "./components/mock.billing/mock.billing.component";
 
 
 
@@ -35,7 +36,7 @@ const routes: Routes = [
     component: ConnectionComponent
   },
   {
-    path: 'home',
+    path: 'home/:login',
     component: HomeComponent,
     canActivate: [AuthGuardService]
   },
@@ -90,7 +91,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
-    path: 'billing',
+    path: 'billing/:login',
     component: BillingComponent,
     canActivate: [AuthGuardService]
   },
@@ -140,6 +141,10 @@ const routes: Routes = [
   {
     path: 'position',
     component: PositionComponent
+  },
+  {
+    path: 'mock/billing',
+    component: MockBillingComponent
   }
 
 ];

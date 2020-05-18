@@ -19,4 +19,8 @@ export class StrapService {
   }
 
 
+  findStrap(id: string): Observable<any>{
+      return this.http.get(`api/strap/find/${id}`);
+
+  }
 }

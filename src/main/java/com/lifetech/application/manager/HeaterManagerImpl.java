@@ -1,28 +1,28 @@
 package com.lifetech.application.manager;
 
-import com.lifetech.application.dto.*;
-import com.lifetech.domain.OrikaBeanMapper;
-import com.lifetech.domain.dao.HeaterDAO;
-import com.lifetech.domain.dao.HeaterHistoricDAO;
-import com.lifetech.domain.dao.RoomDAO;
-import com.lifetech.domain.model.Heater;
-import com.lifetech.domain.model.HeaterHistoric;
-import com.lifetech.domain.model.StateEnum;
-import com.lifetech.domain.model.StatusEnum;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.lifetech.domain.model.Room;
-import org.springframework.stereotype.Service;
+        import com.lifetech.application.dto.*;
+        import com.lifetech.domain.OrikaBeanMapper;
+        import com.lifetech.domain.dao.HeaterDAO;
+        import com.lifetech.domain.dao.HeaterHistoricDAO;
+        import com.lifetech.domain.dao.RoomDAO;
+        import com.lifetech.domain.model.Heater;
+        import com.lifetech.domain.model.HeaterHistoric;
+        import com.lifetech.domain.model.StateEnum;
+        import com.lifetech.domain.model.StatusEnum;
+        import org.slf4j.Logger;
+        import org.slf4j.LoggerFactory;
+        import org.springframework.beans.factory.annotation.Autowired;
+        import com.lifetech.domain.model.Room;
+        import org.springframework.stereotype.Service;
 
-import javax.management.StandardEmitterMBean;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+        import javax.management.StandardEmitterMBean;
+        import java.time.Instant;
+        import java.time.LocalDate;
+        import java.time.ZoneId;
+        import java.util.ArrayList;
+        import java.util.HashSet;
+        import java.util.List;
+        import java.util.Set;
 
 @Service
 public class HeaterManagerImpl implements HeaterManager {
@@ -47,7 +47,10 @@ public class HeaterManagerImpl implements HeaterManager {
 
     @Override
     public HeaterDTO findById(String id) {
-        return null;
+
+        Heater heater = heaterDAO.findById(Long.parseLong(id)).orElse(null);
+        return orikaBeanMapper.map(heater, HeaterDTO.class);
+
     }
 
     @Override
@@ -58,19 +61,27 @@ public class HeaterManagerImpl implements HeaterManager {
 
     @Override
     public List<HeaterDTO> findHeaterByPerson(String id) {
-        return null;
+        List<Heater> heaters = heaterDAO.findAllByPersonId(Long. parseLong(id));
+        return orikaBeanMapper.mapAsList(heaters, HeaterDTO.class);
     }
 
     @Override
     public HeaterDTO updateHeater(String id, HeaterDTO heaterDtoReceived) {
-        return null;
-    }
+
+            Heater heater = heaterDAO.findById(Long.parseLong(id)).orElse(null);
+            // converti en DTO pour modifier
+            HeaterDTO updatedHeaterDTO = orikaBeanMapper.map(heater, HeaterDTO.class);
+            updatedHeaterDTO.setActualval(heaterDtoReceived.getActualval());
+            // A faire: recup state
+            Heater heatersaved = orikaBeanMapper.map(updatedHeaterDTO, Heater.class);
+            System.out.println(heatersaved);
+            return orikaBeanMapper.map(heaterDAO.save(heatersaved), HeaterDTO.class);
+        }
 
     @Override
     public HeaterDTO switchDownHeater(String id, HeaterDTO heaterDtoReceived) {
         return null;
     }
-
 
     public int countHeaters(){
         List<Heater> heaters = heaterDAO.findAll();

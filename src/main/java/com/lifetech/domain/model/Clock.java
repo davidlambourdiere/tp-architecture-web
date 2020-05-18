@@ -1,12 +1,15 @@
 package com.lifetech.domain.model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import java.sql.Timestamp;
 
 @Entity(name="clock")
 public class Clock extends IOT {
+    @Column(name = "minvalueref")
+    private String minvalueref;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Person person;
@@ -18,6 +21,7 @@ public class Clock extends IOT {
         super(price, breakdownstatus, state, ipadress, startdate, minvalueref, maxvalueref, suspect, activityduration);
         this.person = person;
         this.room = room;
+        this.minvalueref = minvalueref;
     }
 
     public Clock() {
@@ -30,6 +34,15 @@ public class Clock extends IOT {
 //    public void setTime(Timestamp time) {
 //        this.time = time;
 //    }
+    @Override
+    public String getMinvalueref() {
+    return minvalueref;
+}
+
+    @Override
+    public void setMinvalueref(String minvalueref) {
+        this.minvalueref = minvalueref;
+    }
 
     public Person getPerson() {
         return person;
@@ -42,4 +55,13 @@ public class Clock extends IOT {
     public Room getRoom() { return room; }
 
     public void setRoom(Room room) { this.room = room; }
+
+    @Override
+    public String toString() {
+        return "Clock{" +
+                "minvalueref='" + minvalueref + '\'' +
+                ", person=" + person +
+                ", room=" + room +
+                '}';
+    }
 }
