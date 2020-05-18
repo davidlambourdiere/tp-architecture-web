@@ -1,0 +1,1 @@
+UPDATE `lifetech`.`residence` SET `name` = 'Residence Avenue Paris' WHERE (`id` = '1');
