@@ -106,4 +106,22 @@ public class ClockDTO extends PersistableElementDTO{
     public Double getPrice() { return price; }
 
     public void setPrice(Double price) { this.price = price; }
+
+    @Override
+    public String toString() {
+        return "ClockDTO{" +
+                "breakdownstatus='" + breakdownstatus + '\'' +
+                ", state='" + state + '\'' +
+                ", startdate=" + startdate +
+                ", minvalueref='" + minvalueref + '\'' +
+                ", suspect='" + suspect + '\'' +
+                ", ipadress='" + ipadress + '\'' +
+                ", maxvalueref='" + maxvalueref + '\'' +
+                ", activityduration=" + activityduration +
+                ", time=" + time +
+                ", person=" + person +
+                ", price=" + price +
+                ", room=" + room +
+                '}';
+    }
 }

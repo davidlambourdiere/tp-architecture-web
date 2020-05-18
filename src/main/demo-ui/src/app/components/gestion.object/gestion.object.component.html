@@ -2,7 +2,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Gerer</title>
+  <title>Manage and Configure</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
@@ -11,6 +11,9 @@
 </head>
 
 <body onload="refreshTime()">
+
+
+
 <br>
 <div class="noteAlt">
 
@@ -20,7 +23,7 @@
 </div>
   <br><br><br>
 
-
+<!-- DISPLAY OF THE LIST OF OBJECTS :-->
 
   <div *ngIf="show===true">
     <div *ngIf="iots!==null && iots.lights!==null" [ngClass]="{'display-none': type!=='Light' && type!=='all',
@@ -125,167 +128,234 @@
             <span  *ngIf="iot.state==='off'"></span>
           </td>
           <td [hidden]="owner!==iot.person.lastName && owner!==''">{{iot.ipadress}}</td>
-          <td [hidden]="owner!==iot.person.lastName && owner!==''"> Not available yet </td>
+          <td [hidden]="owner!==iot.person.lastName && owner!==''"> {{iot.minvalueref}} </td>
         </tr>
         </tbody>
       </table>
     </div>
 
 
+<!--
+END OF THE DISPLAY OF THE LIST OF OBJECTS
+-->
+<br><br>
+<div class="noteAlt">
+
+  <br>
+  You'll find the Scenario part bellow
+  <br>
+</div>
+
+<br>
+<div class="form-group">
+  <label for="aut">Hour on which you want to launch the Scenario </label>
+
+ <pre>   <input type="time" id="aut">
+
+   <button class="btn btn-primary" type="submit">Record  </button>
+ </pre>
+  <label > Then you can wait for it to be launched in the hour scheduled </label>
+</div>
+<br>
+<label >You can just launch it now, manually by clicking here   </label>
+<button (click)="runScenario()" class="btn btn-success btn-lg"  type="submit">Go to Bed now Scenario </button>
+<br><br>
+
+<br><br>
+<!-- DISPLAY OF THE FORMS TO MANAGE EACH OBJECT -->
 
 
+<div class="noteAlt">
+
+  <br>
+  You can manage your iots with this forms
+  <br>
+</div>
+<br><br>
+<br><br>
 
 
 
 <br><br>
 
-<br><br><br><br><br><br>
 
-<div class="row">
-  <div class="col-sm-8 col-sm-offset-2">
-<h1> LIGHT </h1>
+
+<div class="float">
+
+<h3> Light </h3>
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
 
       <div class="form-group">
-        <label for="lighti">Id of the Light you want to update</label>
+        <label for="lighti">Id of the Light </label>
         <input type="text" class="form-control" id="lighti" name="id" required [(ngModel)]="lights.id">
       </div>
 
       <div class="form-group">
-        <label for="couleur">
-          Light's color
+        <label >
+          Light's color you want
         </label>
-        <select id="couleur" class="form-control" name="couleur"  required [(ngModel)]="lights.color">
+         <!--  AJOUTER AUJOURDHUI A REGLER : -->
+        <br>
+        <div class="form-check form-check-inline">
+
+          <label class="form-check-label" for="green">
+            <input class="form-check-input" type="radio" ngModel="lights.color"  name ="couleur" id="green"value="green">
+         Green </label>
+        </div>
+
+        <div class="form-check form-check-inline">
+
+          <label class="form-check-label" for="red">
+            <input class="form-check-input" type="radio" ngModel="lights.color"  name ="couleur" id="red"value="red">
+            Red </label>
+        </div>
+
+        <div class="form-check form-check-inline">
+
+          <label class="form-check-label" for="blue">
+            <input class="form-check-input" type="radio" ngModel="lights.color"  name ="couleur" id="blue"value="blue">
+            Blue </label>
+        </div>
+        <br>
+  <!--      <select id="couleur" class="form-control" name="couleur"  required [(ngModel)]="lights.color">
           <option value="red" >Red</option>
           <option value="blue">Blue</option>
         </select>
+
+
+        -->
       </div>
 
       <div class="form-group">
         <label for="statee">
          State of your Light
         </label>
-        <select id="statee" class="form-control" name="state" required [(ngModel)]="lights.state">
+        <select id="statee" class="custom-select" name="state" required [(ngModel)]="lights.state">
           <option value="on">On</option>
           <option value="off">Off</option>
         </select>
       </div>
 
-
       <div class="form-group">
+
+
         <label for="intensite">
           Intensity of the Light
         </label>
-        <select id="intensite" class="form-control" name="intensite"  required [(ngModel)]="lights.percentage">
+        <input type="number" id="intensite" name="intensite" required [(ngModel)]="lights.percentage" min="1" max="100">
+     <!--   <select id="intensite" class="form-control" name="intensite"  required [(ngModel)]="lights.percentage">
           <option value="1">1</option>
           <option value="5">5</option>
           <option value="10">10</option>
-        </select>
+        </select>-->
+
+
+
+
       </div>
 
 
-      <button class="btn btn-primary" type="submit">Submit</button>
+      <button class="btn btn-outline-primary" type="submit">Set those parameters</button>
 
     </form>
   </div>
-</div>
 
 
-<br><br><br><br><br><br>
-<div class="row">
-  <div class="col-sm-8 col-sm-offset-2">
-    <h1> HEATER </h1>
+<div class="float">
+
+    <h3> Heater </h3>
     <form (ngSubmit)="onSubmitHeater(h)" #h="ngForm">
 
       <div class="form-group">
-        <label for="exampleInputEmail1">Id of the Heater you want to update</label>
+        <label for="exampleInputEmail1">Id of the Heater </label>
         <input type="text" class="form-control" id="exampleInputEmail1" name="id" required [(ngModel)]="heaters.id">
       </div>
 
       <div class="form-group">
         <label for="actualval">
-          Heat
+          Heat you want
         </label>
-        <select id="actualval" class="form-control" name="actualval"  required [(ngModel)]="heaters.actualval">
-          <option value="20">20</option>
-          <option value="21">21</option>
-          <option value="23">23</option>
-        </select>
+        <input type="number" id="actualval" name="actualval" required [(ngModel)]="heaters.actualval" min="16" max="20">
       </div>
 
-      <button (click)="SwitchDownHeat()" class="btn btn-primary" type="sub">Baisser </button>
-      <button class="btn btn-primary" type="sub">Augmenter </button>
-      <br><br>
+
 
       <div class="form-group">
+
         <label for="state">
-          State
+          State of your heater
         </label>
-        <select id="state" class="form-control" name="state" required [(ngModel)]="heaters.state">
+       <select id="state" class="custom-select" name="state" required [(ngModel)]="heaters.state">
           <option value="on">On</option>
           <option value="off">Off</option>
         </select>
+
+
+
       </div>
 
 
-      <button class="btn btn-primary" type="submit">Submit </button>
+      <button class="btn btn-outline-primary" type="submit">Set those parameters </button>
 
     </form>
   </div>
-</div>
-<br>
 
 
-<br><br><br><br><br><br>
-<div class="row">
-  <div class="col-sm-8 col-sm-offset-2">
-    <h1> SHUTTER </h1>
+<div class="float">
+
+    <h3> Shutter </h3>
     <form (ngSubmit)="onSubmitShutter(g)" #g="ngForm">
 
 
       <div class="form-group">
-        <label for="idshut">Id of the Shutter you want to update</label>
+        <label for="idshut" >Id of the Shutter </label>
         <input type="text" class="form-control" id="idshut" name="id" required [(ngModel)]="shutters.id">
       </div>
 
+
       <div class="form-group">
-        <label for="percentage">
+
+
+       <label for="percentage">
           Percentage of opening
         </label>
-        <select id="percentage" class="form-control" name="percentage"  required [(ngModel)]="shutters.percentage">
-          <option value="25">25</option>
-          <option value="50">50</option>
-          <option value="70">70</option>
-        </select>
-      </div>
 
-      <button class="btn btn-primary" type="submit">Submit</button>
+        <input type="number" id="percentage" name="percentage" required [(ngModel)]="shutters.percentage" min="1" max="100">
+
+
+      </div>
+<br><br><br><br>
+      <button class="btn btn-outline-primary" type="submit">Set those parameters</button>
 
     </form>
   </div>
-</div>
-<br>
-<br>
-<br>
-<button (click)="runScenario()" class="btn btn-primary" type="submit">Scenario : Go to Bed ! </button>
-<br><br><br>
-<div class="row">
-  <div class="col-sm-8 col-sm-offset-2">
-    <h1> CLOCK </h1>
-    <form >
+
+
+<div class="float">
+
+    <h3> Clock </h3>
+    <form (ngSubmit)="onSubmitClock(w)" #w="ngForm">
+
+
+      <div class="form-group">
+        <label for="idclock">Id of the Clock </label>
+        <input type="text" class="form-control" id="idclock" name="id" required [(ngModel)]="clocks.id">
+      </div>
 
       <div >
+        <label for="appt"> Hour to wake up for</label>
 
-        <label >
-          Please choose an hour to wake up for
-        </label>
+        <input type="time" id="appt" name="appt"
+               min="00:00" max="23:59" required [(ngModel)]="clocks.minvalueref">
+<br>
 
       </div>
-
-      <button class="btn btn-primary" type="submit">Submit </button>
-
+<br><br><br><br><br>
+      <button class="btn btn-outline-primary" type="submit">Set the alarm clock </button>
+<br><br>
     </form>
   </div>
-</div>
-</body>
 
+
+
+</body>

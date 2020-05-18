@@ -25,13 +25,18 @@ public class SubscriptionManagerImp implements SubscriptionManager{
     }
 
     @Override
-    public SubscriptionDTO findSubscriptionById(Long subscriptionId) {
-        Subscription s = subscriptionDAO.findById(subscriptionId).orElse(null);
-        if(s!=null){
+    public List<SubscriptionDTO> findAllSubscription() {
+        return orikaBeanMapper.mapAsList(subscriptionDAO.findAll(), SubscriptionDTO.class);
+    }
+
+    @Override
+    public Subscription findSubscriptionById(String subscriptionId) {
+        return subscriptionDAO.findById(Long.parseLong(subscriptionId)).orElse(null);
+       /* if(s!=null){
             SubscriptionDTO DTO = orikaBeanMapper.map(s, SubscriptionDTO.class);
             return DTO;
         }
-        return null;
+        return null;*/
     }
 
 

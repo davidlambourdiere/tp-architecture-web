@@ -4,7 +4,7 @@ import com.lifetech.application.dto.SubscriptionDTO;
 import com.lifetech.application.dto.SubscriptionResidentDTO;
 import com.lifetech.application.manager.SubscriptionManager;
 import com.lifetech.application.manager.SubscriptionResidentManager;
-import org.springframework.http.ResponseEntity;
+import com.lifetech.domain.model.Subscription;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -21,14 +21,17 @@ public class SubscriptionController extends RestBaseController {
         this.subscriptionResidentManager = subscriptionResidentManager;
     }
 
-
+    @GetMapping("subscription/findAll")
+    private List<SubscriptionDTO> findAllPerson(){
+        return subscriptionManager.findAllSubscription();
+    }
 
     @GetMapping("subscription/findById/{id}")
-    private ResponseEntity<SubscriptionDTO> getSubscriptionById(@PathVariable(value = "id") Long subscriptionId) {
-        SubscriptionDTO sub = subscriptionManager.findSubscriptionById(subscriptionId);
+    private Subscription getSubscriptionById(@PathVariable(value = "id") String subscriptionId) {
+      //  Subscription sub = subscriptionManager.findSubscriptionById(subscriptionId);
 
 
-        return ResponseEntity.ok().body(sub);
+        return subscriptionManager.findSubscriptionById(subscriptionId);
     }
 
     

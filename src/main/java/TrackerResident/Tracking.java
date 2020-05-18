@@ -77,6 +77,20 @@ public class Tracking {
                     coords.add(coor);
                 }
                 map.put(cle, coords);
+            } else {
+                if (t.equals("LineString")) {
+                    JSONArray coordinates = (JSONArray) g.get("coordinates");
+                    JSONObject properties = (JSONObject) o.get("properties");
+                    String cp1 = properties.get("description").toString();
+                    List<Coordinate> coords = new ArrayList<>();
+                    //JSONArray jArray = (JSONArray) coordinates.get(0);
+                    for (int j = 0; j < coordinates.size(); j++) {
+                        JSONArray test = (JSONArray) coordinates.get(j);
+                        Coordinate coor = new Coordinate(Double.parseDouble(test.get(1).toString()), Double.parseDouble(test.get(0).toString()));
+                        coords.add(coor);
+                    }
+                    map.put(cp1, coords);
+                }
             }
         }
         return map;
@@ -131,14 +145,14 @@ public class Tracking {
     public boolean isInTheLivingRoom(Coordinate coor) {
         List<Coordinate> coordsam = map.get("salleAManger1");
         return (coor.getLongitude() > coordsam.get(3).getLongitude() && coor.getLongitude() < coordsam.get(1).getLongitude()
-        && coor.getLatitude() > coordsam.get(2).getLatitude() && coor.getLatitude() < coordsam.get(0).getLatitude());
+                && coor.getLatitude() > coordsam.get(2).getLatitude() && coor.getLatitude() < coordsam.get(0).getLatitude());
     }
 
     public boolean isInTheRoom(Coordinate coordinate) {
         List<Coordinate> coordsam = map.get("chambre3");
 
         return (coordinate.getLatitude() > coordsam.get(2).getLatitude() && coordinate.getLatitude() < coordsam.get(0).getLatitude() &&
-                 coordinate.getLongitude() > coordsam.get(3).getLongitude() && coordinate.getLongitude() < coordsam.get(1).getLongitude());
+                coordinate.getLongitude() > coordsam.get(3).getLongitude() && coordinate.getLongitude() < coordsam.get(1).getLongitude());
 
     }
 
