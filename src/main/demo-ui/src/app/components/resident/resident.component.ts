@@ -40,9 +40,9 @@ export class ResidentComponent {
 
 
 
-       for (var j = 0; j < this.persons.length; j++){
+       /*for (var j = 0; j < this.persons.length; j++){
           console.log(this.persons[j].adress);
-         }
+         }*/
 
       })
     })
