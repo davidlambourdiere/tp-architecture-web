@@ -53,8 +53,50 @@
         </thead>
         <tbody>
         <tr>
+          <td class="font-weight-bold text-right">IOT</td>
+        </tr>
+        <tr>
+          <td>Number of heaters</td>
+          <td>{{(activityanalysis.nheater == undefined) ? 'N/A' :  activityanalysis.nheater}}</td>
+        </tr>
+        <tr>
           <td>Heather breakdown rate</td>
-          <td>{{activityanalysis.heaterbreakdownrate}}</td>
+          <td>{{(activityanalysis.heaterbreakdownrate == undefined) ? 'N/A' :  (+activityanalysis.heaterbreakdownrate).toFixed(2)}} %</td>
+        </tr>
+        <tr>
+          <td>Number of clocks</td>
+          <td>{{(activityanalysis.nclock == undefined) ? 'N/A' :  activityanalysis.nclock}}</td>
+        </tr>
+        <tr>
+          <td>Clock breakdown rate</td>
+          <td>{{(activityanalysis.clockbreakdownrate == undefined) ? 'N/A' :  (+activityanalysis.clockbreakdownrate).toFixed(2)}} %</td>
+        </tr>
+        <tr>
+          <td>Number of lights</td>
+          <td>{{(activityanalysis.nlight == undefined) ? 'N/A' :  activityanalysis.nlight}}</td>
+        </tr>
+        <tr>
+          <td>Light breakdown rate</td>
+          <td>{{(activityanalysis.lightbreakdownrate == undefined) ? 'N/A' :  (+activityanalysis.lightbreakdownrate).toFixed(2)}} %</td>
+        </tr>
+        <tr>
+          <td>Number of straps</td>
+          <td>{{(activityanalysis.nstrap == undefined) ? 'N/A' :  activityanalysis.nstrap}}</td>
+        </tr>
+        <tr>
+          <td>Strap breakdown rate</td>
+          <td>{{(activityanalysis.strapbreakdownrate == undefined) ? 'N/A' :  (+activityanalysis.strapbreakdownrate).toFixed(2)}} %</td>
+        </tr>
+        <tr>
+          <td class="font-weight-bold text-right">Finance</td></tr>
+        <tr>
+        <tr>
+          <td>Average income</td>
+          <td>{{(activityanalysis.avgincome == undefined) ? 'N/A' :  (+activityanalysis.avgincome).toFixed(2)}}</td>
+        </tr>
+        <tr>
+          <td>Total revenue</td>
+          <td>{{(activityanalysis.totalrevenue == undefined) ? 'N/A' :  activityanalysis.totalrevenue}}</td>
         </tr>
         </tbody>
       </table>

@@ -5,4 +5,13 @@ export class ActivityAnalysisDTO{
   startdate:string;
   enddate:string;
   heaterbreakdownrate:string;
+  clockbreakdownrate: string;
+  lightbreakdownrate: string;
+  strapbreakdownrate: string;
+  nheater: string;
+  nclock: string;
+  nlight: string;
+  nstrap: string;
+  avgincome: string;
+  totalrevenue: string;
 }
