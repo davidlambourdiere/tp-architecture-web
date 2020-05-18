@@ -10,10 +10,8 @@ import java.sql.Timestamp;
 public class Heater  extends IOT{
     @Column(name = "minvalueref")
     private String minvalueref;
-
     @Column(name = "actualval")
     private String actualval;
-
     @Column(name = "maxvalueref")
     private String maxvalueref;
 
@@ -27,13 +25,14 @@ public class Heater  extends IOT{
     private Room room;
 
 
-    public Heater(Double price, StatusEnum breakdownstatus, StateEnum state, String ipadress, Timestamp startdate, String minvalueref, String maxvalueref, SuspectEnum suspect, Timestamp activityduration, Person person, Room room, String temperature) {
+    public Heater(Double price, StatusEnum breakdownstatus, StateEnum state, String ipadress, Timestamp startdate, String minvalueref,String actualval, String maxvalueref, SuspectEnum suspect, Timestamp activityduration, Person person, Room room, String temperature) {
         super(price, breakdownstatus, state, ipadress, startdate, minvalueref, maxvalueref, suspect, activityduration);
         this.person = person;
         this.room = room;
         this.minvalueref = minvalueref;
         this.maxvalueref = maxvalueref;
         this.temperature = temperature;
+        this.actualval = actualval;
     }
 
     public Heater() {
@@ -86,5 +85,17 @@ public class Heater  extends IOT{
 
     public void setActualval(String actualval) {
         this.actualval = actualval;
+    }
+
+    @Override
+    public String toString() {
+        return "Heater{" +
+                "minvalueref='" + minvalueref + '\'' +
+                ", actualval='" + actualval + '\'' +
+                ", maxvalueref='" + maxvalueref + '\'' +
+                ", temperature='" + temperature + '\'' +
+                ", person=" + person +
+                ", room=" + room +
+                '}';
     }
 }

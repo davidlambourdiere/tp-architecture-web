@@ -14,7 +14,12 @@ export class ClockService {
     return this.http.get(`api/clock/findByRoom/${idroom}`);
   }
 
+
   findClock(id: string) : Observable<any> {
     return this.http.get(`api/clock/find/${id}`);
   }
+
+  updateClock(id: bigint , clock: ClockDTO): Observable<ClockDTO> {
+    return this.http.put<ClockDTO>(`api/clock/updateClock/${id}`, clock);}
+
 }

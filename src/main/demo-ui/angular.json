@@ -28,7 +28,6 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss",
               "../demo-ui/node_modules/bootstrap/dist/css/bootstrap.css",
               "../demo-ui/node_modules/font-awesome/css/font-awesome.css"
@@ -101,7 +100,6 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -133,7 +131,6 @@
           }
         }
       }
-    }
-  },
+    }},
   "defaultProject": "demo-ui"
 }

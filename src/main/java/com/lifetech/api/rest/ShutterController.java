@@ -29,11 +29,6 @@ public class ShutterController extends RestBaseController{
         return shutterManager.findShutterByPerson(idperson);
     }
 
-    @GetMapping("shutter/find/{id}")
-    private ShutterDTO findShutter(@PathVariable("id") String id){
-        return shutterManager.findById(id);
-    }
-
     @GetMapping("shutter/{id}")
     private ShutterDTO findById(@PathVariable("id") String id){
         return shutterManager.findById(id);
@@ -46,7 +41,7 @@ public class ShutterController extends RestBaseController{
 
     @PutMapping("shutter/updateShutter/{id}")
     public ShutterDTO updateShutter (@PathVariable(value = "id") String id,
-                                 @Valid @RequestBody ShutterDTO shutterDtoReceived) {
+                                     @Valid @RequestBody ShutterDTO shutterDtoReceived) {
         return shutterManager.updateShutter(id, shutterDtoReceived);
 
     }

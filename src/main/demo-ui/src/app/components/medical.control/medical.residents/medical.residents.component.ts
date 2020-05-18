@@ -49,7 +49,7 @@ export class MedicalResidentsComponent implements OnInit {
     this.findNewAlertsNumber();
     this.findResidentNumber();
     //console.log('refresh-resident');
-    setTimeout(() => {  this.reloadData(); }, 3000);
+    setTimeout(() => {  this.reloadData(); }, 4000);
   }
 
   private findAllStraps() {
