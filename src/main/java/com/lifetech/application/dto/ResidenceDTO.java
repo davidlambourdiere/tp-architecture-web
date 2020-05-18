@@ -2,7 +2,7 @@ package com.lifetech.application.dto;
 
 import java.sql.Timestamp;
 
-public class ResidenceDTO {
+public class ResidenceDTO extends PersistableElementDTO{
     private String adress;
     private String name;
     private String email;
