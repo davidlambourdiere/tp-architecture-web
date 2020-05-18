@@ -20,12 +20,18 @@ export class LightService {
     return this.http.get<LightDTO>(`api/light/${id}`);
   }
 
+<<<<<<< HEAD
   updateLight(id: bigint , light: LightDTO): Observable<LightDTO> {
     return this.http.put<LightDTO>(`api/light/updateLight/${id}`, light);
   }
+=======
+  // updateLight(id: bigint , light: LightDTO): Observable<LightDTO> {
+   // return this.http.put<LightDTO>(`api/light/updateLight/${id}`, light);
+  // }
+>>>>>>> parent of 33782fd... changements mineurs
 
 
-  updateLightNotification(id: number , light: LightDTO): Observable<LightDTO> {
+  updateLight(id: number , light: LightDTO): Observable<LightDTO> {
     return this.http.put<LightDTO>(`api/light/updateLight/${id}`, light);
   }
 }
