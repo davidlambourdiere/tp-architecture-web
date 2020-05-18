@@ -19,6 +19,7 @@ export class PersonProfileService {
   }
 
   createPersonProfile(personProfile: PersonProfileDTO):Observable<PersonProfileDTO>{
+    console.log("toto"+ personProfile.adress);
    return this.http.post<PersonProfileDTO>('api/personProfile/createpersonProfile', personProfile);
   }
 
