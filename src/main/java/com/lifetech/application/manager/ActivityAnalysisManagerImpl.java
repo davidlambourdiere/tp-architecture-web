@@ -32,50 +32,10 @@ public class ActivityAnalysisManagerImpl implements ActivityAnalysisManager {
     }
 
     @Override
-    public ActivityAnalaysisDTO countIOTByPerson(String personLogin) {
-        ActivityAnalaysisDTO activityAnalaysisDTO = new ActivityAnalaysisDTO();
-        Person person = personDAO.findByLogin(personLogin);
-        activityAnalaysisDTO.setPersonName(person.getFirstName() + " " + person.getLastName());
-        activityAnalaysisDTO.setnClock(clockDAO.countByPerson(person));
-        activityAnalaysisDTO.setnHeather(heaterDAO.countByPerson(person));
-        activityAnalaysisDTO.setnLight(lightDAO.countByPerson(person));
-        return activityAnalaysisDTO;
-    }
+    public ActivityAnalaysisDTO postAnalysis(ActivityAnalaysisDTO activityAnalaysisDTO) {
+        LOG.info("Input: " + activityAnalaysisDTO.toString());
 
-    @Override
-    public ActivityAnalaysisDTO countIOTByResidence(long residenceId) {
-        ActivityAnalaysisDTO activityAnalaysisDTO = new ActivityAnalaysisDTO();
-        Residence residence = residenceDAO.findById(residenceId).orElse(null);
-        List<Person> personList = personDAO.findAllByResidenceId(residenceId);
-        Long nClock, nHeather, nLight;
-        nClock = nHeather = nLight = new Long(0);
-        for (Person person : personList) {
-            nClock += clockDAO.countByPerson(person);
-            nHeather += heaterDAO.countByPerson(person);
-            nLight += lightDAO.countByPerson(person);
-        }
-
-        activityAnalaysisDTO.setnClock(nClock);
-        activityAnalaysisDTO.setnHeather(nHeather);
-        activityAnalaysisDTO.setnLight(nLight);
-
-        return activityAnalaysisDTO;
-    }
-
-    @Override
-    public ActivityAnalaysisDTO countIOT() {
-        ActivityAnalaysisDTO activityAnalaysisDTO = new ActivityAnalaysisDTO();
-        activityAnalaysisDTO.setnClock(clockDAO.count());
-        activityAnalaysisDTO.setnHeather(heaterDAO.count());
-        activityAnalaysisDTO.setnLight(lightDAO.count());
-        return activityAnalaysisDTO;
-    }
-
-    @Override
-    public ActivityAnalaysisDTO getBreakdownRate() {
-        ActivityAnalaysisDTO activityAnalaysisDTO = new ActivityAnalaysisDTO();
-        activityAnalaysisDTO.setHeaterBreakdownRate(heaterBreakdownDAO.getMeanBreakdownRate());
-        LOG.info("Average heater breakdowns rate on all residences" + activityAnalaysisDTO.getHeaterBreakdownRate());
+        LOG.info("Output: " + activityAnalaysisDTO.toString());
         return activityAnalaysisDTO;
     }
 }

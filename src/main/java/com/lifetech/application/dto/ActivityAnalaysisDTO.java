@@ -1,78 +1,72 @@
 package com.lifetech.application.dto;
 
 public class ActivityAnalaysisDTO {
-    private String personName;
-    private String residenceName;
-    private Long nClock;
-    private Long nHeather;
-    private Long nLight;
-    private Long nAlert;
-    private Long nBreakdown;
-    private Double heaterBreakdownRate;
-
+    private String residenceid;
+    private String personid;
+    private String period;
+    private String startdate;
+    private String enddate;
+    private String heaterbreakdownrate;
     public ActivityAnalaysisDTO() {
     }
 
-    public Long getnClock() {
-        return nClock;
+    public String getResidenceid() {
+        return residenceid;
     }
 
-    public void setnClock(Long nClock) {
-        this.nClock = nClock;
+    public void setResidenceid(String residenceid) {
+        this.residenceid = residenceid;
     }
 
-    public Long getnHeather() {
-        return nHeather;
+    public String getPersonid() {
+        return personid;
     }
 
-    public void setnHeather(Long nHeather) {
-        this.nHeather = nHeather;
+    public void setPersonid(String personid) {
+        this.personid = personid;
     }
 
-    public Long getnLight() {
-        return nLight;
+    public String getPeriod() {
+        return period;
     }
 
-    public void setnLight(Long nLight) {
-        this.nLight = nLight;
-    }
-    public Long getnAlert() {
-        return nAlert;
+    public void setPeriod(String period) {
+        this.period = period;
     }
 
-    public void setnAlert(Long nAlert) {
-        this.nAlert = nAlert;
+    public String getStartdate() {
+        return startdate;
     }
 
-    public Long getnBreakdown() {
-        return nBreakdown;
+    public void setStartdate(String startdate) {
+        this.startdate = startdate;
     }
 
-    public void setnBreakdown(Long nBreakdown) {
-        this.nBreakdown = nBreakdown;
+    public String getEnddate() {
+        return enddate;
     }
 
-    public String getPersonName() {
-        return personName;
+    public void setEnddate(String enddate) {
+        this.enddate = enddate;
     }
 
-    public void setPersonName(String personName) {
-        this.personName = personName;
+    public String getHeaterbreakdownrate() {
+        return heaterbreakdownrate;
     }
 
-    public String getResidenceName() {
-        return residenceName;
+    public void setHeaterbreakdownrate(String heaterbreakdownrate) {
+        this.heaterbreakdownrate = heaterbreakdownrate;
     }
 
-    public void setResidenceName(String residenceName) {
-        this.residenceName = residenceName;
-    }
-
-    public Double getHeaterBreakdownRate() {
-        return heaterBreakdownRate;
-    }
-
-    public void setHeaterBreakdownRate(Double heaterBreakdownRate) {
-        this.heaterBreakdownRate = heaterBreakdownRate;
+    @Override
+    public String toString() {
+        return "ActivityAnalaysisDTO{" +
+                "residenceid='" + residenceid + '\'' +
+                ", personid='" + personid + '\'' +
+                ", period='" + period + '\'' +
+                ", startdate='" + startdate + '\'' +
+                ", enddate='" + enddate + '\'' +
+                ", heaterbreakdownrate='" + heaterbreakdownrate + '\'' +
+                '}';
     }
 }
