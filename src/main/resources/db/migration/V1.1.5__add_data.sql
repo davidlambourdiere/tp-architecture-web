@@ -6,6 +6,8 @@ INSERT INTO lifetech.subscription (name,description,listofiot,listofservice,pric
 INSERT INTO lifetech.subscription (name,description, listofiot,listofservice,price) VALUES ('total-confort','This subscription is for our residents who need connected objects to help them in everyday life', 'Strap,Light,Shutter,Heater,Clock', 'Bingo',650);
 
 
+
+
 INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id,id_subscription) VALUES ('Jean-Paul', 'Gauthier','1946-05-14', 'admin', 'admin','RESIDENT', 1,1);
 INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id,id_subscription) VALUES ('Justin', 'Aguesse','1956-05-14', 'Justindu94', 'jujulebg','RESIDENT', 1,2);
 INSERT INTO lifetech.person (firstname, lastname,birthdate, login, password,userrole, residence_id,id_subscription) VALUES ('Louis', 'Beaudin','1966-05-14', 'Loulou', 'Louis123','RESIDENT', 1,3);
@@ -161,6 +163,10 @@ INSERT INTO lifetech.straphistoric (startdate, endingdate,state, breakdownstatus
 INSERT INTO lifetech.straphistoric (startdate, endingdate,state, breakdownstatus,strapid) VALUES ("2020-01-25 00:00:00","2020-02-22 00:00:00",'ON',"NOT_BREAKDOWN",1);
 INSERT INTO lifetech.straphistoric (startdate, endingdate,state, breakdownstatus,strapid) VALUES ("2020-01-24 00:00:00","2020-01-25 00:00:00",'OFF',"NOT_BREAKDOWN",1);
 
+INSERT INTO lifetech.subscription (name,description, listofiot,listofservice,price) VALUES ('essential','This subscription is for our residents who enjoy tranquility and security.', 'Strap,Heater', 'Sport',320);
+INSERT INTO lifetech.subscription (name,description,listofiot,listofservice,price) VALUES ('serenity', 'This subscription is intended for our resident who like pratice and love connected objects','Strap,Light,Heater', 'Bingo,Yoga',305);
+INSERT INTO lifetech.subscription (name,description,listofiot,listofservice,price) VALUES ('confort','This subscription is intended for our residents who can not stay in place and want to associate activites ans connected objects', 'Strap,Light,Heater,Shutter', 'Cultural Visite,Sport,Cinema',670);
+INSERT INTO lifetech.subscription (name,description, listofiot,listofservice,price) VALUES ('total-confort','This subscription is for our residents who need connected objects to help them in everyday life', 'Strap,Light,Shutter,Heater,Clock', 'Bingo',650);
 
 INSERT INTO lifetech.referencesprices (descriptionService, nameService, numSerie, price) VALUES ('blabla', 'bingo','S01', '25');
 INSERT INTO lifetech.referencesprices (descriptionService, nameService, numSerie, price) VALUES ('blabla', 'cinéma','A01', '100');

@@ -41,7 +41,7 @@ public class ShutterController extends RestBaseController{
 
     @PutMapping("shutter/updateShutter/{id}")
     public ShutterDTO updateShutter (@PathVariable(value = "id") String id,
-                                 @Valid @RequestBody ShutterDTO shutterDtoReceived) {
+                                     @Valid @RequestBody ShutterDTO shutterDtoReceived) {
         return shutterManager.updateShutter(id, shutterDtoReceived);
 
     }
