@@ -33,6 +33,7 @@ public class PersonProfileController extends RestBaseController {
 
     @PostMapping("personProfile/createpersonProfile")
     private PersonProfileDTO createPersonProfile(@Valid @RequestBody PersonProfileDTO p) {
+        System.out.println("toto" +p.getAdress());
         return personprofilemanager.save(p);
     }
 
