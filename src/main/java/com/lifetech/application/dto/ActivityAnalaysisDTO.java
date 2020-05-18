@@ -7,6 +7,14 @@ public class ActivityAnalaysisDTO {
     private String startdate;
     private String enddate;
     private String heaterbreakdownrate;
+    private String clockbreakdownrate;
+    private String lightbreakdownrate;
+    private String strapbreakdownrate;
+    private String nheater;
+    private String nclock;
+    private String nlight;
+    private String nstrap;
+
     public ActivityAnalaysisDTO() {
     }
 
@@ -58,6 +66,62 @@ public class ActivityAnalaysisDTO {
         this.heaterbreakdownrate = heaterbreakdownrate;
     }
 
+    public String getClockbreakdownrate() {
+        return clockbreakdownrate;
+    }
+
+    public void setClockbreakdownrate(String clockbreakdownrate) {
+        this.clockbreakdownrate = clockbreakdownrate;
+    }
+
+    public String getLightbreakdownrate() {
+        return lightbreakdownrate;
+    }
+
+    public void setLightbreakdownrate(String lightbreakdownrate) {
+        this.lightbreakdownrate = lightbreakdownrate;
+    }
+
+    public String getStrapbreakdownrate() {
+        return strapbreakdownrate;
+    }
+
+    public void setStrapbreakdownrate(String strapbreakdownrate) {
+        this.strapbreakdownrate = strapbreakdownrate;
+    }
+
+    public String getNheater() {
+        return nheater;
+    }
+
+    public void setNheater(String nheater) {
+        this.nheater = nheater;
+    }
+
+    public String getNclock() {
+        return nclock;
+    }
+
+    public void setNclock(String nclock) {
+        this.nclock = nclock;
+    }
+
+    public String getNlight() {
+        return nlight;
+    }
+
+    public void setNlight(String nlight) {
+        this.nlight = nlight;
+    }
+
+    public String getNstrap() {
+        return nstrap;
+    }
+
+    public void setNstrap(String nstrap) {
+        this.nstrap = nstrap;
+    }
+
     @Override
     public String toString() {
         return "ActivityAnalaysisDTO{" +
@@ -67,6 +131,13 @@ public class ActivityAnalaysisDTO {
                 ", startdate='" + startdate + '\'' +
                 ", enddate='" + enddate + '\'' +
                 ", heaterbreakdownrate='" + heaterbreakdownrate + '\'' +
+                ", clockbreakdownrate='" + clockbreakdownrate + '\'' +
+                ", lightbreakdownrate='" + lightbreakdownrate + '\'' +
+                ", strapbreakdownrate='" + strapbreakdownrate + '\'' +
+                ", nheater='" + nheater + '\'' +
+                ", nclock='" + nclock + '\'' +
+                ", nlight='" + nlight + '\'' +
+                ", nstrap='" + nstrap + '\'' +
                 '}';
     }
 }
