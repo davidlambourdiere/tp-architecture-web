@@ -16,11 +16,10 @@ import java.util.Optional;
 public interface HeaterDAO extends JpaRepository<Heater, Long> {
     Long countByPerson(Person person);
 
-    @Query(countQuery="count h.id from Heather h where Residence.id = :residenceId", nativeQuery = true)
-    Long countByPersonId(@Param("residenceId") Long residenceId);
+    @Query(value="select count(*) from heater where heater.person_id = ?1 ;", nativeQuery=true)
+    String countByPersonId(String personid);
 
     List<Heater> findByRoom(Room room);
-
 
     List<Heater> findAllByPersonId(Long id);
 
@@ -28,4 +27,6 @@ public interface HeaterDAO extends JpaRepository<Heater, Long> {
 
     Heater findById(String id);
 
+    @Query(value="select count(*) from heater join person on person.id = heater.person_id where person.residence_id = ?1 ;", nativeQuery=true)
+    String countByResidenceId(String residenceid);
 }

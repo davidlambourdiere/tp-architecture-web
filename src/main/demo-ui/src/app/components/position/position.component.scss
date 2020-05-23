@@ -8,3 +8,14 @@
 .btn.btn-primary {
   margin-right: 12px;
 }
+
+.buttons {
+  /// Alors, je veux le bouton à droite avec un espacement en haut et en bas d'au moins disons 18 px
+  // FLEXBOX
+
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
+  margin-bottom: 18px;
+
+}

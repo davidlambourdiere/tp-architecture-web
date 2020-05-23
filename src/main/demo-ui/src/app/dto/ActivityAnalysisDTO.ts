@@ -1,9 +1,17 @@
 export class ActivityAnalysisDTO{
-  personName : string;
-  residenceName : string;
-  nClock : bigint;
-  nHeather : bigint;
-  nLight : bigint;
-  nAlert : bigint;
-  nBreakDown : bigint;
+  residenceid:string;
+  personid:string;
+  period:string;
+  startdate:string;
+  enddate:string;
+  heaterbreakdownrate:string;
+  clockbreakdownrate: string;
+  lightbreakdownrate: string;
+  strapbreakdownrate: string;
+  nheater: string;
+  nclock: string;
+  nlight: string;
+  nstrap: string;
+  avgincome: string;
+  totalrevenue: string;
 }

@@ -14,5 +14,5 @@ public interface PositionManager {
 
     public List<PositionDTO> positionHistory(long strpId);
 
-    public void insertPositionRunnerStrap();
+    public void insertPositionRunnerStrap(String status);
 }

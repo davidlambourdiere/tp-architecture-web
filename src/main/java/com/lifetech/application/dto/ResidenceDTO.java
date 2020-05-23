@@ -2,7 +2,7 @@ package com.lifetech.application.dto;
 
 import java.sql.Timestamp;
 
-public class ResidenceDTO {
+public class ResidenceDTO extends PersistableElementDTO{
     private String adress;
     private String name;
     private String email;
@@ -18,6 +18,14 @@ public class ResidenceDTO {
 
     public void setAdress(String adress) {
         this.adress = adress;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {

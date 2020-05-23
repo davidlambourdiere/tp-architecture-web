@@ -41,12 +41,16 @@ export class PositionComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   private subs = new SubSink();
 
+  startStopButtonText = 'Démarrer';
+  isStartStopButtonToggle = false;
+
   /**
    *
    * @param strapService  Service de gestion des bracelets
    * @param positionService  Service des positions
    */
-  constructor(private strapService: StrapService, private positionService: PositionService) {}
+  constructor(private strapService: StrapService, private positionService: PositionService) {
+  }
 
   ngOnInit() {
     this.findAllStrap();
@@ -99,6 +103,22 @@ export class PositionComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subs.unsubscribe();
+  }
+
+  simulationPositionToggle() {
+    let status: string;
+
+    this.isStartStopButtonToggle = !this.isStartStopButtonToggle;
+    if (this.isStartStopButtonToggle) {
+      this.startStopButtonText = 'Arrêter';
+      status = 'start';
+    } else {
+      this.startStopButtonText = 'Démarrer';
+      status = 'stop';
+      this.subs.unsubscribe();
+    }
+    this.subs.add(this.positionService.simulatePosition(status));
+
   }
 }
 

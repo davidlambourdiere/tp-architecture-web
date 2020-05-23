@@ -8,4 +8,3 @@ INSERT INTO `light` (ipadress, state, breakdownstatus, suspect, percentage, colo
 INSERT INTO `light` (ipadress, state, breakdownstatus, suspect, percentage, color, person_id, room_id)  VALUES ('172.163.92.2', 'ON', 'NOT_BREAKDOWN', 'NOT_SUSPECT', '23%', 'black', '6' , '6');
 INSERT INTO `light` (ipadress, state, breakdownstatus, suspect, percentage, color, person_id, room_id)  VALUES ('172.163.92.2', 'ON', 'NOT_BREAKDOWN', 'NOT_SUSPECT', '17%', 'red', '7' , '7');
 INSERT INTO `light` (ipadress, state, breakdownstatus, suspect, percentage, color, person_id, room_id)  VALUES ('172.163.92.2', 'ON', 'NOT_BREAKDOWN', 'NOT_SUSPECT', '65%', 'yellow', '8' , '8');
-

@@ -18,4 +18,9 @@ public interface ClockDAO extends JpaRepository<Clock, Long> {
 
     List<Clock> findAllByBreakdownstatus(StatusEnum statusEnum);
 
+    @Query(value="select count(*) from clock where clock.person_id = ?1 ;", nativeQuery=true)
+    String countByPersonId(String personid);
+
+    @Query(value="select count(*) from clock join person on person.id = clock.person_id where person.residence_id = ?1 ;", nativeQuery=true)
+    String countByResidenceId(String residenceid);
 }

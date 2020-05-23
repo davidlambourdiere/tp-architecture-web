@@ -1,75 +1,107 @@
 <home></home>
 <div class="container">
   <div class="row my-1">
-    <div class="col-sm">
-      <h1>IOT Indicators</h1>
-    </div>
+    <h1>Activity Analysis</h1>
   </div>
-  <div class="row my-1">
-    <div class="col-sm">
-      <h2>Person</h2>
-    </div>
-    <div class="col-sm">
-      <form class="form-inline">
-        <select class="form-control mr-2 my-1" #selectperson>
-          <option *ngFor="let person of personlist" value="{{person.login}}" >
-            {{person.firstName}} {{person.lastName}}
-          </option>
-        </select>
-        <button type="submit" class="btn btn-primary my-1" (click)="countIOTByPerson(selectperson.value)">Search</button>
-      </form>
-    </div>
-  </div>
-
+  <hr>
   <div class="row">
-    <div class="col-sm my-1">
-      <h3>{{activityanalysisperson.personName}}</h3>
-    </div>
-    <div class="col-sm py-2">
-      <p><strong>Clock : </strong> {{activityanalysisperson.nClock}}</p>
-      <p><strong>Heather : </strong> {{activityanalysisperson.nHeather}}</p>
-      <p><strong>Light : </strong> {{activityanalysisperson.nLight}}</p>
-
-    </div>
-  </div>
-
-  <hr>
-
-  <div class="row my-1">
-    <div class="col-sm">
-      <h2>Residence</h2>
-    </div>
-    <div class="col-sm">
-      <form class="form-inline">
-        <select class="form-control mr-2 my-1" #selectresidence>
-          <option *ngFor="let residence of residencelist" value="1">{{residence.adress}} </option>
-        </select>
-        <button type="submit" class="btn btn-primary my-1" (click)="countIOTByResidence(selectresidence.value)">Search</button>
+    <div class="col-sm-4">
+      <h4>Search</h4>
+      <form>
+        <div class="form-group">
+          <label for="selectresidence">Residence</label>
+          <select id="selectresidence" class="form-control mr-2 my-1" #selectresidence (change)="getAllPersonsByResidenceId(selectresidence.value)">
+            <option value="0">All</option>
+            <option *ngFor="let residence of residencelist" value="{{residence.id}}">{{residence.name}} </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="selectperson">Person</label>
+          <select id="selectperson"class="form-control" #selectperson>
+            <option value="0">All</option>
+            <option *ngFor="let person of personlist" value="{{person.id}}" >
+              {{person.firstName}} {{person.lastName}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="selectperiod">Period</label>
+          <select id="selectperiod" class="form-control" #selectperiod>
+            <option value="all">All</option>
+            <option value="given">Select</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="startdate">Start date</label>
+          <input type="date" class="form-control" id="startdate" #startdate>
+        </div>
+        <div class="form-group">
+          <label for="enddate">End date</label>
+          <input type="date" class="form-control" id="enddate" #enddate>
+        </div>
+        <button type="submit" class="btn btn-primary pull-right" (click)="analysis(selectresidence.value,selectperson.value,selectperiod.value,startdate.value,enddate.value)">Submit</button>
       </form>
     </div>
-  </div>
-
-  <div class="row my-1">
-    <div class="col-sm">
-      <h3>Residence name</h3>
+    <div class="col">
+      <h4>Indicators</h4>
+      <table class="table table-hover table-bordered">
+        <thead>
+        <tr>
+          <th scope="col">Indicators</th>
+          <th scope="col">Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="font-weight-bold text-right">IOT</td>
+        </tr>
+        <tr>
+          <td>Number of heaters</td>
+          <td>{{(activityanalysis.nheater == undefined) ? 'N/A' :  activityanalysis.nheater}}</td>
+        </tr>
+        <tr>
+          <td>Heather breakdown rate</td>
+          <td>{{(activityanalysis.heaterbreakdownrate == undefined) ? 'N/A' :  (+activityanalysis.heaterbreakdownrate).toFixed(2)}} %</td>
+        </tr>
+        <tr>
+          <td>Number of clocks</td>
+          <td>{{(activityanalysis.nclock == undefined) ? 'N/A' :  activityanalysis.nclock}}</td>
+        </tr>
+        <tr>
+          <td>Clock breakdown rate</td>
+          <td>{{(activityanalysis.clockbreakdownrate == undefined) ? 'N/A' :  (+activityanalysis.clockbreakdownrate).toFixed(2)}} %</td>
+        </tr>
+        <tr>
+          <td>Number of lights</td>
+          <td>{{(activityanalysis.nlight == undefined) ? 'N/A' :  activityanalysis.nlight}}</td>
+        </tr>
+        <tr>
+          <td>Light breakdown rate</td>
+          <td>{{(activityanalysis.lightbreakdownrate == undefined) ? 'N/A' :  (+activityanalysis.lightbreakdownrate).toFixed(2)}} %</td>
+        </tr>
+        <tr>
+          <td>Number of straps</td>
+          <td>{{(activityanalysis.nstrap == undefined) ? 'N/A' :  activityanalysis.nstrap}}</td>
+        </tr>
+        <tr>
+          <td>Strap breakdown rate</td>
+          <td>{{(activityanalysis.strapbreakdownrate == undefined) ? 'N/A' :  (+activityanalysis.strapbreakdownrate).toFixed(2)}} %</td>
+        </tr>
+        <tr>
+          <td class="font-weight-bold text-right">Finance</td></tr>
+        <tr>
+        <tr>
+          <td>Average income</td>
+          <td>{{(activityanalysis.avgincome == undefined) ? 'N/A' :  (+activityanalysis.avgincome).toFixed(2)}}</td>
+        </tr>
+        <tr>
+          <td>Total revenue</td>
+          <td>{{(activityanalysis.totalrevenue == undefined) ? 'N/A' :  activityanalysis.totalrevenue}}</td>
+        </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="col-sm py-2">
-      <p><strong>Clock : </strong> {{activityanalysisresidence.nClock}}</p>
-      <p><strong>Heather : </strong> {{activityanalysisresidence.nHeather}}</p>
-      <p><strong>Light : </strong> {{activityanalysisresidence.nLight}}</p>
-    </div>
   </div>
-
   <hr>
 
-  <div class="row my-1">
-    <div class="col-sm">
-      <h2>Total</h2>
-    </div>
-    <div class="col-sm py-2">
-      <p><strong>Clock : </strong> {{activityanalysistotal.nClock}}</p>
-      <p><strong>Heather : </strong> {{activityanalysistotal.nHeather}}</p>
-      <p><strong>Light : </strong> {{activityanalysistotal.nLight}}</p>
-    </div>
-  </div>
 </div>

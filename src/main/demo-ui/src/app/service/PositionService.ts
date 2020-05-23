@@ -1,8 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {interval, Observable} from "rxjs";
+import {interval, Observable, Subscription} from "rxjs";
 import {PositionDTO} from "../dto/PositionDTO";
 import {startWith, switchMap} from "rxjs/operators";
+
+1
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +15,14 @@ export class PositionService {
   }
 
   findPositionByStrap(strapId: bigint): Observable<PositionDTO> {
-    return interval(3000).pipe(
+    return interval(750).pipe(
       startWith(0),
       switchMap(() => this.http.get<PositionDTO>(`api/position/findByStrap/${strapId}`))
     );
   }
 
-  simulatePosition(): void {
-    this.http.get(`http://localhost:8080/api/position/insertPositionByStrap/1`).subscribe();
+  simulatePosition(status: string): Subscription {
+    return this.http.get(`http://localhost:8080/api/position/insertPositionByStrap/` + status).subscribe();
   }
 
   positionHistory(strapId: bigint): Observable<Array<PositionDTO>> {

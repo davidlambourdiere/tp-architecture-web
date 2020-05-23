@@ -5,12 +5,5 @@ import com.lifetech.application.dto.ActivityAnalaysisDTO;
 import java.util.Map;
 
 public interface ActivityAnalysisManager {
-
-    ActivityAnalaysisDTO countIOTByPerson(String personId);
-
-    ActivityAnalaysisDTO countIOTByResidence(long residenceId);
-
-    ActivityAnalaysisDTO countIOT();
-
-    ActivityAnalaysisDTO getBreakdownRate();
+    ActivityAnalaysisDTO postAnalysis(ActivityAnalaysisDTO activityAnalaysisDTO);
 }

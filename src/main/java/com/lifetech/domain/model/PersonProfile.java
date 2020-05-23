@@ -59,11 +59,8 @@ public class PersonProfile extends PersistableElement {
     @Column(name = "profile")
     private String profile;
 
-    public PersonProfile(){}
 
-
-
-    public PersonProfile(String nom, String prenom, int age, String adress, int postal_code, String adress_email, int tel_number, String chronic_disease, int estimated_mobility, boolean smoking, float smoking_time, boolean drinker, boolean medical_emergencies, String hobbies,float revenue, String profile) {
+    public PersonProfile(String nom, String prenom, int age, String adress, int postal_code, String adress_email, int tel_number, String chronic_disease, int estimated_mobility, boolean smoking, float smoking_time, boolean drinker, boolean medical_emergencies, String hobbies, float revenue, String profile) {
         this.nom = nom;
         this.prenom = prenom;
         this.age = age;
@@ -81,6 +78,8 @@ public class PersonProfile extends PersistableElement {
         this.revenue = revenue;
         this.profile = profile;
     }
+
+    public PersonProfile(){}
 
 
     public String getNom() {

@@ -14,9 +14,7 @@ import {ResidenceDTO} from "../../dto/ResidenceDTO";
 })
 export class  ActivityAnalysisComponent {
 
-  activityanalysisperson : ActivityAnalysisDTO = new ActivityAnalysisDTO();
-  activityanalysisresidence : Object = new ActivityAnalysisDTO();
-  activityanalysistotal : Object = new ActivityAnalysisDTO();
+  activityanalysis : ActivityAnalysisDTO = new ActivityAnalysisDTO();
   personlist: PersonDTO[];
   residencelist: ResidenceDTO[];
 
@@ -25,33 +23,8 @@ export class  ActivityAnalysisComponent {
   }
 
   ngOnInit(){
-    this.findAllPerson();
     this.findAllResidence();
-    this.countIOT();
-  }
-
-  countIOTByPerson(personlogin: string) {
-    this.route.params.subscribe(params =>{
-      this.activityanlysisservice.countIOTByPerson(personlogin).subscribe(data=>{
-        this.activityanalysisperson = data;
-        });
-    });
-  }
-
-  countIOTByResidence(idresidence : string) {
-    this.route.params.subscribe(params =>{
-      this.activityanlysisservice.countIOTByResidence(idresidence).subscribe(data=>{
-        this.activityanalysisresidence = data;
-      });
-    });
-  }
-
-  countIOT() {
-    this.route.params.subscribe(params =>{
-      this.activityanlysisservice.countIOT().subscribe(data=>{
-        this.activityanalysistotal = data;
-      });
-    });
+    this.findAllPerson();
   }
 
   private findAllPerson() {
@@ -66,6 +39,31 @@ export class  ActivityAnalysisComponent {
     this.route.params.subscribe(params =>{
       this.residenceservice.findAllResidence().subscribe(data=>{
         this.residencelist = data;
+      });
+    });
+  }
+
+  getAllPersonsByResidenceId(residenceid: string) {
+    if (residenceid == '0'){
+      this.findAllPerson();
+    }else {
+      this.route.params.subscribe(params => {
+        this.residenceservice.findAllPersonByResidenceId(residenceid).subscribe(data => {
+          this.personlist = data;
+        });
+      });
+    }
+  }
+
+  analysis(residenceid: string, personid: string, period: string, startdate: string, enddate: string) {
+    this.activityanalysis.residenceid=residenceid;
+    this.activityanalysis.personid=personid;
+    this.activityanalysis.period=period;
+    this.activityanalysis.startdate=startdate;
+    this.activityanalysis.enddate=enddate;
+    this.route.params.subscribe(params => {
+      this.activityanlysisservice.findActivityAnalysis(this.activityanalysis).subscribe(data => {
+        this.activityanalysis = data;
       });
     });
   }
