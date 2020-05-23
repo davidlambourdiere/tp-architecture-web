@@ -22,7 +22,7 @@ export class PositionService {
   }
 
   simulatePosition(status: string): Subscription {
-    return this.http.get(`http://localhost:8080/api/position/insertPositionByStrap/` + status).subscribe();
+    return this.http.get(`api/position/insertPositionByStrap/` + status).subscribe();
   }
 
   positionHistory(strapId: bigint): Observable<Array<PositionDTO>> {
