@@ -34,9 +34,9 @@ public class PositionController extends RestBaseController {
      *
      * @throws Exception
      */
-    @GetMapping("position/insertPositionByStrap")
-    private void insertPositionByStrapId() throws Exception {
-        positionManager.insertPositionRunnerStrap();
+    @GetMapping("position/insertPositionByStrap/{status}")
+    private void insertPositionByStrapId(@PathVariable String status) throws Exception {
+        positionManager.insertPositionRunnerStrap(status);
     }
 
     /**

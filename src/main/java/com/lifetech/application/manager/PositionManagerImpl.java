@@ -18,6 +18,7 @@ import javax.persistence.EntityManager;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,6 +36,7 @@ public class PositionManagerImpl implements PositionManager {
 
     /**
      * trouve la position d'un bracelet.
+     *
      * @param strapId id du bracelet
      * @return PositionDTO
      */
@@ -47,21 +49,38 @@ public class PositionManagerImpl implements PositionManager {
     /**
      * récupère tous les bracelets, crée pour chaque bracelet et simule sa position.
      */
-    public void insertPositionRunnerStrap() {
-        List<Strap> straps = strapDAO.findAll();
-        for (Strap strap : straps) {
-            new Thread(() -> {
-                try {
-                    this.simulatePosition(strap);
-                } catch (Exception e) {
-                    e.printStackTrace();
+    public void insertPositionRunnerStrap(String status) {
+        System.out.println(status);
+        this.getAllRunningThrads();
+        if (status.equals("start")) {
+            List<Strap> straps = strapDAO.findAll();
+            for (Strap strap : straps) {
+                new Thread(() -> {
+                    try {
+                        this.simulatePosition(strap);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }).start();
+            }
+        }
+    }
+
+    public void getAllRunningThrads() {
+        Set<Thread> threads = Thread.getAllStackTraces().keySet();
+        for (Thread t : threads) {
+            if (t.getName().startsWith("Thread-") && t.isDaemon()) {
+                if (t.getState().equals(Thread.State.TIMED_WAITING)) {
+                    t.run();
                 }
-            }).start();
+                t.interrupt();
+            }
         }
     }
 
     /**
      * Génère une nouvelle position.
+     *
      * @param strap
      * @throws Exception Exception
      */
@@ -92,7 +111,11 @@ public class PositionManagerImpl implements PositionManager {
                                 GeodesicMask.LATITUDE |
                                         GeodesicMask.LONGITUDE);
                         this.saveData(g.lat2, g.lon2, strap);
-                        Thread.sleep(3000);
+                        try {
+                            Thread.sleep(750);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
@@ -101,8 +124,9 @@ public class PositionManagerImpl implements PositionManager {
 
     /**
      * Enregistre les positions d'un bracelet.
-     * @param lat latitude du bracelet
-     * @param lon longitude du bracelet
+     *
+     * @param lat   latitude du bracelet
+     * @param lon   longitude du bracelet
      * @param strap
      */
     public void saveData(Double lat, Double lon, Strap strap) {
@@ -121,6 +145,7 @@ public class PositionManagerImpl implements PositionManager {
 
     /**
      * Retourne les 30 dernières d'un bracelet.
+     *
      * @param strapId id du bracelet
      * @return List<PositionDTO>
      */
