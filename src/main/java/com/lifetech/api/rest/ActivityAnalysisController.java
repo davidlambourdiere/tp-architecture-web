@@ -1,10 +1,8 @@
 package com.lifetech.api.rest;
 
-import com.lifetech.application.dto.ActivityAnalaysisDTO;
+import com.lifetech.application.dto.ActivityAnalysisDTO;
 import com.lifetech.application.manager.ActivityAnalysisManager;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 public class ActivityAnalysisController extends RestBaseController{
@@ -15,5 +13,5 @@ public class ActivityAnalysisController extends RestBaseController{
     }
 
     @PostMapping("analysis")
-    ActivityAnalaysisDTO postAnalysis(@RequestBody ActivityAnalaysisDTO activityAnalaysisDTO) {return activityAnalysisManager.postAnalysis(activityAnalaysisDTO);}
+    ActivityAnalysisDTO postAnalysis(@RequestBody ActivityAnalysisDTO activityAnalysisDTO) {return activityAnalysisManager.postAnalysis(activityAnalysisDTO);}
 }

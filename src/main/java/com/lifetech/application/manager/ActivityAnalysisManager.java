@@ -1,9 +1,7 @@
 package com.lifetech.application.manager;
 
-import com.lifetech.application.dto.ActivityAnalaysisDTO;
-
-import java.util.Map;
+import com.lifetech.application.dto.ActivityAnalysisDTO;
 
 public interface ActivityAnalysisManager {
-    ActivityAnalaysisDTO postAnalysis(ActivityAnalaysisDTO activityAnalaysisDTO);
+    ActivityAnalysisDTO postAnalysis(ActivityAnalysisDTO activityAnalysisDTO);
 }

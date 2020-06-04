@@ -1,6 +1,6 @@
 package com.lifetech.application.dto;
 
-public class ActivityAnalaysisDTO {
+public class ActivityAnalysisDTO {
     private String residenceid;
     private String personid;
     private String period;
@@ -15,7 +15,7 @@ public class ActivityAnalaysisDTO {
     private String nlight;
     private String nstrap;
 
-    public ActivityAnalaysisDTO() {
+    public ActivityAnalysisDTO() {
     }
 
     public String getResidenceid() {
