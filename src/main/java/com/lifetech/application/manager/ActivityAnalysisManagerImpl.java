@@ -15,19 +15,15 @@ public class ActivityAnalysisManagerImpl implements ActivityAnalysisManager {
     private  ClockDAO clockDAO;
     private  HeaterDAO heaterDAO;
     private  LightDAO lightDAO;
-    private  PersonDAO personDAO;
-    private  ResidenceDAO residenceDAO;
     private  StrapDAO strapDAO;
     private HeaterBreakdownDAO heaterBreakdownDAO;
     private final OrikaBeanMapper orikaBeanMapper;
     private static final Logger LOG = LoggerFactory.getLogger(ActivityAnalysisManager.class);
-    public ActivityAnalysisManagerImpl(ClockDAO clockDAO, HeaterDAO heaterDAO, LightDAO lightDAO, OrikaBeanMapper orikaBeanMapper, PersonDAO personDAO, ResidenceDAO residenceDAO, HeaterBreakdownDAO heaterBreakdownDAO, StrapDAO strapDAO) {
+    public ActivityAnalysisManagerImpl(ClockDAO clockDAO, HeaterDAO heaterDAO, LightDAO lightDAO, OrikaBeanMapper orikaBeanMapper, HeaterBreakdownDAO heaterBreakdownDAO, StrapDAO strapDAO) {
         this.clockDAO = clockDAO;
         this.heaterDAO = heaterDAO;
         this.lightDAO = lightDAO;
         this.orikaBeanMapper = orikaBeanMapper;
-        this.personDAO = personDAO;
-        this.residenceDAO = residenceDAO;
         this.heaterBreakdownDAO = heaterBreakdownDAO;
         this.strapDAO = strapDAO;
     }

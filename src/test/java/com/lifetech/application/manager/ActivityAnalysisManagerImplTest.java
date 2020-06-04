@@ -42,7 +42,7 @@ public class ActivityAnalysisManagerImplTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
-    
+
     @Test
     public void testpostAnalysisOnAllResidences_MustReturnAValidDTO(){
         //Initialization
