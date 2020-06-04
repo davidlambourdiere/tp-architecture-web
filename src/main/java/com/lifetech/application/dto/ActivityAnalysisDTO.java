@@ -1,5 +1,7 @@
 package com.lifetech.application.dto;
 
+import java.util.Objects;
+
 public class ActivityAnalysisDTO {
     private String residenceid;
     private String personid;
@@ -16,6 +18,22 @@ public class ActivityAnalysisDTO {
     private String nstrap;
 
     public ActivityAnalysisDTO() {
+    }
+
+    public ActivityAnalysisDTO(String residenceid, String personid, String period, String startdate, String enddate, String heaterbreakdownrate, String clockbreakdownrate, String lightbreakdownrate, String strapbreakdownrate, String nheater, String nclock, String nlight, String nstrap) {
+        this.residenceid = residenceid;
+        this.personid = personid;
+        this.period = period;
+        this.startdate = startdate;
+        this.enddate = enddate;
+        this.heaterbreakdownrate = heaterbreakdownrate;
+        this.clockbreakdownrate = clockbreakdownrate;
+        this.lightbreakdownrate = lightbreakdownrate;
+        this.strapbreakdownrate = strapbreakdownrate;
+        this.nheater = nheater;
+        this.nclock = nclock;
+        this.nlight = nlight;
+        this.nstrap = nstrap;
     }
 
     public String getResidenceid() {
@@ -139,5 +157,30 @@ public class ActivityAnalysisDTO {
                 ", nlight='" + nlight + '\'' +
                 ", nstrap='" + nstrap + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ActivityAnalysisDTO that = (ActivityAnalysisDTO) o;
+        return Objects.equals(residenceid, that.residenceid) &&
+                Objects.equals(personid, that.personid) &&
+                Objects.equals(period, that.period) &&
+                Objects.equals(startdate, that.startdate) &&
+                Objects.equals(enddate, that.enddate) &&
+                Objects.equals(heaterbreakdownrate, that.heaterbreakdownrate) &&
+                Objects.equals(clockbreakdownrate, that.clockbreakdownrate) &&
+                Objects.equals(lightbreakdownrate, that.lightbreakdownrate) &&
+                Objects.equals(strapbreakdownrate, that.strapbreakdownrate) &&
+                Objects.equals(nheater, that.nheater) &&
+                Objects.equals(nclock, that.nclock) &&
+                Objects.equals(nlight, that.nlight) &&
+                Objects.equals(nstrap, that.nstrap);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(residenceid, personid, period, startdate, enddate, heaterbreakdownrate, clockbreakdownrate, lightbreakdownrate, strapbreakdownrate, nheater, nclock, nlight, nstrap);
     }
 }

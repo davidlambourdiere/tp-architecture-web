@@ -6,19 +6,20 @@ import com.lifetech.domain.dao.*;
 import com.lifetech.infrastructure.ActivityAnalysisAxisEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ActivityAnalysisManagerImpl implements ActivityAnalysisManager {
 
-    private final ClockDAO clockDAO;
-    private final HeaterDAO heaterDAO;
-    private final LightDAO lightDAO;
+    private  ClockDAO clockDAO;
+    private  HeaterDAO heaterDAO;
+    private  LightDAO lightDAO;
+    private  PersonDAO personDAO;
+    private  ResidenceDAO residenceDAO;
+    private  StrapDAO strapDAO;
+    private HeaterBreakdownDAO heaterBreakdownDAO;
     private final OrikaBeanMapper orikaBeanMapper;
-    private final PersonDAO personDAO;
-    private final ResidenceDAO residenceDAO;
-    private final StrapDAO strapDAO;
-    private final HeaterBreakdownDAO heaterBreakdownDAO;
     private static final Logger LOG = LoggerFactory.getLogger(ActivityAnalysisManager.class);
     public ActivityAnalysisManagerImpl(ClockDAO clockDAO, HeaterDAO heaterDAO, LightDAO lightDAO, OrikaBeanMapper orikaBeanMapper, PersonDAO personDAO, ResidenceDAO residenceDAO, HeaterBreakdownDAO heaterBreakdownDAO, StrapDAO strapDAO) {
         this.clockDAO = clockDAO;
